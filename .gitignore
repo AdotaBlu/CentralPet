@@ -32,4 +32,7 @@ target/
 *.logs
 *.iml
 .idea/
+<<<<<<< HEAD
 /bin/
+=======
+>>>>>>> 25b4d3b67f832e2562b99eac003e403dd1ec5664
