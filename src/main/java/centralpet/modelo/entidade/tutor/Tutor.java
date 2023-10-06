@@ -29,9 +29,6 @@ public class Tutor extends Usuario implements Serializable {
 	@Column(name = "cpf_tutor", length = 11, nullable = false, unique = true)
 	private String cpf;
 	
-	@Column(name = "senha_tutor", length = 30, nullable = false, unique = true)
-	private String senha;
-
 	@Column(name = "data_nascimento_tutor", nullable = false, unique = false)
 	private LocalDate dataNascimento;
 
@@ -104,13 +101,6 @@ public class Tutor extends Usuario implements Serializable {
 		this.adocoes.remove(adocao);
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 
 //	public Acompanhamento getAcompanhamento() {
 //		return acompanhamento;
