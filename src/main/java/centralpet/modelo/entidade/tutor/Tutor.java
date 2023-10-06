@@ -27,9 +27,6 @@ public class Tutor extends Usuario implements Serializable {
 
 	@Column(name = "cpf_tutor", length = 11, nullable = false, unique = true)
 	private String cpf;
-
-	@Column(name = "senha_tutor", length = 30, nullable = false, unique = false)
-	private String senha;
 	
 	@Column(name = "data_nascimento_tutor", nullable = false, unique = false)
 	private LocalDate dataNascimento;
@@ -49,21 +46,20 @@ public class Tutor extends Usuario implements Serializable {
 	}
 
 	public Tutor(String nome, Endereco endereco, String cpf, LocalDate datanascimento, GeneroTutor generoTutor, String senha) {
-		super(nome, endereco);
+		super(nome, endereco, senha);
 		setCpf(cpf);
 		setDataNascimento(datanascimento);
 		setGeneroTutor(generoTutor);
-		setSenha(senha);
 		//setAcompanhamento(acompanhamento);
 	}
 
-	public Tutor(String nome, Endereco endereco, Long id, String cpf, LocalDate datanascimento, GeneroTutor generoTutor, String senha) {
-		super(nome, endereco);
+	public Tutor(String nome, Endereco endereco, Long id, String cpf, LocalDate datanascimento, GeneroTutor generoTutor,
+			String senha) {
+		super(nome, endereco, senha);
 		setId(id);
 		setCpf(cpf);
 		setDataNascimento(datanascimento);
 		setGeneroTutor(generoTutor);
-		setSenha(senha);
 		//setAcompanhamento(acompanhamento);
 	}
 
@@ -101,14 +97,6 @@ public class Tutor extends Usuario implements Serializable {
 
 	public void adocaoDesfeita(Adocao adocao) {
 		this.adocoes.remove(adocao);
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 	
 
