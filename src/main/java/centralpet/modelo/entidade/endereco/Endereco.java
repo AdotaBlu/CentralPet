@@ -34,7 +34,7 @@ public class Endereco implements Serializable {
 	private String logradouro;
 	
 	@Column(name = "numero_endereco", nullable = false)
-	private short numero;
+	private int numero;
 	
 	@Column(name = "bairro_endereco", length = 30, nullable = false, unique = false)
 	private String bairro;
@@ -50,7 +50,7 @@ public class Endereco implements Serializable {
 	
 	public Endereco () {}
 	
-	public Endereco (String logradouro, short numero, String bairro, String cep, String pontoReferencia) {
+	public Endereco (String logradouro, int numero, String bairro, String cep, String pontoReferencia) {
 		setLogradouro(logradouro);
 		setNumero(numero);
 		setBairro(bairro);
@@ -58,7 +58,7 @@ public class Endereco implements Serializable {
 		setPontoReferencia(pontoReferencia);
 	}
 	
-	public Endereco (Long id, String logradouro, short numero, String bairro, String cep, String pontoReferencia) {
+	public Endereco (Long id, String logradouro, int numero, String bairro, String cep, String pontoReferencia) {
 		setId(id);
 		setLogradouro(logradouro);
 		setNumero(numero);
@@ -83,11 +83,11 @@ public class Endereco implements Serializable {
 		this.logradouro = logradouro;
 	}
 	
-	public short getNumero () {
+	public int getNumero () {
 		return numero;
 	}
 	
-	public void setNumero (short numero) {
+	public void setNumero (int numero) {
 		this.numero = numero;
 	} 
 	
