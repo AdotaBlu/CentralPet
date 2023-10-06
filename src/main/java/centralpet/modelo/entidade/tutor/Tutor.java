@@ -14,7 +14,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import centralpet.modelo.entidade.acompanhamento.Acompanhamento;
 import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.endereco.Endereco;
 import centralpet.modelo.entidade.usuario.Usuario;
@@ -46,8 +45,7 @@ public class Tutor extends Usuario implements Serializable {
 	public Tutor() {
 	}
 
-	public Tutor(String nome, Endereco endereco, String cpf, LocalDate datanascimento, GeneroTutor generoTutor,
-			Acompanhamento acompanhamento) {
+	public Tutor(String nome, Endereco endereco, String cpf, LocalDate datanascimento, GeneroTutor generoTutor) {
 		super(nome, endereco);
 		setCpf(cpf);
 		setDataNascimento(datanascimento);
@@ -55,8 +53,7 @@ public class Tutor extends Usuario implements Serializable {
 		//setAcompanhamento(acompanhamento);
 	}
 
-	public Tutor(String nome, Endereco endereco, Long id, String cpf, LocalDate datanascimento, GeneroTutor generoTutor,
-			Acompanhamento acompanhamento) {
+	public Tutor(String nome, Endereco endereco, Long id, String cpf, LocalDate datanascimento, GeneroTutor generoTutor) {
 		super(nome, endereco);
 		setId(id);
 		setCpf(cpf);
