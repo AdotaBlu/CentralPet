@@ -1,6 +1,7 @@
 package centralpet.modelo.entidade.pet;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import centralpet.modelo.entidade.acompanhamento.Acompanhamento;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
+import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
+import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
 import centralpet.modelo.enumeracao.pet.status.StatusPet;
@@ -40,6 +42,9 @@ public class Pet implements Serializable {
 
 	@Column(name = "descricao_pet", length = 60, nullable = false, unique = false)
 	private String descricao;
+	
+	@Column(name = "data_nascimento_pet", nullable = false, unique = false)
+	private LocalDate dataNascimento;
 
 	@Column(name = "idade_pet", nullable = false, unique = false)
 	private byte idade;
@@ -63,6 +68,14 @@ public class Pet implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "sexo_pet", nullable = false, unique = false)
 	private SexoPet sexoPet;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "estado_pet", nullable = false, unique = false)
+	private EstadoPet estadoPet;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "pelagem_pet", nullable = false, unique = false)
+	private PelagemPet pelagemPet;
 
 //	@OneToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "id_acompanhamento", nullable = true)
@@ -71,8 +84,9 @@ public class Pet implements Serializable {
 	public Pet() {
 	}
 
-	public Pet(String nome, String vacinas, String descricao, byte idade, Ong ong, StatusPet statusPet,
-			PortePet portePet, EspeciePet especiePet, SexoPet sexoPet, Acompanhamento acompanhamento) {
+	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Ong ong,
+			StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
+			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
 		setVacinas(vacinas);
 		setDescricao(descricao);
@@ -82,11 +96,15 @@ public class Pet implements Serializable {
 		setPortePet(portePet);
 		setEspeciePet(especiePet);
 		setSexoPet(sexoPet);
+		setEstadoPet(estadoPet);
+		setPelagemPet(pelagemPet);
+		setDataNascimento(dataNascimento);
 //		setAcompanhamento(acompanhamento);
 	}
 
-	public Pet(Long id, String nome, String vacinas, String descricao, byte idade, Ong ong, StatusPet statusPet,
-			PortePet portePet, EspeciePet especiePet, SexoPet sexoPet, Acompanhamento acompanhamento) {
+	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Ong ong,
+			StatusPet statusPet,PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,EstadoPet estadoPet,
+			PelagemPet pelagemPet) {
 		setId(id);
 		setNome(nome);
 		setVacinas(vacinas);
@@ -97,6 +115,9 @@ public class Pet implements Serializable {
 		setPortePet(portePet);
 		setEspeciePet(especiePet);
 		setSexoPet(sexoPet);
+		setEstadoPet(estadoPet);
+		setPelagemPet(pelagemPet);
+		setDataNascimento(dataNascimento);
 //		setAcompanhamento(acompanhamento);
 	}
 
@@ -179,6 +200,32 @@ public class Pet implements Serializable {
 	public void setSexoPet(SexoPet sexoPet) {
 		this.sexoPet = sexoPet;
 	}
+
+	public EstadoPet getEstadoPet() {
+		return estadoPet;
+	}
+
+	public void setEstadoPet(EstadoPet estadoPet) {
+		this.estadoPet = estadoPet;
+	}
+
+	public PelagemPet getPelagemPet() {
+		return pelagemPet;
+	}
+
+	public void setPelagemPet(PelagemPet pelagemPet) {
+		this.pelagemPet = pelagemPet;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	
+	
 
 //	public Acompanhamento getAcompanhamento() {
 //		return acompanhamento;
