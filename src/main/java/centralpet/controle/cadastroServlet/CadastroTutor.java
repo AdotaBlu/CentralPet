@@ -91,7 +91,8 @@ public class CadastroTutor extends HttpServlet {
 		String cpf = request.getParameter("cpf");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
 		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("generoTutor"));
-		tutor1 = new Tutor(nome, endereco1, cpf, dataNascimento, generoTutor);
+		String senha = request.getParameter("senha");
+		tutor1 = new Tutor(nome, endereco1, cpf, dataNascimento, generoTutor, senha);
 		daoTutor.inserirTutor(tutor1);
 		
 		Contato contato1 = null;

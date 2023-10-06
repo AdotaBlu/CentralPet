@@ -50,6 +50,7 @@
         <select name="generoTutor" id="drop_down_genero">
             <option value="MASCULINO">Masculino</option>
             <option value="FEMININO">Feminino</option>
+            <option value="OUTROS">Outros</option>
         </select>
         
         <label for="telefone">Telefone</label>
@@ -59,7 +60,7 @@
         <input type="email" id="email" name="email">
         
         <label for="senha">Senha</label>
-        <input type="password" id="senha">
+        <input type="password" id="senha" name="senha">
         
         <button type="submit">Salvar</button>		
 		<button type="reset">Limpar</button>
