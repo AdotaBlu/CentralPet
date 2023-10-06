@@ -30,7 +30,7 @@ public class Endereco implements Serializable {
 	@Column(name = "id_endereco")
 	private Long id;
 	
-	@Column(name = "logradouro_endereco", length = 20, nullable = false, unique = false)
+	@Column(name = "logradouro_endereco", length = 60, nullable = false, unique = false)
 	private String logradouro;
 	
 	@Column(name = "numero_endereco", nullable = false)

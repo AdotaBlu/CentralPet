@@ -68,3 +68,4 @@ target/
 *.logs
 *.iml
 .idea/
+/.apt_generated_tests/

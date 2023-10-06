@@ -47,9 +47,9 @@
         <input type="date" id="dataNascimento" name="dataNascimento"/>
   
         <label for="drop_down_genero">Genero</label>
-        <select name="genero" id="drop_down_genero">
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
+        <select name="generoTutor" id="drop_down_genero">
+            <option value="MASCULINO">Masculino</option>
+            <option value="FEMININO">Feminino</option>
         </select>
         
         <label for="telefone">Telefone</label>

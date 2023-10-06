@@ -90,7 +90,7 @@ public class CadastroTutor extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
-		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("genero"));
+		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("generoTutor"));
 		tutor1 = new Tutor(nome, endereco1, cpf, dataNascimento, generoTutor);
 		daoTutor.inserirTutor(tutor1);
 		
@@ -100,7 +100,7 @@ public class CadastroTutor extends HttpServlet {
 		String telefone = request.getParameter("telefone");
 		contato1 = new Contato(email, telefone, tutor1);
 		daoContato.inserirContato(contato1);
-		response.sendRedirect("home");
+		response.sendRedirect("home.jsp");
 	}
 
 }
