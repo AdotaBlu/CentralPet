@@ -32,6 +32,9 @@ public abstract class Usuario implements Serializable {
 
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = false)
 	private String nome;
+	
+	@Column(name = "senha_usuario", length = 30, nullable = false, unique = false)
+	private String senha;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_endereco")
@@ -45,17 +48,20 @@ public abstract class Usuario implements Serializable {
 
 	public Usuario () {}
 	
-	public Usuario (String nome, Endereco endereco) {
+	public Usuario (String nome, Endereco endereco, String senha) {
 		setNome(nome);
 		setEndereco(endereco);
 		setDataCadastro(dataCadastro);
 		setDataAlteracaoCadastro(dataAlteracaoCadastro);
+		setSenha(senha);
 	}
 	
-	public Usuario (Long id, String nome, Endereco endereco) {
+	public Usuario (Long id, String nome, Endereco endereco, String senha) {
 		setId(id);
 		setNome(nome);
 		setEndereco(endereco);
+		setSenha(senha);
+		setDataAlteracaoCadastro(dataAlteracaoCadastro);
 	}
 
 	public Long getId() {
@@ -99,6 +105,14 @@ public abstract class Usuario implements Serializable {
 		dataAlteracaoCadastro = LocalDate.now();
 		this.dataAlteracaoCadastro = dataAlteracaoCadastro;
 	} 
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	
 	
 }
