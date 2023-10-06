@@ -10,7 +10,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="resources/css/estilo.css">
+    <style><%@include file="/resources/css/estilo.css"%></style>
 
     <title>Cadastro Tutor</title>
 
@@ -18,7 +18,7 @@
 
 <body>
 
-    <form action="cadastro-tutor">
+    <form method="post"  action="cadastro-tutor">
     	
   		<label for="logradouro">Logradouro</label>
         <input type="text" id="logradouro" name="logradouro">
@@ -39,10 +39,7 @@
 		   
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome">
-        
-        <label for="sobrenome">Sobrenome</label>
-        <input type="text" id="sobrenome" name="sobrenome">
-        
+       
         <label for="cpf">CPF</label>
         <input type="text" id="sobrenome" name="cpf">
         
