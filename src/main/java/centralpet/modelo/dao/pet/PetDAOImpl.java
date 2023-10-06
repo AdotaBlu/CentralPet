@@ -14,6 +14,8 @@ import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
+import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
+import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
 import centralpet.modelo.enumeracao.pet.status.StatusPet;
@@ -340,5 +342,79 @@ public class PetDAOImpl implements PetDAO{
 			}
 		}
 		return petsDesseStatus;
+	}
+	
+	public List<Pet> recuperarPetsEstado(Pet pet) {
+
+		Session sessao = null;
+		List<Pet> petsDesseEstado = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+
+			ParameterExpression<EstadoPet> estadoPet = construtor.parameter(EstadoPet.class);
+
+			criteria.where(construtor.equal(estadoPet, pet.getEstadoPet()));
+
+			petsDesseEstado = sessao.createQuery(criteria).setParameter(estadoPet, pet.getEstadoPet()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return petsDesseEstado;
+	}
+	
+	public List<Pet> recuperarPetsPelagem(Pet pet) {
+
+		Session sessao = null;
+		List<Pet> petsDessaPelagem = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+
+			ParameterExpression<PelagemPet> pelagemPet = construtor.parameter(PelagemPet.class);
+
+			criteria.where(construtor.equal(pelagemPet, pet.getPelagemPet()));
+
+			petsDessaPelagem = sessao.createQuery(criteria).setParameter(pelagemPet, pet.getPelagemPet()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return petsDessaPelagem;
 	}
 }
