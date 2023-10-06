@@ -10,7 +10,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="resources/css/estilo.css">
+    <style><%@include file="/resources/css/estilo.css"%></style>
 
     <title>Cadastro Tutor</title>
 
@@ -18,7 +18,7 @@
 
 <body>
 
-    <form action="cadastro-tutor">
+    <form method="post"  action="cadastro-tutor">
     	
   		<label for="logradouro">Logradouro</label>
         <input type="text" id="logradouro" name="logradouro">
@@ -39,10 +39,7 @@
 		   
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome">
-        
-        <label for="sobrenome">Sobrenome</label>
-        <input type="text" id="sobrenome" name="sobrenome">
-        
+       
         <label for="cpf">CPF</label>
         <input type="text" id="sobrenome" name="cpf">
         
@@ -50,9 +47,10 @@
         <input type="date" id="dataNascimento" name="dataNascimento"/>
   
         <label for="drop_down_genero">Genero</label>
-        <select name="genero" id="drop_down_genero">
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
+        <select name="generoTutor" id="drop_down_genero">
+            <option value="MASCULINO">Masculino</option>
+            <option value="FEMININO">Feminino</option>
+            <option value="OUTROS">Outros</option>
         </select>
         
         <label for="telefone">Telefone</label>
@@ -62,7 +60,7 @@
         <input type="email" id="email" name="email">
         
         <label for="senha">Senha</label>
-        <input type="password" id="senha">
+        <input type="password" id="senha" name="senha">
         
         <button type="submit">Salvar</button>		
 		<button type="reset">Limpar</button>
