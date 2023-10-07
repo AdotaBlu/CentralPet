@@ -61,15 +61,16 @@ public class Cadastro extends HttpServlet {
 
 			case "/novo-tutor":
 				mostrarFormularioNovoTutor(request, response);
-
+				break;
 			case "/cadastro-tutor":
 				inserirTutor(request, response);
-			
+				break;
 			case "/nova-ong":
 				mostrarFormularioNovaOng(request, response);
-				
+				break;
 			case "/cadastro-ong":
 				inserirOng(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {

@@ -20,4 +20,6 @@ public interface OngDAO {
 	List<Ong> recuperarOngBairro(String localidade);
 
 	List<Pet> recuperarOngPet(Ong pets);
+	
+	Ong recuperarOng(Ong ong);
 }

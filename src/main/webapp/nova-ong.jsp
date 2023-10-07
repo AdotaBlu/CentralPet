@@ -18,7 +18,7 @@
 
 <body>
 	<main>
-   		<form method="post"  action="cadastro-tutor">
+   		<form method="post"  action="cadastro-ong">
    
   		<label for="logradouro">Logradouro</label>
         <input type="text" id="logradouro" name="logradouro">
@@ -33,26 +33,16 @@
         <input type="text" id="cep" name="cep">
         
         <label for="pontoReferencia">Ponto de Referência</label>
-        <input type="text" id="tex" name="pontoReferencia">
+        <input type="text" id="pontoReferencia" name="pontoReferencia">
         
-		<h1>Informações tutor</h1> 
+		<h1>Informações da ONG</h1> 
 		   
-        <label for="nome">Nome</label>
+        <label for="nome">Razão Social</label>
         <input type="text" id="nome" name="nome">
        
-        <label for="cpf">CPF</label>
-        <input type="text" id="sobrenome" name="cpf">
-        
-        <label for="dataNasc">Data de Nascimento</label>
-        <input type="date" id="dataNascimento" name="dataNascimento"/>
+        <label for="cpf">CNPJ</label>
+        <input type="number" id="cnpj" name="cnpj">
   
-        <label for="drop_down_genero">Genero</label>
-        <select name="generoTutor" id="drop_down_genero">
-            <option value="MASCULINO">Masculino</option>
-            <option value="FEMININO">Feminino</option>
-            <option value="OUTROS">Outros</option>
-        </select>
-        
         <label for="telefone">Telefone</label>
         <input type="tel" id="telefone" name="telefone">
         
