@@ -7,6 +7,12 @@
     text-decoration: none;
 }
 
+main{
+	display: flex;
+	flex-direction: column; 
+    align-items: center;
+}
+
 header{
     width: auto;
     height: 70px;
@@ -40,7 +46,6 @@ ul{
 
 li{
     display: inline-block;
-
 }
 
 option{
@@ -51,4 +56,36 @@ option{
     margin: 15;
     border: 1px solid #31035B;
     border-radius: 5px;
+}
+
+.container{
+	display: flex;
+}
+
+.container-botao{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+button{
+	width: 230px;
+    height: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #31035B;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botao-primario{
+	background-color:#31035B ;
+	color: white;
+}
+
+.botao-primario:hover {
+	background-color: rgb(33, 2, 62);
 }
