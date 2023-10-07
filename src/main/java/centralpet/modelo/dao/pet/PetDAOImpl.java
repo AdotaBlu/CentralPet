@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.pet.Pet;
+import centralpet.modelo.entidade.pet.Pet_;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
@@ -416,5 +417,43 @@ public class PetDAOImpl implements PetDAO{
 			}
 		}
 		return petsDessaPelagem;
+	}
+	
+	public Pet recuperarPet(Pet pet) {
+
+		Session sessao = null;
+		Pet essePet = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+			Root<Pet> raizPet = criteria.from(Pet.class);
+			
+			criteria.where(construtor.equal(raizPet.get(Pet_.id), pet.getId()));
+			
+			essePet = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return essePet;
 	}
 }

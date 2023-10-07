@@ -191,5 +191,43 @@ public class TermoDAOImpl implements TermoDAO {
 		return termos;
 
 	}
+	
+	public Termo recuperarTermo(Termo termo) {
+
+		Session sessao = null;
+		Termo esseTermo = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Termo> criteria = construtor.createQuery(Termo.class);
+			Root<Termo> raizTermo = criteria.from(Termo.class);
+			
+			criteria.where(construtor.equal(raizTermo.get(Termo_.id), termo.getId()));
+			
+			esseTermo = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return esseTermo;
+	}
 
 }

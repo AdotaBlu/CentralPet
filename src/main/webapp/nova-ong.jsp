@@ -42,9 +42,6 @@
        
         <label for="cpf">CNPJ</label>
         <input type="number" id="cnpj" name="cnpj">
-        
-        <label for="dataNasc">Data de Nascimento</label>
-        <input type="date" id="dataNascimento" name="dataNascimento"/>
   
         <label for="telefone">Telefone</label>
         <input type="tel" id="telefone" name="telefone">

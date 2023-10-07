@@ -29,6 +29,8 @@ import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.enumeracao.adocao.StatusAdocao;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
+import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
+import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
 import centralpet.modelo.enumeracao.pet.status.StatusPet;
@@ -82,9 +84,11 @@ public class Principal {
 		LocalDate datanascimento = LocalDate.of(2000, 2, 1);
 		GeneroTutor generoTutor = GeneroTutor.MASCULINO;
 		LocalDate dataCadastro = LocalDate.now();
+		String senha = "12345";
 
 		tutor.setNome(nome);
 		tutor.setEndereco(endereco);
+		tutor.setSenha(senha);
 		tutor.setDataCadastro(dataCadastro);
 		tutor.setCpf(cpf);
 		tutor.setDataNascimento(datanascimento);
@@ -93,23 +97,22 @@ public class Principal {
 		tutorDAO.inserirTutor(tutor);
 		
 
-		Tutor tutor2 = new Tutor();
-
-		String nome2 = "Hermes";
-
-		String cpf2 = "98765432134";
-		LocalDate datanascimento2 = LocalDate.of(1999, 3, 3);
-		GeneroTutor generoTutor2 = GeneroTutor.MASCULINO;
-		LocalDate dataCadastro2 = LocalDate.now();
-
-		tutor2.setNome(nome2);
-		tutor2.setEndereco(endereco);
-		tutor2.setDataCadastro(dataCadastro2);
-		tutor2.setCpf(cpf2);
-		tutor2.setDataNascimento(datanascimento2);
-		tutor2.setGeneroTutor(generoTutor2);
-
-		tutorDAO.inserirTutor(tutor2);
+		/*
+		 * Tutor tutor2 = new Tutor();
+		 * 
+		 * String nome2 = "Hermes";
+		 * 
+		 * String cpf2 = "98765432134"; LocalDate datanascimento2 = LocalDate.of(1999,
+		 * 3, 3); GeneroTutor generoTutor2 = GeneroTutor.MASCULINO; LocalDate
+		 * dataCadastro2 = LocalDate.now();
+		 * 
+		 * tutor2.setNome(nome2); tutor2.setEndereco(endereco);
+		 * tutor2.setDataCadastro(dataCadastro2); tutor2.setCpf(cpf2);
+		 * tutor2.setDataNascimento(datanascimento2);
+		 * tutor2.setGeneroTutor(generoTutor2);
+		 * 
+		 * tutorDAO.inserirTutor(tutor2);
+		 */
 
 		Contato contato = new Contato();
 
@@ -130,22 +133,21 @@ public class Principal {
 
 		ong.setNome(nomeOng);
 		ong.setEndereco(endereco2);
+		ong.setSenha("123");
 		ong.setCnpj(cnpj);
 		ong.setDataCadastro(dataCadastro3);
 		ong.setId(1L);;
 		ongDAO.inserirOng(ong);
 		
-		Ong ong2 = new Ong();
-
-		String nomeOng2 = "Ong Jungkook";
-		LocalDate dataCadastro4 = LocalDate.now();
-		String cnpj4 = "12355678911234";
-
-		ong2.setNome(nomeOng2);
-		ong2.setEndereco(endereco2);
-		ong2.setCnpj(cnpj4);
-		ong2.setDataCadastro(dataCadastro4);
-		ongDAO.inserirOng(ong2);
+		/*
+		 * Ong ong2 = new Ong();
+		 * 
+		 * String nomeOng2 = "Ong Jungkook"; LocalDate dataCadastro4 = LocalDate.now();
+		 * String cnpj4 = "12355678911234";
+		 * 
+		 * ong2.setNome(nomeOng2); ong2.setEndereco(endereco2); ong2.setCnpj(cnpj4);
+		 * ong2.setDataCadastro(dataCadastro4); ongDAO.inserirOng(ong2);
+		 */
 
 		Pet pet = new Pet();
 
@@ -156,6 +158,8 @@ public class Principal {
 		PortePet portePet = PortePet.PEQUENO;
 		EspeciePet especiePet = EspeciePet.CACHORRO;
 		SexoPet sexoPet = SexoPet.FEMEA;
+		EstadoPet estadoPet = EstadoPet.ATIVO;
+		PelagemPet pelagempet = PelagemPet.CURTO;
 
 		pet.setNome(nomePet);
 		pet.setVacinas(vacinas);
@@ -166,31 +170,26 @@ public class Principal {
 		pet.setPortePet(portePet);
 		pet.setEspeciePet(especiePet);
 		pet.setSexoPet(sexoPet);
+		pet.setEstadoPet(estadoPet);
+		pet.setPelagemPet(pelagempet);
 
 		
 		petDAO.inserirPet(pet);
 		
-		Pet pet2 = new Pet();
-		String nomePet2 = "Qiero";
-		String vacinas2 = "Raiva, fungo";
-		String descricao2 = "Fofo e dorminhoco";
-		StatusPet statusPet2 = StatusPet.DISPONIVEL;
-		PortePet portePet2 = PortePet.MEDIO;
-		EspeciePet especiePet2 = EspeciePet.CACHORRO;
-		SexoPet sexoPet2 = SexoPet.MACHO;
-
-		pet2.setNome(nomePet2);
-		pet2.setVacinas(vacinas2);
-		pet2.setDescricao(descricao2);
-		pet2.setIdade((byte) 0);
-		pet2.setOng(ong2);
-		pet2.setStatusPet(statusPet2);
-		pet2.setPortePet(portePet2);
-		pet2.setEspeciePet(especiePet2);
-		pet2.setSexoPet(sexoPet2);
-
-		
-		petDAO.inserirPet(pet2);
+		/*
+		 * Pet pet2 = new Pet(); String nomePet2 = "Qiero"; String vacinas2 =
+		 * "Raiva, fungo"; String descricao2 = "Fofo e dorminhoco"; StatusPet statusPet2
+		 * = StatusPet.DISPONIVEL; PortePet portePet2 = PortePet.MEDIO; EspeciePet
+		 * especiePet2 = EspeciePet.CACHORRO; SexoPet sexoPet2 = SexoPet.MACHO;
+		 * 
+		 * pet2.setNome(nomePet2); pet2.setVacinas(vacinas2);
+		 * pet2.setDescricao(descricao2); pet2.setIdade((byte) 0); pet2.setOng(ong2);
+		 * pet2.setStatusPet(statusPet2); pet2.setPortePet(portePet2);
+		 * pet2.setEspeciePet(especiePet2); pet2.setSexoPet(sexoPet2);
+		 * 
+		 * 
+		 * petDAO.inserirPet(pet2);
+		 */
 
 		Termo termo = new Termo();
 
@@ -201,15 +200,15 @@ public class Principal {
 
 		termoDAO.inserirTermo(termo);
 		
-		Termo termo2 = new Termo();
-
-		String termoOng2 = "TERMO RESPONSAVEL 2";
-
-		termo2.setOngResponsavel(ong);
-		termo2.setTermo(termoOng2);
-
-		termoDAO.inserirTermo(termo2);
-
+		/*
+		 * Termo termo2 = new Termo();
+		 * 
+		 * String termoOng2 = "TERMO RESPONSAVEL 2";
+		 * 
+		 * termo2.setOngResponsavel(ong); termo2.setTermo(termoOng2);
+		 * 
+		 * termoDAO.inserirTermo(termo2);
+		 */
 
 		Adocao adocao = new Adocao();
 
@@ -225,19 +224,18 @@ public class Principal {
 		
 		adocaoDAO.inserirAdocao(adocao);
 		
-		Adocao adocao2 = new Adocao();
-
-		StatusAdocao statusAdocao2 = StatusAdocao.PENDENTE;
-		LocalDate dataAdocao2 = LocalDate.of(2023, 8, 21);
-
-		adocao2.setPet(pet2);
-		adocao2.setOng(ong2);
-		adocao2.setTutor(tutor2);
-		adocao2.setTermo(termo2);
-		adocao2.setStatusAdocao(statusAdocao2);
-		adocao2.setDataAdocao(dataAdocao2);
-		
-		adocaoDAO.inserirAdocao(adocao2);
+		/*
+		 * Adocao adocao2 = new Adocao();
+		 * 
+		 * StatusAdocao statusAdocao2 = StatusAdocao.PENDENTE; LocalDate dataAdocao2 =
+		 * LocalDate.of(2023, 8, 21);
+		 * 
+		 * adocao2.setPet(pet2); adocao2.setOng(ong2); adocao2.setTutor(tutor2);
+		 * adocao2.setTermo(termo2); adocao2.setStatusAdocao(statusAdocao2);
+		 * adocao2.setDataAdocao(dataAdocao2);
+		 * 
+		 * adocaoDAO.inserirAdocao(adocao2);
+		 */
 		
 		PetsFavoritosTutor petsFav = new PetsFavoritosTutor();
 		
@@ -246,14 +244,11 @@ public class Principal {
 		
 		petsFavoritosTutorDAO.inserirPetsFavoritados(petsFav);
 		
-		PetsFavoritosTutor petsFav2 = new PetsFavoritosTutor();
+		Tutor tutorteste = null;
 		
-		petsFav2.setUsuario(tutor);
-		petsFav2.setPet(pet2);
+		tutorteste = tutorDAO.recuperarTutor(tutor);
 		
-		petsFavoritosTutorDAO.inserirPetsFavoritados(petsFav2);
-		
-		
+		System.out.println(tutorteste.getNome());
 			
 			
 		

@@ -203,56 +203,6 @@ public class OngDAOImpl implements OngDAO {
 
 	}
 
-//		Session sessao = null;
-//
-//		List<Ong> bairros = null;
-//
-//		try {
-//
-//			sessao = fabrica.getConexao().openSession();
-//
-//			sessao.beginTransaction();
-//
-//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-//
-//			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
-//
-//			Root<Ong> raizEndereco= criteria.from(Ong.class);
-//
-//		//	Join<Ong, Endereco> juncaoBairros = raizOng.join(Endereco_.BAIRRO);
-//			Join<Endereco, Ong> juncaoBairros = raizEndereco.join(Endereco_.ID);
-//
-//			//ParameterExpression<Long> idOng = construtor.parameter(Long.class);
-//			ParameterExpression<String> inputPesquisa = construtor.parameter(String.class);
-//			criteria.where(construtor.equal(juncaoBairros.get(Endereco_.ID), inputPesquisa));
-//
-//			//bairros = sessao.createQuery(criteria).setParameter(idOng, bairro.getId()).getResultList();
-//			bairros = sessao.createQuery(criteria).setParameter(inputPesquisa, bairro.getBairro()).getResultList();
-//			sessao.getTransaction().commit();
-//
-//		} catch (Exception sqlException) {
-//
-//			sqlException.printStackTrace();
-//
-//			if (sessao.getTransaction() != null) {
-//
-//				sessao.getTransaction().rollback();
-//
-//			}
-//
-//		} finally {
-//
-//			if (sessao != null) {
-//
-//				sessao.close();
-//
-//			}
-//
-//		}
-//
-//		return bairros;
-//
-//	}
 
 	public List<Pet> recuperarOngPet(Ong pet) {
 
@@ -354,6 +304,44 @@ public class OngDAOImpl implements OngDAO {
 
 		return ongs;
 
+	}
+	
+	public Ong recuperarOng(Ong ong) {
+
+		Session sessao = null;
+		Ong essaOng = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
+			Root<Ong> raizPet = criteria.from(Ong.class);
+			
+			criteria.where(construtor.equal(raizPet.get(Ong_.id), ong.getId()));
+			
+			essaOng = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return essaOng;
 	}
 
 }
