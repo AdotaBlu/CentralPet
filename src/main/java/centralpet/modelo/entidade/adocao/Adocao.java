@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import centralpet.modelo.entidade.acompanhamento.Acompanhamento;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.termo.Termo;
@@ -64,19 +63,17 @@ public class Adocao implements Serializable {
 	public Adocao() {
 	}
 
-	public Adocao(Pet pet, Ong ong, Tutor tutor, Termo termo, StatusAdocao statusAdocao, LocalDate dataAdocao,
-			Acompanhamento acompanhamento) {
+	public Adocao(Pet pet, Ong ong, Tutor tutor, Termo termo) {
 		setPet(pet);
 		setOng(ong);
 		setTutor(tutor);
 		setTermo(termo);
-		setStatusAdocao(statusAdocao);
+		setStatusAdocao(StatusAdocao.PENDENTE);
 		setDataAdocao(dataAdocao);
 //		setAcompanhamento(acompanhamento);
 	}
 
-	public Adocao(Long id, Pet pet, Ong ong, Tutor tutor, Termo termo, StatusAdocao statusAdocao, LocalDate dataAdocao,
-			Acompanhamento acompanhamento) {
+	public Adocao(Long id, Pet pet, Ong ong, Tutor tutor, Termo termo, StatusAdocao statusAdocao) {
 		setId(id);
 		setPet(pet);
 		setOng(ong);

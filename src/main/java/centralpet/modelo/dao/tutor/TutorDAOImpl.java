@@ -12,7 +12,6 @@ import org.hibernate.Session;
 
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.tutor.Tutor_;
-import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
 
@@ -192,7 +191,7 @@ public class TutorDAOImpl implements TutorDAO {
 
 	}
 	
-	public Tutor recuperarTutor(Usuario usuario) {
+	public Tutor recuperarTutor(Long id) {
 
 		Session sessao = null;
 		Tutor tutor = null;
@@ -206,7 +205,7 @@ public class TutorDAOImpl implements TutorDAO {
 			CriteriaQuery<Tutor> criteria = construtor.createQuery(Tutor.class);
 			Root<Tutor> raizTutor = criteria.from(Tutor.class);
 			
-			criteria.where(construtor.equal(raizTutor.get(Tutor_.id), usuario.getId()));
+			criteria.where(construtor.equal(raizTutor.get(Tutor_.id), id));
 			
 			tutor = sessao.createQuery(criteria).getSingleResult();
 			

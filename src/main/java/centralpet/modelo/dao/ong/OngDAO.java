@@ -21,5 +21,5 @@ public interface OngDAO {
 
 	List<Pet> recuperarOngPet(Ong pets);
 	
-	Ong recuperarOng(Ong ong);
+	Ong recuperarOng(Long id);
 }
