@@ -246,7 +246,7 @@ public class Principal {
 		
 		Tutor tutorteste = null;
 		
-		tutorteste = tutorDAO.recuperarTutor(tutor);
+		tutorteste = tutorDAO.recuperarTutor(1L);
 		
 		System.out.println(tutorteste.getNome());
 			

@@ -29,5 +29,5 @@ public interface PetDAO {
 	
 	List<Pet> recuperarPetsEstado(Pet pet);
 	
-	Pet recuperarPet(Pet pet);
+	Pet recuperarPet(Long id);
 }

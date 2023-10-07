@@ -419,7 +419,7 @@ public class PetDAOImpl implements PetDAO{
 		return petsDessaPelagem;
 	}
 	
-	public Pet recuperarPet(Pet pet) {
+	public Pet recuperarPet(Long id) {
 
 		Session sessao = null;
 		Pet essePet = null;
@@ -433,7 +433,7 @@ public class PetDAOImpl implements PetDAO{
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
 			
-			criteria.where(construtor.equal(raizPet.get(Pet_.id), pet.getId()));
+			criteria.where(construtor.equal(raizPet.get(Pet_.id), id));
 			
 			essePet = sessao.createQuery(criteria).getSingleResult();
 			

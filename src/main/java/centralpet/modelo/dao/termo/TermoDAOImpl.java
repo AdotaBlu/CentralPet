@@ -192,7 +192,7 @@ public class TermoDAOImpl implements TermoDAO {
 
 	}
 	
-	public Termo recuperarTermo(Termo termo) {
+	public Termo recuperarTermo(Long id) {
 
 		Session sessao = null;
 		Termo esseTermo = null;
@@ -206,7 +206,7 @@ public class TermoDAOImpl implements TermoDAO {
 			CriteriaQuery<Termo> criteria = construtor.createQuery(Termo.class);
 			Root<Termo> raizTermo = criteria.from(Termo.class);
 			
-			criteria.where(construtor.equal(raizTermo.get(Termo_.id), termo.getId()));
+			criteria.where(construtor.equal(raizTermo.get(Termo_.id), id));
 			
 			esseTermo = sessao.createQuery(criteria).getSingleResult();
 			

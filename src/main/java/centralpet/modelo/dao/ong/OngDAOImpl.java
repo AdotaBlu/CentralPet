@@ -306,7 +306,7 @@ public class OngDAOImpl implements OngDAO {
 
 	}
 	
-	public Ong recuperarOng(Ong ong) {
+	public Ong recuperarOng(Long id) {
 
 		Session sessao = null;
 		Ong essaOng = null;
@@ -320,7 +320,7 @@ public class OngDAOImpl implements OngDAO {
 			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
 			Root<Ong> raizPet = criteria.from(Ong.class);
 			
-			criteria.where(construtor.equal(raizPet.get(Ong_.id), ong.getId()));
+			criteria.where(construtor.equal(raizPet.get(Ong_.id), id));
 			
 			essaOng = sessao.createQuery(criteria).getSingleResult();
 			
