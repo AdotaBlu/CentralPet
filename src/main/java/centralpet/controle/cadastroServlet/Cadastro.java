@@ -119,7 +119,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovaAdocao(request, response);
 				break;
 				
-			case "cadastro-adocao":
+			case "/cadastro-adocao":
 				inserirAdocao(request, response);
 			}
 
@@ -143,24 +143,71 @@ public class Cadastro extends HttpServlet {
 	}
 	
 	private void mostrarFormularioNovoPet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws SQLException, ServletException, IOException {
+		   System.out.println("Método mostrarFormularioNovoPet foi chamado");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
-		dispatcher.forward(request, response);
+		    Ong ong = daoOng.recuperarOng(2L);
+
+		    if (ong != null) {
+	
+		        System.out.println("Nome da Ong: " + ong.getNome());
+		        
+		        request.setAttribute("ong", ong);
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
+		        dispatcher.forward(request, response);
+		    } else {
+		        
+		        System.out.println("Ong não encontrada");
+		    }
 	}
 	
 	private void mostrarFormularioNovoTermo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		  System.out.println("Método mostrarFormularioNovoTermo foi chamado");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("novo-termo.jsp");
-		dispatcher.forward(request, response);
+		    Ong ong = daoOng.recuperarOng(2L);
+
+		    if (ong != null) {
+	
+		        System.out.println("Nome da Ong: " + ong.getNome());
+		        
+		        request.setAttribute("ong", ong);
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("novo-termo.jsp");
+		        dispatcher.forward(request, response);
+		    } else {
+		        
+		        System.out.println("Ong não encontrada");
+		    }
+	
 	}
 	
 	private void mostrarFormularioNovaAdocao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		 System.out.println("Método mostrarFormularioNovoTermo foi chamado");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("nova-adocao.jsp");
-		dispatcher.forward(request, response);
+		    Ong ong = daoOng.recuperarOng(2L);
+		    Tutor tutor = daoTutor.recuperarTutor(1L);
+			Pet pet = daoPet.recuperarPet(1L);
+		    Termo termo = daoTermo.recuperarTermo(1L);
+			
+
+		    if (ong != null && tutor != null && pet != null && termo != null) {
+	
+		        System.out.println("Nome da Ong: " + ong.getNome());
+		        System.out.println("Nome do Tutor: " + tutor.getNome());
+		        System.out.println("Nome do Pet: " + pet.getNome());
+		        System.out.println("Nome do Tutor: " + termo.getTermo());
+		        
+		        request.setAttribute("ong", ong);
+		        request.setAttribute("tutor", tutor);
+		        request.setAttribute("pet", pet);
+		        request.setAttribute("termo", termo);
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("nova-adocao.jsp");
+		        dispatcher.forward(request, response);
+		    } else {
+		        
+		        System.out.println("Ong e Tutor não encontrados");
+		    }
 	}
 	
 
@@ -200,7 +247,7 @@ public class Cadastro extends HttpServlet {
 	}
 	
 	private void inserirOng(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		
 		Endereco endereco = null;
 
@@ -229,13 +276,15 @@ public class Cadastro extends HttpServlet {
 		
 		contato = new Contato(email, telefone, ong);
 		daoContato.inserirContato(contato);
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("novo-pet");
+		
 	}
 	
 	private void inserirPet(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		
-		Ong ong = daoOng.recuperarOng(2L);
+		Ong ongPet = daoOng.recuperarOng(2L);
+		
 		
 		String nome = request.getParameter("nome");
 		String vacinas = request.getParameter("vacinas");
@@ -249,9 +298,11 @@ public class Cadastro extends HttpServlet {
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estadoPet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagemPet"));
 		
-		Pet pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, ong, statusPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet);
+		Pet pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet);
 		daoPet.inserirPet(pet);
-		response.sendRedirect("home.jsp");
+		
+	
+		response.sendRedirect("novo-termo");
 	}
 	
 	private void inserirTermo(HttpServletRequest request, HttpServletResponse response)
@@ -263,7 +314,7 @@ public class Cadastro extends HttpServlet {
 		
 		Termo termo = new Termo(ong, Otermo);
 		daoTermo.inserirTermo(termo);
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("nova-adocao");
 	}
 	
 	private void inserirAdocao(HttpServletRequest request, HttpServletResponse response)
@@ -276,6 +327,11 @@ public class Cadastro extends HttpServlet {
 		
 		Adocao adocao = new Adocao(pet, ong, tutor, termo);
 		daoAdocao.inserirAdocao(adocao);
+		
+		System.out.println("Adoção inserida no banco");
+		System.out.println("Pet: " + pet.getNome());
+		System.out.println("ONG: " + ong.getNome());
+		System.out.println("Tutor: " + tutor.getNome());
 		response.sendRedirect("home.jsp");
 	}
 
