@@ -1,5 +1,13 @@
 package centralpet.modelo.dao.fotosPet;
 
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+
 import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
@@ -81,5 +89,53 @@ public class FotosPetDAOImpl implements FotosPetDAO {
 
 		}
 
+	}
+	
+	public List<FotosPet> recuperarFotosPet(Long id) {
+		
+		Session sessao = null;
+
+		List<FotosPet> fotos= null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<FotosPet> criteria = construtor.createQuery(FotosPet.class);
+
+			Root<FotosPet> raizFotoPet = criteria.from(FotosPet.class);
+			
+			criteria.select(raizFotoPet);
+			
+			criteria.where(construtor.equal(raizFotoPet.get("id_pet"), id));
+
+			fotos = sessao.createQuery(criteria).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+
+				sessao.getTransaction().rollback();
+
+			}
+
+		} finally {
+
+			if (sessao != null) {
+
+				sessao.close();
+
+			}
+
+		}
+		return fotos;
 	}
 }

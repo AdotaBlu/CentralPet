@@ -2,6 +2,7 @@ package centralpet.modelo.entidade.fotosPet;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class FotosPet implements Serializable {
     private Long id;
 
     @Lob
+    @Column(name="foto_pet")
     private byte[] dadosImagem;
     
     @ManyToOne(fetch = FetchType.LAZY)

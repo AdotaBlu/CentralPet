@@ -14,7 +14,7 @@
 
 <body>
 	<main>
-   		<form method="post"  action="cadastro-ong">
+   		<form method="post"  action="cadastro-ong" enctype="multipart/form-data">
    
   		<label for="logradouro">Logradouro</label>
         <input type="text" id="logradouro" name="logradouro">
@@ -47,6 +47,9 @@
         
         <label for="senha">Senha</label>
         <input type="password" id="senha" name="senha">
+        
+        <label for="imagem">Escolha uma foto de perfil</label>
+    	<input type="file" name="fotoPerfil" id="fotoPerfil" accept="image/*">
         
         <div class="container-botao">
 			<button type="reset" class= "botao-secundario">Limpar</button>

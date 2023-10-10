@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,6 +40,10 @@ public abstract class Usuario implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
+	
+	@Lob
+	@Column(name="foto_perfil_usuario", nullable = true, unique = false)
+	private byte[] fotoPerfil;
 
 	@Column(name = "data_cadastro_usuario", nullable = false, unique = false)
 	private LocalDate dataCadastro;
@@ -48,20 +53,22 @@ public abstract class Usuario implements Serializable {
 
 	public Usuario () {}
 	
-	public Usuario (String nome, Endereco endereco, String senha) {
+	public Usuario (String nome, Endereco endereco, String senha, byte[] fotoPerfil) {
 		setNome(nome);
 		setEndereco(endereco);
 		setDataCadastro(dataCadastro);
 		setDataAlteracaoCadastro(dataAlteracaoCadastro);
 		setSenha(senha);
+		setFotoPerfil(fotoPerfil);
 	}
 	
-	public Usuario (Long id, String nome, Endereco endereco, String senha) {
+	public Usuario (Long id, String nome, Endereco endereco, String senha, byte[] fotoPerfil) {
 		setId(id);
 		setNome(nome);
 		setEndereco(endereco);
 		setSenha(senha);
 		setDataAlteracaoCadastro(dataAlteracaoCadastro);
+		setFotoPerfil(fotoPerfil);
 	}
 
 	public Long getId() {
@@ -112,6 +119,14 @@ public abstract class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public byte[] getfotoPerfil() {
+		return fotoPerfil;
+	}
+	
+	public void setFotoPerfil(byte[] fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
 	}
 	
 	

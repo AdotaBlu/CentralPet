@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.tika.Tika;
 
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
@@ -70,9 +72,13 @@ public class Cadastro extends HttpServlet {
 	
 	private TermoDAO daoTermo;
 	
+	private FotosPetDAO daoFotosPet;
+	
 	private Collection<Part> parteImagem = null;
 	
 	private byte[] fotos = null;
+	
+	private Tika tika = new Tika();
 
 	public void init() {
 		daoEndereco = new EnderecoDAOImpl();
@@ -82,6 +88,7 @@ public class Cadastro extends HttpServlet {
 		daoPet = new PetDAOImpl();
 		daoAdocao = new AdocaoDAOImpl();
 		daoTermo = new TermoDAOImpl();
+		daoFotosPet = new FotosPetDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -144,6 +151,10 @@ public class Cadastro extends HttpServlet {
 				
 			case "/cadastrar-fotos-pet":
 				inserirFotosPet(request, response);
+				break;
+				
+			case "/mostrar-perfil-pet":
+				mostrarPerfilPet(request, response);
 				break;
 			}
 
@@ -251,9 +262,52 @@ public class Cadastro extends HttpServlet {
 		}
 	}
 	
+	private void mostrarPerfilPet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		Pet pet = daoPet.recuperarPet(1L);
+		List<FotosPet> fotos = daoFotosPet.recuperarFotosPet(1L);
+		
+		Ong ong = daoOng.recuperarOng(2L);
+		
+		if(pet != null) {		
+			request.setAttribute("pet", pet);
+			
+			if(ong != null) {
+				request.setAttribute("ong", ong);
+			}
+		} else {
+			System.out.println("Pet nao encontrado");
+		}
+		
+		if(fotos != null) {
+			request.setAttribute("fotos", fotos);
+		
+			for(FotosPet foto : fotos) {
+				
+				if(foto.getDadosImagem() != null) {
+					String tipoImagem = tika.detect(foto.getDadosImagem());
+					response.setContentType(tipoImagem);
+					
+					try(ServletOutputStream outputStream = response.getOutputStream()) {
+						outputStream.write(foto.getDadosImagem());
+					}
+				} else {
+					response.setContentType("imagem invalida");
+				}
+			}
+		} else {
+			System.out.println("sem fotos");
+		}
+		
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-pet.jsp");
+		dispatcher.forward(request, response);
+	}
+	
 
 	private void inserirTutor(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 
 		Endereco endereco = null;
 
@@ -267,14 +321,17 @@ public class Cadastro extends HttpServlet {
 		daoEndereco.inserirEndereco(endereco);
 
 		Tutor tutor = null;
+		Part fotoPerfil = null;
 
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
 		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("generoTutor"));
 		String senha = request.getParameter("senha");
+		fotoPerfil = request.getPart("fotoPerfil");
+		fotos = obterBytesImagem(fotoPerfil);
 		
-		tutor = new Tutor(nome, endereco, cpf, dataNascimento, generoTutor, senha);
+		tutor = new Tutor(nome, endereco, cpf, dataNascimento, generoTutor, senha, fotos);
 		daoTutor.inserirTutor(tutor);
 		
 		Contato contato = null;
@@ -302,12 +359,15 @@ public class Cadastro extends HttpServlet {
 		daoEndereco.inserirEndereco(endereco);
 		
 		Ong ong = null;
+		Part fotoPerfil = null;
 		
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
+		fotoPerfil = request.getPart("fotoPerfil");
+		fotos = obterBytesImagem(fotoPerfil);
 		
-		ong = new Ong(nome, endereco, cnpj, senha);
+		ong = new Ong(nome, endereco, cnpj, senha, fotos);
 		daoOng.inserirOng(ong);
 		
 		Contato contato = null;
@@ -356,7 +416,7 @@ public class Cadastro extends HttpServlet {
 		parteImagem = request.getParts();
 		adicionarImagems(listaFotosPet, pet, parteImagem);
 		
-		response.sendRedirect("novo-termo");
+		response.sendRedirect("mostrar-perfil-pet");
 	}
 	
 	private void inserirTermo(HttpServletRequest request, HttpServletResponse response)
@@ -410,8 +470,6 @@ public class Cadastro extends HttpServlet {
 			foto = new FotosPet(fotos, pet);
 			
 			pet.adicionarFoto(foto);
-			
-			//fotosPet.add(foto);
 			daoFotosPet.inserirFotosPet(foto);
 			
 		}
