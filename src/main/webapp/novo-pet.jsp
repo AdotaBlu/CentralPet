@@ -22,7 +22,7 @@
 				<h1> ong = null </h1>
 			</c:if>
 			
-   			<form method="post"  action="cadastro-pet">
+   			<form method="post"  action="cadastro-pet" enctype="multipart/form-data">
   
 				<h1>Informações do Pet</h1> 
 		   
@@ -73,6 +73,9 @@
          			<option value="MEDIO">Medio</option>
          			<option value="LONGO">Longo</option>
        			 </select>
+       			 
+       			 <label for="fotos">Escolha várias fotos:</label>
+    			 <input type="file" name="fotos" id="fotos" accept="image/*" multiple>
        		
         		<div class="container-botao">
 					<button type="reset" class= "botao-secundario">Limpar</button>

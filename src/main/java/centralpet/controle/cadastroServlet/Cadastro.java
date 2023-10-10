@@ -1,8 +1,11 @@
 package centralpet.controle.cadastroServlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
 
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
@@ -17,6 +23,8 @@ import centralpet.modelo.dao.contato.ContatoDAO;
 import centralpet.modelo.dao.contato.ContatoDAOImpl;
 import centralpet.modelo.dao.endereco.EnderecoDAO;
 import centralpet.modelo.dao.endereco.EnderecoDAOImpl;
+import centralpet.modelo.dao.fotosPet.FotosPetDAO;
+import centralpet.modelo.dao.fotosPet.FotosPetDAOImpl;
 import centralpet.modelo.dao.ong.OngDAO;
 import centralpet.modelo.dao.ong.OngDAOImpl;
 import centralpet.modelo.dao.pet.PetDAO;
@@ -28,6 +36,7 @@ import centralpet.modelo.dao.tutor.TutorDAOImpl;
 import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.contato.Contato;
 import centralpet.modelo.entidade.endereco.Endereco;
+import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.termo.Termo;
@@ -58,6 +67,10 @@ public class Cadastro extends HttpServlet {
 	private AdocaoDAO daoAdocao;
 	
 	private TermoDAO daoTermo;
+	
+	private Collection<Part> parteImagem = null;
+	
+	private byte[] fotos = null;
 
 	public void init() {
 		daoEndereco = new EnderecoDAOImpl();
@@ -281,10 +294,12 @@ public class Cadastro extends HttpServlet {
 	}
 	
 	private void inserirPet(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		
 		Ong ongPet = daoOng.recuperarOng(2L);
 		
+		List<FotosPet> fotosPet = null;
+		Pet pet = null;
 		
 		String nome = request.getParameter("nome");
 		String vacinas = request.getParameter("vacinas");
@@ -297,8 +312,11 @@ public class Cadastro extends HttpServlet {
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexoPet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estadoPet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagemPet"));
+		parteImagem = request.getParts();
+		adicionarImagems(fotosPet, pet, parteImagem);
 		
-		Pet pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet);
+		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet,
+				pelagemPet, fotosPet);
 		daoPet.inserirPet(pet);
 		
 	
@@ -335,4 +353,34 @@ public class Cadastro extends HttpServlet {
 		response.sendRedirect("home.jsp");
 	}
 
+	private byte[] obterBytesImagem(Part parteImagem) throws IOException {
+		InputStream imagemInputstream = parteImagem.getInputStream();
+		
+		return IOUtils.toByteArray(imagemInputstream);
+	}
+	
+	private void adicionarImagems(List<FotosPet> fotosPet, Pet pet, Collection<Part> parteImagem) throws IOException {
+		
+		FotosPetDAO daoFotosPet;
+		
+		for(Part partes : parteImagem) {
+			
+			daoFotosPet = new FotosPetDAOImpl();
+			
+			fotos = obterBytesImagem(partes);
+			
+			FotosPet foto = new FotosPet();
+			
+			foto.setDadosImagem(fotos);
+			foto.setPet(pet);
+			
+			fotosPet.add(foto);
+			daoFotosPet.inserirFotosPet(foto);
+			
+		}
+		pet.setFotos(fotosPet);
+	}
+	
 }
+
+

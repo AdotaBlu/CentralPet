@@ -25,6 +25,7 @@ public class ConexaoFactory {
 		configuracao.addAnnotatedClass(centralpet.modelo.entidade.pendencia.Pendencia.class);
 		configuracao.addAnnotatedClass(centralpet.modelo.entidade.visita.Visita.class);
 		configuracao.addAnnotatedClass(centralpet.modelo.entidade.recolhimento.Recolhimento.class);
+		configuracao.addAnnotatedClass(centralpet.modelo.entidade.fotosPet.FotosPet.class);
 		configuracao.configure("hibernate.cfg.xml");
 
 		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties())
