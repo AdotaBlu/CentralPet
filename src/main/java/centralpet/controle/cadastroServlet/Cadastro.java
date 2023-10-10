@@ -134,6 +134,15 @@ public class Cadastro extends HttpServlet {
 				
 			case "/cadastro-adocao":
 				inserirAdocao(request, response);
+				break;
+				
+			case "/novas-fotos-pet":
+				mostrarFormularioNovasFotosPet(request, response);
+				break;
+				
+			case "/cadastrar-fotos-pet":
+				inserirFotosPet(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {
@@ -223,6 +232,23 @@ public class Cadastro extends HttpServlet {
 		    }
 	}
 	
+	private void mostrarFormularioNovasFotosPet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		Pet pet = daoPet.recuperarPet(1L);
+		
+		if(pet != null) {
+			
+			request.setAttribute("pet", pet);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("novas-fotos-pet.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			
+			System.out.println("Pet nao encontrado");
+		}
+	}
+	
 
 	private void inserirTutor(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
@@ -297,14 +323,12 @@ public class Cadastro extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		
 		Ong ongPet = daoOng.recuperarOng(2L);
-		
-		List<FotosPet> fotosPet = null;
 		Pet pet = null;
 		
 		String nome = request.getParameter("nome");
 		String vacinas = request.getParameter("vacinas");
 		String descricao = request.getParameter("descricao");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimentoPet"));
 		Byte idade = Byte.parseByte(request.getParameter("idade"));
 		StatusPet statusPet = StatusPet.valueOf(request.getParameter("statusPet"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("portePet"));
@@ -312,14 +336,24 @@ public class Cadastro extends HttpServlet {
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexoPet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estadoPet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagemPet"));
-		parteImagem = request.getParts();
-		adicionarImagems(fotosPet, pet, parteImagem);
 		
 		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet,
-				pelagemPet, fotosPet);
+				pelagemPet);
 		daoPet.inserirPet(pet);
 		
 	
+		response.sendRedirect("novas-fotos-pet");
+	}
+	
+	private void inserirFotosPet(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		Pet pet = daoPet.recuperarPet(1L);
+		List<FotosPet> listaFotosPet = null;
+		
+		parteImagem = request.getParts();
+		adicionarImagems(listaFotosPet, pet, parteImagem);
+		
 		response.sendRedirect("novo-termo");
 	}
 	

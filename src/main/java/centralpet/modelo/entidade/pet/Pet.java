@@ -94,7 +94,7 @@ public class Pet implements Serializable {
 
 	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Ong ong,
 			StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
-			EstadoPet estadoPet, PelagemPet pelagemPet, List<FotosPet> fotos) {
+			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
 		setVacinas(vacinas);
 		setDescricao(descricao);
@@ -107,7 +107,6 @@ public class Pet implements Serializable {
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
 		setDataNascimento(dataNascimento);
-		setFotos(fotos);
 //		setAcompanhamento(acompanhamento);
 	}
 

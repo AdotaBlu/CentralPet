@@ -22,7 +22,7 @@
 				<h1> ong = null </h1>
 			</c:if>
 			
-   			<form method="post"  action="cadastro-pet" enctype="multipart/form-data">
+   			<form method="post"  action="cadastro-pet">
   
 				<h1>Informações do Pet</h1> 
 		   
@@ -36,7 +36,7 @@
         		<input type="text" id="descricao" name="descricao">
         
         		<label for="dataNascimento">Data de Nascimento do Pet</label>
-        		<input type="date" id="dataNascimento" name="dataNascimento">
+        		<input type="date" id="dataNascimentoPet" name="dataNascimentoPet">
         		
         		<label for="idade">Idade do Pet</label>
         		<input type="number" id="idade" name="idade">
@@ -73,9 +73,6 @@
          			<option value="MEDIO">Medio</option>
          			<option value="LONGO">Longo</option>
        			 </select>
-       			 
-       			 <label for="fotos">Escolha várias fotos:</label>
-    			 <input type="file" name="fotos" id="fotos" accept="image/*" multiple>
        		
         		<div class="container-botao">
 					<button type="reset" class= "botao-secundario">Limpar</button>
