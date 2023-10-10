@@ -22,11 +22,11 @@
 		<form method="post" action="cadastrar-fotos-pet" enctype="multipart/form-data">
 			
 			 	 <label for="fotos">Escolha várias fotos:</label>
-    			 <input type="file" name="fotos" id="fotos" accept="image/*" multiple>
+    			 <input type="file" name="fotos" id="fotos" accept="image/*" multiple formenctype="multipart/form-data">
     			 
     			 <div class="container-botao">
 					<button type="reset" class= "botao-secundario">Limpar</button>
-        			<button type="submit" class="botao-primario">Salvar</button>		
+        			<button type="submit" class="botao-primario" formenctype="multipart/form-data" >Salvar</button>		
         		 </div>
 		</form>
 	</main>		
