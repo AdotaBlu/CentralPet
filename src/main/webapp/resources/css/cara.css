@@ -1,93 +1,29 @@
+cara.css
+
+
+
 *{
-    margin: 0;
+    width: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #F5F6F7;
-    text-decoration: none;
 }
 
-main{
-	display: flex;
-	flex-direction: column; 
-    align-items: center;
+body{
+    background-color: #eef1f9;
+    color: #38035b;
+    max-width: auto;
+    margin: 0 auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+
 }
+
 
 header{
-    width: auto;
-    height: 70px;
-    background-color: #fff;
-}
-
-input{
-    display: block;
-    padding: 15px;
-    width: 470px;
-    height: 40px;
-    margin: 15;
-    border: 1px solid #31035B;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-
-form{
-    display: grid;
-    gap: 10px;
-    justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-}
-
-ul{
-    width: auto;
-    height: 70px;
-    background-color: #fff;
-}
-
-li{
-    display: inline-block;
-}
-
-option{
-    display: block;
-    padding: 15px;
-    width: 470px;
-    height: 40px;
-    margin: 15;
-    border: 1px solid #31035B;
-    border-radius: 5px;
-}
-
-.container{
-	display: flex;
-}
-
-.container-botao{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-}
-
-
-button{
-	width: 230px;
-    height: 40px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #31035B;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.botao-primario{
-	background-color:#31035B ;
-	color: white;
-}
-
-.botao-primario:hover {
-	background-color: rgb(33, 2, 62);
 }
 
 main{
@@ -106,6 +42,9 @@ footer{
     height: 370px;
 }
 
+
+
+
 .caixa1{
     width: 100%;
     height: 370px;
@@ -118,6 +57,8 @@ footer{
 .caixa1 h2{
     padding: 25px;
 }
+
+
 
 .caixa2-1{
     width: 100%;
@@ -135,6 +76,7 @@ footer{
     margin-right: 40px;
     max-width: 160px;
 }
+
 
 .caixa2-2{
     
@@ -155,6 +97,9 @@ footer{
     margin-right: 25px;
 }
 
+
+
+
 .cardgrid{
     display: flex;
     justify-content: left;
@@ -169,6 +114,9 @@ footer{
     background-color: #fcb700;
 
 }
+
+
+
 
 .caixa3-1{
     width: 20%;
@@ -206,7 +154,8 @@ footer{
     margin: 40px;
     width: 20%;
 }
-
+.footer-content h1{
+}
 
 a{
     text-align: center;
@@ -256,3 +205,18 @@ img{
     text-align: center;
     height: 15px;
 }
+
+button{
+    background-color: #38035b;
+    color: #eef1f9;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+
+}
+button:hover{
+    background-color: #380860;
+    transition: 0.3;
+}
+
