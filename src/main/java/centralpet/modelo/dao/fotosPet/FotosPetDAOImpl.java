@@ -111,8 +111,8 @@ public class FotosPetDAOImpl implements FotosPetDAO {
 			
 			criteria.select(raizFotoPet);
 			
-			criteria.where(construtor.equal(raizFotoPet.get("id_pet"), id));
-
+			criteria.where(construtor.equal(raizFotoPet.get("pet").get("id"), id));
+			
 			fotos = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();

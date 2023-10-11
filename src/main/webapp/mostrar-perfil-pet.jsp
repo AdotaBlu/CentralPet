@@ -52,13 +52,15 @@
 				</c:if>
 			</table>
 		</div>
-		
+		<!--
 		<div>
-			<h2>Fotos do pet</h2>
-			<c:forEach var="foto" items="${fotos}">
-				<img alt="Foto" src="mostrar-perfil-pet?id=${foto.id}">
+		'	<h2>Fotos do pet</h2>
+			<c:forEach var="respostaTemporaria" items="${fotosProcessadas}">
+   			 <img alt="Foto" src="data:${respostaTemporaria.contentType};base64,${respostaTemporaria.body}" width="200" height="200"/>">
 			</c:forEach>
+			
 		</div>
+				-->
 	</main>
 	
 </body>

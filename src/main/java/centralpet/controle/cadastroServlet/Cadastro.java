@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
@@ -266,41 +268,37 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 		
 		Pet pet = daoPet.recuperarPet(1L);
-		List<FotosPet> fotos = daoFotosPet.recuperarFotosPet(1L);
-		
+		//List<FotosPet> fotos = daoFotosPet.recuperarFotosPet(1L);
 		Ong ong = daoOng.recuperarOng(2L);
 		
-		if(pet != null) {		
+		if(pet != null && ong != null) {		
 			request.setAttribute("pet", pet);
-			
-			if(ong != null) {
-				request.setAttribute("ong", ong);
-			}
-		} else {
-			System.out.println("Pet nao encontrado");
-		}
+			request.setAttribute("ong", ong);
+			} 
+		else 
+			System.out.println("Pet ou ONG não encontrado");
 		
-		if(fotos != null) {
-			request.setAttribute("fotos", fotos);
-		
-			for(FotosPet foto : fotos) {
-				
-				if(foto.getDadosImagem() != null) {
-					String tipoImagem = tika.detect(foto.getDadosImagem());
-					response.setContentType(tipoImagem);
-					
-					try(ServletOutputStream outputStream = response.getOutputStream()) {
-						outputStream.write(foto.getDadosImagem());
-					}
-				} else {
-					response.setContentType("imagem invalida");
-				}
-			}
-		} else {
-			System.out.println("sem fotos");
-		}
-		
-		
+		/*if (fotos != null) {
+		    System.out.println("Foto não é nula");
+		    List<HttpServletResponse> fotosProcessadas = new ArrayList<>();
+		    
+		    for (FotosPet foto : fotos) {
+		        if (foto.getDadosImagem() != null) {
+		            String tipoImagem = tika.detect(foto.getDadosImagem());
+
+		            HttpServletResponse respostaTemporaria = criarRespostaTemporaria(response, tipoImagem, foto.getDadosImagem());
+		           
+		            fotosProcessadas.add(respostaTemporaria);
+		        } else 
+		            response.setContentType("imagem invalida");
+		        
+		    }
+		    
+		    request.setAttribute("fotosProcessadas", fotosProcessadas);
+		    
+		} else 
+		    System.out.println("Sem fotos");
+		*/
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-pet.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -474,6 +472,22 @@ public class Cadastro extends HttpServlet {
 			
 		}
 		pet.setFotos(fotosPet);
+	}
+	
+	private HttpServletResponse criarRespostaTemporaria(HttpServletResponse respostaOriginal, String tipoFoto, byte[] conteudoFoto) {
+	    try {
+	        HttpServletResponseWrapper respostaProcessada = new HttpServletResponseWrapper(respostaOriginal);
+	        respostaProcessada.setContentType(tipoFoto);
+	        
+	        try (ServletOutputStream outputStream = respostaProcessada.getOutputStream()) {
+	            outputStream.write(conteudoFoto);
+	        }
+	        
+	        return respostaProcessada;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 	
 }
