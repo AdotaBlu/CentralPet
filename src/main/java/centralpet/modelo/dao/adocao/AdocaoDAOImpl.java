@@ -195,7 +195,7 @@ private ConexaoFactory fabrica;
 		return adocoes;
 	}
 	
-public List<Adocao> recuperarAdocoesOng(Ong ong) {
+	public List<Adocao> recuperarAdocoesOng(Ong ong) {
 		
 		Session sessao = null;
 		List<Adocao> doacoes = null;
@@ -234,5 +234,43 @@ public List<Adocao> recuperarAdocoesOng(Ong ong) {
 		}
 		
 		return doacoes;
+	}
+	
+	public Adocao recuperarAdocao(Long id) {
+		
+		Session sessao = null;
+		Adocao adocao = null;
+		
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Adocao> criteria = construtor.createQuery(Adocao.class);
+			Root<Adocao> raizAdocao = criteria.from(Adocao.class);
+			
+			criteria.where(construtor.equal(raizAdocao.get(Adocao_.id), id));
+
+			adocao = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
+			if(sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+				
+			}
+		} finally {
+			
+			if(sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return adocao;
 	}
 }

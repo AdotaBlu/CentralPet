@@ -233,7 +233,7 @@ public class Cadastro extends HttpServlet {
 		    Ong ong = daoOng.recuperarOng(2L);
 		    Tutor tutor = daoTutor.recuperarTutor(1L);
 			Pet pet = daoPet.recuperarPet(1L);
-		    Termo termo = daoTermo.recuperarTermo(1L);
+		    Termo termo = daoTermo.recuperarTermo(2L);
 			
 
 		    if (ong != null && tutor != null && pet != null && termo != null) {
@@ -317,8 +317,11 @@ public class Cadastro extends HttpServlet {
 		Ong ong = daoOng.recuperarOng(2L);
 		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 		Contato contato = daoContato.recuperarContatoUsuario(ong);
-		List<Adocao> adocao = daoAdocao.recuperarAdocoesOng(ong);
+		Adocao adocao = daoAdocao.recuperarAdocao(1L);
 		Termo termo = daoTermo.recuperarTermo(2L);
+		
+		String nomePet = adocao.getPet().getNome();
+		String nomeTutor = adocao.getTutor().getNome();
 		
 		if(ong != null && endereco != null && contato != null && termo != null) {
 			request.setAttribute("ong", ong);
@@ -326,6 +329,8 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("contato", contato);
 			request.setAttribute("adocao", adocao);
 			request.setAttribute("termo", termo);
+			request.setAttribute("nomePet", nomePet);
+			request.setAttribute("nomeTutor", nomeTutor);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
@@ -482,7 +487,7 @@ public class Cadastro extends HttpServlet {
 		Pet pet = daoPet.recuperarPet(1L);
 		Ong ong = daoOng.recuperarOng(2L);
 	    Tutor tutor = daoTutor.recuperarTutor(1L);
-		Termo termo = daoTermo.recuperarTermo(1L);
+		Termo termo = daoTermo.recuperarTermo(2L);
 		
 		Adocao adocao = new Adocao(pet, ong, tutor, termo);
 		daoAdocao.inserirAdocao(adocao);
@@ -491,7 +496,7 @@ public class Cadastro extends HttpServlet {
 		System.out.println("Pet: " + pet.getNome());
 		System.out.println("ONG: " + ong.getNome());
 		System.out.println("Tutor: " + tutor.getNome());
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("mostrar-perfil-ong");
 	}
 
 	private byte[] obterBytesImagem(Part parteImagem) throws IOException {
