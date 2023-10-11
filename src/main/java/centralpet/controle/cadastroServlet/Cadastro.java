@@ -115,6 +115,9 @@ public class Cadastro extends HttpServlet {
 				inserirTutor(request, response);
 				break;
 				
+			case "/editar-tutor":
+				mostrarFormEditarTutor(request, response);
+				
 			case "/nova-ong":
 				mostrarFormularioNovaOng(request, response);
 				break;
@@ -166,6 +169,10 @@ public class Cadastro extends HttpServlet {
 			case "/mostrar-perfil-tutor":
 				mostrarPerfilTutor(request, response);
 				break;
+				
+			case "/mostrar-selecao-cadastro":
+				mostrarSelecaoCadastro(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {
@@ -179,6 +186,21 @@ public class Cadastro extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	private void mostrarFormEditarTutor(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, ServletException, IOException {
+			
+			Tutor tutor = daoTutor.recuperarTutor(1L);
+			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
+			Contato contato = daoContato.recuperarContatoUsuario(tutor);
+			
+			request.setAttribute("tutor", tutor);
+			request.setAttribute("endereco", endereco);
+			request.setAttribute("contato", contato);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
+			dispatcher.forward(request, response);
+		}
 	
 	private void mostrarFormularioNovaOng(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -320,8 +342,7 @@ public class Cadastro extends HttpServlet {
 		Adocao adocao = daoAdocao.recuperarAdocao(1L);
 		Termo termo = daoTermo.recuperarTermo(2L);
 		
-		String nomePet = adocao.getPet().getNome();
-		String nomeTutor = adocao.getTutor().getNome();
+
 		
 		if(ong != null && endereco != null && contato != null && termo != null) {
 			request.setAttribute("ong", ong);
@@ -329,8 +350,6 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("contato", contato);
 			request.setAttribute("adocao", adocao);
 			request.setAttribute("termo", termo);
-			request.setAttribute("nomePet", nomePet);
-			request.setAttribute("nomeTutor", nomeTutor);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
@@ -353,6 +372,13 @@ public class Cadastro extends HttpServlet {
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-tutor.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarSelecaoCadastro(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-selecao-cadastro.jsp");
 		dispatcher.forward(request, response);
 	}
 
