@@ -158,6 +158,14 @@ public class Cadastro extends HttpServlet {
 			case "/mostrar-perfil-pet":
 				mostrarPerfilPet(request, response);
 				break;
+				
+			case "/mostrar-perfil-ong":
+				mostrarPerfilOng(request, response);
+				break;
+				
+			case "/mostrar-perfil-tutor":
+				mostrarPerfilTutor(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {
@@ -303,6 +311,45 @@ public class Cadastro extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
+	private void mostrarPerfilOng(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		Ong ong = daoOng.recuperarOng(2L);
+		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
+		Contato contato = daoContato.recuperarContatoUsuario(ong);
+		List<Adocao> adocao = daoAdocao.recuperarAdocoesOng(ong);
+		Termo termo = daoTermo.recuperarTermo(2L);
+		
+		if(ong != null && endereco != null && contato != null && termo != null) {
+			request.setAttribute("ong", ong);
+			request.setAttribute("endereco", endereco);
+			request.setAttribute("contato", contato);
+			request.setAttribute("adocao", adocao);
+			request.setAttribute("termo", termo);
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarPerfilTutor(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		Tutor tutor = daoTutor.recuperarTutor(1L);
+		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
+		Contato contato = daoContato.recuperarContatoUsuario(tutor);
+		List<Adocao> adocao = daoAdocao.recuperarAdocoesTutor(tutor);
+		
+		if(tutor != null && endereco != null && contato != null) {
+			request.setAttribute("tutor", tutor);
+			request.setAttribute("endereco", endereco);
+			request.setAttribute("contato", contato);
+			request.setAttribute("adocao", adocao);
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-tutor.jsp");
+		dispatcher.forward(request, response);
+	}
 
 	private void inserirTutor(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {

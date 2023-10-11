@@ -206,7 +206,7 @@ public class TermoDAOImpl implements TermoDAO {
 			CriteriaQuery<Termo> criteria = construtor.createQuery(Termo.class);
 			Root<Termo> raizTermo = criteria.from(Termo.class);
 			
-			criteria.where(construtor.equal(raizTermo.get(Termo_.id), id));
+			criteria.where(construtor.equal(raizTermo.get(Termo_.ong), id));
 			
 			esseTermo = sessao.createQuery(criteria).getSingleResult();
 			
