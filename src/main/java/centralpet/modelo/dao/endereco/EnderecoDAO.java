@@ -16,4 +16,6 @@ public interface EnderecoDAO {
 	List<Endereco> recuperarTodosEnderecos ();
 	
 	Endereco recuperarEnderecoUsuario (Usuario usuario);
+	
+	Endereco recuperarEndereco(Long id);
 }

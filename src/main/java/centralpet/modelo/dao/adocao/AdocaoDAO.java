@@ -4,7 +4,6 @@ import java.util.List;
 
 import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.ong.Ong;
-import centralpet.modelo.entidade.termo.Termo;
 import centralpet.modelo.entidade.tutor.Tutor;
 
 public interface AdocaoDAO {

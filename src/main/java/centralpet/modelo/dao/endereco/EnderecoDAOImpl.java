@@ -8,6 +8,8 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Session;
+
 import centralpet.modelo.entidade.endereco.Endereco;
 import centralpet.modelo.entidade.endereco.Endereco_;
 import centralpet.modelo.entidade.tutor.Tutor;
@@ -247,6 +249,44 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
 		return endereco;
 
+	}
+	
+	public Endereco recuperarEndereco(Long id) {
+
+		Session sessao = null;
+		Endereco enderecoRecuperado = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Endereco> criteria = construtor.createQuery(Endereco.class);
+			Root<Endereco> raizEndereco = criteria.from(Endereco.class);
+			
+			criteria.where(construtor.equal(raizEndereco.get(Endereco_.id), id));
+			
+			enderecoRecuperado = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return enderecoRecuperado;
 	}
 
 }

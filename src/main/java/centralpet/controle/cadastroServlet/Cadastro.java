@@ -117,7 +117,12 @@ public class Cadastro extends HttpServlet {
 				
 			case "/editar-tutor":
 				mostrarFormEditarTutor(request, response);
-				
+				break;
+			
+			case "/atualizar-tutor":
+				atualizarTutor(request, response);
+				break;
+			
 			case "/nova-ong":
 				mostrarFormularioNovaOng(request, response);
 				break;
@@ -190,16 +195,24 @@ public class Cadastro extends HttpServlet {
 	private void mostrarFormEditarTutor(HttpServletRequest request, HttpServletResponse response) 
 			throws SQLException, ServletException, IOException {
 			
-			Tutor tutor = daoTutor.recuperarTutor(1L);
-			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
-			Contato contato = daoContato.recuperarContatoUsuario(tutor);
-			
-			request.setAttribute("tutor", tutor);
+			//Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
+			Long idEndereco = 1L;
+			Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
 			request.setAttribute("endereco", endereco);
+			
+			//Long idTutor = Long.parseLong(request.getParameter("id-tutor"));
+			Long idTutor = 1L;
+			Tutor tutor = daoTutor.recuperarTutor(idTutor);
+			request.setAttribute("tutor", tutor);
+			
+			//Long idContato = Long.parseLong(request.getParameter("id-contato"));
+			Long idContato = 1L;
+			Contato contato = daoContato.recuperarContato(idContato);
 			request.setAttribute("contato", contato);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
 			dispatcher.forward(request, response);
+			System.out.println("passou pelo metodo de mostrar o form");
 		}
 	
 	private void mostrarFormularioNovaOng(HttpServletRequest request, HttpServletResponse response)
@@ -418,6 +431,46 @@ public class Cadastro extends HttpServlet {
 		contato = new Contato(email, telefone, tutor);
 		daoContato.inserirContato(contato);
 		response.sendRedirect("home.jsp");
+	}
+	
+	private void atualizarTutor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		System.out.println("entrou no action de atualizar tutor");
+		
+		Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
+		String logradouro = request.getParameter("logradouro");
+		int numero = Integer.parseInt(request.getParameter("numero"));
+		String bairro = request.getParameter("bairro");
+		String cep = request.getParameter("cep");
+		String pontoReferencia = request.getParameter("pontoReferencia");
+		
+		daoEndereco.atualizarEndereco(new Endereco(idEndereco, logradouro, numero, bairro, cep, pontoReferencia));
+		Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
+		
+		System.out.println("passou pela parte de endereco");
+		
+		Part fotoPerfil = null;
+		Long idTutor = Long.parseLong(request.getParameter("id-tutor"));
+		String nome = request.getParameter("nome");
+		String cpf = request.getParameter("cpf");
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("generoTutor"));
+		String senha = request.getParameter("senha");
+		fotoPerfil = request.getPart("fotoPerfil");
+		fotos = obterBytesImagem(fotoPerfil);
+		daoTutor.atualizarTutor(new Tutor(nome, endereco, idTutor, cpf, dataNascimento, generoTutor, senha, fotos));
+		Tutor tutor = daoTutor.recuperarTutor(idTutor);
+		
+		System.out.println("passou pela parte de tutor");
+
+		Long idContato = Long.parseLong(request.getParameter("id-contato"));
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		daoContato.atualizarContato(new Contato(idContato, email, telefone, tutor));
+		response.sendRedirect("home.jsp");
+		
+		System.out.println("passou pela parte de contato e enviou oq mostrar");
 	}
 	
 	private void inserirOng(HttpServletRequest request, HttpServletResponse response)
