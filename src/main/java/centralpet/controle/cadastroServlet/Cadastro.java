@@ -131,6 +131,14 @@ public class Cadastro extends HttpServlet {
 				inserirOng(request, response);
 				break;
 				
+			case "/editar-ong":
+				mostrarFormEditarOng(request, response);
+				break;
+				
+			case "/atualizar-ong":
+				atualizarOng(request, response);
+				break;
+				
 			case "/novo-pet":
 				mostrarFormularioNovoPet(request, response);
 				break;
@@ -212,7 +220,6 @@ public class Cadastro extends HttpServlet {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
 			dispatcher.forward(request, response);
-			System.out.println("passou pelo metodo de mostrar o form");
 		}
 	
 	private void mostrarFormularioNovaOng(HttpServletRequest request, HttpServletResponse response)
@@ -221,6 +228,28 @@ public class Cadastro extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	private void mostrarFormEditarOng(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, ServletException, IOException {
+			
+			//Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
+			Long idEndereco = 2L;
+			Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
+			request.setAttribute("endereco", endereco);
+			
+			//Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Long idOng = 2L;
+			Ong ong = daoOng.recuperarOng(idOng);
+			request.setAttribute("ong", ong);
+			
+			//Long idContato = Long.parseLong(request.getParameter("id-contato"));
+			Long idContato = 2L;
+			Contato contato = daoContato.recuperarContato(idContato);
+			request.setAttribute("contato", contato);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
+			dispatcher.forward(request, response);
+		}
 	
 	private void mostrarFormularioNovoPet(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
@@ -508,6 +537,36 @@ public class Cadastro extends HttpServlet {
 		daoContato.inserirContato(contato);
 		response.sendRedirect("novo-pet");
 		
+	}
+	
+	private void atualizarOng(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
+		String logradouro = request.getParameter("logradouro");
+		int numero = Integer.parseInt(request.getParameter("numero"));
+		String bairro = request.getParameter("bairro");
+		String cep = request.getParameter("cep");
+		String pontoReferencia = request.getParameter("pontoReferencia");
+		Endereco endereco = new Endereco(idEndereco, logradouro, numero, bairro, cep, pontoReferencia);
+		daoEndereco.atualizarEndereco(endereco);
+		
+		Part fotoPerfil = null;
+		
+		Long idOng = Long.parseLong(request.getParameter("id-ong"));
+		String nome = request.getParameter("nome");
+		String senha = request.getParameter("senha");
+		String cnpj = request.getParameter("cnpj");
+		fotoPerfil = request.getPart("fotoPerfil");
+		fotos = obterBytesImagem(fotoPerfil);
+		Ong ong = new Ong(nome, endereco, idOng, cnpj, senha, fotos);
+		daoOng.atualizarOng(ong);
+		
+		Long idContato = Long.parseLong(request.getParameter("id-contato"));
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		daoContato.atualizarContato(new Contato(idContato, email, telefone, ong));
+		response.sendRedirect("home.jsp");
 	}
 	
 	private void inserirPet(HttpServletRequest request, HttpServletResponse response)
