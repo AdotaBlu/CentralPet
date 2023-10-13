@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 import centralpet.modelo.entidade.fotosPet.FotosPet;
+import centralpet.modelo.entidade.fotosPet.FotosPet_;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
 public class FotosPetDAOImpl implements FotosPetDAO {
@@ -111,7 +112,7 @@ public class FotosPetDAOImpl implements FotosPetDAO {
 			
 			criteria.select(raizFotoPet);
 			
-			criteria.where(construtor.equal(raizFotoPet.get("pet").get("id"), id));
+			criteria.where(construtor.equal(raizFotoPet.get(FotosPet_.pet), id));
 			
 			fotos = sessao.createQuery(criteria).getResultList();
 
@@ -137,5 +138,53 @@ public class FotosPetDAOImpl implements FotosPetDAO {
 
 		}
 		return fotos;
+	}
+	
+public FotosPet recuperarFotoId(Long id) {
+		
+		Session sessao = null;
+
+		FotosPet foto = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<FotosPet> criteria = construtor.createQuery(FotosPet.class);
+
+			Root<FotosPet> raizFotoPet = criteria.from(FotosPet.class);
+			
+			criteria.select(raizFotoPet);
+			
+			criteria.where(construtor.equal(raizFotoPet.get(FotosPet_.id), id));
+			
+			foto = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+
+				sessao.getTransaction().rollback();
+
+			}
+
+		} finally {
+
+			if (sessao != null) {
+
+				sessao.close();
+
+			}
+
+		}
+		return foto;
 	}
 }

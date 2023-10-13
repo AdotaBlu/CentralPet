@@ -41,6 +41,7 @@ import centralpet.modelo.dao.tutor.TutorDAOImpl;
 import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.contato.Contato;
 import centralpet.modelo.entidade.endereco.Endereco;
+import centralpet.modelo.entidade.fotosPet.FotoDTO;
 import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
@@ -186,6 +187,10 @@ public class Cadastro extends HttpServlet {
 			case "/mostrar-selecao-cadastro":
 				mostrarSelecaoCadastro(request, response);
 				break;
+				
+			case "/mostrar-imagem":
+				mostrarImagem(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {
@@ -328,37 +333,26 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 		
 		Pet pet = daoPet.recuperarPet(1L);
-		//List<FotosPet> fotos = daoFotosPet.recuperarFotosPet(1L);
+		List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(1L);
 		Ong ong = daoOng.recuperarOng(2L);
+		List<FotoDTO> fotoDTOs = new ArrayList<>();
 		
 		if(pet != null && ong != null) {		
 			request.setAttribute("pet", pet);
 			request.setAttribute("ong", ong);
-			} 
-		else 
-			System.out.println("Pet ou ONG não encontrado");
+			
+			for(FotosPet foto : fotosPet) {
+				
+				FotoDTO fotoDTO = new FotoDTO();
+				fotoDTO.setId(foto.getId());
+				fotoDTO.setUrlImagem("?action=/mostrar-imagem&foto-id=" + foto.getId());
+				fotoDTOs.add(fotoDTO);
+			}
+			
+			request.setAttribute("fotos", fotoDTOs);
+			
+		} 
 		
-		/*if (fotos != null) {
-		    System.out.println("Foto não é nula");
-		    List<HttpServletResponse> fotosProcessadas = new ArrayList<>();
-		    
-		    for (FotosPet foto : fotos) {
-		        if (foto.getDadosImagem() != null) {
-		            String tipoImagem = tika.detect(foto.getDadosImagem());
-
-		            HttpServletResponse respostaTemporaria = criarRespostaTemporaria(response, tipoImagem, foto.getDadosImagem());
-		           
-		            fotosProcessadas.add(respostaTemporaria);
-		        } else 
-		            response.setContentType("imagem invalida");
-		        
-		    }
-		    
-		    request.setAttribute("fotosProcessadas", fotosProcessadas);
-		    
-		} else 
-		    System.out.println("Sem fotos");
-		*/
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-pet.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -660,6 +654,25 @@ public class Cadastro extends HttpServlet {
 	        e.printStackTrace();
 	        return null;
 	    }
+	}
+	
+	private void mostrarImagem(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		
+		Long fotoId = Long.parseLong(request.getParameter("foto-id"));
+		FotosPet fotosPet = daoFotosPet.recuperarFotoId(fotoId);
+		System.out.println("agora indo no if");
+		if(fotosPet != null && fotosPet.getDadosImagem() != null) {
+			
+			String tipoConteudo = tika.detect(fotosPet.getDadosImagem());
+			response.setContentType(tipoConteudo);
+			
+			try(ServletOutputStream outputStream = response.getOutputStream()) {
+				outputStream.write(fotosPet.getDadosImagem());
+				System.out.println("passei pelo if");
+			}
+		}
+		System.out.println("acabou metodo");
 	}
 	
 }

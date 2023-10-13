@@ -11,4 +11,6 @@ public interface FotosPetDAO {
 	 void deletarFotosPet(FotosPet fotos);
 	 
 	 List<FotosPet> recuperarFotosPet(Long id);
+	 
+	 FotosPet recuperarFotoId(Long id);
 }

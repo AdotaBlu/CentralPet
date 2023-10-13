@@ -53,15 +53,16 @@
 				</c:if>
 			</table>
 		</div>
-		<!--
+		
 		<div>
-		'	<h2>Fotos do pet</h2>
-			<c:forEach var="respostaTemporaria" items="${fotosProcessadas}">
-   			 <img alt="Foto" src="data:${respostaTemporaria.contentType};base64,${respostaTemporaria.body}" width="200" height="200"/>">
+		<c:if test="${not empty fotos}">
+			<h2>Fotos do pet</h2>
+			<c:forEach var="foto" items="${fotos}">
+				<img src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
 			</c:forEach>
-			
+		</c:if>	
 		</div>
-				-->
+				
 	</main>
 	
 </body>
