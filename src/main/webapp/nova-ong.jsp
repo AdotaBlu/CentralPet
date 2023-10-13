@@ -43,7 +43,7 @@
         <input type="text" id="cep" name="cep" value="<c:out value='${endereco.cep}' />">
         
         <label for="pontoReferencia">Ponto de Referência</label>
-        <input type="text" id="pontoReferencia" name="pontoReferencia" value="<c:out value='${endereco.pontoReferencia}' />">
+        <input type="text" id="pontoReferencia" name="ponto-referencia" value="<c:out value='${endereco.pontoReferencia}' />">
         
 		<h1>Informações da ONG</h1> 
 		 
@@ -71,7 +71,7 @@
         <input type="password" id="senha" name="senha" value="<c:out value='${ong.senha}' />">
         
         <label for="imagem">Escolha uma foto de perfil</label>
-    	<input type="file" name="fotoPerfil" id="fotoPerfil" accept="image/*">
+    	<input type="file" name="foto-perfil" id="fotoPerfil" accept="image/*">
         
         <div class="container-botao">
 			<button type="reset" class= "botao-secundario">Limpar</button>

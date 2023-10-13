@@ -40,7 +40,7 @@
             <label for="cep">CEP</label>
             <input type="text" id="cep" name="cep" value="<c:out value='${endereco.cep}' />">
             <label for="pontoReferencia">Ponto de Referência</label>
-            <input type="text" id="pontoReferencia" name="pontoReferencia" value="<c:out value='${endereco.pontoReferencia}' />">
+            <input type="text" id="pontoReferencia" name="ponto-referencia" value="<c:out value='${endereco.pontoReferencia}' />">
            
         </div>
         <div class="container-cadastro">
@@ -53,10 +53,10 @@
             <label for="cpf">CPF</label>
             <input type="text" id="cpf" name="cpf" value="<c:out value='${tutor.cpf}' />">
             <label for="dataNascimento">Data de Nascimento</label>
-            <input type="date" id="dataNascimento" name="dataNascimento" value="<c:out value='${tutor.dataNascimento}' />"/>
+            <input type="date" id="dataNascimento" name="data-nascimento" value="<c:out value='${tutor.dataNascimento}' />"/>
             <label for="drop_down_genero">Gênero</label>
        
-            <select name="generoTutor" id="drop_down_genero" >
+            <select name="genero-tutor" id="drop_down_genero" >
                 <option value="MASCULINO">Masculino</option>
                 <option value="FEMININO">Feminino</option>
                 <option value="OUTROS">Outros</option>
@@ -72,7 +72,7 @@
             <label for="senha">Senha</label>
             <input type="password" id="senha" name="senha" value="<c:out value='${tutor.senha}' />">
             <label for="fotoPerfil">Escolha uma foto de perfil</label>
-            <input type="file" name="fotoPerfil" id="fotoPerfil" accept="image/*">
+            <input type="file" name="foto-perfil" id="fotoPerfil" accept="image/*">
             <div class="container-botao">
                 <button type="reset" class="botao-secundario">Limpar</button>
                 <button type="submit" class="botao-primario">Salvar</button>

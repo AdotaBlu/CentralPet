@@ -258,8 +258,6 @@ public class Cadastro extends HttpServlet {
 		    Ong ong = daoOng.recuperarOng(2L);
 
 		    if (ong != null) {
-	
-		        System.out.println("Nome da Ong: " + ong.getNome());
 		        
 		        request.setAttribute("ong", ong);
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
@@ -272,13 +270,10 @@ public class Cadastro extends HttpServlet {
 	
 	private void mostrarFormularioNovoTermo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		  System.out.println("Método mostrarFormularioNovoTermo foi chamado");
 
 		    Ong ong = daoOng.recuperarOng(2L);
 
 		    if (ong != null) {
-	
-		        System.out.println("Nome da Ong: " + ong.getNome());
 		        
 		        request.setAttribute("ong", ong);
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("novo-termo.jsp");
@@ -292,20 +287,13 @@ public class Cadastro extends HttpServlet {
 	
 	private void mostrarFormularioNovaAdocao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 System.out.println("Método mostrarFormularioNovoTermo foi chamado");
-
+		
 		    Ong ong = daoOng.recuperarOng(2L);
 		    Tutor tutor = daoTutor.recuperarTutor(1L);
 			Pet pet = daoPet.recuperarPet(1L);
 		    Termo termo = daoTermo.recuperarTermo(2L);
-			
 
 		    if (ong != null && tutor != null && pet != null && termo != null) {
-	
-		        System.out.println("Nome da Ong: " + ong.getNome());
-		        System.out.println("Nome do Tutor: " + tutor.getNome());
-		        System.out.println("Nome do Pet: " + pet.getNome());
-		        System.out.println("Nome do Tutor: " + termo.getTermo());
 		        
 		        request.setAttribute("ong", ong);
 		        request.setAttribute("tutor", tutor);
@@ -384,8 +372,6 @@ public class Cadastro extends HttpServlet {
 		Adocao adocao = daoAdocao.recuperarAdocao(1L);
 		Termo termo = daoTermo.recuperarTermo(2L);
 		
-
-		
 		if(ong != null && endereco != null && contato != null && termo != null) {
 			request.setAttribute("ong", ong);
 			request.setAttribute("endereco", endereco);
@@ -433,7 +419,7 @@ public class Cadastro extends HttpServlet {
 		int numero = Integer.parseInt(request.getParameter("numero"));
 		String bairro = request.getParameter("bairro");
 		String cep = request.getParameter("cep");
-		String pontoReferencia = request.getParameter("pontoReferencia");
+		String pontoReferencia = request.getParameter("ponto-referencia");
 		
 		endereco = new Endereco(logradouro, numero, bairro, cep, pontoReferencia);
 		daoEndereco.inserirEndereco(endereco);
@@ -443,10 +429,10 @@ public class Cadastro extends HttpServlet {
 
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
-		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("generoTutor"));
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
+		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("genero-tutor"));
 		String senha = request.getParameter("senha");
-		fotoPerfil = request.getPart("fotoPerfil");
+		fotoPerfil = request.getPart("foto-perfil");
 		fotos = obterBytesImagem(fotoPerfil);
 		
 		tutor = new Tutor(nome, endereco, cpf, dataNascimento, generoTutor, senha, fotos);
@@ -472,7 +458,7 @@ public class Cadastro extends HttpServlet {
 		int numero = Integer.parseInt(request.getParameter("numero"));
 		String bairro = request.getParameter("bairro");
 		String cep = request.getParameter("cep");
-		String pontoReferencia = request.getParameter("pontoReferencia");
+		String pontoReferencia = request.getParameter("ponto-referencia");
 		
 		daoEndereco.atualizarEndereco(new Endereco(idEndereco, logradouro, numero, bairro, cep, pontoReferencia));
 		Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
@@ -483,10 +469,10 @@ public class Cadastro extends HttpServlet {
 		Long idTutor = Long.parseLong(request.getParameter("id-tutor"));
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
-		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("generoTutor"));
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
+		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("genero-tutor"));
 		String senha = request.getParameter("senha");
-		fotoPerfil = request.getPart("fotoPerfil");
+		fotoPerfil = request.getPart("foto-perfil");
 		fotos = obterBytesImagem(fotoPerfil);
 		daoTutor.atualizarTutor(new Tutor(nome, endereco, idTutor, cpf, dataNascimento, generoTutor, senha, fotos));
 		Tutor tutor = daoTutor.recuperarTutor(idTutor);
@@ -511,7 +497,7 @@ public class Cadastro extends HttpServlet {
 		int numero = Integer.parseInt(request.getParameter("numero"));
 		String bairro = request.getParameter("bairro");
 		String cep = request.getParameter("cep");
-		String pontoReferencia = request.getParameter("pontoReferencia");
+		String pontoReferencia = request.getParameter("ponto-referencia");
 		
 		endereco = new Endereco(logradouro, numero, bairro, cep, pontoReferencia);
 		daoEndereco.inserirEndereco(endereco);
@@ -522,7 +508,7 @@ public class Cadastro extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
-		fotoPerfil = request.getPart("fotoPerfil");
+		fotoPerfil = request.getPart("foto-perfil");
 		fotos = obterBytesImagem(fotoPerfil);
 		
 		ong = new Ong(nome, endereco, cnpj, senha, fotos);
@@ -547,7 +533,7 @@ public class Cadastro extends HttpServlet {
 		int numero = Integer.parseInt(request.getParameter("numero"));
 		String bairro = request.getParameter("bairro");
 		String cep = request.getParameter("cep");
-		String pontoReferencia = request.getParameter("pontoReferencia");
+		String pontoReferencia = request.getParameter("ponto-referencia");
 		Endereco endereco = new Endereco(idEndereco, logradouro, numero, bairro, cep, pontoReferencia);
 		daoEndereco.atualizarEndereco(endereco);
 		
@@ -557,7 +543,7 @@ public class Cadastro extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
-		fotoPerfil = request.getPart("fotoPerfil");
+		fotoPerfil = request.getPart("foto-perfil");
 		fotos = obterBytesImagem(fotoPerfil);
 		Ong ong = new Ong(nome, endereco, idOng, cnpj, senha, fotos);
 		daoOng.atualizarOng(ong);
@@ -578,14 +564,14 @@ public class Cadastro extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String vacinas = request.getParameter("vacinas");
 		String descricao = request.getParameter("descricao");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimentoPet"));
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
 		Byte idade = Byte.parseByte(request.getParameter("idade"));
-		StatusPet statusPet = StatusPet.valueOf(request.getParameter("statusPet"));
-		PortePet portePet = PortePet.valueOf(request.getParameter("portePet"));
-		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especiePet"));
-		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexoPet"));
-		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estadoPet"));
-		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagemPet"));
+		StatusPet statusPet = StatusPet.valueOf(request.getParameter("status-pet"));
+		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
+		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
+		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
+		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
+		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
 		
 		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet,
 				pelagemPet);
@@ -629,11 +615,7 @@ public class Cadastro extends HttpServlet {
 		
 		Adocao adocao = new Adocao(pet, ong, tutor, termo);
 		daoAdocao.inserirAdocao(adocao);
-		
-		System.out.println("Adoção inserida no banco");
-		System.out.println("Pet: " + pet.getNome());
-		System.out.println("ONG: " + ong.getNome());
-		System.out.println("Tutor: " + tutor.getNome());
+
 		response.sendRedirect("mostrar-perfil-ong");
 	}
 

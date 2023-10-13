@@ -72,3 +72,4 @@ target/
 /.apt_generated/
 /generated-sources/
 /generated-test-sources/
+bin/

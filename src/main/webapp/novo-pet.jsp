@@ -36,23 +36,23 @@
         		<input type="text" id="descricao" name="descricao">
         
         		<label for="dataNascimento">Data de Nascimento do Pet</label>
-        		<input type="date" id="dataNascimentoPet" name="dataNascimentoPet">
+        		<input type="date" id="dataNascimentoPet" name="data-nascimento-pet">
         		
         		<label for="idade">Idade do Pet</label>
         		<input type="number" id="idade" name="idade">
         		
         		
-        		<input type="hidden" id="statusPet" name="statusPet" value="DISPONIVEL">
-        		<input type="hidden" id="estadoPet" name="estadoPet" value="ATIVO">
+        		<input type="hidden" id="statusPet" name="status-pet" value="DISPONIVEL">
+        		<input type="hidden" id="estadoPet" name="estado-pet" value="ATIVO">
         		
        			 <label for="drop_down_especie">Especie do Pet</label>
-      			  <select name="especiePet" id="drop_down_especie">
+      			  <select name="especie-pet" id="drop_down_especie">
             		<option value="GATO">Gato</option>
          			<option value="CACHORRO">Cachorro</option>
        			 </select>
        			 
        			 <label for="drop_down_porte">Porte</label>
-      			  <select name="portePet" id="drop_down_porte">
+      			  <select name="porte-pet" id="drop_down_porte">
             		<option value="MINI">Mini</option>
          			<option value="PEQUENO">Pequeno</option>
          			<option value="MEDIO">Medio</option>
@@ -61,14 +61,14 @@
        			 </select>
        			 
        			 <label for="drop_down_sexo">Sexo do Pet</label>
-      			  <select name="sexoPet" id="drop_down_sexo">
+      			  <select name="sexo-pet" id="drop_down_sexo">
             		<option value="MACHO">Macho</option>
          			<option value="FEMEA">Femea</option>
        			 </select>
        			 
        			 
        			 <label for="drop_down_pelagem">Pelagem</label>
-      			  <select name="pelagemPet" id="drop_down_pelagem">
+      			  <select name="pelagem-pet" id="drop_down_pelagem">
             		<option value="CURTO">Curto</option>
          			<option value="MEDIO">Medio</option>
          			<option value="LONGO">Longo</option>
