@@ -5,18 +5,17 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
@@ -82,7 +81,7 @@ public class Cadastro extends HttpServlet {
 	private byte[] fotos = null;
 	
 	private Tika tika = new Tika();
-
+	
 	public void init() {
 		daoEndereco = new EnderecoDAOImpl();
 		daoTutor = new TutorDAOImpl();
@@ -188,9 +187,6 @@ public class Cadastro extends HttpServlet {
 				mostrarSelecaoCadastro(request, response);
 				break;
 				
-			case "/mostrar-imagem":
-				mostrarImagem(request, response);
-				break;
 			}
 
 		} catch (SQLException ex) {
@@ -336,6 +332,7 @@ public class Cadastro extends HttpServlet {
 		List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(1L);
 		Ong ong = daoOng.recuperarOng(2L);
 		List<FotoDTO> fotoDTOs = new ArrayList<>();
+		String urlFoto;
 		
 		if(pet != null && ong != null) {		
 			request.setAttribute("pet", pet);
@@ -344,8 +341,9 @@ public class Cadastro extends HttpServlet {
 			for(FotosPet foto : fotosPet) {
 				
 				FotoDTO fotoDTO = new FotoDTO();
+				urlFoto = Base64.getEncoder().encodeToString(foto.getDadosImagem());
 				fotoDTO.setId(foto.getId());
-				fotoDTO.setUrlImagem("?action=/mostrar-imagem&foto-id=" + foto.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 				fotoDTOs.add(fotoDTO);
 			}
 			
@@ -640,40 +638,7 @@ public class Cadastro extends HttpServlet {
 		pet.setFotos(fotosPet);
 	}
 	
-	private HttpServletResponse criarRespostaTemporaria(HttpServletResponse respostaOriginal, String tipoFoto, byte[] conteudoFoto) {
-	    try {
-	        HttpServletResponseWrapper respostaProcessada = new HttpServletResponseWrapper(respostaOriginal);
-	        respostaProcessada.setContentType(tipoFoto);
-	        
-	        try (ServletOutputStream outputStream = respostaProcessada.getOutputStream()) {
-	            outputStream.write(conteudoFoto);
-	        }
-	        
-	        return respostaProcessada;
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return null;
-	    }
-	}
 	
-	private void mostrarImagem(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		
-		Long fotoId = Long.parseLong(request.getParameter("foto-id"));
-		FotosPet fotosPet = daoFotosPet.recuperarFotoId(fotoId);
-		System.out.println("agora indo no if");
-		if(fotosPet != null && fotosPet.getDadosImagem() != null) {
-			
-			String tipoConteudo = tika.detect(fotosPet.getDadosImagem());
-			response.setContentType(tipoConteudo);
-			
-			try(ServletOutputStream outputStream = response.getOutputStream()) {
-				outputStream.write(fotosPet.getDadosImagem());
-				System.out.println("passei pelo if");
-			}
-		}
-		System.out.println("acabou metodo");
-	}
 	
 }
 

@@ -58,7 +58,7 @@
 		<c:if test="${not empty fotos}">
 			<h2>Fotos do pet</h2>
 			<c:forEach var="foto" items="${fotos}">
-				<img src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
+				<img class="imagem-perfil-pet" src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
 			</c:forEach>
 		</c:if>	
 		</div>
