@@ -1,7 +1,6 @@
 package centralpet.controle.cadastroServlet;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.tika.Tika;
 
 import centralpet.modelo.dao.adocao.AdocaoDAO;
@@ -53,6 +51,7 @@ import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
 import centralpet.modelo.enumeracao.pet.status.StatusPet;
+import centralpet.util.conversorImagem.ConverterImagem;
 
 @WebServlet("/")
 @MultipartConfig
@@ -77,6 +76,8 @@ public class Cadastro extends HttpServlet {
 	private FotosPetDAO daoFotosPet;
 	
 	private Collection<Part> parteImagem = null;
+	
+	private ConverterImagem converterImagem;
 	
 	private byte[] fotos = null;
 	
@@ -418,14 +419,14 @@ public class Cadastro extends HttpServlet {
 
 		Tutor tutor = null;
 		Part fotoPerfil = null;
-
+		
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
 		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("genero-tutor"));
 		String senha = request.getParameter("senha");
 		fotoPerfil = request.getPart("foto-perfil");
-		fotos = obterBytesImagem(fotoPerfil);
+		fotos = converterImagem.obterBytesImagem(fotoPerfil);
 		
 		tutor = new Tutor(nome, endereco, cpf, dataNascimento, generoTutor, senha, fotos);
 		daoTutor.inserirTutor(tutor);
@@ -465,7 +466,7 @@ public class Cadastro extends HttpServlet {
 		GeneroTutor generoTutor = GeneroTutor.valueOf(request.getParameter("genero-tutor"));
 		String senha = request.getParameter("senha");
 		fotoPerfil = request.getPart("foto-perfil");
-		fotos = obterBytesImagem(fotoPerfil);
+		fotos = converterImagem.obterBytesImagem(fotoPerfil);
 		daoTutor.atualizarTutor(new Tutor(nome, endereco, idTutor, cpf, dataNascimento, generoTutor, senha, fotos));
 		Tutor tutor = daoTutor.recuperarTutor(idTutor);
 		
@@ -501,7 +502,7 @@ public class Cadastro extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
 		fotoPerfil = request.getPart("foto-perfil");
-		fotos = obterBytesImagem(fotoPerfil);
+		fotos = converterImagem.obterBytesImagem(fotoPerfil);
 		
 		ong = new Ong(nome, endereco, cnpj, senha, fotos);
 		daoOng.inserirOng(ong);
@@ -536,7 +537,7 @@ public class Cadastro extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
 		fotoPerfil = request.getPart("foto-perfil");
-		fotos = obterBytesImagem(fotoPerfil);
+		fotos = converterImagem.obterBytesImagem(fotoPerfil);
 		Ong ong = new Ong(nome, endereco, idOng, cnpj, senha, fotos);
 		daoOng.atualizarOng(ong);
 		
@@ -580,7 +581,7 @@ public class Cadastro extends HttpServlet {
 		List<FotosPet> listaFotosPet = null;
 		
 		parteImagem = request.getParts();
-		adicionarImagems(listaFotosPet, pet, parteImagem);
+		converterImagem.adicionarImagensArrayFotosPet(listaFotosPet, pet, parteImagem);
 		
 		response.sendRedirect("mostrar-perfil-pet");
 	}
@@ -610,35 +611,6 @@ public class Cadastro extends HttpServlet {
 
 		response.sendRedirect("mostrar-perfil-ong");
 	}
-
-	private byte[] obterBytesImagem(Part parteImagem) throws IOException {
-		InputStream imagemInputstream = parteImagem.getInputStream();
-		
-		return IOUtils.toByteArray(imagemInputstream);
-	}
-	
-	private void adicionarImagems(List<FotosPet> fotosPet, Pet pet, Collection<Part> parteImagem) throws IOException {
-		
-		FotosPetDAO daoFotosPet;
-		
-		for(Part partes : parteImagem) {
-			
-			daoFotosPet = new FotosPetDAOImpl();
-			
-			fotos = obterBytesImagem(partes);
-			
-			FotosPet foto = new FotosPet();
-		
-			foto = new FotosPet(fotos, pet);
-			
-			pet.adicionarFoto(foto);
-			daoFotosPet.inserirFotosPet(foto);
-			
-		}
-		pet.setFotos(fotosPet);
-	}
-	
-	
 	
 }
 
