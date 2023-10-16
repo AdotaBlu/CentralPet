@@ -16,6 +16,7 @@
 				
 			<c:if test="${ong != null}"> 
 				<h1><c:out value='${ong.nome}' /></h1>
+				<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="100">
 			</c:if>
 			
 			<c:if test="${ong == null}"> 

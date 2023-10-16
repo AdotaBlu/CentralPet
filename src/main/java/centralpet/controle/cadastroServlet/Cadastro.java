@@ -256,6 +256,15 @@ public class Cadastro extends HttpServlet {
 		    if (ong != null) {
 		        
 		        request.setAttribute("ong", ong);
+		        
+		        String urlFoto;
+				FotoDTO fotoDTO = new FotoDTO();
+				urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+				fotoDTO.setId(ong.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
+		        
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
 		        dispatcher.forward(request, response);
 		    } else {
@@ -341,6 +350,7 @@ public class Cadastro extends HttpServlet {
 		Contato contato = daoContato.recuperarContatoUsuario(ong);
 		Adocao adocao = daoAdocao.recuperarAdocao(1L);
 		Termo termo = daoTermo.recuperarTermo(2L);
+		String urlFoto;
 		
 		if(ong != null && endereco != null && contato != null && termo != null) {
 			request.setAttribute("ong", ong);
@@ -348,6 +358,13 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("contato", contato);
 			request.setAttribute("adocao", adocao);
 			request.setAttribute("termo", termo);
+			
+			FotoDTO fotoDTO = new FotoDTO();
+			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+			fotoDTO.setId(ong.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
@@ -367,6 +384,14 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
 			request.setAttribute("adocao", adocao);
+			
+			String urlFoto;
+			FotoDTO fotoDTO = new FotoDTO();
+			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+			fotoDTO.setId(tutor.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-tutor.jsp");
