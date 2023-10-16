@@ -1,0 +1,222 @@
+cara.css
+
+
+
+*{
+    width: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #eef1f9;
+    color: #38035b;
+    max-width: auto;
+    margin: 0 auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+
+}
+
+
+header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main{
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color: #eef1f9;
+}
+
+footer{
+    color: #eef1f9;
+    background-color: #31035b;
+    height: 370px;
+}
+
+
+
+
+.caixa1{
+    width: 100%;
+    height: 370px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color: #eef1f9;
+    margin-top: 50px;
+}
+.caixa1 h2{
+    padding: 25px;
+}
+
+
+
+.caixa2-1{
+    width: 100%;
+    height: 370px;
+    display: flex;
+    margin-right: 20px;
+    border-radius: 0px 300px 300px 0px;
+    border: #31035b solid 2px;
+    justify-content: flex-end;
+}
+.caixa2-1 p{
+    font-size: 15px;
+    text-align: left;
+    align-items: center;
+    margin-right: 40px;
+    max-width: 160px;
+}
+
+
+.caixa2-2{
+    
+    background-color: #31035b;
+    width: 20%;
+    height: 370px;
+    border-radius:300px 0px 0px 300px ;
+    text-align: right;
+    display: flex;
+    padding-left: 100px;
+    align-items: center;
+    justify-content: left;
+}
+.caixa2-2 a{
+    color: #eef1f9;
+    font-size: 30px;
+    line-height: 10px;
+    margin-right: 25px;
+}
+
+
+
+
+.cardgrid{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.card{
+    position: relative;;
+    width: 222px;
+    height: 300px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fcb700;
+
+}
+
+
+
+
+.caixa3-1{
+    width: 20%;
+    height: 370px;
+    border-radius:0px 300px 300px 0px ;
+    background-color: #31035b;
+}
+.caixa3-2{
+    width: 100%;
+    height: 370px;
+    border-radius:300px 0px 0px 300px ;
+    text-align: right;
+    display: flex;
+    padding-left: 100px;
+    align-items: center;
+    justify-content: left;
+    border: #31035b solid 2px;
+    margin-left: 20px;
+}
+.caixa3-2-counter{
+    justify-content: center;
+    align-items: center;
+    gap: px;
+    margin: 20px;
+}
+
+
+.footer-content{
+    display: flex;
+    justify-content: center;
+    justify-items: left;
+}
+.footer-content ul{
+    align-items: left;
+    margin: 40px;
+    width: 20%;
+}
+.footer-content h1{
+}
+
+a{
+    text-align: center;
+    text-decoration: none;
+}
+li{
+    display: inline-block;
+    margin: 15px;
+    color: #fcb700;
+}
+li:hover{
+    color: #38035b;
+    transition: 0.3;
+}
+
+h1{
+    font-size: 30px;
+    line-height: 10px;
+}
+
+h2{
+    font-size: 40px;
+
+}
+
+span{
+    color: #FCB700;
+}
+
+
+img{
+    width: 330px;
+    padding: 0;
+}
+.img{
+    height: 31px;
+    width: 42px;
+    margin-left: 40px;
+}
+.ul{
+    margin-right: 40px;
+}
+
+.li{
+    color: #fcb700;
+    list-style: none;
+    text-align: center;
+    height: 15px;
+}
+
+button{
+    background-color: #38035b;
+    color: #eef1f9;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+
+}
+button:hover{
+    background-color: #380860;
+    transition: 0.3;
+}
+

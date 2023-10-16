@@ -50,6 +50,10 @@ public class Endereco implements Serializable {
 	
 	public Endereco () {}
 	
+	public Endereco (Long id) {
+		setId(id);
+	}
+	
 	public Endereco (String logradouro, int numero, String bairro, String cep, String pontoReferencia) {
 		setLogradouro(logradouro);
 		setNumero(numero);

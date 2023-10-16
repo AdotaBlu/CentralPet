@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+		 <style><%@include file="/resources/css/estilo.css"%></style>
         <title> Home </title>
 
         <link rel="stylesheet" href="cara.css">
@@ -29,13 +29,13 @@
             
             <ul>
                 <a href=""><li>Buscar Pets</li></a>
-                <a href=""><li>Ongs</li></a>
+                <a href="<%=request.getContextPath()%>/mostrar-perfil-ong"><li>Ongs</li></a>
             </ul>
 
             <ul class="ul">
                 <a href=""><button>Adotar</button></a>
                 <a href="file:///C:/Users/Quick/Documents/projeto/login/login.html"><li>Entrar</li></a>
-                <a href=""><li>Cadastrar</li></a>
+                <a href="<%=request.getContextPath()%>/mostrar-selecao-cadastro"><li>Cadastrar</li></a>
             </ul>
 
         </header>
@@ -73,12 +73,12 @@
                     </div>
                     
             
-                    <p>DÃª o primeiro passo para encontrar 
+                    <p>Dê o primeiro passo para encontrar 
                     seu novo amigo peludo! 
                     Nesta etapa, 
-                    explore os pets disponÃ­veis para adoÃ§Ã£o. 
-                    Veja suas fotos, leia suas histÃ³rias e descubra 
-                    qual deles toca seu coraÃ§Ã£o.
+                    explore os pets disponíveis para adoção. 
+                    Veja suas fotos, leia suas histórias e descubra 
+                    qual deles toca seu coração.
                    </p>
                 </div>
 
@@ -102,7 +102,7 @@
                     <h1> 0 0 0 0 0 </h1>
                 </div>
 
-                <h1> JÃ¡ foram adotados pela central pet atÃ© agora.</h1>
+                <h1> Já foram adotados pela central pet até agora.</h1>
 
             </div>
 
@@ -112,7 +112,7 @@
         
         <footer class="footer-content">
             
-            <h1>Central Pet Ã© desenvolvido por <span>ADOTABLU.</span> </h1>
+            <h1>Central Pet é desenvolvido por <span>ADOTABLU.</span> </h1>
             
             <ul>
                 <h3><span>ADOTABLU</span></h3>

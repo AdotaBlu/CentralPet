@@ -2,7 +2,10 @@ package centralpet.modelo.entidade.pet;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
@@ -76,6 +81,9 @@ public class Pet implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "pelagem_pet", nullable = false, unique = false)
 	private PelagemPet pelagemPet;
+	
+	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<FotosPet> fotos = new ArrayList<>();
 
 //	@OneToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "id_acompanhamento", nullable = true)
@@ -118,6 +126,7 @@ public class Pet implements Serializable {
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
 		setDataNascimento(dataNascimento);
+		setFotos(fotos);
 //		setAcompanhamento(acompanhamento);
 	}
 
@@ -224,6 +233,25 @@ public class Pet implements Serializable {
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+	public List<FotosPet> getFotos() {
+		return fotos;
+	}
+
+	public void setFotos(List<FotosPet> fotosPet) {
+		this.fotos = fotosPet;
+	}
+
+	public void adicionarFoto(FotosPet foto) {
+		this.fotos.add(foto);
+	}
+	
+	public void removerFoto(FotosPet foto) {
+		this.fotos.remove(foto);
+	}
+
+	
+	
 	
 	
 
