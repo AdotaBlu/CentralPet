@@ -51,6 +51,7 @@ import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
 import centralpet.modelo.enumeracao.pet.status.StatusPet;
+import centralpet.util.conversorImagem.ConversorImagemImpl;
 import centralpet.util.conversorImagem.ConverterImagem;
 
 @WebServlet("/")
@@ -92,6 +93,7 @@ public class Cadastro extends HttpServlet {
 		daoAdocao = new AdocaoDAOImpl();
 		daoTermo = new TermoDAOImpl();
 		daoFotosPet = new FotosPetDAOImpl();
+		converterImagem = new ConversorImagemImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -162,14 +164,6 @@ public class Cadastro extends HttpServlet {
 				
 			case "/cadastro-adocao":
 				inserirAdocao(request, response);
-				break;
-				
-			case "/novas-fotos-pet":
-				mostrarFormularioNovasFotosPet(request, response);
-				break;
-				
-			case "/cadastrar-fotos-pet":
-				inserirFotosPet(request, response);
 				break;
 				
 			case "/mostrar-perfil-pet":
@@ -308,24 +302,7 @@ public class Cadastro extends HttpServlet {
 		        System.out.println("Ong e Tutor não encontrados");
 		    }
 	}
-	
-	private void mostrarFormularioNovasFotosPet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		Pet pet = daoPet.recuperarPet(1L);
-		
-		if(pet != null) {
-			
-			request.setAttribute("pet", pet);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("novas-fotos-pet.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			
-			System.out.println("Pet nao encontrado");
-		}
-	}
-	
+
 	private void mostrarPerfilPet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
@@ -570,19 +547,11 @@ public class Cadastro extends HttpServlet {
 				pelagemPet);
 		daoPet.inserirPet(pet);
 		
-	
-		response.sendRedirect("novas-fotos-pet");
-	}
-	
-	private void inserirFotosPet(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		
-		Pet pet = daoPet.recuperarPet(1L);
 		List<FotosPet> listaFotosPet = null;
 		
 		parteImagem = request.getParts();
 		converterImagem.adicionarImagensArrayFotosPet(listaFotosPet, pet, parteImagem);
-		
+	
 		response.sendRedirect("mostrar-perfil-pet");
 	}
 	

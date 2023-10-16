@@ -22,7 +22,7 @@
 				<h1> ong = null </h1>
 			</c:if>
 			
-   			<form method="post"  action="cadastro-pet">
+   			<form method="post"  action="cadastro-pet" enctype="multipart/form-data">
   
 				<h1>Informações do Pet</h1> 
 		   
@@ -80,7 +80,7 @@
        		
         		<div class="container-botao">
 					<button type="reset" class= "botao-secundario">Limpar</button>
-        			<button type="submit" class="botao-primario">Salvar</button>		
+        			<button type="submit" class="botao-primario" formenctype="multipart/form-data">Salvar</button>		
         		</div>
 	    	</form>
     
