@@ -12,13 +12,7 @@
 	<main>
 		<c:if test="${ong != null}">
 			<h1><c:out value='${ong.nome}' /></h1>
-		</c:if>
-		
-		<c:if test="${ong == null}">
-			<h1>nenhuma ong encontrada</h1>
-		</c:if>
-		
-		<div>
+			<div>
 			<table class = "infomacoes">
 				<thead>
 					<tr>
@@ -97,9 +91,13 @@
 					</tbody>
 				</c:if>
 			</table>
-			
-			
 		</div>
+		</c:if>
+		
+		<c:if test="${ong == null}">
+			<h1>Nenhuma ong encontrada</h1>
+		</c:if>
+	
 	</main>
 
 </body>

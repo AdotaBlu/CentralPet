@@ -10,17 +10,23 @@
 </head>
 
 <body>
-	
 	<main>
 		<c:if test="${pet != null}">
-			<h1><c:out value='${pet.nome}' /></h1>
-		</c:if>
-		
-		<c:if test="${pet == null}">
-			<h1>nenhum pet encontrado</h1>
-		</c:if>
-		
-		<div>
+			<h1><c:out value='${pet.nome}'/></h1>
+			
+			<div class ="container-info-pet">
+				<div class="container-fotos-pet">
+				<c:if test="${not empty fotos}">
+					<h2>Fotos do pet</h2>
+					<c:forEach var="foto" items="${fotos}">
+						<img class="imagem-perfil-pet" src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
+					</c:forEach>
+				</c:if>
+				<c:if test="${not empty fotos}">
+					<h2></h2>
+				</c:if>
+			</div>
+				
 			<table>
 				<thead>
 					<tr>
@@ -53,16 +59,13 @@
 				</c:if>
 			</table>
 		</div>
+		</c:if>
 		
-		<div>
-		<c:if test="${not empty fotos}">
-			<h2>Fotos do pet</h2>
-			<c:forEach var="foto" items="${fotos}">
-				<img class="imagem-perfil-pet" src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
-			</c:forEach>
-		</c:if>	
-		</div>
-				
+		<c:if test="${pet == null}">
+			<h1>Nenhum pet encontrado :p</h1>
+		</c:if>
+		
+		
 	</main>
 	
 </body>

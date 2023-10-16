@@ -73,6 +73,10 @@
          			<option value="MEDIO">Medio</option>
          			<option value="LONGO">Longo</option>
        			 </select>
+       			 
+       			 <label for="fotos">Escolha várias fotos:</label>
+    			 <input type="file" name="fotos" id="fotos" accept="image/*" multiple formenctype="multipart/form-data">
+    			 
        		
         		<div class="container-botao">
 					<button type="reset" class= "botao-secundario">Limpar</button>
