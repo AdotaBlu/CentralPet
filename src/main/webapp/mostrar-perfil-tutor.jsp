@@ -12,6 +12,7 @@
 	<main>
 		<c:if test="${tutor != null}">
 			<h1><c:out value='${tutor.nome}' /></h1>
+			<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="20">
 		</c:if>
 		
 		<c:if test="${tutor == null}">
