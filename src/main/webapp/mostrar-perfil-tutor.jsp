@@ -10,6 +10,7 @@
 </head>
 <body>
 	<main>
+		<%@include file="nav-tutor-logado.jsp"%>
 		<c:if test="${tutor != null}">
 			<h1><c:out value='${tutor.nome}' /></h1>
 			<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="20">
