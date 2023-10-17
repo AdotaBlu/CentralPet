@@ -14,33 +14,10 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
     width: 100%;
     background-color: #eef1f9;
 }
 
-header {
-    width: auto;
-    height: 70px;
-    background-color: #fff;
-}
-
-ul {
-    width: auto;
-    height: 70px;
-    background-color: #fff;
-}
-
-li {
-    display: inline-block;
-    margin: 15px;
-    color: #fcb700;
-}
-
-li:hover {
-    color: #38035b;
-    transition: 0.3s;
-}
 
 form {
     display: grid;
@@ -226,3 +203,95 @@ tbody tr td::first-letter {
     text-transform: uppercase;
 }
 
+
+/*Barra de filtros*/
+
+.filtro{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+    height: 70px;
+    background-color: #fff;
+    display:flex ;
+    justify-content: space-around;
+}
+.filtro select{
+    width: 208px;
+    height: 40px;
+    border: 0,5px;
+    border-radius: 5px;
+    color: #38035b;
+}
+.filtro button{
+    height: 40px;
+    width: 208px;
+    background-color: #38035b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Barra de navegação tutor logado */
+
+header {
+    display: flex;
+    height: 70px;
+    background-color: #fff;
+    justify-content: space-around;
+    align-items: center;
+}
+li:hover{
+    color: #fcb700;
+}
+
+.ini{
+    display: flex;
+}
+.ini img{
+    height: 20px;
+    width: 20px;
+}
+.ini h1{
+    color: #38035b;
+    font-size: 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mid{
+    display: flex;
+}
+.mid a{
+    margin-left: 5px;
+    display: flex;
+    font-size: 12px;
+    color: #38035b;
+    list-style: none;
+}
+
+.end{
+    display: flex;
+}
+.end a{
+    margin-left: 5px;
+    display: flex;
+    font-size: 12px;
+    color: #38035b;
+    list-style: none;
+}
+.end button{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #38035b;
+    font-size: 12px;
+    justify-content: center;
+    color:#fff ;
+}
+.li{
+    display: flex;
+    list-style: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
