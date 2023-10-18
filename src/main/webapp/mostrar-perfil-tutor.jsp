@@ -5,15 +5,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 	<style><%@include file="/resources/css/estilo.css"%></style>
-	<title>Perfil da Tutor</title>
+	<title>Perfil do Tutor</title>
 </head>
 <body>
-	<main>
 		<%@include file="nav-tutor-logado.jsp"%>
+	<main>
 		<c:if test="${tutor != null}">
 			<h1><c:out value='${tutor.nome}' /></h1>
-			<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="20">
+			<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="200px" heigth="200px">
 		</c:if>
 		
 		<c:if test="${tutor == null}">
@@ -28,7 +31,7 @@
 						<th>Email</th>
 						<th>Telefone</th>
 						<th>CPF</th>
-						<th>Genero</th>
+						<th>Gênero</th>
 						<th>Data de Nascimento</th>
 					</tr>
 				</thead>
@@ -52,8 +55,8 @@
 						<th>Logradouro</th>
 						<th>Número</th>
 						<th>Bairro</th>
-						<th>Cep</th>
-						<th>Ponto de Referencia</th>
+						<th>CEP</th>
+						<th>Ponto de Referência</th>
 					</tr>
 				</thead>
 				
