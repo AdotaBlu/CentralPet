@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.tika.Tika;
@@ -100,6 +101,7 @@ public class Cadastro extends HttpServlet {
 		daoFotosPet = new FotosPetDAOImpl();
 		converterImagem = new ConversorImagemImpl();
 		daoUsuario = new UsuarioDAOImpl();
+		HttpSession sessao = null;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -219,19 +221,14 @@ public class Cadastro extends HttpServlet {
 	private void mostrarFormEditarTutor(HttpServletRequest request, HttpServletResponse response) 
 			throws SQLException, ServletException, IOException {
 			
-			//Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
-			Long idEndereco = 1L;
-			Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
+			HttpSession sessao = request.getSession();
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+		
+			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
+			Contato contato = daoContato.recuperarContatoUsuario(tutor);
+			
 			request.setAttribute("endereco", endereco);
-			
-			//Long idTutor = Long.parseLong(request.getParameter("id-tutor"));
-			Long idTutor = 1L;
-			Tutor tutor = daoTutor.recuperarTutor(idTutor);
 			request.setAttribute("tutor", tutor);
-			
-			//Long idContato = Long.parseLong(request.getParameter("id-contato"));
-			Long idContato = 1L;
-			Contato contato = daoContato.recuperarContato(idContato);
 			request.setAttribute("contato", contato);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
@@ -247,20 +244,26 @@ public class Cadastro extends HttpServlet {
 	
 	private void mostrarFormEditarOng(HttpServletRequest request, HttpServletResponse response) 
 			throws SQLException, ServletException, IOException {
+		
+			HttpSession sessao = request.getSession();
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+		
+			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 			
+			Contato contato = daoContato.recuperarContatoUsuario(ong);
 			//Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
-			Long idEndereco = 2L;
-			Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
+			//Long idEndereco = 2L;
+			//Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
 			request.setAttribute("endereco", endereco);
 			
 			//Long idOng = Long.parseLong(request.getParameter("id-ong"));
-			Long idOng = 2L;
-			Ong ong = daoOng.recuperarOng(idOng);
+			//Long idOng = 2L;
+			//Ong ong = daoOng.recuperarOng(idOng);
 			request.setAttribute("ong", ong);
 			
 			//Long idContato = Long.parseLong(request.getParameter("id-contato"));
-			Long idContato = 2L;
-			Contato contato = daoContato.recuperarContato(idContato);
+			//Long idContato = 2L;
+			//Contato contato = daoContato.recuperarContato(idContato);
 			request.setAttribute("contato", contato);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
@@ -269,9 +272,9 @@ public class Cadastro extends HttpServlet {
 	
 	private void mostrarFormularioNovoPet(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		   System.out.println("Método mostrarFormularioNovoPet foi chamado");
-
-		    Ong ong = daoOng.recuperarOng(2L);
+		
+			HttpSession sessao = request.getSession();
+			Ong ong = (Ong) sessao.getAttribute("usuario");
 
 		    if (ong != null) {
 		        
@@ -295,8 +298,8 @@ public class Cadastro extends HttpServlet {
 	
 	private void mostrarFormularioNovoTermo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		    Ong ong = daoOng.recuperarOng(2L);
+			HttpSession sessao = request.getSession();
+		    Ong ong = (Ong) sessao.getAttribute("usuario");
 
 		    if (ong != null) {
 		        
@@ -364,8 +367,9 @@ public class Cadastro extends HttpServlet {
 	
 	private void mostrarPerfilOng(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Ong ong = (Ong) sessao.getAttribute("usuario");
 		
-		Ong ong = daoOng.recuperarOng(2L);
 		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 		Contato contato = daoContato.recuperarContatoUsuario(ong);
 		Adocao adocao = daoAdocao.recuperarAdocao(1L);
@@ -394,7 +398,9 @@ public class Cadastro extends HttpServlet {
 	private void mostrarPerfilTutor(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		Tutor tutor = daoTutor.recuperarTutor(1L);
+		HttpSession sessao = request.getSession();
+		Tutor tutor =  (Tutor) sessao.getAttribute("usuario");
+		//Tutor tutor = daoTutor.recuperarTutor();
 		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 		Contato contato = daoContato.recuperarContatoUsuario(tutor);
 		List<Adocao> adocao = daoAdocao.recuperarAdocoesTutor(tutor);
@@ -573,7 +579,8 @@ public class Cadastro extends HttpServlet {
 	private void inserirPet(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		
-		Ong ongPet = daoOng.recuperarOng(2L);
+		HttpSession sessao = request.getSession();
+		Ong ongPet = (Ong) sessao.getAttribute("usuario");
 		Pet pet = null;
 		
 		String nome = request.getParameter("nome");
@@ -634,8 +641,9 @@ public class Cadastro extends HttpServlet {
 		boolean existe = daoUsuario.verificarUsuario(nomeUsuario, senhaUsuario);
 		
 		if(existe) {
+			HttpSession sessao = request.getSession();
 			Usuario usuario = daoUsuario.recuperarUsuarioNome(nomeUsuario);
-			request.setAttribute("usuario", usuario);
+			sessao.setAttribute("usuario", usuario);
 			response.sendRedirect("home.jsp");
 		} else {
 			 usuarioInvalido = "invalido";
