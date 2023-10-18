@@ -15,4 +15,8 @@ public interface UsuarioDAO {
 	
 	List<Usuario> recuperarTodosUsuarios();
 	
+	Boolean verificarUsuario(String nomeUsuario, String senhaUsuario);
+	
+	Usuario recuperarUsuarioNome(String nomeUsuario);
+	
 }

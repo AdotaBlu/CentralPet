@@ -35,6 +35,8 @@ import centralpet.modelo.dao.termo.TermoDAO;
 import centralpet.modelo.dao.termo.TermoDAOImpl;
 import centralpet.modelo.dao.tutor.TutorDAO;
 import centralpet.modelo.dao.tutor.TutorDAOImpl;
+import centralpet.modelo.dao.usuario.UsuarioDAO;
+import centralpet.modelo.dao.usuario.UsuarioDAOImpl;
 import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.contato.Contato;
 import centralpet.modelo.entidade.endereco.Endereco;
@@ -44,6 +46,7 @@ import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.termo.Termo;
 import centralpet.modelo.entidade.tutor.Tutor;
+import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
@@ -76,6 +79,8 @@ public class Cadastro extends HttpServlet {
 	
 	private FotosPetDAO daoFotosPet;
 	
+	private UsuarioDAO daoUsuario;
+	
 	private Collection<Part> parteImagem = null;
 	
 	private ConverterImagem converterImagem;
@@ -94,6 +99,7 @@ public class Cadastro extends HttpServlet {
 		daoTermo = new TermoDAOImpl();
 		daoFotosPet = new FotosPetDAOImpl();
 		converterImagem = new ConversorImagemImpl();
+		daoUsuario = new UsuarioDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -182,11 +188,25 @@ public class Cadastro extends HttpServlet {
 				mostrarSelecaoCadastro(request, response);
 				break;
 				
+			case "/novo-login":
+				mostrarFormularioLogin(request, response);
+				break;
+				
+			case "/confirmar-login":
+				confirmarLogin(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
+	}
+	
+	private void mostrarFormularioLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("novo-login.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarFormularioNovoTutor(HttpServletRequest request, HttpServletResponse response)
@@ -605,6 +625,26 @@ public class Cadastro extends HttpServlet {
 
 		response.sendRedirect("mostrar-perfil-ong");
 	}
+	
+	private void confirmarLogin(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		String usuarioInvalido = null;
+		String nomeUsuario = request.getParameter("nome-usuario");
+		String senhaUsuario = request.getParameter("senha-usuario");
+		boolean existe = daoUsuario.verificarUsuario(nomeUsuario, senhaUsuario);
+		
+		if(existe) {
+			Usuario usuario = daoUsuario.recuperarUsuarioNome(nomeUsuario);
+			request.setAttribute("usuario", usuario);
+			response.sendRedirect("home.jsp");
+		} else {
+			 usuarioInvalido = "invalido";
+			request.setAttribute("usuario-invalido", usuarioInvalido);
+		}
+		
+		
+	}
+	
 	
 }
 
