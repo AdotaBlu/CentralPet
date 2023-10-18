@@ -9,9 +9,11 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-
+import centralpet.modelo.entidade.ong.Ong;
+import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.tutor.Tutor_;
+import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
 
@@ -227,6 +229,44 @@ public class TutorDAOImpl implements TutorDAO {
 		}
 
 		return tutor;
+	}
+	
+	public Tutor recuperarTutorUsuario(Usuario usuario) {
+
+		Session sessao = null;
+		Tutor esseTutor = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Tutor> criteria = construtor.createQuery(Tutor.class);
+			Root<Tutor> raizOng = criteria.from(Tutor.class);
+			
+			criteria.where(construtor.equal(raizOng.get(Tutor_.id), usuario.getId()));
+			
+			esseTutor = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return esseTutor;
 	}
 	
 

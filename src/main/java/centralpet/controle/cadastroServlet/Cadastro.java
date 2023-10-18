@@ -118,6 +118,10 @@ public class Cadastro extends HttpServlet {
 
 			switch (action) {
 
+			case "/home":
+				mostrarTelaInicial(request, response);
+				break;
+			
 			case "/novo-tutor":
 				mostrarFormularioNovoTutor(request, response);
 				break;
@@ -202,6 +206,40 @@ public class Cadastro extends HttpServlet {
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
+	}
+	
+	private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		
+		Ong ong = daoOng.recuperarOngUsuario(usuario);
+		Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
+		
+		FotoDTO fotoDTO = new FotoDTO();
+		String urlFoto;
+		
+		if(tutor != null) {
+			
+			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+			fotoDTO.setId(tutor.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("tutor", tutor);
+		} else if(ong != null) {
+			
+			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+			fotoDTO.setId(ong.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("ong", ong);
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	private void mostrarFormularioLogin(HttpServletRequest request, HttpServletResponse response)
@@ -466,7 +504,7 @@ public class Cadastro extends HttpServlet {
 		
 		contato = new Contato(email, telefone, tutor);
 		daoContato.inserirContato(contato);
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("home");
 	}
 	
 	private void atualizarTutor(HttpServletRequest request, HttpServletResponse response)
@@ -504,7 +542,7 @@ public class Cadastro extends HttpServlet {
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		daoContato.atualizarContato(new Contato(idContato, email, telefone, tutor));
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("home");
 		
 		System.out.println("passou pela parte de contato e enviou oq mostrar");
 	}
@@ -542,7 +580,7 @@ public class Cadastro extends HttpServlet {
 		
 		contato = new Contato(email, telefone, ong);
 		daoContato.inserirContato(contato);
-		response.sendRedirect("novo-pet");
+		response.sendRedirect("home");
 		
 	}
 	
@@ -573,7 +611,7 @@ public class Cadastro extends HttpServlet {
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		daoContato.atualizarContato(new Contato(idContato, email, telefone, ong));
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("home");
 	}
 	
 	private void inserirPet(HttpServletRequest request, HttpServletResponse response)
@@ -644,7 +682,7 @@ public class Cadastro extends HttpServlet {
 			HttpSession sessao = request.getSession();
 			Usuario usuario = daoUsuario.recuperarUsuarioNome(nomeUsuario);
 			sessao.setAttribute("usuario", usuario);
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("home");
 		} else {
 			 usuarioInvalido = "invalido";
 			request.setAttribute("usuario-invalido", usuarioInvalido);
