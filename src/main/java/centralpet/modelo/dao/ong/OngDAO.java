@@ -4,6 +4,7 @@ import java.util.List;
 
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
+import centralpet.modelo.entidade.usuario.Usuario;
 
 public interface OngDAO {
 
@@ -22,4 +23,6 @@ public interface OngDAO {
 	List<Pet> recuperarOngPet(Ong pets);
 	
 	Ong recuperarOng(Long id);
+	
+	Ong recuperarOngUsuario(Usuario usuario);
 }

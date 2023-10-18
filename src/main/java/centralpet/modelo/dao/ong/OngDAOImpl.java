@@ -15,6 +15,7 @@ import centralpet.modelo.entidade.endereco.Endereco_;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.pet.Pet;
+import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
 public class OngDAOImpl implements OngDAO {
@@ -318,9 +319,47 @@ public class OngDAOImpl implements OngDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			
 			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
-			Root<Ong> raizPet = criteria.from(Ong.class);
+			Root<Ong> raizOng = criteria.from(Ong.class);
 			
-			criteria.where(construtor.equal(raizPet.get(Ong_.id), id));
+			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
+			
+			essaOng = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return essaOng;
+	}
+	
+	public Ong recuperarOngUsuario(Usuario usuario) {
+
+		Session sessao = null;
+		Ong essaOng = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
+			Root<Ong> raizOng = criteria.from(Ong.class);
+			
+			criteria.where(construtor.equal(raizOng.get(Ong_.id), usuario.getId()));
 			
 			essaOng = sessao.createQuery(criteria).getSingleResult();
 			

@@ -50,6 +50,7 @@ public class Principal {
 		TermoDAO termoDAO = new TermoDAOImpl();
 		AdocaoDAO adocaoDAO = new AdocaoDAOImpl();
 		PetsFavoritosTutorDAO petsFavoritosTutorDAO = new PetsFavoritosTutorDAOImpl();
+		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 
 //		String logradouro = "rua XV setembro";
 //		short numero = 356;
@@ -257,12 +258,7 @@ public class Principal {
 //		
 //		
 //		
-		Usuario usuario = null;
-		
-		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-		
-		usuarioDAO.verificarUsuario("joao", "12345");
-		
+	
 		
 	} 
 }
