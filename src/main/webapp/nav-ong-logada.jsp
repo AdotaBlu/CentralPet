@@ -8,7 +8,7 @@
 		<a href=""><li>Acompanhamento</li></a>
 	</ul>
 	<ul class="end">
-		<a href=""><button>Cadastrar Pet</button></a>
+		<a href="<%=request.getContextPath()%>/novo-pet"><button>Cadastrar Pet</button></a>
 		<div class="li">
 			<img class = "foto-miniatura" src='<c:out value="${foto.urlImagem}"></c:out>' alt="miniatura-perfil"> <a href=""><li>Minha Conta</li></a>
 		</div>

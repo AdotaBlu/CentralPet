@@ -42,7 +42,7 @@
         		<label for="idade">Idade do Pet</label>
         		<input type="number" id="idade" name="idade">
         		
-        		<label for="peso">Idade do Pet</label>
+        		<label for="peso">Peso do Pet</label>
         		<input type="text" id="peso" name="peso">
         		
         		<input type="hidden" id="statusPet" name="status-pet" value="DISPONIVEL">
@@ -78,12 +78,12 @@
        			 </select>
        			 
        			 <label for="fotos">Escolha várias fotos:</label>
-    			 <input type="file" name="fotos" id="fotos" accept="image/*" multiple formenctype="multipart/form-data">
+    			 <input type="file" name="fotos" id="fotos" accept="image/*" multiple>
     			 
        		
         		<div class="container-botao">
 					<button type="reset" class= "botao-secundario">Limpar</button>
-        			<button type="submit" class="botao-primario" formenctype="multipart/form-data">Salvar</button>		
+        			<button type="submit" class="botao-primario">Salvar</button>		
         		</div>
 	    	</form>
     
