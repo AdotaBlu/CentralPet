@@ -638,10 +638,8 @@ public class Cadastro extends HttpServlet {
 				pelagemPet);
 		daoPet.inserirPet(pet);
 		
-		List<FotosPet> listaFotosPet = null;
-		
 		parteImagem = request.getParts();
-		converterImagem.adicionarImagensArrayFotosPet(listaFotosPet, pet, parteImagem);
+		converterImagem.adicionarImagensArrayFotosPet( pet, parteImagem);
 	
 		response.sendRedirect("mostrar-perfil-pet");
 	}

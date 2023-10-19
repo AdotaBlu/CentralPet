@@ -17,8 +17,8 @@
 		
 		
 		<div class="li">
-			<a href="%=request.getContextPath()%>/novo-login"><li>Entrar</li></a>
-			<a href="%=request.getContextPath()%>/mostrar-selecao-cadastro"><li>Cadastrar</li></a>
+			<a href="<%=request.getContextPath()%>/novo-login"><li>Entrar</li></a>
+			<a href="<%=request.getContextPath()%>/mostrar-selecao-cadastro"><li>Cadastrar</li></a>
 		</div>
 	</ul>
 

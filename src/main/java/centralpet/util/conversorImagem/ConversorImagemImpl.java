@@ -3,7 +3,6 @@ package centralpet.util.conversorImagem;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.List;
 
 import javax.servlet.http.Part;
 
@@ -22,26 +21,36 @@ public class ConversorImagemImpl implements ConverterImagem {
 		return IOUtils.toByteArray(imagemInputstream);
 	}
 	
-	public void adicionarImagensArrayFotosPet(List<FotosPet> fotosPet, Pet pet, Collection<Part> parteImagem) throws IOException {
+	public void adicionarImagensArrayFotosPet( Pet pet, Collection<Part> parteImagem) throws IOException {
 		
 		FotosPetDAO daoFotosPet;
 		
-		for(Part partes : parteImagem) {
-			byte[] fotos = null;
-			
-			daoFotosPet = new FotosPetDAOImpl();
-			
-			fotos = obterBytesImagem(partes);
-			
-			FotosPet foto = new FotosPet();
 		
-			foto = new FotosPet(fotos, pet);
+		
+		for(Part partes : parteImagem) {
 			
-			pet.adicionarFoto(foto);
-			daoFotosPet.inserirFotosPet(foto);
+			String tipoImagem = partes.getContentType();
+		
+			if(tipoImagem != null) {
+				
+				byte[] fotos = null;
+				
+				daoFotosPet = new FotosPetDAOImpl();
+				
+				fotos = obterBytesImagem(partes);
+				
+				FotosPet foto = new FotosPet();
+			
+				foto = new FotosPet(fotos, pet);
+				
+				pet.adicionarFoto(foto);
+				daoFotosPet.inserirFotosPet(foto);
+			}
+			
+			
 			
 		}
-		pet.setFotos(fotosPet);
+		
 	}
 	
 }

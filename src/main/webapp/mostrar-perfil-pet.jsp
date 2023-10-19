@@ -22,9 +22,6 @@
 						<img class="imagem-perfil-pet" src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
 					</c:forEach>
 				</c:if>
-				<c:if test="${not empty fotos}">
-					<h2></h2>
-				</c:if>
 			</div>
 				
 			<table>
