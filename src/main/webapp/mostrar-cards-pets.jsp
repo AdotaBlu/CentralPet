@@ -24,7 +24,7 @@
 					<div class="info-card">
 						<div class="info-ong">
 							<p>
-								ONG:<c:out value='${pet.ong.nome}'></c:out>
+								ONG:
 							</p>
 						</div>
 						<div class="info">

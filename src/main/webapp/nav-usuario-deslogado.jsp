@@ -7,8 +7,8 @@
 	</div>
 
 	<ul class="mid">
-		<a href=""><li>Buscar Pets</li></a>
-		<a href="%=request.getContextPath()%>/mostrar-perfil-ong"><li>Ongs</li></a>
+		<a href="<%=request.getContextPath()%>/mostrar-cards-pets"><li>Buscar Pets</li></a>
+		<a href="<%=request.getContextPath()%>/mostrar-perfil-ong"><li>Ongs</li></a>
 	</ul>
 
 	<ul class="end">

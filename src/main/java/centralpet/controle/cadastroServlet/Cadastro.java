@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.apache.tika.Tika;
-
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
 import centralpet.modelo.dao.contato.ContatoDAO;
@@ -87,8 +85,6 @@ public class Cadastro extends HttpServlet {
 	private ConverterImagem converterImagem;
 	
 	private byte[] fotos = null;
-	
-	private Tika tika = new Tika();
 	
 	public void init() {
 		daoEndereco = new EnderecoDAOImpl();
@@ -201,6 +197,10 @@ public class Cadastro extends HttpServlet {
 			case "/confirmar-login":
 				confirmarLogin(request, response);
 				break;
+				
+			case "/mostrar-cards-pets":
+				mostrarPetsDisponiveis(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {
@@ -246,6 +246,17 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("novo-login.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarPetsDisponiveis(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		List<Pet> todosPets = daoPet.recuperarTodosPets();
+		
+		request.setAttribute("pets", todosPets);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
 		dispatcher.forward(request, response);
 	}
 
