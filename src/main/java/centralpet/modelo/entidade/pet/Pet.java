@@ -53,6 +53,9 @@ public class Pet implements Serializable {
 
 	@Column(name = "idade_pet", nullable = false, unique = false)
 	private byte idade;
+	
+	@Column(name = "peso_pet", nullable = false, unique = false)
+	private Double peso;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_ong", nullable = false)
@@ -92,13 +95,14 @@ public class Pet implements Serializable {
 	public Pet() {
 	}
 
-	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Ong ong,
+	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso, Ong ong,
 			StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
 		setVacinas(vacinas);
 		setDescricao(descricao);
 		setIdade(idade);
+		setPeso(peso);
 		setOng(ong);
 		setStatusPet(statusPet);
 		setPortePet(portePet);
@@ -110,7 +114,7 @@ public class Pet implements Serializable {
 //		setAcompanhamento(acompanhamento);
 	}
 
-	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Ong ong,
+	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso, Ong ong,
 			StatusPet statusPet,PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,EstadoPet estadoPet,
 			PelagemPet pelagemPet) {
 		setId(id);
@@ -118,6 +122,7 @@ public class Pet implements Serializable {
 		setVacinas(vacinas);
 		setDescricao(descricao);
 		setIdade(idade);
+		setPeso(peso);
 		setOng(ong);
 		setStatusPet(statusPet);
 		setPortePet(portePet);
@@ -168,6 +173,14 @@ public class Pet implements Serializable {
 
 	public void setIdade(byte idade) {
 		this.idade = idade;
+	}
+
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
 	}
 
 	public Ong getOng() {
