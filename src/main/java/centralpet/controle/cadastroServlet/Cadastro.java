@@ -626,6 +626,7 @@ public class Cadastro extends HttpServlet {
 		String descricao = request.getParameter("descricao");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
 		Byte idade = Byte.parseByte(request.getParameter("idade"));
+		Double peso = Double.parseDouble(request.getParameter("peso"));
 		StatusPet statusPet = StatusPet.valueOf(request.getParameter("status-pet"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
 		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
@@ -633,7 +634,7 @@ public class Cadastro extends HttpServlet {
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
 		
-		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet,
+		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet,
 				pelagemPet);
 		daoPet.inserirPet(pet);
 		

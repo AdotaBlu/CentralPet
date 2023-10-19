@@ -34,6 +34,7 @@
 						<th>Descrição</th>
 						<th>Data de nascimento</th>
 						<th>Idade</th>
+						<th>Peso</th>
 						<th>Ong responsavel</th>
 						<th>Porte</th>
 						<th>Especie</th>
@@ -49,6 +50,7 @@
 							<td><c:out value='${pet.descricao}'></c:out></td>
 							<td><c:out value='${pet.dataNascimento}'></c:out></td>
 							<td><c:out value='${pet.idade}'></c:out></td>
+							<td><c:out value='${pet.peso}'></c:out></td>
 							<td><c:out value='${ong.nome}'></c:out></td>
 							<td><c:out value='${pet.portePet}'></c:out></td>
 							<td><c:out value='${pet.especiePet}'></c:out></td>

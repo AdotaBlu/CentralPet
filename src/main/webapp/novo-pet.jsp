@@ -42,6 +42,8 @@
         		<label for="idade">Idade do Pet</label>
         		<input type="number" id="idade" name="idade">
         		
+        		<label for="peso">Idade do Pet</label>
+        		<input type="text" id="peso" name="peso">
         		
         		<input type="hidden" id="statusPet" name="status-pet" value="DISPONIVEL">
         		<input type="hidden" id="estadoPet" name="estado-pet" value="ATIVO">
