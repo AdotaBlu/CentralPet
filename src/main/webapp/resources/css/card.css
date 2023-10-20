@@ -1,0 +1,65 @@
+.card{
+    width: 180px;
+    height: 275px;
+    background-color: #f5f6f7;
+    border: #31035b 1px solid;
+    border-radius: 5px;
+
+}
+.card img{
+    width: 180px;
+    height: 151px;
+    border-radius: 5px;
+
+}
+.card button{
+    background-color: #31035b;
+    color: #f5f6f7;
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+
+.nome{
+    margin-left: 10%;
+    height: 10%;
+}
+.nome h1{
+    color: #31035b;
+}
+.nome img{
+    margin-left: 10%;
+    width: 9.4px;
+    height: 12.42px;
+}
+
+.nomeOng {
+    height: 12px;
+    display: flex;
+    align-items: center;
+    color: #31035b;
+    margin-left: 10%;
+}
+.nomeOng h3{
+    font-size: 9px;
+    color: #626262;
+}
+.nomeOng p{
+    margin: 2%;
+    font-size: 8px;
+}
+
+.info{
+    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1%;
+    font-size: 7px;
+    margin-left: 10%;
+
+}

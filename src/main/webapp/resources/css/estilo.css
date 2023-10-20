@@ -52,12 +52,11 @@ select {
     justify-content: space-between;
 }
 
-button {
+.botao-primario {
     width: 230px;
     height: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 15px;
     border: 1px solid #31035B;
     border-radius: 5px;
     cursor: pointer;
@@ -65,7 +64,8 @@ button {
     color: white;
 }
 
-button:hover {
+
+.botao-primario:hover {
     background-color: rgb(33, 2, 62);
 }
 
@@ -116,8 +116,7 @@ tbody tr td::first-letter {
 
 
 /*Barra de filtros*/
-.container-filtro{
-}
+
 .filtro{
     margin-top: auto;
     margin-bottom: auto;
@@ -128,11 +127,12 @@ tbody tr td::first-letter {
     align-items: center;
 }
 .filtro select{
-    width: 208px;
-    height: 40px;
+    width: 180px;
+    height: 35px;
     border: 0,5px;
     border-radius: 5px;
     color: #38035b;
+    margin: 5px 0 5px 0 
 }
 .filtro button{
     height: 40px;
@@ -153,7 +153,7 @@ header {
     align-items: center;
 }
 li:hover{
-    color: #fcb700;
+    color: #38035b;
 }
 
 .ini{
@@ -183,14 +183,16 @@ li:hover{
 
 .end{
     display: flex;
+  
 }
 
 .end a{
     margin-left: 5px;
     display: flex;
     font-size: 12px;
-    color: #38035b;
+    color: #D9D9D9;
     list-style: none;
+    font-weight: bold;
 }
 .end button{
     width: 100px;
@@ -199,6 +201,17 @@ li:hover{
     border: none;
     background-color: #38035b;
     font-size: 12px;
+    color: #fff;
+}
+
+.end button:hover{
+    width: 100px;
+    height: 30px;
+    border: 1.5px solid #38035b;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    font-size: 12px;
+    color: #38035b;
 }
 .li{
     display: flex;
@@ -207,10 +220,12 @@ li:hover{
     margin-bottom: auto;
     align-items: center;
     width: auto;
+  	margin-left: 5%;
 }
 
 .foto-miniatura{
 	border-radius: 50%;
+    border: 1px solid #D9D9D9;
 	width: 30px;
 	height: 30px;
 }
