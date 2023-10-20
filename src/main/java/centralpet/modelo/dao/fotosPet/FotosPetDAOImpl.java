@@ -140,7 +140,7 @@ public class FotosPetDAOImpl implements FotosPetDAO {
 		return fotos;
 	}
 	
-public FotosPet recuperarFotoId(Long id) {
+	public FotosPet recuperarFotoId(Long id) {
 		
 		Session sessao = null;
 
@@ -187,4 +187,52 @@ public FotosPet recuperarFotoId(Long id) {
 		}
 		return foto;
 	}
+	
+	public List<FotosPet> recuperarTodasFotos() {
+		
+		Session sessao = null;
+
+		List<FotosPet> fotos = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<FotosPet> criteria = construtor.createQuery(FotosPet.class);
+
+			Root<FotosPet> raizFotoPet = criteria.from(FotosPet.class);
+			
+			criteria.select(raizFotoPet);
+			
+			fotos = sessao.createQuery(criteria).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+
+				sessao.getTransaction().rollback();
+
+			}
+
+		} finally {
+
+			if (sessao != null) {
+
+				sessao.close();
+
+			}
+
+		}
+		return fotos;
+	}
+
+
 }
