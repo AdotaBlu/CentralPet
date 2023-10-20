@@ -3,6 +3,7 @@ package centralpet.modelo.entidade.pet;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -47,13 +48,13 @@ public class Pet implements Serializable {
 
 	@Column(name = "descricao_pet", length = 60, nullable = false, unique = false)
 	private String descricao;
-	
+
 	@Column(name = "data_nascimento_pet", nullable = false, unique = false)
 	private LocalDate dataNascimento;
 
 	@Column(name = "idade_pet", nullable = false, unique = false)
 	private byte idade;
-	
+
 	@Column(name = "peso_pet", nullable = false, unique = false)
 	private Double peso;
 
@@ -76,16 +77,16 @@ public class Pet implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "sexo_pet", nullable = false, unique = false)
 	private SexoPet sexoPet;
-	
+
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "estado_pet", nullable = false, unique = false)
 	private EstadoPet estadoPet;
-	
+
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "pelagem_pet", nullable = false, unique = false)
 	private PelagemPet pelagemPet;
-	
-	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<FotosPet> fotos = new ArrayList<>();
 
 //	@OneToOne(fetch = FetchType.LAZY)
@@ -95,8 +96,8 @@ public class Pet implements Serializable {
 	public Pet() {
 	}
 
-	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso, Ong ong,
-			StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
+	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso,
+			Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
 		setVacinas(vacinas);
@@ -114,9 +115,9 @@ public class Pet implements Serializable {
 //		setAcompanhamento(acompanhamento);
 	}
 
-	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso, Ong ong,
-			StatusPet statusPet,PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,EstadoPet estadoPet,
-			PelagemPet pelagemPet) {
+	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade,
+			Double peso, Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
+			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setId(id);
 		setNome(nome);
 		setVacinas(vacinas);
@@ -258,15 +259,16 @@ public class Pet implements Serializable {
 	public void adicionarFoto(FotosPet foto) {
 		this.fotos.add(foto);
 	}
-	
+
 	public void removerFoto(FotosPet foto) {
 		this.fotos.remove(foto);
 	}
 
-	
-	
-	
-	
+	public String fotoPrincipalPet() {
+		String urlFotoPrincipal =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotos.get(0).getDadosImagem())) ;
+
+		return urlFotoPrincipal;
+	}
 
 //	public Acompanhamento getAcompanhamento() {
 //		return acompanhamento;

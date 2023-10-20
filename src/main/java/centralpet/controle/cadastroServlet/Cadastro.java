@@ -257,7 +257,6 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 		
 		List<Pet> todosPets = daoPet.recuperarTodosPets();
-		List<FotosPet> todasFotosPet =
 		
 		
 		request.setAttribute("pets", todosPets);
@@ -649,7 +648,7 @@ public class Cadastro extends HttpServlet {
 		daoPet.inserirPet(pet);
 		
 		parteImagem = request.getParts();
-		converterImagem.adicionarImagensArrayFotosPet( pet, parteImagem);
+		converterImagem.adicionarImagensArrayFotosPet(pet, parteImagem);
 	
 		response.sendRedirect("mostrar-perfil-pet");
 	}

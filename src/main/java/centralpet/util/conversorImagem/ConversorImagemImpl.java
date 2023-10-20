@@ -17,40 +17,36 @@ public class ConversorImagemImpl implements ConverterImagem {
 
 	public byte[] obterBytesImagem(Part parteImagem) throws IOException {
 		InputStream imagemInputstream = parteImagem.getInputStream();
-		
+
 		return IOUtils.toByteArray(imagemInputstream);
 	}
-	
-	public void adicionarImagensArrayFotosPet( Pet pet, Collection<Part> parteImagem) throws IOException {
-		
+
+	public void adicionarImagensArrayFotosPet(Pet pet, Collection<Part> parteImagem) throws IOException {
+
 		FotosPetDAO daoFotosPet;
-		
-		
-		
-		for(Part partes : parteImagem) {
-			
+
+		for (Part partes : parteImagem) {
+
 			String tipoImagem = partes.getContentType();
-		
-			if(tipoImagem != null) {
-				
+
+			if (tipoImagem != null) {
+
 				byte[] fotos = null;
-				
+
 				daoFotosPet = new FotosPetDAOImpl();
-				
+
 				fotos = obterBytesImagem(partes);
-				
+
 				FotosPet foto = new FotosPet();
-			
+
 				foto = new FotosPet(fotos, pet);
-				
+
 				pet.adicionarFoto(foto);
 				daoFotosPet.inserirFotosPet(foto);
 			}
-			
-			
-			
+
 		}
-		
+
 	}
-	
+
 }

@@ -19,7 +19,7 @@
 			<c:forEach var="pet" items="${pets}">
 				<div class="pet-card">
 					<div class="fotos-pet">
-						<img>
+						<img src="<c:out value='${pet.fotoPrincipalPet}'></c:out>" alt="foto-pet">
 					</div>
 					<div class="info-card">
 						<div class="info-ong">
@@ -45,10 +45,10 @@
 								<p>bf</p>
 							</div>
 							<div class="pet-info">
-								<p>Idade: <c:out value='${pet.idade}'></c:out></p>
-								<p>Porte: <c:out value='${pet.porte}'></c:out></p>
-								<p>Pelagem: <c:out value='${pet.pelagem}'></c:out></p>
-								<p>Peso: <c:out value='${pet.peso}'></c:out></p>
+								<div><p>Idade: <c:out value='${pet.idade}'></c:out></p></div>
+								<div><<p>Porte: <c:out value='${pet.portePet}'></c:out></p></div>
+								<div><<p>Pelagem: <c:out value='${pet.pelagemPet}'></c:out></p></div>
+								<div><<p>Peso: <c:out value='${pet.peso}'></c:out></p></div>
 							</div>
 							<div class="btn-card">
 								<a class="btn-adotar-card">Adotar</a>
