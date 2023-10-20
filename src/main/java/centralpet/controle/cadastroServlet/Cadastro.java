@@ -101,7 +101,7 @@ public class Cadastro extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+ 			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
@@ -257,6 +257,8 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 		
 		List<Pet> todosPets = daoPet.recuperarTodosPets();
+		List<FotosPet> todasFotosPet =
+		
 		
 		request.setAttribute("pets", todosPets);
 		
