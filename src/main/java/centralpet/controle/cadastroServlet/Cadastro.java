@@ -198,6 +198,10 @@ public class Cadastro extends HttpServlet {
 				confirmarLogin(request, response);
 				break;
 				
+			case "/sair":
+				finalizarLogin(request, response);
+				break;
+				
 			case "/mostrar-cards-pets":
 				mostrarPetsDisponiveis(request, response);
 				break;
@@ -300,19 +304,12 @@ public class Cadastro extends HttpServlet {
 			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 			
 			Contato contato = daoContato.recuperarContatoUsuario(ong);
-			//Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
-			//Long idEndereco = 2L;
-			//Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
+			
 			request.setAttribute("endereco", endereco);
 			
-			//Long idOng = Long.parseLong(request.getParameter("id-ong"));
-			//Long idOng = 2L;
-			//Ong ong = daoOng.recuperarOng(idOng);
+			
 			request.setAttribute("ong", ong);
 			
-			//Long idContato = Long.parseLong(request.getParameter("id-contato"));
-			//Long idContato = 2L;
-			//Contato contato = daoContato.recuperarContato(idContato);
 			request.setAttribute("contato", contato);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
@@ -698,6 +695,15 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("usuario-invalido", usuarioInvalido);
 		}
 		
+		
+	}
+	
+	private void finalizarLogin(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		
+		request.getSession().invalidate();
+		
+		response.sendRedirect("home.jsp");
 		
 	}
 	
