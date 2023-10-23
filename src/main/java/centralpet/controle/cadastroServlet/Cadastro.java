@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -205,6 +206,10 @@ public class Cadastro extends HttpServlet {
 			case "/mostrar-cards-pets":
 				mostrarPetsDisponiveis(request, response);
 				break;
+				
+			case "/filtrar-pets":
+				filtrarPets(request, response);
+				break;
 			}
 
 		} catch (SQLException ex) {
@@ -263,6 +268,23 @@ public class Cadastro extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
 		dispatcher.forward(request, response);
+	}
+	
+	private void  filtrarPets(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		Optional<EspeciePet> especie = Optional.ofNullable(request.getParameter("especie")).map(EspeciePet::valueOf);
+		Optional<PortePet> porte = Optional.ofNullable(request.getParameter("porte")).map(PortePet::valueOf);
+		Optional<SexoPet> sexo = Optional.ofNullable(request.getParameter("sexo")).map(SexoPet::valueOf);
+		Optional<PelagemPet> pelagem = Optional.ofNullable(request.getParameter("pelagem")).map(PelagemPet::valueOf);
+		
+		List<Pet> petsFiltrados = daoPet.filtrarBuscaPet(especie, porte, sexo, pelagem);
+		
+		request.setAttribute("pets", petsFiltrados);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 	private void mostrarFormularioNovoTutor(HttpServletRequest request, HttpServletResponse response)
@@ -635,7 +657,7 @@ public class Cadastro extends HttpServlet {
 		String descricao = request.getParameter("descricao");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
 		Byte idade = Byte.parseByte(request.getParameter("idade"));
-		Long peso = Long.parseLong(request.getParameter("peso"));
+		Double peso = Double.parseDouble(request.getParameter("peso"));
 		StatusPet statusPet = StatusPet.valueOf(request.getParameter("status-pet"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
 		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));

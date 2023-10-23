@@ -56,7 +56,7 @@ public class Pet implements Serializable {
 	private byte idade;
 
 	@Column(name = "peso_pet", nullable = false, unique = false)
-	private Long peso;
+	private Double peso;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_ong", nullable = false)
@@ -96,7 +96,7 @@ public class Pet implements Serializable {
 	public Pet() {
 	}
 
-	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Long peso,
+	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso,
 			Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
@@ -116,7 +116,7 @@ public class Pet implements Serializable {
 	}
 
 	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade,
-			Long peso, Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
+			Double peso, Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setId(id);
 		setNome(nome);
@@ -176,11 +176,11 @@ public class Pet implements Serializable {
 		this.idade = idade;
 	}
 
-	public Long getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(Long peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 

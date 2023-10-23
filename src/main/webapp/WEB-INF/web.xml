@@ -30,7 +30,7 @@
         <servlet-name>Cadastro</servlet-name>
         <url-pattern>/nova-adocao</url-pattern>
     </servlet-mapping>
-    
+        
 	<welcome-file-list>
 		<welcome-file>/home.jsp</welcome-file>
 	</welcome-file-list>
