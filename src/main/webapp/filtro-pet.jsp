@@ -3,11 +3,13 @@
 	<div class="filtro">
 
 	<select name="especie" id="especie">
+		<option value="" selected>Especie</option>
 		<option value="CACHORRO">Cachorro</option>
 		<option value="GATO">Gato</option>
 	</select>
 	
 	<select name="porte" id="porte">
+		<option value="" selected>Porte</option>
 		<option value="MINI">Mini</option>
 		<option value="PEQUENO">Pequeno</option>
 		<option value="MEDIO">Médio</option>
@@ -16,11 +18,13 @@
 	</select> 
 	
 	<select name="sexo" id="sexo">
+		<option value="" selected>Sexo</option>
 		<option value="MACHO">Macho</option>
 		<option value="FEMEA">Fêmea</option>
 	</select> 
 	
 	<select name="pelagem" id="pelagem">
+		<option value="" selected>Pelagem</option>
 		<option value="CURTO">Curta</option>
 		<option value="MEDIO">Média</option>
 		<option value="LONGO">Longa</option>

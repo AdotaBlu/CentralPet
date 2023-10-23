@@ -462,11 +462,11 @@ public class PetDAOImpl implements PetDAO {
 	}
 
 	public List<Pet> filtrarBuscaPet(Optional<EspeciePet> especiePet, Optional<PortePet> portePet,
-										Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet) {
-		
+			Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet) {
+
 		Session sessao = null;
 		List<Pet> petsFiltrados = null;
-		
+
 		try {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
@@ -474,39 +474,36 @@ public class PetDAOImpl implements PetDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
-			
+
 			criteria.select(raizPet);
-			
+
 			List<Predicate> predicatos = new ArrayList<>();
-			
-			especiePet.ifPresent(especie -> predicatos.add(construtor.equal(raizPet.get("especiePet"), especiePet)));
-			portePet.ifPresent(porte -> predicatos.add(construtor.equal(raizPet.get("portePet"), portePet)));
-			sexoPet.ifPresent(sexo -> predicatos.add(construtor.equal(raizPet.get("sexoPet"), sexoPet)));
-			pelagemPet.ifPresent(pelagem -> predicatos.add(construtor.equal(raizPet.get("pelagemPet"), pelagemPet)));
-			
-			if(!predicatos.isEmpty()) {
-				
-				criteria.where(construtor.and((Predicate[]) predicatos.toArray(new Predicate[predicatos.size()])));
+
+			especiePet.ifPresent(especie -> predicatos.add(construtor.equal(raizPet.get("especiePet"), especiePet.get())));
+			portePet.ifPresent(porte -> predicatos.add(construtor.equal(raizPet.get("portePet"), portePet.get())));
+			sexoPet.ifPresent(sexo -> predicatos.add(construtor.equal(raizPet.get("sexoPet"), sexoPet.get())));
+			pelagemPet.ifPresent(pelagem -> predicatos.add(construtor.equal(raizPet.get("pelagemPet"), pelagemPet.get())));
+
+			if (!predicatos.isEmpty()) {
+				criteria.where(construtor.and(predicatos.toArray(new Predicate[0])));
 			}
-			
+
 			petsFiltrados = sessao.createQuery(criteria).getResultList();
-			
-		} catch(Exception sqlException) {
-			
+
+		} catch (Exception sqlException) {
+
 			sqlException.printStackTrace();
-			
+
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
-
 			}
-		
-		} finally {
 
-			if (sessao != null) {	
+		} finally {
+			if (sessao != null) {
 				sessao.close();
 			}
-	
-	} return petsFiltrados;
-  }
+		}
+		return petsFiltrados;
+	}
 }
 	
