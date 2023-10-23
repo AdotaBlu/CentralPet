@@ -9,8 +9,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Predicate;
 
-import org.apache.taglibs.standard.extra.spath.Predicate;
 import org.hibernate.Session;
 
 import centralpet.modelo.entidade.ong.Ong;
@@ -486,7 +486,7 @@ public class PetDAOImpl implements PetDAO {
 			
 			if(!predicatos.isEmpty()) {
 				
-				criteria.where(construtor.and((javax.persistence.criteria.Predicate[]) predicatos.toArray(new Predicate[predicatos.size()])));
+				criteria.where(construtor.and((Predicate[]) predicatos.toArray(new Predicate[predicatos.size()])));
 			}
 			
 			petsFiltrados = sessao.createQuery(criteria).getResultList();
