@@ -56,9 +56,9 @@ public class Pet implements Serializable {
 	private byte idade;
 
 	@Column(name = "peso_pet", nullable = false, unique = false)
-	private Double peso;
+	private Long peso;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_ong", nullable = false)
 	private Ong ong;
 
@@ -86,7 +86,7 @@ public class Pet implements Serializable {
 	@Column(name = "pelagem_pet", nullable = false, unique = false)
 	private PelagemPet pelagemPet;
 
-	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<FotosPet> fotos = new ArrayList<>();
 
 //	@OneToOne(fetch = FetchType.LAZY)
@@ -96,7 +96,7 @@ public class Pet implements Serializable {
 	public Pet() {
 	}
 
-	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso,
+	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Long peso,
 			Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
@@ -116,7 +116,7 @@ public class Pet implements Serializable {
 	}
 
 	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade,
-			Double peso, Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
+			Long peso, Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setId(id);
 		setNome(nome);
@@ -176,11 +176,11 @@ public class Pet implements Serializable {
 		this.idade = idade;
 	}
 
-	public Double getPeso() {
+	public Long getPeso() {
 		return peso;
 	}
 
-	public void setPeso(Double peso) {
+	public void setPeso(Long peso) {
 		this.peso = peso;
 	}
 
@@ -266,7 +266,6 @@ public class Pet implements Serializable {
 
 	public String fotoPrincipalPet() {
 		String urlFotoPrincipal =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotos.get(0).getDadosImagem())) ;
-
 		return urlFotoPrincipal;
 	}
 

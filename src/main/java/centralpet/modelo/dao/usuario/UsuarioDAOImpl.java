@@ -190,7 +190,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 
-	public Boolean verificarUsuario(String nomeUsuario, String senhaUsuario) {
+	public Boolean verificarUsuario(String emailUsuario, String senhaUsuario) {
 
 		Session sessao = null;
 
@@ -206,13 +206,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 
-			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			Root<Contato> raizContato = criteria.from(Contato.class);
 
-			criteria.select(raizUsuario);
-
-			criteria.where(construtor.and(construtor.equal(raizUsuario.get(Usuario_.nome), nomeUsuario),
-
-					construtor.equal(raizUsuario.get(Usuario_.senha), senhaUsuario)));
+		    criteria.select(raizContato.get(Contato_.USUARIO)); 
+		    
+	        criteria.where(construtor.and(
+	            construtor.equal(raizContato.get(Contato_.EMAIL), emailUsuario),
+	            construtor.equal(raizContato.get(Contato_.USUARIO).get(Usuario_.SENHA), senhaUsuario)));
 
 			usuario = sessao.createQuery(criteria).getSingleResult();
 
@@ -246,7 +246,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 	
-	public Usuario recuperarUsuarioNome(String nome) {
+	public Usuario recuperarUsuarioNome(String emailUsuario) {
 		Session sessao = null;
 		Usuario usuario = null;
 
@@ -257,12 +257,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-			criteria.select(raizUsuario);
-			
-			criteria.where(construtor.equal(raizUsuario.get(Usuario_.nome), nome));
+			Root<Contato> raizContato = criteria.from(Contato.class);
 
+		    criteria.select(raizContato.get(Contato_.USUARIO)); 
+		    
+	        criteria.where(construtor.equal(raizContato.get(Contato_.EMAIL), emailUsuario));
 			usuario = sessao.createQuery(criteria).getSingleResult();
 
 			sessao.getTransaction().commit();
