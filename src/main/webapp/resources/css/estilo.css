@@ -96,6 +96,7 @@ a {
 
 
 /*Barra de filtros*/
+
 .filtro{
     margin-top: auto;
     margin-bottom: auto;
@@ -104,6 +105,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: row;
 }
 .filtro select{
     width: 140px;
@@ -250,6 +252,12 @@ li:hover{
 	font-weight: 500;
 	color:#390879;
 	margin-left: 5px;
+	text-transform: lowercase;
+}
+
+
+#nome-pet::first-letter {
+    text-transform: uppercase;
 }
 
 .pet-icone{

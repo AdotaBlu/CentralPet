@@ -9,8 +9,6 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import centralpet.modelo.entidade.ong.Ong;
-import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.tutor.Tutor_;
 import centralpet.modelo.entidade.usuario.Usuario;
