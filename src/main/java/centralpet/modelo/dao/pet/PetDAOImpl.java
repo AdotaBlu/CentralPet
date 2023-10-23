@@ -479,10 +479,10 @@ public class PetDAOImpl implements PetDAO {
 			
 			List<Predicate> predicatos = new ArrayList<>();
 			
-			especiePet.ifPresent(especie -> predicatos.add((Predicate) construtor.equal(raizPet.get("especiePet"), especiePet)));
-			portePet.ifPresent(porte -> predicatos.add((Predicate) construtor.equal(raizPet.get("portePet"), portePet)));
-			sexoPet.ifPresent(sexo -> predicatos.add((Predicate) construtor.equal(raizPet.get("sexoPet"), sexoPet)));
-			pelagemPet.ifPresent(pelagem -> predicatos.add((Predicate) construtor.equal(raizPet.get("pelagemPet"), pelagemPet)));
+			especiePet.ifPresent(especie -> predicatos.add(construtor.equal(raizPet.get("especiePet"), especiePet)));
+			portePet.ifPresent(porte -> predicatos.add(construtor.equal(raizPet.get("portePet"), portePet)));
+			sexoPet.ifPresent(sexo -> predicatos.add(construtor.equal(raizPet.get("sexoPet"), sexoPet)));
+			pelagemPet.ifPresent(pelagem -> predicatos.add(construtor.equal(raizPet.get("pelagemPet"), pelagemPet)));
 			
 			if(!predicatos.isEmpty()) {
 				
