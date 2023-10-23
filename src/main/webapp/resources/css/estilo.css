@@ -15,7 +15,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #eef1f9;
+    background-color: #F5F6F7;
 }
 
 
@@ -27,24 +27,32 @@ form {
 }
 
 input, option {
-    display: block;
     padding: 15px;
     width: 470px;
     height: 40px;
     margin: 15px;
-    border: 1px solid #31035B;
+    border: 1px solid #390879;
     border-radius: 5px;
     background-color: #fff;
 }
 
+.input-cadastro{
+	display:flex;
+	flex-direction: column;
+}
+
+.select-cadastro{
+	display:flex;
+	flex-direction: column;
+}
+
 select {
     width: 470px;
+    height: 40px;
+    margin: 15px;
+    border: 1px solid #390879;
+    border-radius: 5px;
 }
-
-.container {
-    display: flex;
-}
-
 .container-botao {
     display: flex;
     flex-direction: row;
@@ -52,38 +60,17 @@ select {
     justify-content: space-between;
 }
 
-button {
+button{
     width: 230px;
     height: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #31035B;
+    border: 1px solid #390879;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #31035B;
+    background-color: #390879;
     color: white;
 }
-
-button:hover {
-    background-color: rgb(33, 2, 62);
-}
-
-.cardgrid {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-.card {
-    position: relative;
-    width: 222px;
-    height: 300px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #fcb700;
-}
-
 
 .footer-content {
     display: flex;
@@ -106,18 +93,9 @@ a {
 	height: 200px;
 }
 
-tbody tr td {
-    text-transform: lowercase;
-}
-
-tbody tr td::first-letter {
-    text-transform: uppercase;
-}
 
 
 /*Barra de filtros*/
-.container-filtro{
-}
 .filtro{
     margin-top: auto;
     margin-bottom: auto;
@@ -128,16 +106,18 @@ tbody tr td::first-letter {
     align-items: center;
 }
 .filtro select{
-    width: 208px;
-    height: 40px;
+    width: 140px;
+    height: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
     border: 0,5px;
     border-radius: 5px;
-    color: #38035b;
+    color: #390879;
 }
-.filtro button{
-    height: 40px;
-    width: 208px;
-    background-color: #38035b;
+.btn-filtrar{
+    height: 30px;
+    width: 150px;
+    background-color: #390879;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -164,7 +144,7 @@ li:hover{
     width: 20px;
 }
 .ini h1{
-    color: #38035b;
+    color: #390879;
     font-size: 15px;
     margin-top: auto;
     margin-bottom: auto;
@@ -189,7 +169,7 @@ li:hover{
     margin-left: 5px;
     display: flex;
     font-size: 12px;
-    color: #38035b;
+    color: #390879;
     list-style: none;
 }
 .end button{
@@ -197,7 +177,7 @@ li:hover{
     height: 30px;
     border-radius: 5px;
     border: none;
-    background-color: #38035b;
+    background-color: #390879;
     font-size: 12px;
 }
 .li{
@@ -211,6 +191,166 @@ li:hover{
 
 .foto-miniatura{
 	border-radius: 50%;
-	width: 30px;
+	width: 30px;                            
 	height: 30px;
 }
+
+.container-cards{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	
+}
+/* Card Pet*/
+
+.pet-card{
+	background-color: #FCFAFF;
+	width:220px;
+	margin: 10px;
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;             
+	transition: transform 0.2s;         ;
+}
+
+.pet-card:hover{
+	transform: scale(1.1);
+}
+
+.foto-pet{
+	border-radius: 5px 5px 0 0;
+}
+.info-card{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	padding: 3px;
+	font-size: 11px;
+}
+
+.info-top{
+	text-align: center;
+}
+
+#label-ong{
+	color:#390879;
+}
+
+.info-mid{
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#nome-pet{
+	font-size: 17px;
+	font-weight: 500;
+	color:#390879;
+	margin-left: 5px;
+}
+
+.pet-icone{
+	display: flex;
+	justify-content: space-around;
+	margin-right: 5px;
+}
+
+.pet-icone div{
+	margin-left: 13px;
+}
+.info-bottom{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-left:5px;
+}
+	
+.pet-info-box{
+	flex: 0 1 calc(50% - 10px);
+	display: flex; 
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.label{
+    color: #626262;
+    margin-right: 5px;
+}
+
+.value{
+	color: #000000;
+	text-transform: lowercase;
+}
+.value::first-letter {
+    text-transform: uppercase;
+}
+
+.btn-card{
+	display: flex;
+	justify-content: space-around;
+	margin: 10px 0 10px 0;
+}
+.btn-adotar-card {
+    display: inline-block;
+    width: 210px;
+    height: 30px;
+    background-color: #390879;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    border: none; 
+    border-radius: 5px;
+}
+
+.btn-adotar-card:hover {
+	color:#fcb700;
+}
+
+/* Login */
+
+.container-login{
+	margin-top: 10%;
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+}
+
+.container-h2{
+	color:#390879;
+}
+
+.input-login{
+	width: 400px;
+	
+}
+.container-botao-login{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.botao-login:hover{
+	color:#fcb700;
+	background-color:rgb(44, 6, 94);
+}
+
+#email-usuario, #senha-usuario{
+	width: 400px;
+}
+
+.container-link-cadastro{
+	text-align: center;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.container-link-cadastro a{
+	color: #390879; 
+	font-weight: bold;
+}
+
+
+

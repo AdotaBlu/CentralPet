@@ -14,7 +14,7 @@
 			<h1><c:out value='${ong.nome}' /></h1>
 			<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="100">
 			<div>
-			<table class = "infomacoes">
+			<table class="infomacoes">
 				<thead>
 					<tr>
 						<th>Nome</th>
@@ -34,14 +34,14 @@
 				</c:if>
 			</table>
 				<h1>Endereço</h1>
-			<table class = "infomacoes">
+			<table class="infomacoes">
 				<thead>
 					<tr>
 						<th>Logradouro</th>
 						<th>Número</th>
 						<th>Bairro</th>
 						<th>Cep</th>
-						<th>Ponto de Referencia</th>
+						<th>Ponto de Referência</th>
 					</tr>
 				</thead>
 				
@@ -59,7 +59,7 @@
 			</table>
 			
 			<h1>Adoções</h1>
-			<table class = "infomacoes">
+			<table class="infomacoes">
 				<thead>
 					<tr>
 						<th>Pet</th>
@@ -77,7 +77,7 @@
 				</c:if>
 			</table>
 			<h1>Termo</h1>
-			<table class = "infomacoes">
+			<table class="infomacoes">
 				<thead>
 					<tr>
 						<th>O Termo</th>

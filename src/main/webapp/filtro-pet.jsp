@@ -16,6 +16,6 @@
 		<option value="curta">Curta</option>
 		<option value="media">Média</option>
 		<option value="longa">Longa</option>
-	</select> <a href=""><button>Filtrar</button> </a>
+	</select> <a href=""><button class="btn-filtrar">Filtrar</button> </a>
 </div>
 </div>

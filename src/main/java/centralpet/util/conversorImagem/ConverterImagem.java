@@ -11,5 +11,5 @@ public interface ConverterImagem {
 
 	byte[] obterBytesImagem(Part imagem) throws IOException;
 	
-	void adicionarImagensArrayFotosPet( Pet pet, Collection<Part> parteImagem) throws IOException;
+	void adicionarImagensArrayFotosPet(Pet pet, Collection<Part> parteImagem) throws IOException;
 }

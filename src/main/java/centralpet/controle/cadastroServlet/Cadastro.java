@@ -257,7 +257,6 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 		
 		List<Pet> todosPets = daoPet.recuperarTodosPets();
-		List<FotosPet> todasFotosPet =
 		
 		
 		request.setAttribute("pets", todosPets);
@@ -636,7 +635,7 @@ public class Cadastro extends HttpServlet {
 		String descricao = request.getParameter("descricao");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
 		Byte idade = Byte.parseByte(request.getParameter("idade"));
-		Double peso = Double.parseDouble(request.getParameter("peso"));
+		Long peso = Long.parseLong(request.getParameter("peso"));
 		StatusPet statusPet = StatusPet.valueOf(request.getParameter("status-pet"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
 		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
@@ -649,7 +648,7 @@ public class Cadastro extends HttpServlet {
 		daoPet.inserirPet(pet);
 		
 		parteImagem = request.getParts();
-		converterImagem.adicionarImagensArrayFotosPet( pet, parteImagem);
+		converterImagem.adicionarImagensArrayFotosPet(pet, parteImagem);
 	
 		response.sendRedirect("mostrar-perfil-pet");
 	}
@@ -683,13 +682,13 @@ public class Cadastro extends HttpServlet {
 	private void confirmarLogin(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		String usuarioInvalido = null;
-		String nomeUsuario = request.getParameter("nome-usuario");
+		String emailUsuario = request.getParameter("email-usuario");
 		String senhaUsuario = request.getParameter("senha-usuario");
-		boolean existe = daoUsuario.verificarUsuario(nomeUsuario, senhaUsuario);
+		boolean existe = daoUsuario.verificarUsuario(emailUsuario, senhaUsuario);
 		
 		if(existe) {
 			HttpSession sessao = request.getSession();
-			Usuario usuario = daoUsuario.recuperarUsuarioNome(nomeUsuario);
+			Usuario usuario = daoUsuario.recuperarUsuarioNome(emailUsuario);
 			sessao.setAttribute("usuario", usuario);
 			response.sendRedirect("home");
 		} else {
