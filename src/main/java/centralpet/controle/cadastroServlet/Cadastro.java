@@ -159,6 +159,18 @@ public class Cadastro extends HttpServlet {
 				inserirPet(request, response);
 				break;
 				
+			case "/editar-pet":
+				mostrarFormularioEditarPet(request, response);
+				break;
+				
+			case "/atualizar-pet":
+				atualizarPet(request, response);
+				break;
+				
+			case "/excluir-pet":
+				excluirPet(request, response);
+				break;
+				
 			case "/novo-termo":
 				mostrarFormularioNovoTermo(request, response);
 				break;
@@ -536,6 +548,46 @@ public class Cadastro extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
 			dispatcher.forward(request, response);
 		}
+	}
+		
+		private void mostrarFormularioEditarPet(HttpServletRequest request, HttpServletResponse response)
+				throws SQLException, ServletException, IOException {
+			
+			HttpSession sessao = request.getSession();
+			String urlFoto;
+			FotoDTO fotoDTO = new FotoDTO();
+			
+			if(sessao.getAttribute("usuario") instanceof Tutor) {
+				Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+				fotoDTO.setId(tutor.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
+				request.setAttribute("tutor", tutor);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(sessao.getAttribute("usuario") instanceof Ong){
+				Ong ong = (Ong) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+				fotoDTO.setId(ong.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
+				request.setAttribute("ong", ong);
+				
+				Long idPet = Long.parseLong(request.getParameter("id-pet"));
+				Pet pet = daoPet.recuperarPet(idPet);
+				List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(idPet);
+				
+				request.setAttribute("pet", pet);
+				request.setAttribute("fotos-pet", fotosPet);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("editar-pet.jsp");
+				dispatcher.forward(request, response);
+			}
 	
 		else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
@@ -902,6 +954,47 @@ public class Cadastro extends HttpServlet {
 		converterImagem.adicionarImagensArrayFotosPet(pet, parteImagem);
 	
 		response.sendRedirect("mostrar-perfil-pet");
+	}
+	
+	private void atualizarPet(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		HttpSession sessao = request.getSession();
+		Ong ongPet = (Ong) sessao.getAttribute("usuario");
+		
+		Pet pet = null;
+		Long id = Long.parseLong(request.getParameter("id-pet"));
+		String nome = request.getParameter("nome");
+		String vacinas = request.getParameter("vacinas");
+		String descricao = request.getParameter("descricao");
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
+		Byte idade = Byte.parseByte(request.getParameter("idade"));
+		Double peso = Double.parseDouble(request.getParameter("peso"));
+		StatusPet statusPet = StatusPet.valueOf(request.getParameter("status-pet"));
+		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
+		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
+		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
+		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
+		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
+		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet);
+		daoPet.atualizarPet(pet);
+		 
+		response.sendRedirect("mostrar-perfil-pet");
+	}
+	
+	private void excluirPet(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		HttpSession sessao = request.getSession();
+		Ong ongPet = (Ong) sessao.getAttribute("usuario");
+		
+		if(ongPet != null) {
+		Long id = Long.parseLong(request.getParameter("id-pet"));
+		Pet pet = daoPet.recuperarPet(id);
+		daoPet.deletarPet(pet);
+		} 
+		
+		response.sendRedirect("home");
 	}
 	
 	private void inserirTermo(HttpServletRequest request, HttpServletResponse response)
