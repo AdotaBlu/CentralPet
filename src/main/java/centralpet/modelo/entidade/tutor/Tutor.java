@@ -56,8 +56,7 @@ public class Tutor extends Usuario implements Serializable {
 
 	public Tutor(String nome, Endereco endereco, Long id, String cpf, LocalDate datanascimento, GeneroTutor generoTutor,
 			String senha, byte[] fotoPerfil) {
-		super(nome, endereco, senha, fotoPerfil);
-		setId(id);
+		super(id, nome, endereco, fotoPerfil, senha);
 		setCpf(cpf);
 		setDataNascimento(datanascimento);
 		setGeneroTutor(generoTutor);

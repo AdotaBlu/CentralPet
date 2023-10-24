@@ -42,7 +42,11 @@
 						</div>
 						<div class="input-editar">
 							<label for="data-nascimento">Data de Nascimento</label> 
-							<input type="date" id="data-nascimento" name="data-nascimento">
+							<input type="date" id="data-nascimento" name="data-nascimento" value='${tutor.dataNascimento}'>
+						</div>
+						<div class="input-editar">
+							<label for="senha">Senha</label> 
+							<input type="hidden" id="senha" name="senha" value="<c:out value='${tutor.senha}' />">
 						</div>
 						<div class="select-editar">
 							<label for="drop_down_genero">Gênero</label> 
