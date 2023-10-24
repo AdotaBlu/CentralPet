@@ -26,6 +26,7 @@ public class ConversorImagemImpl implements ConverterImagem {
 		FotosPetDAO daoFotosPet;
 
 		for (Part partes : parteImagem) {
+			
 			String tipoImagem = partes.getContentType();
 
 			if (tipoImagem != null) {

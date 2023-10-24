@@ -35,7 +35,12 @@ input, option {
     border-radius: 5px;
     background-color: #fff;
 }
-
+#termo{
+	padding: 5px;
+    border: 1px solid #390879;
+    border-radius: 5px;
+    background-color: #fff;
+}
 .input-cadastro{
 	display:flex;
 	flex-direction: column;
@@ -237,6 +242,9 @@ li:hover{
 }
 
 #label-ong{
+	color:#626262;
+}
+#value-ong{
 	color:#390879;
 }
 

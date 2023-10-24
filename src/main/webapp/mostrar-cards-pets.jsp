@@ -26,7 +26,7 @@
 					<div class="info-card">
 						<div class="info-top">
 							<span class="label" id="label-ong">ONG: </span>
-							<span><c:out value='${pet.ong.nome}'></c:out></span>
+							<span id="value-ong"><c:out value='${pet.ong.nome}'></c:out></span>
 						</div>
 						<div class="info-mid">
 							<div class="pet-nome">

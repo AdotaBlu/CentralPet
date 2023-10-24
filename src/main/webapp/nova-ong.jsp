@@ -70,9 +70,10 @@
         <label for="senha">Senha</label>
         <input type="password" id="senha" name="senha" value="<c:out value='${ong.senha}' />">
         
+        
         <label for="imagem">Escolha uma foto de perfil</label>
     	<input type="file" name="foto-perfil" id="fotoPerfil" accept="image/*">
-        
+        	
         <div class="container-botao">
 			<button type="reset" class= "botao-secundario">Limpar</button>
         	<button type="submit" class="botao-primario">Salvar</button>		
