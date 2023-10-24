@@ -368,5 +368,42 @@ li:hover{
 	font-weight: bold;
 }
 
+ Editar Tutor, ONG */
+.container-editar-tutor{
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+}
+.container-editar-tutor h1{
+	text-align: center;
+	color: #390879;
+}
 
+.input-editar label{
+	display: block;
+}
+
+.select-editar label{
+	display: block;
+}
+
+/*
+input[type='file'] {
+  	display: none
+}
+*/
+
+.editar-foto-tutor{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-inserir-foto{
+	padding: 0 10 0;
+	font-size: 30px;
+	cursor: pointer;
+	border-radius: 5px;
+	color:#390879;
+}
 

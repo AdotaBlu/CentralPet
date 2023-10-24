@@ -395,11 +395,16 @@ public class Cadastro extends HttpServlet {
 				Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 				Contato contato = daoContato.recuperarContatoUsuario(tutor);
 				
+				urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+				fotoDTO.setId(tutor.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
 				request.setAttribute("endereco", endereco);
 				request.setAttribute("tutor", tutor);
 				request.setAttribute("contato", contato);
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("editar-tutor.jsp");
 				dispatcher.forward(request, response);
 			}
 			else if(sessao.getAttribute("usuario") instanceof Ong){
@@ -488,7 +493,7 @@ public class Cadastro extends HttpServlet {
 				
 				request.setAttribute("foto", fotoDTO);
 				request.setAttribute("ong", ong);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("editar-ong.jsp");
 				dispatcher.forward(request, response);
 			}
 		
