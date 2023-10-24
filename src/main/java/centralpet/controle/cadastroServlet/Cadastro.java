@@ -221,15 +221,12 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession sessao = request.getSession();
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		
-		Ong ong = daoOng.recuperarOngUsuario(usuario);
-		Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
-		
 		FotoDTO fotoDTO = new FotoDTO();
 		String urlFoto;
 		
-		if(tutor != null) {
+		if(sessao.getAttribute("usuario") instanceof Tutor){
+			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+			Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
 			
 			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
 			fotoDTO.setId(tutor.getId());
@@ -237,8 +234,12 @@ public class Cadastro extends HttpServlet {
 			
 			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
-		} else if(ong != null) {
-			
+		}
+		
+		if(sessao.getAttribute("usuario") instanceof Ong) {
+			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+			Ong ong = daoOng.recuperarOngUsuario(usuario);
+
 			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
 			fotoDTO.setId(ong.getId());
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
@@ -253,16 +254,48 @@ public class Cadastro extends HttpServlet {
 	
 	private void mostrarFormularioLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+			
+		HttpSession sessao = request.getSession();
+		FotoDTO fotoDTO = new FotoDTO();
+		String urlFoto;
 		
+		if(sessao.getAttribute("usuario") instanceof Tutor){
+			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+			Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
+			
+			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+			fotoDTO.setId(tutor.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("tutor", tutor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		if(sessao.getAttribute("usuario") instanceof Ong) {
+			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+			Ong ong = daoOng.recuperarOngUsuario(usuario);
+
+			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+			fotoDTO.setId(ong.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("ong", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("novo-login.jsp");
 		dispatcher.forward(request, response);
+		}
 	}
 	
 	private void mostrarPetsDisponiveis(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		List<Pet> todosPets = daoPet.recuperarTodosPets();
-		
 		
 		request.setAttribute("pets", todosPets);
 		
@@ -316,97 +349,227 @@ public class Cadastro extends HttpServlet {
 
 	private void mostrarFormularioNovoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
-		dispatcher.forward(request, response);
+		HttpSession sessao = request.getSession();
+		String urlFoto;
+		FotoDTO fotoDTO = new FotoDTO();
+		
+		if(sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			
+			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+			fotoDTO.setId(tutor.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("tutor", tutor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
+		else if(sessao.getAttribute("usuario") instanceof Ong){
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			
+			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+			fotoDTO.setId(ong.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("ong", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 	
 	private void mostrarFormEditarTutor(HttpServletRequest request, HttpServletResponse response) 
 			throws SQLException, ServletException, IOException {
 			
 			HttpSession sessao = request.getSession();
-			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			String urlFoto;
+			FotoDTO fotoDTO = new FotoDTO();
+			
+			if(sessao.getAttribute("usuario") instanceof Tutor) {
+				Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+				Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
+				Contato contato = daoContato.recuperarContatoUsuario(tutor);
+				
+				request.setAttribute("endereco", endereco);
+				request.setAttribute("tutor", tutor);
+				request.setAttribute("contato", contato);
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(sessao.getAttribute("usuario") instanceof Ong){
+				Ong ong = (Ong) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+				fotoDTO.setId(ong.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+				request.setAttribute("foto", fotoDTO);
+				request.setAttribute("ong", ong);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
 		
-			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
-			Contato contato = daoContato.recuperarContatoUsuario(tutor);
+			else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
 			
-			request.setAttribute("endereco", endereco);
-			request.setAttribute("tutor", tutor);
-			request.setAttribute("contato", contato);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
-			dispatcher.forward(request, response);
 		}
 	
 	private void mostrarFormularioNovaOng(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-	private void mostrarFormEditarOng(HttpServletRequest request, HttpServletResponse response) 
-			throws SQLException, ServletException, IOException {
-		
 			HttpSession sessao = request.getSession();
-			Ong ong = (Ong) sessao.getAttribute("usuario");
-		
-			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
+			String urlFoto;
+			FotoDTO fotoDTO = new FotoDTO();
 			
-			Contato contato = daoContato.recuperarContatoUsuario(ong);
-			
-			request.setAttribute("endereco", endereco);
-			
-			
-			request.setAttribute("ong", ong);
-			
-			request.setAttribute("contato", contato);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
-			dispatcher.forward(request, response);
-		}
-	
-	private void mostrarFormularioNovoPet(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-		
-			HttpSession sessao = request.getSession();
-			Ong ong = (Ong) sessao.getAttribute("usuario");
-
-		    if (ong != null) {
-		        
-		        request.setAttribute("ong", ong);
-		        
-		        String urlFoto;
-				FotoDTO fotoDTO = new FotoDTO();
+			if(sessao.getAttribute("usuario") instanceof Tutor) {
+				Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+				fotoDTO.setId(tutor.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
+				request.setAttribute("tutor", tutor);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(sessao.getAttribute("usuario") instanceof Ong){
+				Ong ong = (Ong) sessao.getAttribute("usuario");
+				
 				urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
 				fotoDTO.setId(ong.getId());
 				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 				
 				request.setAttribute("foto", fotoDTO);
-		        
-		        RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
-		        dispatcher.forward(request, response);
-		    } else {
-		        
-		        System.out.println("Ong não encontrada");
-		    }
+				request.setAttribute("ong", ong);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
+		
+			else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
+				dispatcher.forward(request, response);
+			}
+		}
+	
+	private void mostrarFormEditarOng(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, ServletException, IOException {
+		
+			HttpSession sessao = request.getSession();
+			String urlFoto;
+			FotoDTO fotoDTO = new FotoDTO();
+			
+			if(sessao.getAttribute("usuario") instanceof Tutor) {
+				Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+				fotoDTO.setId(tutor.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
+				request.setAttribute("tutor", tutor);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(sessao.getAttribute("usuario") instanceof Ong){
+				Ong ong = (Ong) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+				fotoDTO.setId(ong.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
+				request.setAttribute("ong", ong);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
+				dispatcher.forward(request, response);
+			}
+		
+			else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+		}
+	
+	private void mostrarFormularioNovoPet(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		String urlFoto;
+		FotoDTO fotoDTO = new FotoDTO();
+		
+		if(sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			
+			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+			fotoDTO.setId(tutor.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("tutor", tutor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
+		else if(sessao.getAttribute("usuario") instanceof Ong){
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			
+			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+			fotoDTO.setId(ong.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("ong", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
+			dispatcher.forward(request, response);
+		}
+	
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 	
 	private void mostrarFormularioNovoTermo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			HttpSession sessao = request.getSession();
-		    Ong ong = (Ong) sessao.getAttribute("usuario");
-
-		    if (ong != null) {
-		        
-		        request.setAttribute("ong", ong);
-		        RequestDispatcher dispatcher = request.getRequestDispatcher("novo-termo.jsp");
-		        dispatcher.forward(request, response);
-		    } else {
-		        
-		        System.out.println("Ong não encontrada");
-		    }
-	
+			
+			String urlFoto;
+			FotoDTO fotoDTO = new FotoDTO();
+			
+			if(sessao.getAttribute("usuario") instanceof Tutor) {
+				Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+				fotoDTO.setId(tutor.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("tutor", tutor);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+				dispatcher.forward(request, response);
+			}
+			else if(sessao.getAttribute("usuario") instanceof Ong){
+				Ong ong = (Ong) sessao.getAttribute("usuario");
+				
+				urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+				fotoDTO.setId(ong.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("ong", ong);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("novo-termo.jsp");
+				dispatcher.forward(request, response);
+			}    
+			else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+	    		dispatcher.forward(request, response);
+			}
 	}
 	
 	private void mostrarFormularioNovaAdocao(HttpServletRequest request, HttpServletResponse response)
@@ -468,16 +631,16 @@ public class Cadastro extends HttpServlet {
 		
 		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 		Contato contato = daoContato.recuperarContatoUsuario(ong);
-		Adocao adocao = daoAdocao.recuperarAdocao(1L);
-		Termo termo = daoTermo.recuperarTermo(2L);
+		//Adocao adocao = daoAdocao.recuperarAdocao(1L);
+		//Termo termo = daoTermo.recuperarTermo(2L);
 		String urlFoto;
 		
-		if(ong != null && endereco != null && contato != null && termo != null) {
+		if(ong != null && endereco != null && contato != null) {
 			request.setAttribute("ong", ong);
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
-			request.setAttribute("adocao", adocao);
-			request.setAttribute("termo", termo);
+			//request.setAttribute("adocao", adocao);
+			//request.setAttribute("termo", termo);
 			
 			FotoDTO fotoDTO = new FotoDTO();
 			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
@@ -523,8 +686,40 @@ public class Cadastro extends HttpServlet {
 	private void mostrarSelecaoCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-selecao-cadastro.jsp");
-		dispatcher.forward(request, response);
+		HttpSession sessao = request.getSession();
+		String urlFoto;
+		FotoDTO fotoDTO = new FotoDTO();
+		
+		if(sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			
+			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+			fotoDTO.setId(tutor.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("tutor", tutor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
+		else if(sessao.getAttribute("usuario") instanceof Ong){
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			
+			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
+			fotoDTO.setId(ong.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("ong", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-selecao-cadastro.jsp");
+			dispatcher.forward(request, response);
+		}
+	
 	}
 
 	private void inserirTutor(HttpServletRequest request, HttpServletResponse response)
