@@ -45,7 +45,7 @@ public abstract class Usuario implements Serializable {
 	@Column(name="foto_perfil_usuario", nullable = true, unique = false)
 	private byte[] fotoPerfil;
 
-	@Column(name = "data_cadastro_usuario", nullable = false, unique = false)
+	@Column(name = "data_cadastro_usuario", nullable = true, unique = false)
 	private LocalDate dataCadastro;
 
 	@Column(name = "data_alteracao_cadastro_usuario", nullable = true, unique = false)
@@ -66,13 +66,19 @@ public abstract class Usuario implements Serializable {
 		setFotoPerfil(fotoPerfil);
 	}
 	
-	public Usuario (Long id, String nome, Endereco endereco, String senha, byte[] fotoPerfil) {
+	public Usuario (Long id, String nome, Endereco endereco, byte[] fotoPerfil, String senha) {
 		setId(id);
 		setNome(nome);
 		setEndereco(endereco);
-		setSenha(senha);
 		setDataAlteracaoCadastro(dataAlteracaoCadastro);
 		setFotoPerfil(fotoPerfil);
+		setSenha(senha);
+	}
+	
+	public Usuario (Long id, String senha) {
+		setId(id);
+		setSenha(senha);
+		setDataAlteracaoCadastro(dataAlteracaoCadastro);
 	}
 
 	public Long getId() {

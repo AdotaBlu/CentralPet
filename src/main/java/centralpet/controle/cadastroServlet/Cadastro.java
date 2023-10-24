@@ -391,15 +391,21 @@ public class Cadastro extends HttpServlet {
 			FotoDTO fotoDTO = new FotoDTO();
 			
 			if(sessao.getAttribute("usuario") instanceof Tutor) {
-				Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+				Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+				Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
 				Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 				Contato contato = daoContato.recuperarContatoUsuario(tutor);
 				
+				urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+				fotoDTO.setId(tutor.getId());
+				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+				
+				request.setAttribute("foto", fotoDTO);
 				request.setAttribute("endereco", endereco);
 				request.setAttribute("tutor", tutor);
 				request.setAttribute("contato", contato);
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("editar-tutor.jsp");
 				dispatcher.forward(request, response);
 			}
 			else if(sessao.getAttribute("usuario") instanceof Ong){
@@ -488,7 +494,7 @@ public class Cadastro extends HttpServlet {
 				
 				request.setAttribute("foto", fotoDTO);
 				request.setAttribute("ong", ong);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("editar-ong.jsp");
 				dispatcher.forward(request, response);
 			}
 		
@@ -763,8 +769,6 @@ public class Cadastro extends HttpServlet {
 	private void atualizarTutor(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		
-		System.out.println("entrou no action de atualizar tutor");
-		
 		Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
@@ -774,8 +778,6 @@ public class Cadastro extends HttpServlet {
 		
 		daoEndereco.atualizarEndereco(new Endereco(idEndereco, logradouro, numero, bairro, cep, pontoReferencia));
 		Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
-		
-		System.out.println("passou pela parte de endereco");
 		
 		Part fotoPerfil = null;
 		Long idTutor = Long.parseLong(request.getParameter("id-tutor"));
@@ -788,16 +790,16 @@ public class Cadastro extends HttpServlet {
 		fotos = converterImagem.obterBytesImagem(fotoPerfil);
 		daoTutor.atualizarTutor(new Tutor(nome, endereco, idTutor, cpf, dataNascimento, generoTutor, senha, fotos));
 		Tutor tutor = daoTutor.recuperarTutor(idTutor);
-		
-		System.out.println("passou pela parte de tutor");
 
 		Long idContato = Long.parseLong(request.getParameter("id-contato"));
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		daoContato.atualizarContato(new Contato(idContato, email, telefone, tutor));
+	
+		HttpSession sessao = request.getSession();
+		Usuario usuario = daoUsuario.recuperarUsuarioEmail(email);
+		sessao.setAttribute("usuario", usuario);
 		response.sendRedirect("home");
-		
-		System.out.println("passou pela parte de contato e enviou oq mostrar");
 	}
 	
 	private void inserirOng(HttpServletRequest request, HttpServletResponse response)
@@ -833,6 +835,7 @@ public class Cadastro extends HttpServlet {
 		
 		contato = new Contato(email, telefone, ong);
 		daoContato.inserirContato(contato);
+		
 		response.sendRedirect("home");
 		
 	}
@@ -853,8 +856,8 @@ public class Cadastro extends HttpServlet {
 		
 		Long idOng = Long.parseLong(request.getParameter("id-ong"));
 		String nome = request.getParameter("nome");
-		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
+		String senha = request.getParameter("senha");
 		fotoPerfil = request.getPart("foto-perfil");
 		fotos = converterImagem.obterBytesImagem(fotoPerfil);
 		Ong ong = new Ong(nome, endereco, idOng, cnpj, senha, fotos);
@@ -864,6 +867,10 @@ public class Cadastro extends HttpServlet {
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		daoContato.atualizarContato(new Contato(idContato, email, telefone, ong));
+		
+		HttpSession sessao = request.getSession();
+		Usuario usuario = daoUsuario.recuperarUsuarioEmail(email);
+		sessao.setAttribute("usuario", usuario);
 		response.sendRedirect("home");
 	}
 	
@@ -932,7 +939,7 @@ public class Cadastro extends HttpServlet {
 		
 		if(existe) {
 			HttpSession sessao = request.getSession();
-			Usuario usuario = daoUsuario.recuperarUsuarioNome(emailUsuario);
+			Usuario usuario = daoUsuario.recuperarUsuarioEmail(emailUsuario);
 			sessao.setAttribute("usuario", usuario);
 			response.sendRedirect("home");
 		} else {

@@ -246,7 +246,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 	
-	public Usuario recuperarUsuarioNome(String emailUsuario) {
+	public Usuario recuperarUsuarioEmail(String emailUsuario) {
 		Session sessao = null;
 		Usuario usuario = null;
 

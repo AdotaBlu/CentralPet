@@ -48,8 +48,7 @@ public class Ong extends Usuario implements Serializable {
 	}
 
 	public Ong(String nome, Endereco endereco, Long id, String cnpj, String senha, byte[] fotoPerfil) {
-		super(nome, endereco, senha, fotoPerfil);
-		setId(id);
+		super(id, nome, endereco, fotoPerfil, senha);
 		setCnpj(cnpj);
 	}
 
