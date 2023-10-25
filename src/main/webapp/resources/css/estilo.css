@@ -68,8 +68,6 @@ select {
 button{
     width: 230px;
     height: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
     border: 1px solid #390879;
     border-radius: 5px;
     cursor: pointer;
@@ -369,12 +367,12 @@ li:hover{
 }
 
  Editar Tutor, ONG */
-.container-editar-tutor{
+.container-editar{
 	margin-top: 40px;
 	display: flex;
 	flex-direction: column;
 }
-.container-editar-tutor h1{
+.container-editarh1{
 	text-align: center;
 	color: #390879;
 }
@@ -387,23 +385,21 @@ li:hover{
 	display: block;
 }
 
-/*
+
 input[type='file'] {
   	display: none
 }
-*/
 
-.editar-foto-tutor{
+
+.editar-foto{
 	display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .label-inserir-foto{
-	padding: 0 10 0;
 	font-size: 30px;
 	cursor: pointer;
-	border-radius: 5px;
 	color:#390879;
 }
 

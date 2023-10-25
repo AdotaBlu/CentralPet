@@ -58,6 +58,19 @@
 				</c:if>
 			</table>
 		</div>
+		<div>
+			<c:if test="${ongSessao != null}">
+				<form method="post" action="editar-pet">
+					<input type="hidden" id="id-pet" name="id-pet" value="<c:out value='${pet.id}' />">
+					<input type="hidden" id="id-ong" name="id-ong" value="<c:out value='${ongSessao.id}' />">
+					<button type="submit" class="btn-adotar-card">Editar Pet</button>
+				</form>
+				<form method="post" action="excluir-pet">
+					<input type="hidden" id="id-pet" name="id-pet" value="<c:out value='${pet.id}' />">
+					<button type="submit" class="btn-adotar-card">Deletar Pet</button>
+				</form>
+			</c:if>
+		</div>
 		</c:if>
 		
 		<c:if test="${pet == null}">
