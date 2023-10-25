@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import centralpet.modelo.entidade.endereco.Endereco;
+import centralpet.modelo.entidade.ong.Ong;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -45,7 +46,7 @@ public abstract class Usuario implements Serializable {
 	@Column(name="foto_perfil_usuario", nullable = true, unique = false)
 	private byte[] fotoPerfil;
 
-	@Column(name = "data_cadastro_usuario", nullable = true, unique = false)
+	@Column(name = "data_cadastro_usuario", nullable = true, unique = false, updatable = false)
 	private LocalDate dataCadastro;
 
 	@Column(name = "data_alteracao_cadastro_usuario", nullable = true, unique = false)
@@ -138,6 +139,20 @@ public abstract class Usuario implements Serializable {
 	public void setFotoPerfil(byte[] fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
+	
+	  @Override
+	    public boolean equals(Object obj) {
+	        if(!(obj instanceof Ong)) 
+	        	return false; 
+
+	        if(obj == this) 
+	        	return true;
+	        
+	        Usuario usuario = (Usuario) obj; 
+
+	        return this.id == usuario.getId() &&
+	                this.nome.equals(usuario.getNome());
+	    }   
 	
 	
 }

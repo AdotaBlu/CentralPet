@@ -71,9 +71,13 @@
 									<span class="value"><c:out value='${pet.peso}'></c:out>kg</span>
 								</div>
 							</div>
-							<div class="btn-card">
-								<a href="" class="btn-adotar-card">Adotar</a>
-							</div>
+							<form method="post" action="mostrar-perfil-pet" enctype="form-data">					
+								<div class="btn-card">				
+									<input type="hidden" id="id-pet" name="id-pet" value="<c:out value='${pet.id}' />">
+									<input type="hidden" id="id-ong" name="id-ong" value="<c:out value='${pet.ong.id}' />">
+									<button type="submit" class="btn-adotar-card">Adotar</button>
+								</div>
+							</form>
 						</div>
 				</div>
 			</c:forEach>

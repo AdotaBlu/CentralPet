@@ -15,9 +15,9 @@
 		
 		<form method="post" action="atualizar-tutor" enctype="multipart/form-data">
 		
-			<div class="container-editar-tutor">
+			<div class="container-editar">
 				<h1>Editar Dados Tutor</h1>
-				<div class="editar-info-tutor">
+				<div class="editar-info">
 					<div class="editar-foto-tutor">
 						<label class="label-inserir-foto" for="foto-perfil">+</label> 
 						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${foto.urlImagem}"></c:out>">
@@ -44,10 +44,7 @@
 							<label for="data-nascimento">Data de Nascimento</label> 
 							<input type="date" id="data-nascimento" name="data-nascimento" value='${tutor.dataNascimento}'>
 						</div>
-						<div class="input-editar">
-							<label for="senha">Senha</label> 
 							<input type="hidden" id="senha" name="senha" value="<c:out value='${tutor.senha}' />">
-						</div>
 						<div class="select-editar">
 							<label for="drop_down_genero">Gênero</label> 
 							<select name="genero-tutor" id="drop_down_genero">
@@ -59,7 +56,7 @@
 					</div>
 				</div>
 				
-				<div class="editar-endereco-tutor">
+				<div class="editar-endereco">
 					<div class="input-editar">
     				<label for="logradouro">Logradouro</label>
     				<input type="text" id="logradouro" name="logradouro" value="<c:out value='${endereco.logradouro}' />">
@@ -98,3 +95,9 @@
 	</main>
 </body>
 </html>
+
+
+
+
+
+

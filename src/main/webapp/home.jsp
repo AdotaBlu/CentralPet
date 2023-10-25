@@ -25,48 +25,21 @@
 	</c:if>
 	
 	<main>
-		<div class="container-home1">
-			<div class="container-home1-1">
-				<h1>Entrar</h1>
-			</div>
-			<div class="container-home-1-2">
-				<img src="" alt="logoDaHome">
-				<div class="container-paragrafo-home">
-					<p><b>Adote</b> e ajude</p>
-					<p>um animalzinho</p>
-					<p>a encontrar um lar</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="container-home2">
-			<div class="container-home2-1">
-				<div class="container-card">
-					<div class="card"></div>
-					<div class="card"></div>
-					<div class="card"></div>
-				</div>
-				<p>Dê o primeiro passo para encontrar seu novo amigo peludo!
-					Nesta etapa, explore os pets disponíveis para adoção. Veja suas
-					fotos, leia suas histórias e descubra qual deles toca seu coração.</p>
-			</div>
-			<div class="container-home2-2">
-				
-				<p><b>Explorar</b></p>
-			</div>
-		</div>
-		<div class="container-home3">
-			<div class="container-home3-1">
-			</div>
-			<div class="container-home3-2">
-				<div class="container-contador-pets">
-			    	<p>0 0 0 0 0 0</p>
-				</div>
-				<div class="container-paragrafo-home">
-			    	<p>Já foram adotados pela <b>Central Pet</b> até agora</p>
-				</div>
-			</div>
-		</div>
+		<a href="<%=request.getContextPath()%>/novo-tutor">Cadastrar Tutor</a>
+		<a href="<%=request.getContextPath()%>/editar-tutor">Editar Tutor</a>
+		<a href="<%=request.getContextPath()%>/mostrar-perfil-tutor">Perfil Tutor</a>
+		<a href="<%=request.getContextPath()%>/nova-ong">Cadastrar Ong</a>
+		<a href="<%=request.getContextPath()%>/editar-ong">Editar Ong</a>
+		<a href="<%=request.getContextPath()%>/mostrar-perfil-ong">Perfil Ong</a>
+		<a href="<%=request.getContextPath()%>/novo-pet">Cadastrar Pet</a>
+		<a href="<%=request.getContextPath()%>/editar-pet">Editar Pet</a>
+		<a href="<%=request.getContextPath()%>/mostrar-perfil-pet">Perfil Pet</a>
+		<a href="<%=request.getContextPath()%>/mostrar-cards-pets">Pets</a>
+		<a href="<%=request.getContextPath()%>/mostrar-selecao-cadastro">Seleção Cadastro</a>
+		<a href="<%=request.getContextPath()%>/novo-login">Login</a>
+		<a href="<%=request.getContextPath()%>/novo-termo">Cadastrar Termo</a>
+		<a href="<%=request.getContextPath()%>/nova-adocao">Realizar Adoção</a>
+		
 	</main>
 </body>
 

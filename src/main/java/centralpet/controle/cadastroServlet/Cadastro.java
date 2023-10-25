@@ -500,11 +500,16 @@ public class Cadastro extends HttpServlet {
 			else if(sessao.getAttribute("usuario") instanceof Ong){
 				Ong ong = (Ong) sessao.getAttribute("usuario");
 				
+				
+				Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
+				Contato contato = daoContato.recuperarContatoUsuario(ong);
 				urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
 				fotoDTO.setId(ong.getId());
 				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 				
 				request.setAttribute("foto", fotoDTO);
+				request.setAttribute("endereco", endereco);
+				request.setAttribute("contato", contato);
 				request.setAttribute("ong", ong);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("editar-ong.jsp");
 				dispatcher.forward(request, response);
@@ -582,9 +587,20 @@ public class Cadastro extends HttpServlet {
 				Long idPet = Long.parseLong(request.getParameter("id-pet"));
 				Pet pet = daoPet.recuperarPet(idPet);
 				List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(idPet);
+				List<FotoDTO> fotoDTOs = new ArrayList<>();
+				String urlFotoPet;
+				
+				for(FotosPet fotoPet : fotosPet) {
+					
+					FotoDTO fotoDTOPet = new FotoDTO();
+					urlFotoPet = Base64.getEncoder().encodeToString(fotoPet.getDadosImagem());
+					fotoDTOPet.setId(fotoPet.getId());
+					fotoDTOPet.setUrlImagem("data:image/jpeg;base64," + urlFotoPet);
+					fotoDTOs.add(fotoDTOPet);
+				}
 				
 				request.setAttribute("pet", pet);
-				request.setAttribute("fotos-pet", fotosPet);
+				request.setAttribute("fotos", fotoDTOs);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("editar-pet.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -655,11 +671,21 @@ public class Cadastro extends HttpServlet {
 	private void mostrarPerfilPet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		Pet pet = daoPet.recuperarPet(1L);
-		List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(1L);
-		Ong ong = daoOng.recuperarOng(2L);
+		HttpSession sessao = request.getSession();
+		
+		Long idPet = Long.parseLong(request.getParameter("id-pet"));
+		Long idOng = Long.parseLong(request.getParameter("id-ong"));
+		
+		Pet pet = daoPet.recuperarPet(idPet);
+		List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(idPet);
+		Ong ong = daoOng.recuperarOng(idOng);
 		List<FotoDTO> fotoDTOs = new ArrayList<>();
 		String urlFoto;
+		
+		if(sessao.getAttribute("usuario").equals(ong)){
+			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
+			request.setAttribute("ongSessao", ongSessao);
+		}
 		
 		if(pet != null && ong != null) {		
 			request.setAttribute("pet", pet);
@@ -979,7 +1005,7 @@ public class Cadastro extends HttpServlet {
 		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet);
 		daoPet.atualizarPet(pet);
 		 
-		response.sendRedirect("mostrar-perfil-pet");
+		response.sendRedirect("mostrar-cards-pets.jsp");
 	}
 	
 	private void excluirPet(HttpServletRequest request, HttpServletResponse response)
@@ -994,7 +1020,7 @@ public class Cadastro extends HttpServlet {
 		daoPet.deletarPet(pet);
 		} 
 		
-		response.sendRedirect("home");
+		response.sendRedirect("mostrar-cards-pets");
 	}
 	
 	private void inserirTermo(HttpServletRequest request, HttpServletResponse response)

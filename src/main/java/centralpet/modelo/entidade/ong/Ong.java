@@ -107,5 +107,7 @@ public class Ong extends Usuario implements Serializable {
 	public void removerAcompanhamento(Acompanhamento acompanhamento) {
 		this.acompanhamentos.remove(acompanhamento);
 	}
+	
+	 
 
 }
