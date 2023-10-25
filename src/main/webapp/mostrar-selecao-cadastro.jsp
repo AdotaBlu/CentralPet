@@ -7,6 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style><%@include file="/resources/css/estilo.css"%></style>
 	<title>Seleção de Cadastro</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"rel="stylesheet">
+<style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 <body>
 	<%@ include file="nav-usuario-deslogado.jsp" %>
@@ -19,8 +23,8 @@
 				<h2>Crie sua Conta</h2>
 			</div>
 			<div>
-				<a href="<%=request.getContextPath()%>/nova-ong" class="link-cadastro">Criar conta ONG</a>
-				<a href="<%=request.getContextPath()%>/novo-tutor" class="link-cadastro">Criar conta Tutor</a>
+				<a href="<%=request.getContextPath()%>/nova-ong"> <button>Criar conta ONG</button></a>
+				<a href="<%=request.getContextPath()%>/novo-tutor"> <button>Criar conta Tutor</button></a>
 			</div>
 		</div>
 	</main>
