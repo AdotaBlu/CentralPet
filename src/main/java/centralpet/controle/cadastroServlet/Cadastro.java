@@ -317,38 +317,18 @@ public class Cadastro extends HttpServlet {
 	
 	private void  filtrarPets(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Optional<EspeciePet> especieOp;
-		Optional<PortePet> porteOp;
-		Optional<SexoPet> sexoOp;
-		Optional<PelagemPet> pelagemOp;
 		
 		String especie = request.getParameter("especie");
-		if(especie == "") {
-			especieOp = Optional.empty();
-		} else {
-			especieOp = Optional.ofNullable(request.getParameter("especie")).map(EspeciePet::valueOf);
-		}
+		Optional<EspeciePet> especieOp = (especie == "") ? Optional.empty() : Optional.of(EspeciePet.valueOf(especie));
 		
 		String porte = request.getParameter("porte");
-		if(porte == "") {
-			porteOp = Optional.empty();
-		} else {
-			porteOp = Optional.ofNullable(request.getParameter("porte")).map(PortePet::valueOf);
-		}
+		Optional<PortePet> porteOp = (porte == "") ? Optional.empty() : Optional.of(PortePet.valueOf(porte));
 		
 		String sexo = request.getParameter("sexo");
-		if(sexo == "") {
-			sexoOp = Optional.empty();
-		} else {
-			sexoOp = Optional.ofNullable(request.getParameter("sexo")).map(SexoPet::valueOf);
-		}
+		Optional<SexoPet> sexoOp = (sexo == "") ? Optional.empty() : Optional.of(SexoPet.valueOf(sexo));
 		 
 		String pelagem = request.getParameter("pelagem");
-		if(pelagem == "") {
-			pelagemOp = Optional.empty();
-		} else {
-			pelagemOp = Optional.ofNullable(request.getParameter("pelagem")).map(PelagemPet::valueOf);
-		}
+		Optional<PelagemPet> pelagemOp = (pelagem == "") ? Optional.empty() : Optional.of(PelagemPet.valueOf(pelagem));
 		
 		List<Pet> petsFiltrados = daoPet.filtrarBuscaPet(especieOp, porteOp, sexoOp, pelagemOp);
 		
