@@ -552,8 +552,15 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
 			dispatcher.forward(request, response);
+		} else {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home");
+			dispatcher.forward(request, response);
 		}
 	}
+	
+	
+	
 		
 		private void mostrarFormularioEditarPet(HttpServletRequest request, HttpServletResponse response)
 				throws SQLException, ServletException, IOException {
@@ -979,7 +986,7 @@ public class Cadastro extends HttpServlet {
 		parteImagem = request.getParts();
 		converterImagem.adicionarImagensArrayFotosPet(pet, parteImagem);
 	
-		response.sendRedirect("mostrar-perfil-pet");
+		response.sendRedirect("home	");
 	}
 	
 	private void atualizarPet(HttpServletRequest request, HttpServletResponse response)
@@ -1004,6 +1011,10 @@ public class Cadastro extends HttpServlet {
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
 		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, statusPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet);
 		daoPet.atualizarPet(pet);
+		
+		Usuario usuario =  daoUsuario.recuperarUsuario(ongPet);
+		sessao.setAttribute("usuario", usuario);
+
 		 
 		response.sendRedirect("mostrar-cards-pets.jsp");
 	}
@@ -1018,6 +1029,9 @@ public class Cadastro extends HttpServlet {
 		Long id = Long.parseLong(request.getParameter("id-pet"));
 		Pet pet = daoPet.recuperarPet(id);
 		daoPet.deletarPet(pet);
+		
+		Usuario usuario =  daoUsuario.recuperarUsuario(ongPet);
+		sessao.setAttribute("usuario", usuario);
 		} 
 		
 		response.sendRedirect("mostrar-cards-pets");

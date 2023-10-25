@@ -19,4 +19,6 @@ public interface UsuarioDAO {
 	
 	Usuario recuperarUsuarioEmail(String nomeUsuario);
 	
+	Usuario recuperarUsuario(Usuario usuario);
+	
 }
