@@ -326,7 +326,7 @@ li:hover{
 
 /* Login */
 
-.container-login{
+MM{
 	margin-top: 10%;
 	display: flex;
 	flex-direction:column;
@@ -402,4 +402,12 @@ input[type='file'] {
 	cursor: pointer;
 	color:#390879;
 }
+
+.link-cadastro{
+	display: block;
+	align-items: center;
+	
+}
+
+
 
