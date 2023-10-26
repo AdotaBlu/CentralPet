@@ -34,7 +34,8 @@
 		<a href="<%=request.getContextPath()%>/novo-pet">Cadastrar Pet</a>
 		<a href="<%=request.getContextPath()%>/editar-pet">Editar Pet</a>
 		<a href="<%=request.getContextPath()%>/mostrar-perfil-pet">Perfil Pet</a>
-		<a href="<%=request.getContextPath()%>/mostrar-cards-pets">Pets</a>
+		<a href="<%=request.getContextPath()%>/mostrar-cards-pets">Pets Cadastrados</a>
+		<a href="<%=request.getContextPath()%>/mostrar-cards-ongs">Ongs Cadastradas</a>
 		<a href="<%=request.getContextPath()%>/mostrar-selecao-cadastro">Seleção Cadastro</a>
 		<a href="<%=request.getContextPath()%>/novo-login">Login</a>
 		<a href="<%=request.getContextPath()%>/novo-termo">Cadastrar Termo</a>
