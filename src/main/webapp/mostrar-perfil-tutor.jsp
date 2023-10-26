@@ -71,6 +71,11 @@
 					</tbody>
 				</c:if>
 			</table>
+			<c:if test="${tutor != null}">
+				<form method="post" action="excluir-tutor">
+					<button type="submit" class="btn-adotar-card">Deletar Conta</button>
+				</form>
+			</c:if>
 		</div>
 	</main>
 	
