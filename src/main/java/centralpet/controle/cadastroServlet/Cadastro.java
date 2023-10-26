@@ -558,7 +558,6 @@ public class Cadastro extends HttpServlet {
 		daoOng.deletarOng(ong);
 		sessao.invalidate();
 		response.sendRedirect("home");
-		
 		}
 		else if(sessao.getAttribute("usuario") instanceof Tutor){
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
@@ -767,32 +766,60 @@ public class Cadastro extends HttpServlet {
 
 	private void mostrarPerfilOng(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		HttpSession sessao = request.getSession();
-		Ong ong = (Ong) sessao.getAttribute("usuario");
-
-		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
-		Contato contato = daoContato.recuperarContatoUsuario(ong);
-		// Adocao adocao = daoAdocao.recuperarAdocao(1L);
-		// Termo termo = daoTermo.recuperarTermo(2L);
 		String urlFoto;
+		FotoDTO fotoDTO = new FotoDTO();
 
-		if (ong != null && endereco != null && contato != null) {
+		if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+
+			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
+			Contato contato = daoContato.recuperarContatoUsuario(ong);
+			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
+
+			request.setAttribute("pets", petsOng);
 			request.setAttribute("ong", ong);
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
-			// request.setAttribute("adocao", adocao);
-			// request.setAttribute("termo", termo);
 
-			FotoDTO fotoDTO = new FotoDTO();
 			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
 			fotoDTO.setId(ong.getId());
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
+			
+			request.setAttribute("pets", petsOng);
 			request.setAttribute("foto", fotoDTO);
-		}
+			request.setAttribute("ong", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOng(idOng);
+			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
-		dispatcher.forward(request, response);
+			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
+			fotoDTO.setId(tutor.getId());
+			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+			
+			request.setAttribute("ong", ong);
+			request.setAttribute("pets", petsOng);
+			request.setAttribute("foto", fotoDTO);
+			request.setAttribute("tutor", tutor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOng(idOng);
+			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
+			
+			request.setAttribute("ong", ong);
+			request.setAttribute("pets", petsOng);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarPerfilTutor(HttpServletRequest request, HttpServletResponse response)
@@ -1047,6 +1074,8 @@ public class Cadastro extends HttpServlet {
 
 		parteImagem = request.getParts();
 		converterImagem.adicionarImagensArrayFotosPet(pet, parteImagem);
+		
+		ongPet.adicionarPet(pet);
 
 		response.sendRedirect("home	");
 	}

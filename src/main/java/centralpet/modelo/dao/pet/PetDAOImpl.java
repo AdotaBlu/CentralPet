@@ -173,7 +173,7 @@ public class PetDAOImpl implements PetDAO {
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
 
-			Join<Pet, Ong> juncaoOng = raizPet.join(Ong_.DOACOES);
+			Join<Pet, Ong> juncaoOng = raizPet.join(Pet_.ONG);
 
 			ParameterExpression<Long> idOng = construtor.parameter(Long.class);
 
