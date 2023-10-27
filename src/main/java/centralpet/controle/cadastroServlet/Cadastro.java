@@ -226,6 +226,10 @@ public class Cadastro extends HttpServlet {
 			case "/mostrar-cards-pets":
 				mostrarPetsDisponiveis(request, response);
 				break;
+				
+			case "/mostrar-cards-ongs":
+				mostrarTodasOngs(request, response);
+				break;
 
 			case "/filtrar-pets":
 				filtrarPets(request, response);
@@ -344,6 +348,18 @@ public class Cadastro extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
 		dispatcher.forward(request, response);
 
+	}
+	
+	private void mostrarTodasOngs(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		
+		List<Ong> todasOngs = daoOng.recuperarTodasOngs();
+
+		request.setAttribute("ongs", todasOngs);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-ongs.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarFormularioNovoTutor(HttpServletRequest request, HttpServletResponse response)
@@ -738,9 +754,11 @@ public class Cadastro extends HttpServlet {
 		List<FotoDTO> fotoDTOs = new ArrayList<>();
 		String urlFoto;
 
-		if (sessao.getAttribute("usuario").equals(ong)) {
+		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
-			request.setAttribute("ongSessao", ongSessao);
+			
+			if(ongSessao.equals(ong)) 
+				request.setAttribute("ongSessao", ongSessao);
 		}
 
 		if (pet != null && ong != null) {
@@ -772,12 +790,19 @@ public class Cadastro extends HttpServlet {
 		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Ong) {
-			Ong ong = (Ong) sessao.getAttribute("usuario");
-
+			
+			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOng(idOng);
 			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 			Contato contato = daoContato.recuperarContatoUsuario(ong);
 			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
 
+			if(ongSessao.equals(ong)) 
+				request.setAttribute("ongSessao", ongSessao);
+			
+					
+					
 			request.setAttribute("pets", petsOng);
 			request.setAttribute("ong", ong);
 			request.setAttribute("endereco", endereco);
@@ -807,7 +832,7 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("pets", petsOng);
 			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			Long idOng = Long.parseLong(request.getParameter("id-ong"));
@@ -817,7 +842,7 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("ong", ong);
 			request.setAttribute("pets", petsOng);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

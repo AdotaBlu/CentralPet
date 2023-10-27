@@ -5,14 +5,14 @@
 		<h1>Central Pet</h1>
 	</div>
 	<ul class="mid">
-		<a href=""><li>Buscar Pets</li></a>
-		<a href="<%=request.getContextPath()%>/mostrar-perfil-ong"><li>Ongs</li></a>
+	<a href="<%=request.getContextPath()%>/mostrar-cards-ongs"><li>Ongs</li></a>
 		<a href=""><li>Acompanhamento</li></a>
 	</ul>
 	<ul class="end">
-		<a id="botao-adotar" href=""><button = class ="botao-adotar-miniatura">Adotar</button></a>
+		<a id="botao-adotar" href="<%=request.getContextPath()%>/mostrar-cards-pets"><button = class ="botao-adotar-miniatura">Adotar</button></a>
 		<div class="li">
-			<img class ="foto-miniatura"src='<c:out value="${foto.urlImagem}"></c:out>' alt="miniatura-tutor"  width="30px" height="30px"> <a href=""><li>Minha Conta</li></a>
+			<img class ="foto-miniatura"src='<c:out value="${foto.urlImagem}"></c:out>' alt="miniatura-tutor"  width="30px" height="30px"> 
+			<a href=""><li>Minha Conta</li></a>
 		</div>
 		<a href="<%=request.getContextPath()%>/sair"><button>Sair</button></a>
 	</ul>

@@ -2,6 +2,7 @@ package centralpet.modelo.entidade.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Base64;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -138,6 +139,11 @@ public abstract class Usuario implements Serializable {
 	
 	public void setFotoPerfil(byte[] fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
+	}
+	
+	public String urlFoto() {
+		String urlFoto =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotoPerfil));
+		return urlFoto;
 	}
 	
 	  @Override

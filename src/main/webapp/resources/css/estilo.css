@@ -409,5 +409,28 @@ input[type='file'] {
 	
 }
 
+/* Cards Ongs */
 
+.btn-ong-card {
+    display: inline-block;
+    width: 210px;
+    height: 30px;
+    background-color: #fcb700;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    border: none; 
+    border-radius: 5px;
+}
+#ong-nome-card {
+	font-size: 17px;
+	font-weight: 500;
+	color:#390879;
+	margin-left: 5px;
+}
 
+/* Perfil Ong */
+#ong-pets-cadastrados{
+	display: block;
+}

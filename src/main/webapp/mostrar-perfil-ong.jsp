@@ -12,7 +12,7 @@
 	<main>
 		<c:if test="${ong != null}">
 			<h1><c:out value='${ong.nome}' /></h1>
-			<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="100">
+			<img alt="foto-de-perfil" src='<c:out value="${ong.urlFoto()}"></c:out>' width="100">
 			<div>
 			<table class="infomacoes">
 				<thead>
@@ -93,23 +93,19 @@
 				</c:if>
 			</table>
 		</div>
-		<c:if test="${ong != null}">
+		<c:if test="${ongSessao != null}">
 			<form method="post" action="excluir-ong">
 				<button type="submit" class="btn-adotar-card">Deletar Conta</button>
 			</form>
 		</c:if>
+		<h1 id="ong-pets-cadastrados">Pets Cadastrados</h1>
 		<div class="container-cards">
-		<h1>Pets Cadastrados</h1>
 		<c:forEach var="pet" items="${pets}">
 				<div class="pet-card">
 					<div class="foto-pet">
 						<img class ="foto-pet" src="<c:out value='${pet.fotoPrincipalPet()}'></c:out>" alt="foto-pet" width="220" height="170">
 					</div>
 					<div class="info-card">
-						<div class="info-top">
-							<span class="label" id="label-ong">ONG: </span>
-							<span id="value-ong"><c:out value='${pet.ong.nome}'></c:out></span>
-						</div>
 						<div class="info-mid">
 							<div class="pet-nome">
 								<p id="nome-pet">
