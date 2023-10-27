@@ -759,7 +759,6 @@ public class Cadastro extends HttpServlet {
 
 		Long idPet = Long.parseLong(request.getParameter("id-pet"));
 		Long idOng = Long.parseLong(request.getParameter("id-ong"));
-
 		Pet pet = daoPet.recuperarPet(idPet);
 		List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(idPet);
 		Ong ong = daoOng.recuperarOng(idOng);
@@ -771,6 +770,11 @@ public class Cadastro extends HttpServlet {
 
 			if (ongSessao.equals(ong))
 				request.setAttribute("ongSessao", ongSessao);
+		
+		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			
+			request.setAttribute("tutor", tutor);
 		}
 
 		if (pet != null && ong != null) {
@@ -789,6 +793,7 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("fotos", fotoDTOs);
 
 		}
+		
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-pet.jsp");
 		dispatcher.forward(request, response);
@@ -1182,15 +1187,16 @@ public class Cadastro extends HttpServlet {
 
 	private void deletarPetsFavoritados(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		
 		HttpSession sessao = request.getSession();
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutorPetFav = (Tutor) sessao.getAttribute("usuario");
 
 			Long idPet = Long.parseLong(request.getParameter("id-pet"));
 			Pet pet = daoPet.recuperarPet(idPet);
-			PetsFavoritosTutor petFavTutor = new PetsFavoritosTutor(tutorPetFav, pet);
+			PetsFavoritosTutor petFavTutor = daoPetFav.recuperarFavorito(pet, tutorPetFav);
 			daoPetFav.deletarPetsFavoritados(petFavTutor);
-
+			
 			response.sendRedirect("mostrar-cards-pets");
 
 		}

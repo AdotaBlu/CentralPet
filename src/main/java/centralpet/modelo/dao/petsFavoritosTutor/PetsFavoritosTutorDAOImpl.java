@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import centralpet.modelo.entidade.favorito.PetsFavoritosTutor;
 import centralpet.modelo.entidade.favorito.PetsFavoritosTutor_;
 import centralpet.modelo.entidade.pet.Pet;
+import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
@@ -173,6 +174,42 @@ public class PetsFavoritosTutorDAOImpl implements PetsFavoritosTutorDAO{
 		return petsFavoritos;
 	}
 
-	
+	public PetsFavoritosTutor recuperarFavorito(Pet pet, Tutor tutor) {
+		
+		Session sessao = null;
+		PetsFavoritosTutor petFavorito = null;
+		
+		try {
+			
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<PetsFavoritosTutor> criteria = construtor.createQuery(PetsFavoritosTutor.class);
+			
+			Root<PetsFavoritosTutor> raizPetsFavoritos = criteria.from(PetsFavoritosTutor.class);
+			
+			criteria.select(raizPetsFavoritos);
+			
+			criteria.where(construtor.and(
+					construtor.equal(raizPetsFavoritos.get(PetsFavoritosTutor_.usuario), tutor.getId())),
+					construtor.equal(raizPetsFavoritos.get(PetsFavoritosTutor_.pet), pet.getId()));
+			
+			petFavorito = sessao.createQuery(criteria).getSingleResult();
+			
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if(sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if(sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return petFavorito;
+	}
 	
 }
