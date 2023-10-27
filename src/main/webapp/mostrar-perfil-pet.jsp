@@ -32,7 +32,7 @@
 						<th>Data de nascimento</th>
 						<th>Idade</th>
 						<th>Peso</th>
-						<th>Ong responsavel</th>
+						<th>ONG responsavel</th>
 						<th>Porte</th>
 						<th>Especie</th>
 						<th>Sexo</th>
@@ -68,6 +68,16 @@
 				<form method="post" action="excluir-pet">
 					<input type="hidden" id="id-pet" name="id-pet" value="<c:out value='${pet.id}' />">
 					<button type="submit" class="btn-adotar-card">Deletar Pet</button>
+				</form>
+			</c:if>
+			<c:if test="${tutor != null }">
+				<form method = "post" action = "favoritar-pet">
+					<input type = "hidden" id = "id-pet" name = "id-pet" value = "<c:out value = '${pet.id}'/>">
+					<button type="submit">Favoritar Pet</button>
+				</form>
+				<form method = "post" action = "excluir-pet-favoritado">
+					<input type = "hidden" id = "id-pet" name = "id-pet" value = "<c:out value = '${pet.id}'/>">
+					<button type="submit">Excluir Pet Favoritado</button>
 				</form>
 			</c:if>
 		</div>

@@ -31,6 +31,8 @@ import centralpet.modelo.dao.ong.OngDAO;
 import centralpet.modelo.dao.ong.OngDAOImpl;
 import centralpet.modelo.dao.pet.PetDAO;
 import centralpet.modelo.dao.pet.PetDAOImpl;
+import centralpet.modelo.dao.petsFavoritosTutor.PetsFavoritosTutorDAO;
+import centralpet.modelo.dao.petsFavoritosTutor.PetsFavoritosTutorDAOImpl;
 import centralpet.modelo.dao.termo.TermoDAO;
 import centralpet.modelo.dao.termo.TermoDAOImpl;
 import centralpet.modelo.dao.tutor.TutorDAO;
@@ -40,6 +42,7 @@ import centralpet.modelo.dao.usuario.UsuarioDAOImpl;
 import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.contato.Contato;
 import centralpet.modelo.entidade.endereco.Endereco;
+import centralpet.modelo.entidade.favorito.PetsFavoritosTutor;
 import centralpet.modelo.entidade.fotosPet.FotoDTO;
 import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.entidade.ong.Ong;
@@ -85,6 +88,8 @@ public class Cadastro extends HttpServlet {
 
 	private ConverterImagem converterImagem;
 
+	private PetsFavoritosTutorDAO daoPetFav;
+
 	private byte[] fotos = null;
 
 	public void init() {
@@ -99,6 +104,7 @@ public class Cadastro extends HttpServlet {
 		converterImagem = new ConversorImagemImpl();
 		daoUsuario = new UsuarioDAOImpl();
 		HttpSession sessao = null;
+		daoPetFav = new PetsFavoritosTutorDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -150,7 +156,7 @@ public class Cadastro extends HttpServlet {
 			case "/editar-ong":
 				mostrarFormEditarOng(request, response);
 				break;
-				
+
 			case "/excluir-ong":
 				excluirOng(request, response);
 				break;
@@ -177,6 +183,14 @@ public class Cadastro extends HttpServlet {
 
 			case "/excluir-pet":
 				excluirPet(request, response);
+				break;
+
+			case "/favoritar-pet":
+				inserirPetsFavoritados(request, response);
+				break;
+
+			case "/excluir-pet-favoritado":
+				deletarPetsFavoritados(request, response);
 				break;
 
 			case "/novo-termo":
@@ -226,7 +240,7 @@ public class Cadastro extends HttpServlet {
 			case "/mostrar-cards-pets":
 				mostrarPetsDisponiveis(request, response);
 				break;
-				
+
 			case "/mostrar-cards-ongs":
 				mostrarTodasOngs(request, response);
 				break;
@@ -349,11 +363,10 @@ public class Cadastro extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-	
+
 	private void mostrarTodasOngs(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
 		List<Ong> todasOngs = daoOng.recuperarTodasOngs();
 
 		request.setAttribute("ongs", todasOngs);
@@ -559,35 +572,34 @@ public class Cadastro extends HttpServlet {
 
 	private void excluirOng(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-	
+
 		HttpSession sessao = request.getSession();
 		String urlFoto;
 		FotoDTO fotoDTO = new FotoDTO();
-		
-		if(sessao.getAttribute("usuario") instanceof Ong) {
-		Ong ong = (Ong) sessao.getAttribute("usuario");
-		Contato contato = daoContato.recuperarContatoUsuario(ong);
-		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
-		
-		daoEndereco.deletarEndereco(endereco);
-		daoContato.deletarContato(contato);
-		daoOng.deletarOng(ong);
-		sessao.invalidate();
-		response.sendRedirect("home");
-		}
-		else if(sessao.getAttribute("usuario") instanceof Tutor){
+
+		if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			Contato contato = daoContato.recuperarContatoUsuario(ong);
+			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
+
+			daoEndereco.deletarEndereco(endereco);
+			daoContato.deletarContato(contato);
+			daoOng.deletarOng(ong);
+			sessao.invalidate();
+			response.sendRedirect("home");
+		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			
+
 			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
 			fotoDTO.setId(tutor.getId());
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-			
+
 			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		}
-	
+
 		else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -756,8 +768,8 @@ public class Cadastro extends HttpServlet {
 
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
-			
-			if(ongSessao.equals(ong)) 
+
+			if (ongSessao.equals(ong))
 				request.setAttribute("ongSessao", ongSessao);
 		}
 
@@ -784,13 +796,13 @@ public class Cadastro extends HttpServlet {
 
 	private void mostrarPerfilOng(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession sessao = request.getSession();
 		String urlFoto;
 		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Ong) {
-			
+
 			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
 			Long idOng = Long.parseLong(request.getParameter("id-ong"));
 			Ong ong = daoOng.recuperarOng(idOng);
@@ -798,11 +810,9 @@ public class Cadastro extends HttpServlet {
 			Contato contato = daoContato.recuperarContatoUsuario(ong);
 			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
 
-			if(ongSessao.equals(ong)) 
+			if (ongSessao.equals(ong))
 				request.setAttribute("ongSessao", ongSessao);
-			
-					
-					
+
 			request.setAttribute("pets", petsOng);
 			request.setAttribute("ong", ong);
 			request.setAttribute("endereco", endereco);
@@ -811,13 +821,13 @@ public class Cadastro extends HttpServlet {
 			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
 			fotoDTO.setId(ong.getId());
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-			
+
 			request.setAttribute("pets", petsOng);
 			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
-			
+
 		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			Long idOng = Long.parseLong(request.getParameter("id-ong"));
@@ -827,7 +837,7 @@ public class Cadastro extends HttpServlet {
 			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
 			fotoDTO.setId(tutor.getId());
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-			
+
 			request.setAttribute("ong", ong);
 			request.setAttribute("pets", petsOng);
 			request.setAttribute("foto", fotoDTO);
@@ -838,10 +848,10 @@ public class Cadastro extends HttpServlet {
 			Long idOng = Long.parseLong(request.getParameter("id-ong"));
 			Ong ong = daoOng.recuperarOng(idOng);
 			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
-			
+
 			request.setAttribute("ong", ong);
 			request.setAttribute("pets", petsOng);
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -860,11 +870,13 @@ public class Cadastro extends HttpServlet {
 
 			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 			Contato contato = daoContato.recuperarContatoUsuario(tutor);
+			List<Pet> petsFavoritos = daoPetFav.petsFavoritadosTutor(tutor);
 			// List<Adocao> adocao = daoAdocao.recuperarAdocoesTutor(tutor);
 
 			request.setAttribute("tutor", tutor);
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
+			request.setAttribute("petsFavoritos", petsFavoritos);
 
 			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
 			fotoDTO.setId(tutor.getId());
@@ -1099,7 +1111,7 @@ public class Cadastro extends HttpServlet {
 
 		parteImagem = request.getParts();
 		converterImagem.adicionarImagensArrayFotosPet(pet, parteImagem);
-		
+
 		ongPet.adicionarPet(pet);
 
 		response.sendRedirect("home	");
@@ -1151,6 +1163,37 @@ public class Cadastro extends HttpServlet {
 		}
 
 		response.sendRedirect("mostrar-cards-pets");
+	}
+
+	private void inserirPetsFavoritados(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		HttpSession sessao = request.getSession();
+		if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutorPetFav = (Tutor) sessao.getAttribute("usuario");
+
+			Long idPet = Long.parseLong(request.getParameter("id-pet"));
+			Pet pet = daoPet.recuperarPet(idPet);
+			PetsFavoritosTutor petFavTutor = new PetsFavoritosTutor(tutorPetFav, pet);
+			daoPetFav.inserirPetsFavoritados(petFavTutor);
+
+			response.sendRedirect("mostrar-cards-pets");
+		}
+	}
+
+	private void deletarPetsFavoritados(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		HttpSession sessao = request.getSession();
+		if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutorPetFav = (Tutor) sessao.getAttribute("usuario");
+
+			Long idPet = Long.parseLong(request.getParameter("id-pet"));
+			Pet pet = daoPet.recuperarPet(idPet);
+			PetsFavoritosTutor petFavTutor = new PetsFavoritosTutor(tutorPetFav, pet);
+			daoPetFav.deletarPetsFavoritados(petFavTutor);
+
+			response.sendRedirect("mostrar-cards-pets");
+
+		}
 	}
 
 	private void inserirTermo(HttpServletRequest request, HttpServletResponse response)
