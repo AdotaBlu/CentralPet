@@ -868,7 +868,6 @@ public class Cadastro extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		String urlFoto;
 		FotoDTO fotoDTO = new FotoDTO();
-		// Tutor tutor = daoTutor.recuperarTutor();
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
@@ -876,7 +875,7 @@ public class Cadastro extends HttpServlet {
 			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 			Contato contato = daoContato.recuperarContatoUsuario(tutor);
 			List<Pet> petsFavoritos = daoPetFav.petsFavoritadosTutor(tutor);
-			// List<Adocao> adocao = daoAdocao.recuperarAdocoesTutor(tutor);
+
 
 			request.setAttribute("tutor", tutor);
 			request.setAttribute("endereco", endereco);
@@ -1180,7 +1179,8 @@ public class Cadastro extends HttpServlet {
 			Pet pet = daoPet.recuperarPet(idPet);
 			PetsFavoritosTutor petFavTutor = new PetsFavoritosTutor(tutorPetFav, pet);
 			daoPetFav.inserirPetsFavoritados(petFavTutor);
-
+			
+			
 			response.sendRedirect("mostrar-cards-pets");
 		}
 	}
@@ -1196,6 +1196,7 @@ public class Cadastro extends HttpServlet {
 			Pet pet = daoPet.recuperarPet(idPet);
 			PetsFavoritosTutor petFavTutor = daoPetFav.recuperarFavorito(pet, tutorPetFav);
 			daoPetFav.deletarPetsFavoritados(petFavTutor);
+			
 			
 			response.sendRedirect("mostrar-cards-pets");
 
