@@ -20,5 +20,7 @@ public interface AdocaoDAO {
 	
 	List<Adocao> recuperarAdocoesOng(Ong ong);
 	
+	Adocao recuperarAdocaoPendenteTutor(Tutor tutor);
+	
 	Adocao recuperarAdocao(Long id);
 }
