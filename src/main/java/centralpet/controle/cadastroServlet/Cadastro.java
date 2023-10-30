@@ -21,8 +21,6 @@ import javax.servlet.http.Part;
 
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
-import centralpet.modelo.dao.avaliacao.AvaliacaoDAO;
-import centralpet.modelo.dao.avaliacao.AvaliacaoDAOImpl;
 import centralpet.modelo.dao.contato.ContatoDAO;
 import centralpet.modelo.dao.contato.ContatoDAOImpl;
 import centralpet.modelo.dao.endereco.EnderecoDAO;
@@ -42,7 +40,6 @@ import centralpet.modelo.dao.tutor.TutorDAOImpl;
 import centralpet.modelo.dao.usuario.UsuarioDAO;
 import centralpet.modelo.dao.usuario.UsuarioDAOImpl;
 import centralpet.modelo.entidade.adocao.Adocao;
-import centralpet.modelo.entidade.avaliacao.Avaliacao;
 import centralpet.modelo.entidade.contato.Contato;
 import centralpet.modelo.entidade.endereco.Endereco;
 import centralpet.modelo.entidade.favorito.PetsFavoritosTutor;
@@ -92,8 +89,6 @@ public class Cadastro extends HttpServlet {
 	private ConverterImagem converterImagem;
 
 	private PetsFavoritosTutorDAO daoPetFav;
-	
-	private AvaliacaoDAO daoAvaliacao;
 
 	private byte[] fotos = null;
 
@@ -110,7 +105,6 @@ public class Cadastro extends HttpServlet {
 		daoUsuario = new UsuarioDAOImpl();
 		HttpSession sessao = null;
 		daoPetFav = new PetsFavoritosTutorDAOImpl();
-		daoAvaliacao = new AvaliacaoDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -213,14 +207,6 @@ public class Cadastro extends HttpServlet {
 
 			case "/cadastro-adocao":
 				inserirAdocao(request, response);
-				break;
-				
-			case "/inserir-avaliacao":
-				mostrarFormularioAvaliacao(request, response);
-				break;
-				
-			case "/registrar-avaliacao":
-				registrarAvaliacao(request, response);
 				break;
 
 			case "/mostrar-perfil-pet":
@@ -765,23 +751,6 @@ public class Cadastro extends HttpServlet {
 			System.out.println("Ong e Tutor não encontrados");
 		}
 	}
-	
-	private void mostrarFormularioAvaliacao(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		HttpSession sessao = request.getSession();
-		
-		if(sessao.getAttribute("usuario") instanceof Tutor) {
-			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			
-			Adocao adocao = daoAdocao.recuperarAdocaoPendenteTutor(tutor);
-			
-			request.setAttribute("adocao", adocao);
-			request.setAttribute("tutor", tutor);
-			
-			response.sendRedirect("mostrar-formulario-avaliacao.jsp");
-		}
-	}
 
 	private void mostrarPerfilPet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -1257,24 +1226,6 @@ public class Cadastro extends HttpServlet {
 		Adocao adocao = new Adocao(pet, ong, tutor, termo);
 		daoAdocao.inserirAdocao(adocao);
 
-		response.sendRedirect("mostrar-perfil-ong");
-	}
-	
-	private void registrarAvaliacao(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		
-		Long idTutor = Long.parseLong(request.getParameter("idTutor"));
-		Long idOng = Long.parseLong(request.getParameter("idOng"));
-		
-		Tutor tutor = daoTutor.recuperarTutor(idTutor);
-		Ong ong = daoOng.recuperarOng(idOng);
-		
-		String depoimento = request.getParameter("depoimento");
-		Byte nota = Byte.parseByte(request.getParameter("nota"));
-		
-		Avaliacao avaliacao = new Avaliacao(depoimento, nota, ong, tutor);
-		daoAvaliacao.inserirAvaliacao(avaliacao);
-		
 		response.sendRedirect("mostrar-perfil-ong");
 	}
 

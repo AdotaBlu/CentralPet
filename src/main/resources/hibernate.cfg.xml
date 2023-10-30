@@ -25,6 +25,5 @@
 		<mapping class="centralpet.modelo.entidade.visita.Visita" />
 		<mapping class="centralpet.modelo.entidade.recolhimento.Recolhimento" />
 		<mapping class="centralpet.modelo.entidade.fotosPet.FotosPet" />
-		<mapping class="centralpet.modelo.entidade.avaliacao.Avaliacao" />
 	</session-factory>
 </hibernate-configuration>
