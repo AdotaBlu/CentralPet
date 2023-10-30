@@ -3,14 +3,14 @@ package centralpet.modelo.entidade.avaliacao;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import centralpet.modelo.entidade.ong.Ong;
@@ -33,12 +33,10 @@ public class Avaliacao implements Serializable{
 	@Column(name ="nota_avaliacao", nullable = false, unique = false)
 	private Byte nota;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", insertable = false, updatable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "avaliacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Ong ong;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", insertable = false, updatable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "avaliacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Tutor tutor;
 	
 	@Column(name="data_avaliacao", nullable = true, unique = false)
