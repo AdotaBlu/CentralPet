@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
@@ -238,38 +237,41 @@ private ConexaoFactory fabrica;
 	}
 	
 	public Adocao recuperarAdocaoPendenteTutor(Tutor tutor) {
-	    Session sessao = null;
-	    Adocao adocao = null;
+		
+		Session sessao = null;
+		Adocao adocao = null;
+		
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Adocao> criteria = construtor.createQuery(Adocao.class);
+			Root<Adocao> raizAdocao = criteria.from(Adocao.class);
+			
+			criteria.where(construtor.equal(raizAdocao.get(Adocao_.tutor), tutor.getId()));
 
-	    try {
-	        sessao = fabrica.getConexao().openSession();
-	        sessao.beginTransaction();
+			adocao = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
 
-	        CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-	        CriteriaQuery<Adocao> criteria = construtor.createQuery(Adocao.class);
-	        Root<Adocao> raizAdocao = criteria.from(Adocao.class);
-
-	        raizAdocao.fetch("pet", JoinType.LEFT);  
-	        raizAdocao.fetch("ong", JoinType.LEFT);
-	        raizAdocao.fetch("termo", JoinType.LEFT);
-
-	        criteria.where(construtor.equal(raizAdocao.get(Adocao_.tutor), tutor.getId()));
-	        
-	        adocao = sessao.createQuery(criteria).getSingleResult();
-
-	        sessao.getTransaction().commit();
-	    } catch (Exception sqlException) {
-	        sqlException.printStackTrace();
-	        if (sessao.getTransaction() != null) {
-	            sessao.getTransaction().rollback();
-	        }
-	    } finally {
-	        if (sessao != null) {
-	            sessao.close();
-	        }
-	    }
-
-	    return adocao;
+		} catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
+			if(sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+				
+			}
+		} finally {
+			
+			if(sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return adocao;
 	}
 	
 	public Adocao recuperarAdocao(Long id) {

@@ -59,9 +59,9 @@ import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
+import centralpet.modelo.enumeracao.pet.status.StatusPet;
 import centralpet.util.conversorImagem.ConversorImagemImpl;
 import centralpet.util.conversorImagem.ConverterImagem;
-import javassist.expr.NewArray;
 
 @WebServlet("/")
 @MultipartConfig
@@ -347,16 +347,8 @@ public class Cadastro extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<Pet> todosPets = daoPet.recuperarTodosPets();
-		List<Pet> petsDisponiveis = new ArrayList<>();
-	
-		for (Pet pet : todosPets) {
-			
-			if(pet.getEstadoPet() == EstadoPet.ATIVO) {
-				petsDisponiveis.add(pet);
-			}
-		}
 
-		request.setAttribute("pets", petsDisponiveis);
+		request.setAttribute("pets", todosPets);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
 		dispatcher.forward(request, response);
@@ -755,46 +747,22 @@ public class Cadastro extends HttpServlet {
 	private void mostrarFormularioNovaAdocao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession sessao = request.getSession();
+		Ong ong = daoOng.recuperarOng(2L);
+		Tutor tutor = daoTutor.recuperarTutor(1L);
+		Pet pet = daoPet.recuperarPet(1L);
+		Termo termo = daoTermo.recuperarTermo(2L);
 
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
-
-		if (sessao.getAttribute("usuario") instanceof Tutor) {
-			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			
-			Long idPet = Long.parseLong(request.getParameter("id-pet"));
-			Pet pet = daoPet.recuperarPet(idPet);
-			
-			Long idOng = pet.getOng().getId();
-			Ong ongPet = daoOng.recuperarOng(idOng);
-			
-			Termo termo = daoTermo.recuperarTermo(idOng);
-
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-			
-			request.setAttribute("termo", termo);
-			request.setAttribute("ong", ongPet);
-			request.setAttribute("pet", pet);
-			request.setAttribute("tutor", tutor);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-adocao.jsp");
-			dispatcher.forward(request, response);
-		} else if (sessao.getAttribute("usuario") instanceof Ong) {
-			Ong ong = (Ong) sessao.getAttribute("usuario");
-
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+		if (ong != null && tutor != null && pet != null && termo != null) {
 
 			request.setAttribute("ong", ong);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			request.setAttribute("tutor", tutor);
+			request.setAttribute("pet", pet);
+			request.setAttribute("termo", termo);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-adocao.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-			dispatcher.forward(request, response);
+
+			System.out.println("Ong e Tutor não encontrados");
 		}
 	}
 	
@@ -811,8 +779,7 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("adocao", adocao);
 			request.setAttribute("tutor", tutor);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-formulario-avaliacao.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect("mostrar-formulario-avaliacao.jsp");
 		}
 	}
 
@@ -869,42 +836,29 @@ public class Cadastro extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		String urlFoto;
 		FotoDTO fotoDTO = new FotoDTO();
-		
-		Long idOng = Long.parseLong(request.getParameter("id-ong"));
-		Ong ong = daoOng.recuperarOng(idOng);
-		
-		List<Pet> petsDisponiveis = new ArrayList<>();
-		List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
-		List<Avaliacao> avaliacoesOng =	daoAvaliacao.recuperarAvaliacoesOng(ong);
-		
-		for (Pet pet : petsOng) {
-			
-			if(pet.getEstadoPet() == EstadoPet.ATIVO) {
-				petsDisponiveis.add(pet);
-			}
-		}
-		
+
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 
 			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOng(idOng);
 			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 			Contato contato = daoContato.recuperarContatoUsuario(ong);
-			
-			
+			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
+
 			if (ongSessao.equals(ong))
 				request.setAttribute("ongSessao", ongSessao);
-			
-			
 
+			request.setAttribute("pets", petsOng);
+			request.setAttribute("ong", ong);
+			request.setAttribute("endereco", endereco);
+			request.setAttribute("contato", contato);
 
 			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
 			fotoDTO.setId(ong.getId());
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
-			request.setAttribute("avaliacoesOng", avaliacoesOng);
-			request.setAttribute("endereco", endereco);
-			request.setAttribute("contato", contato);
-			request.setAttribute("pets", petsDisponiveis);
+			request.setAttribute("pets", petsOng);
 			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
@@ -912,23 +866,27 @@ public class Cadastro extends HttpServlet {
 
 		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOng(idOng);
+			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
+
 			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
 			fotoDTO.setId(tutor.getId());
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
-			request.setAttribute("avaliacoesOng", avaliacoesOng);
-			request.setAttribute("pets", petsDisponiveis);
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
+			request.setAttribute("pets", petsOng);
+			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			
-			request.setAttribute("avaliacoesOng", avaliacoesOng);
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOng(idOng);
+			List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
+
 			request.setAttribute("ong", ong);
-			request.setAttribute("pets", petsDisponiveis);
+			request.setAttribute("pets", petsOng);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
@@ -1175,13 +1133,14 @@ public class Cadastro extends HttpServlet {
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
 		Byte idade = Byte.parseByte(request.getParameter("idade"));
 		Double peso = Double.parseDouble(request.getParameter("peso"));
+		StatusPet statusPet = StatusPet.valueOf(request.getParameter("status-pet"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
 		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
 
-		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, portePet, especiePet,
+		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, statusPet, portePet, especiePet,
 				sexoPet, estadoPet, pelagemPet);
 		daoPet.inserirPet(pet);
 
@@ -1207,12 +1166,13 @@ public class Cadastro extends HttpServlet {
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
 		Byte idade = Byte.parseByte(request.getParameter("idade"));
 		Double peso = Double.parseDouble(request.getParameter("peso"));
+		StatusPet statusPet = StatusPet.valueOf(request.getParameter("status-pet"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
 		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
-		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, portePet,
+		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, statusPet, portePet,
 				especiePet, sexoPet, estadoPet, pelagemPet);
 		daoPet.atualizarPet(pet);
 
@@ -1276,51 +1236,37 @@ public class Cadastro extends HttpServlet {
 
 	private void inserirTermo(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		HttpSession sessao = request.getSession();
-		
-		if (sessao.getAttribute("usuario") instanceof Ong) {
-			Ong ong = (Ong) sessao.getAttribute("usuario");
-			String Otermo = request.getParameter("termo");
 
-			Termo termo = new Termo(ong, Otermo);
-			daoTermo.inserirTermo(termo);
-			response.sendRedirect("home");
-		}
+		Ong ong = daoOng.recuperarOng(2L);
+
+		String Otermo = request.getParameter("termo");
+
+		Termo termo = new Termo(ong, Otermo);
+		daoTermo.inserirTermo(termo);
+		response.sendRedirect("nova-adocao");
 	}
 
 	private void inserirAdocao(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		
-		HttpSession sessao = request.getSession();
-		if (sessao.getAttribute("usuario") instanceof Tutor) {
-			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			
-			Long idPet = Long.parseLong(request.getParameter("id-pet"));
-			Long idOng = Long.parseLong(request.getParameter("id-ong"));
-			
-			Pet pet = daoPet.recuperarPet(idPet);
-			pet.setEstadoPet(EstadoPet.INATIVO);
-			daoPet.atualizarPet(pet);
-			Ong ong = daoOng.recuperarOng(idOng);
-			Termo termo = daoTermo.recuperarTermo(ong.getId());
 
-			Adocao adocao = new Adocao(pet, ong, tutor, termo);
-			daoAdocao.inserirAdocao(adocao);
+		Pet pet = daoPet.recuperarPet(1L);
+		Ong ong = daoOng.recuperarOng(2L);
+		Tutor tutor = daoTutor.recuperarTutor(1L);
+		Termo termo = daoTermo.recuperarTermo(2L);
 
-			response.sendRedirect("inserir-avaliacao");
+		Adocao adocao = new Adocao(pet, ong, tutor, termo);
+		daoAdocao.inserirAdocao(adocao);
 
-		}
-
-
+		response.sendRedirect("mostrar-perfil-ong");
 	}
 	
 	private void registrarAvaliacao(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		HttpSession sessao = request.getSession();
+			throws SQLException, IOException {
 		
-		Long idOng = Long.parseLong(request.getParameter("id-ong"));
+		Long idTutor = Long.parseLong(request.getParameter("idTutor"));
+		Long idOng = Long.parseLong(request.getParameter("idOng"));
 		
-		Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+		Tutor tutor = daoTutor.recuperarTutor(idTutor);
 		Ong ong = daoOng.recuperarOng(idOng);
 		
 		String depoimento = request.getParameter("depoimento");
@@ -1329,13 +1275,11 @@ public class Cadastro extends HttpServlet {
 		Avaliacao avaliacao = new Avaliacao(depoimento, nota, ong, tutor);
 		daoAvaliacao.inserirAvaliacao(avaliacao);
 		
-		request.setAttribute("ong", ong);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("mostrar-perfil-ong");
 	}
 
 	private void confirmarLogin(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
+			throws SQLException, IOException {
 		String usuarioInvalido = null;
 		String emailUsuario = request.getParameter("email-usuario");
 		String senhaUsuario = request.getParameter("senha-usuario");
@@ -1348,10 +1292,8 @@ public class Cadastro extends HttpServlet {
 			response.sendRedirect("home");
 		} else {
 			usuarioInvalido = "invalido";
-			
-			request.setAttribute("usuarioInvalido", usuarioInvalido);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-login.jsp");
-			dispatcher.forward(request, response);
+			request.setAttribute("usuario-invalido", usuarioInvalido);
+			response.sendRedirect("novo-login");
 		}
 
 	}

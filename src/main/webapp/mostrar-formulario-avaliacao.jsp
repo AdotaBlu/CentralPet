@@ -36,8 +36,8 @@
 		<div>
 			<form action="registrar-avaliacao" method="post">
 				<c:if test="${adocao != null && tutor != null}">
-					<input type="hidden" id="id-tutor" name="id-tutor"  value="<c:out value='${tutor.id}' />">
-					<input type="hidden" id="id-ong" name="id-ong"  value="<c:out value='${adocao.ong.id}' />">
+					<input type="hidden" id="id-tutor" name="idTutor"  value="<c:out value='${tutor.id}' />">
+					<input type="hidden" id="id-ong" name="idOng"  value="<c:out value='${adocao.ong.id}' />">
 				</c:if>
 				
 				<label for="nota">Nota:</label>

@@ -70,8 +70,6 @@
 					<button type="submit" class="btn-adotar-card">Deletar Pet</button>
 				</form>
 			</c:if>
-		</div>
-		<div>
 			<c:if test="${tutor != null }">
 				<form method = "post" action = "favoritar-pet">
 					<input type = "hidden" id = "id-pet" name = "id-pet" value = "<c:out value = '${pet.id}'/>">
@@ -80,14 +78,6 @@
 				<form method = "post" action = "excluir-pet-favoritado">
 					<input type = "hidden" id = "id-pet" name = "id-pet" value = "<c:out value = '${pet.id}'/>">
 					<button type="submit">Excluir Pet Favoritado</button>
-				</form>
-			</c:if>
-		</div>
-		<div>
-			<c:if test="${tutor != null }">
-				<form method = "post" action = "nova-adocao">
-					<input type = "hidden" id = "id-pet" name = "id-pet" value = "<c:out value = '${pet.id}'/>">
-					<button type="submit">Adotar Pet</button>
 				</form>
 			</c:if>
 		</div>
