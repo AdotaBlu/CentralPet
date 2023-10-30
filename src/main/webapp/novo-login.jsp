@@ -40,11 +40,6 @@
 				</div>
 			</form>
 		</div>
-		
-		<c:if test="${usuarioInvalido != null}">
-			<h2>Usuario não encontrado</h2>
-			<p>Verifique as infomações e tente novamente</p>
-		</c:if>
 	</main>
 </body>
 </html>

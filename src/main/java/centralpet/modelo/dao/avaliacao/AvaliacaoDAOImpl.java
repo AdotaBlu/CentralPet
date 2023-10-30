@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -95,8 +94,6 @@ public class AvaliacaoDAOImpl implements AvaliacaoDAO{
 			CriteriaQuery<Avaliacao> criteria = construtor.createQuery(Avaliacao.class);
 			Root<Avaliacao> raizAvaliacao = criteria.from(Avaliacao.class);
 			
-	        raizAvaliacao.fetch("tutor", JoinType.LEFT); 
-
 			criteria.select(raizAvaliacao);
 			
 			criteria.where(construtor.equal(raizAvaliacao.get(Avaliacao_.ong), ong.getId()));
