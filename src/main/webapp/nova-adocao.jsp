@@ -25,6 +25,8 @@
 				<h1>Pet: <c:out value='${pet.nome}' /></h1>
 				<form method="post" action="cadastro-adocao" >
 					<h1> Adocao requerida</h1>
+					<input type="hidden" id="id-pet" name="id-pet"  value="<c:out value='${pet.id}' />">
+					<input type="hidden" id="id-ong" name="id-ong"  value="<c:out value='${ong.id}' />">
 					 <div class="container-botao">
         			<button type="submit" class="botao-primario">Salvar Adoção</button>		
        				</div>

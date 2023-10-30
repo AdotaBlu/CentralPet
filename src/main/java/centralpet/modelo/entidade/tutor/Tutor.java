@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import centralpet.modelo.entidade.adocao.Adocao;
+import centralpet.modelo.entidade.avaliacao.Avaliacao;
 import centralpet.modelo.entidade.endereco.Endereco;
 import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
@@ -37,6 +38,9 @@ public class Tutor extends Usuario implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Adocao> adocoes = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Avaliacao> avaliacoes = new ArrayList<>();
 
 	//@OneToOne(fetch = FetchType.LAZY)
 	//@JoinColumn(name = "id_acompanhamento", nullable = true)

@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,10 +35,12 @@ public class Avaliacao implements Serializable{
 	@Column(name ="nota_avaliacao", nullable = false, unique = false)
 	private Byte nota;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "avaliacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_ong", nullable = false)
 	private Ong ong;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "avaliacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_tutor", nullable = false)
 	private Tutor tutor;
 	
 	@Column(name="data_avaliacao", nullable = true, unique = false)
