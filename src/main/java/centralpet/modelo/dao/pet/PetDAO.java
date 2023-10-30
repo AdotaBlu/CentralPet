@@ -28,8 +28,6 @@ public interface PetDAO {
 	
 	List<Pet> recuperarPetsEspecie(Pet pet);
 	
-	List<Pet> recuperarPetsStatus(Pet pet);
-	
 	List<Pet> recuperarPetsPelagem(Pet pet);
 	
 	List<Pet> recuperarPetsEstado(Pet pet);

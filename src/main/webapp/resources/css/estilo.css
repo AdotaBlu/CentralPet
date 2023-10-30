@@ -222,6 +222,7 @@ li:hover{
 
 .pet-card:hover{
 	transform: scale(1.1);
+	border: 2px solid #390879;
 }
 
 .foto-pet{

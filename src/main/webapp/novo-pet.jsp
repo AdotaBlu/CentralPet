@@ -45,7 +45,6 @@
         		<label for="peso">Peso do Pet</label>
         		<input type="text" id="peso" name="peso">
         		
-        		<input type="hidden" id="statusPet" name="status-pet" value="DISPONIVEL">
         		<input type="hidden" id="estadoPet" name="estado-pet" value="ATIVO">
         		
        			 <label for="drop_down_especie">Especie do Pet</label>
