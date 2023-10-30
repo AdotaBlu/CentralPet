@@ -239,6 +239,51 @@ public class PetDAOImpl implements PetDAO {
 		}
 		return petsOng;
 	}
+	
+	public List<Pet> recuperarPetsAtivosOng(Ong ong) {
+
+		Session sessao = null;
+		List<Pet> petsOng = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+			Root<Pet> raizPet = criteria.from(Pet.class);
+
+			Join<Pet, Ong> juncaoOng = raizPet.join(Pet_.ONG);
+
+			ParameterExpression<Long> idOng = construtor.parameter(Long.class);
+
+			//criteria.where(construtor.equal(juncaoOng.get(Ong_.ID), idOng));
+			
+			criteria.where(construtor.and(
+					construtor.equal(juncaoOng.get(Ong_.id), idOng),
+					construtor.equal(raizPet.get(Pet_.estadoPet), EstadoPet.ATIVO)));
+
+			petsOng = sessao.createQuery(criteria).setParameter(idOng, ong.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return petsOng;
+	}
 
 	public List<Pet> recuperarPetsPorte(Pet pet) {
 
@@ -466,7 +511,7 @@ public class PetDAOImpl implements PetDAO {
 	}
 
 	public List<Pet> filtrarBuscaPet(Optional<EspeciePet> especiePet, Optional<PortePet> portePet,
-			Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet) {
+			Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet, Optional<EstadoPet> estadoPet) {
 
 		Session sessao = null;
 		List<Pet> petsFiltrados = null;
@@ -482,14 +527,56 @@ public class PetDAOImpl implements PetDAO {
 			criteria.select(raizPet);
 
 			List<Predicate> predicatos = new ArrayList<>();
-
-			especiePet.ifPresent(especie -> predicatos.add(construtor.equal(raizPet.get("especiePet"), especiePet.get())));
-			portePet.ifPresent(porte -> predicatos.add(construtor.equal(raizPet.get("portePet"), portePet.get())));
-			sexoPet.ifPresent(sexo -> predicatos.add(construtor.equal(raizPet.get("sexoPet"), sexoPet.get())));
-			pelagemPet.ifPresent(pelagem -> predicatos.add(construtor.equal(raizPet.get("pelagemPet"), pelagemPet.get())));
+			
+			estadoPet.ifPresent(estado -> predicatos.add(construtor.equal(raizPet.get(Pet_.estadoPet), estadoPet.get())));
+			especiePet.ifPresent(especie -> predicatos.add(construtor.equal(raizPet.get(Pet_.especiePet), especiePet.get())));
+			portePet.ifPresent(porte -> predicatos.add(construtor.equal(raizPet.get(Pet_.portePet), portePet.get())));
+			sexoPet.ifPresent(sexo -> predicatos.add(construtor.equal(raizPet.get(Pet_.sexoPet), sexoPet.get())));
+			pelagemPet.ifPresent(pelagem -> predicatos.add(construtor.equal(raizPet.get(Pet_.pelagemPet), pelagemPet.get())));
 
 			if (!predicatos.isEmpty()) {
 				criteria.where(construtor.and(predicatos.toArray(new Predicate[0])));
+			}
+
+			petsFiltrados = sessao.createQuery(criteria).getResultList();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return petsFiltrados;
+	}
+	
+	public List<Pet> filtrarPetsEstado(Optional<EstadoPet> estadoPet) {
+
+		Session sessao = null;
+		List<Pet> petsFiltrados = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+			Root<Pet> raizPet = criteria.from(Pet.class);
+
+			criteria.select(raizPet);
+
+			List<Predicate> predicados = new ArrayList<>();
+
+			estadoPet.ifPresent(estado -> predicados.add(construtor.equal(raizPet.get(Pet_.estadoPet), estadoPet.get())));
+
+			if (!predicados.isEmpty()) {
+				criteria.where(construtor.and(predicados.toArray(new Predicate[0])));
 			}
 
 			petsFiltrados = sessao.createQuery(criteria).getResultList();

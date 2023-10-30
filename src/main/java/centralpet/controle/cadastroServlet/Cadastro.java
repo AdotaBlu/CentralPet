@@ -61,7 +61,7 @@ import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
 import centralpet.util.conversorImagem.ConversorImagemImpl;
 import centralpet.util.conversorImagem.ConverterImagem;
-import javassist.expr.NewArray;
+
 
 @WebServlet("/")
 @MultipartConfig
@@ -230,6 +230,10 @@ public class Cadastro extends HttpServlet {
 			case "/mostrar-perfil-ong":
 				mostrarPerfilOng(request, response);
 				break;
+				
+			case "/ong-filtrar-pets":
+				ongMostrarPetsfiltrados(request, response);
+				break;
 
 			case "/mostrar-perfil-tutor":
 				mostrarPerfilTutor(request, response);
@@ -346,15 +350,7 @@ public class Cadastro extends HttpServlet {
 	private void mostrarPetsDisponiveis(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Pet> todosPets = daoPet.recuperarTodosPets();
-		List<Pet> petsDisponiveis = new ArrayList<>();
-	
-		for (Pet pet : todosPets) {
-			
-			if(pet.getEstadoPet() == EstadoPet.ATIVO) {
-				petsDisponiveis.add(pet);
-			}
-		}
+		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
 
 		request.setAttribute("pets", petsDisponiveis);
 
@@ -376,8 +372,10 @@ public class Cadastro extends HttpServlet {
 
 		String pelagem = request.getParameter("pelagem");
 		Optional<PelagemPet> pelagemOp = (pelagem == "") ? Optional.empty() : Optional.of(PelagemPet.valueOf(pelagem));
+		
+		Optional<EstadoPet> estadoOp = Optional.ofNullable(EstadoPet.ATIVO);
 
-		List<Pet> petsFiltrados = daoPet.filtrarBuscaPet(especieOp, porteOp, sexoOp, pelagemOp);
+		List<Pet> petsFiltrados = daoPet.filtrarBuscaPet(especieOp, porteOp, sexoOp, pelagemOp, estadoOp);
 
 		request.setAttribute("pets", petsFiltrados);
 
@@ -873,16 +871,9 @@ public class Cadastro extends HttpServlet {
 		Long idOng = Long.parseLong(request.getParameter("id-ong"));
 		Ong ong = daoOng.recuperarOng(idOng);
 		
-		List<Pet> petsDisponiveis = new ArrayList<>();
-		List<Pet> petsOng = daoPet.recuperarPetsOng(ong);
+		//List<Pet> petsDisponiveis = new ArrayList<>();
+		List<Pet> petsOng = daoPet.recuperarPetsAtivosOng(ong);
 		List<Avaliacao> avaliacoesOng =	daoAvaliacao.recuperarAvaliacoesOng(ong);
-		
-		for (Pet pet : petsOng) {
-			
-			if(pet.getEstadoPet() == EstadoPet.ATIVO) {
-				petsDisponiveis.add(pet);
-			}
-		}
 		
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 
@@ -904,7 +895,7 @@ public class Cadastro extends HttpServlet {
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
-			request.setAttribute("pets", petsDisponiveis);
+			request.setAttribute("pets", petsOng);
 			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
@@ -918,7 +909,7 @@ public class Cadastro extends HttpServlet {
 			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
-			request.setAttribute("pets", petsDisponiveis);
+			request.setAttribute("pets",petsOng);
 			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			request.setAttribute("tutor", tutor);
@@ -928,11 +919,45 @@ public class Cadastro extends HttpServlet {
 			
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("ong", ong);
-			request.setAttribute("pets", petsDisponiveis);
+			request.setAttribute("pets", petsOng);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 		}
+	}
+	
+	private void ongMostrarPetsfiltrados(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		FotoDTO fotoDTO = new FotoDTO();
+		
+		String estado = request.getParameter("estado");
+		Optional<EstadoPet> estadoOp = (estado == "") ? Optional.empty() : Optional.of(EstadoPet.valueOf(estado));
+		
+		List<Pet> petsFiltrados = daoPet.filtrarPetsEstado(estadoOp);
+		
+		
+		Ong ongSessao = (Ong) sessao.getAttribute("usuario");
+		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ongSessao);
+		Contato contato = daoContato.recuperarContatoUsuario(ongSessao);
+		
+		List<Avaliacao> avaliacoesOng =	daoAvaliacao.recuperarAvaliacoesOng(ongSessao);
+		
+		request.setAttribute("ongSessao", ongSessao);
+		String urlFoto = Base64.getEncoder().encodeToString(ongSessao.getfotoPerfil());
+		fotoDTO.setId(ongSessao.getId());
+		fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
+
+		request.setAttribute("avaliacoesOng", avaliacoesOng);
+		request.setAttribute("endereco", endereco);
+		request.setAttribute("contato", contato);
+		request.setAttribute("pets", petsFiltrados);
+		request.setAttribute("foto", fotoDTO);
+		request.setAttribute("ong", ongSessao);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarPerfilTutor(HttpServletRequest request, HttpServletResponse response)

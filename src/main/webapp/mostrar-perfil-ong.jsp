@@ -126,6 +126,9 @@
 					</c:forEach>
 				</div>
 			</c:if>
+			<c:if test="${ongSessao != null}">
+				<%@ include file="ong-filtro-pets.jsp" %>
+			</c:if>
 		</c:if>
 		
 		<c:if test="${ong == null}">

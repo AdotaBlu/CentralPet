@@ -6,6 +6,7 @@ import java.util.Optional;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
+import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
@@ -20,7 +21,11 @@ public interface PetDAO {
 	
 	List<Pet> recuperarTodosPets();
 	
+	List<Pet> recuperarTodosPetsAtivos();
+	
 	List<Pet> recuperarPetsOng(Ong ong);
+	
+	List<Pet> recuperarPetsAtivosOng(Ong ong);
 	
 	List<Pet> recuperarPetsPorte(Pet pet);
 	
@@ -33,7 +38,9 @@ public interface PetDAO {
 	List<Pet> recuperarPetsEstado(Pet pet);
 	
 	List<Pet> filtrarBuscaPet(Optional<EspeciePet> especiePet, Optional<PortePet> portePet,
-			Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet);
+			Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet, Optional<EstadoPet> estadoPet);
+	
+	List<Pet> filtrarPetsEstado(Optional<EstadoPet> estadoPet);
 	
 	Pet recuperarPet(Long id);
 }
