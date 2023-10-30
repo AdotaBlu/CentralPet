@@ -41,7 +41,7 @@ public class Ong extends Usuario implements Serializable {
 	private List<Acompanhamento> acompanhamentos = new ArrayList<>();
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ong", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Avaliacao>avalicoes = new ArrayList<>();
+	private List<Avaliacao> avaliacoes = new ArrayList<>();
 
 	public Ong() {
 	}
@@ -90,6 +90,15 @@ public class Ong extends Usuario implements Serializable {
 
 	public List<Adocao> getDoacoes() {
 		return doacoes;
+	}
+
+
+	public void adicionarAvaliacao(Avaliacao avaliacao) {
+		this.avaliacoes.add(avaliacao);
+	}
+
+	public void removerAvaliacao(Avaliacao avaliacao) {
+		this.avaliacoes.remove(avaliacao);
 	}
 
 	public void adicionarDoacao(Adocao doacao) {

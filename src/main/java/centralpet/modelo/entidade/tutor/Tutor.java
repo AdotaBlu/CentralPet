@@ -39,6 +39,7 @@ public class Tutor extends Usuario implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Adocao> adocoes = new ArrayList<>();
 	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Avaliacao> avaliacoes = new ArrayList<>();
 
@@ -93,6 +94,14 @@ public class Tutor extends Usuario implements Serializable {
 
 	public List<Adocao> getAdocoes() {
 		return adocoes;
+	}
+
+	public void adicionarAvaliacao(Avaliacao avaliacao) {
+		this.avaliacoes.add(avaliacao);
+	}
+
+	public void removerAvaliacao(Avaliacao avaliacao) {
+		this.avaliacoes.remove(avaliacao);
 	}
 
 	public void adocaoFeita(Adocao adocao) {
