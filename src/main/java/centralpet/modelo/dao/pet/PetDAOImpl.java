@@ -22,7 +22,6 @@ import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
-import centralpet.modelo.enumeracao.pet.status.StatusPet;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
 public class PetDAOImpl implements PetDAO {
@@ -156,6 +155,47 @@ public class PetDAOImpl implements PetDAO {
 		}
 
 		return pets;
+
+	}
+	
+	public List<Pet> recuperarTodosPetsAtivos() {
+
+		Session sessao = null;
+		List<Pet> petsAtivos = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+			Root<Pet> raizPet = criteria.from(Pet.class);
+			
+			criteria.select(raizPet);
+			
+			criteria.where(construtor.equal(raizPet.get(Pet_.estadoPet), EstadoPet.ATIVO));
+
+			petsAtivos = sessao.createQuery(criteria).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return petsAtivos;
 
 	}
 
@@ -311,42 +351,6 @@ public class PetDAOImpl implements PetDAO {
 		return petsDessaEspecie;
 	}
 
-	public List<Pet> recuperarPetsStatus(Pet pet) {
-
-		Session sessao = null;
-		List<Pet> petsDesseStatus = null;
-
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
-
-			ParameterExpression<StatusPet> statusPet = construtor.parameter(StatusPet.class);
-
-			criteria.where(construtor.equal(statusPet, pet.getStatusPet()));
-
-			petsDesseStatus = sessao.createQuery(criteria).setParameter(statusPet, pet.getStatusPet()).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return petsDesseStatus;
-	}
 
 	public List<Pet> recuperarPetsEstado(Pet pet) {
 

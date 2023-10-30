@@ -33,12 +33,12 @@ public class Avaliacao implements Serializable{
 	@Column(name ="nota_avaliacao", nullable = false, unique = false)
 	private Byte nota;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_ong", nullable = false)
 	private Ong ong;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_tutor", nullable = false)
 	private Tutor tutor;
 	
 	@Column(name="data_avaliacao", nullable = true, unique = false)

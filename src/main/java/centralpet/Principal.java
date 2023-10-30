@@ -1,7 +1,5 @@
  package centralpet;
 
-import java.time.LocalDate;
-
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
 import centralpet.modelo.dao.contato.ContatoDAO;
@@ -20,23 +18,7 @@ import centralpet.modelo.dao.tutor.TutorDAO;
 import centralpet.modelo.dao.tutor.TutorDAOImpl;
 import centralpet.modelo.dao.usuario.UsuarioDAO;
 import centralpet.modelo.dao.usuario.UsuarioDAOImpl;
-import centralpet.modelo.entidade.adocao.Adocao;
-import centralpet.modelo.entidade.contato.Contato;
-import centralpet.modelo.entidade.endereco.Endereco;
-import centralpet.modelo.entidade.favorito.PetsFavoritosTutor;
-import centralpet.modelo.entidade.ong.Ong;
-import centralpet.modelo.entidade.pet.Pet;
-import centralpet.modelo.entidade.termo.Termo;
-import centralpet.modelo.entidade.tutor.Tutor;
-import centralpet.modelo.entidade.usuario.Usuario;
-import centralpet.modelo.enumeracao.adocao.StatusAdocao;
-import centralpet.modelo.enumeracao.genero.GeneroTutor;
-import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
-import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
-import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
-import centralpet.modelo.enumeracao.pet.porte.PortePet;
-import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
-import centralpet.modelo.enumeracao.pet.status.StatusPet;
+
 
 public class Principal {
 

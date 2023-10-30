@@ -27,7 +27,6 @@ import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
-import centralpet.modelo.enumeracao.pet.status.StatusPet;
 
 @Entity
 @Table(name = "pet")
@@ -63,10 +62,6 @@ public class Pet implements Serializable {
 	private Ong ong;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "status_pet", nullable = false, unique = false)
-	private StatusPet statusPet;
-
-	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "porte_pet", nullable = false, unique = false)
 	private PortePet portePet;
 
@@ -97,7 +92,7 @@ public class Pet implements Serializable {
 	}
 
 	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso,
-			Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
+			Ong ong, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
 		setVacinas(vacinas);
@@ -105,7 +100,6 @@ public class Pet implements Serializable {
 		setIdade(idade);
 		setPeso(peso);
 		setOng(ong);
-		setStatusPet(statusPet);
 		setPortePet(portePet);
 		setEspeciePet(especiePet);
 		setSexoPet(sexoPet);
@@ -116,7 +110,7 @@ public class Pet implements Serializable {
 	}
 
 	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade,
-			Double peso, Ong ong, StatusPet statusPet, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
+			Double peso, Ong ong, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setId(id);
 		setNome(nome);
@@ -125,7 +119,6 @@ public class Pet implements Serializable {
 		setIdade(idade);
 		setPeso(peso);
 		setOng(ong);
-		setStatusPet(statusPet);
 		setPortePet(portePet);
 		setEspeciePet(especiePet);
 		setSexoPet(sexoPet);
@@ -190,14 +183,6 @@ public class Pet implements Serializable {
 
 	public void setOng(Ong ong) {
 		this.ong = ong;
-	}
-
-	public StatusPet getStatusPet() {
-		return statusPet;
-	}
-
-	public void setStatusPet(StatusPet statusPet) {
-		this.statusPet = statusPet;
 	}
 
 	public PortePet getPortePet() {
