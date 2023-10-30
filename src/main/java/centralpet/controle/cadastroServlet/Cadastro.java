@@ -1256,8 +1256,6 @@ public class Cadastro extends HttpServlet {
 
 		response.sendRedirect("home.jsp");
 
-		
 	}
 
-	
 }
