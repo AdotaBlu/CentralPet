@@ -236,44 +236,6 @@ private ConexaoFactory fabrica;
 		return doacoes;
 	}
 	
-	public Adocao recuperarAdocaoPendenteTutor(Tutor tutor) {
-		
-		Session sessao = null;
-		Adocao adocao = null;
-		
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			
-			CriteriaQuery<Adocao> criteria = construtor.createQuery(Adocao.class);
-			Root<Adocao> raizAdocao = criteria.from(Adocao.class);
-			
-			criteria.where(construtor.equal(raizAdocao.get(Adocao_.tutor), tutor.getId()));
-
-			adocao = sessao.createQuery(criteria).getSingleResult();
-			
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-			
-			sqlException.printStackTrace();
-			
-			if(sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-				
-			}
-		} finally {
-			
-			if(sessao != null) {
-				sessao.close();
-			}
-		}
-		
-		return adocao;
-	}
-	
 	public Adocao recuperarAdocao(Long id) {
 		
 		Session sessao = null;
