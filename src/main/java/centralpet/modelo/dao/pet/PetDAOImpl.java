@@ -200,7 +200,7 @@ public class PetDAOImpl implements PetDAO {
 	}
 
 	public List<Pet> recuperarPetsOng(Ong ong) {
-
+ 
 		Session sessao = null;
 		List<Pet> petsOng = null;
 
@@ -556,7 +556,7 @@ public class PetDAOImpl implements PetDAO {
 		return petsFiltrados;
 	}
 	
-	public List<Pet> filtrarPetsEstado(Optional<EstadoPet> estadoPet) {
+	public List<Pet> filtrarPetsEstado(Optional<EstadoPet> estadoPet, Ong ong) {
 
 		Session sessao = null;
 		List<Pet> petsFiltrados = null;
@@ -568,11 +568,13 @@ public class PetDAOImpl implements PetDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
-
+			
+			Join<Pet, Ong> juncaoOng = raizPet.join(Pet_.ONG);
 			criteria.select(raizPet);
 
 			List<Predicate> predicados = new ArrayList<>();
-
+			
+			predicados.add(construtor.equal(juncaoOng.get(Ong_.id), ong.getId()));
 			estadoPet.ifPresent(estado -> predicados.add(construtor.equal(raizPet.get(Pet_.estadoPet), estadoPet.get())));
 
 			if (!predicados.isEmpty()) {

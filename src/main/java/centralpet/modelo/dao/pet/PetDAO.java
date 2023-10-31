@@ -40,7 +40,7 @@ public interface PetDAO {
 	List<Pet> filtrarBuscaPet(Optional<EspeciePet> especiePet, Optional<PortePet> portePet,
 			Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet, Optional<EstadoPet> estadoPet);
 	
-	List<Pet> filtrarPetsEstado(Optional<EstadoPet> estadoPet);
+	List<Pet> filtrarPetsEstado(Optional<EstadoPet> estadoPet, Ong ong);
 	
 	Pet recuperarPet(Long id);
 }
