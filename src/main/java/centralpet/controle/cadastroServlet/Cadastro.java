@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.Hibernate;
+
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
 import centralpet.modelo.dao.avaliacao.AvaliacaoDAO;
@@ -381,7 +383,6 @@ public class Cadastro extends HttpServlet {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	private void mostrarTodasOngs(HttpServletRequest request, HttpServletResponse response)
@@ -1193,7 +1194,6 @@ public class Cadastro extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		Ong ongPet = (Ong) sessao.getAttribute("usuario");
 		Pet pet = null;
-
 		String nome = request.getParameter("nome");
 		String vacinas = request.getParameter("vacinas");
 		String descricao = request.getParameter("descricao");
@@ -1208,14 +1208,13 @@ public class Cadastro extends HttpServlet {
 
 		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, portePet, especiePet,
 				sexoPet, estadoPet, pelagemPet);
+		
 		daoPet.inserirPet(pet);
 
 		parteImagem = request.getParts();
 		converterImagem.adicionarImagensArrayFotosPet(pet, parteImagem);
 
-		ongPet.adicionarPet(pet);
-
-		response.sendRedirect("home	");
+		response.sendRedirect("home");
 	}
 
 	private void atualizarPet(HttpServletRequest request, HttpServletResponse response)
@@ -1318,8 +1317,8 @@ public class Cadastro extends HttpServlet {
 		
 		HttpSession sessao = request.getSession();
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
-			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			
+			Tutor tutor =  (Tutor) sessao.getAttribute("usuario");
+		
 			Long idPet = Long.parseLong(request.getParameter("id-pet"));
 			Long idOng = Long.parseLong(request.getParameter("id-ong"));
 			
