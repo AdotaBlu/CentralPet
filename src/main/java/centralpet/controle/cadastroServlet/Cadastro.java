@@ -932,12 +932,6 @@ public class Cadastro extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		FotoDTO fotoDTO = new FotoDTO();
 		
-		String estado = request.getParameter("estado");
-		Optional<EstadoPet> estadoOp = (estado == "") ? Optional.empty() : Optional.of(EstadoPet.valueOf(estado));
-		
-		List<Pet> petsFiltrados = daoPet.filtrarPetsEstado(estadoOp);
-		
-		
 		Ong ongSessao = (Ong) sessao.getAttribute("usuario");
 		Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ongSessao);
 		Contato contato = daoContato.recuperarContatoUsuario(ongSessao);
@@ -945,6 +939,12 @@ public class Cadastro extends HttpServlet {
 		List<Avaliacao> avaliacoesOng =	daoAvaliacao.recuperarAvaliacoesOng(ongSessao);
 		
 		request.setAttribute("ongSessao", ongSessao);
+		
+		String estado = request.getParameter("estado");
+		Optional<EstadoPet> estadoOp = (estado == "") ? Optional.empty() : Optional.of(EstadoPet.valueOf(estado));
+		
+		List<Pet> petsFiltrados = daoPet.filtrarPetsEstado(estadoOp, ongSessao);
+		
 		String urlFoto = Base64.getEncoder().encodeToString(ongSessao.getfotoPerfil());
 		fotoDTO.setId(ongSessao.getId());
 		fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);

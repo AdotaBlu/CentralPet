@@ -21,7 +21,7 @@
 			<c:forEach var="pet" items="${pets}">
 				<div class="pet-card">
 					<div class="foto-pet">
-						<img class ="foto-pet" src="<c:out value='${pet.fotoPrincipalPet()}'></c:out>" alt="foto-pet" width="220" height="170">
+						<img class ="foto-pet" src="<c:out value='${pet.fotoPrincipalPet()}'></c:out>" alt="foto-pet">
 					</div>
 					<div class="info-card">
 						<div class="info-top">
