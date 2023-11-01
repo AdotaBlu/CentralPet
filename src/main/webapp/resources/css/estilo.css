@@ -1,6 +1,6 @@
 :root {
 	--roxo: #390879;
-	--branco: #FFFFF;
+	--branco: #FFFFFF;
 	--gelo: #F5F6F7;
 	--amarelo: #FCB700;
 	--preto: #000000;
@@ -16,7 +16,7 @@
 }
 
 body {
-	background-color: #F5F6F7;
+	background-color: var(--gelo);
 }
 
 main {
@@ -24,7 +24,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	background-color: #F5F6F7;
+	background-color: var(--gelo);
 }
 
 form {
@@ -39,16 +39,16 @@ input, option {
 	width: 470px;
 	height: 40px;
 	margin: 15px;
-	border: 1px solid #390879;
+	border: 1px solid var(--roxo);
 	border-radius: 5px;
-	background-color: #fff;
+	background-color: var(--branco);
 }
 
 #termo {
 	padding: 5px;
-	border: 1px solid #390879;
+	border: 1px solid var(--roxo);
 	border-radius: 5px;
-	background-color: #fff;
+	background-color: var(--branco);
 }
 
 .input-cadastro {
@@ -65,7 +65,7 @@ select {
 	width: 470px;
 	height: 40px;
 	margin: 15px;
-	border: 1px solid #390879;
+	border: 1px solid var(--roxo);
 	border-radius: 5px;
 }
 
@@ -79,11 +79,11 @@ select {
 button {
 	width: 230px;
 	height: 40px;
-	border: 1px solid #390879;
+	border: 1px solid var(--roxo);
 	border-radius: 5px;
 	cursor: pointer;
-	background-color: #390879;
-	color: white;
+	background-color: var(--roxo);
+	color: var(--branco);
 }
 
 .footer-content {
@@ -126,14 +126,14 @@ a {
 	margin-right: 10px;
 	border: 0, 5px;
 	border-radius: 5px;
-	color: #390879;
+	color: var(--roxo);
 }
 
 .btn-filtrar {
 	height: 30px;
 	width: 150px;
-	background-color: #390879;
-	color: #fff;
+	background-color: var(--roxo);
+	color: var(--branco);
 	border: none;
 	border-radius: 5px;
 }
@@ -142,13 +142,13 @@ a {
 header {
 	display: flex;
 	height: 70px;
-	background-color: #fff;
+	background-color: var(--branco);
 	justify-content: space-around;
 	align-items: center;
 }
 
 li:hover {
-	color: #fcb700;
+	color: var(--amarelo);
 }
 
 .ini {
@@ -161,7 +161,7 @@ li:hover {
 }
 
 .ini h1 {
-	color: #390879;
+	color: var(--roxo);
 	font-size: 15px;
 	margin-top: auto;
 	margin-bottom: auto;
@@ -175,7 +175,7 @@ li:hover {
 	margin-left: 5px;
 	display: flex;
 	font-size: 12px;
-	color: #38035b;
+	color: var(--roxo);
 	list-style: none;
 }
 
@@ -187,7 +187,7 @@ li:hover {
 	margin-left: 5px;
 	display: flex;
 	font-size: 12px;
-	color: #390879;
+	color: var(--roxo);
 	list-style: none;
 }
 
@@ -196,7 +196,7 @@ li:hover {
 	height: 30px;
 	border-radius: 5px;
 	border: none;
-	background-color: #390879;
+	background-color: var(--roxo);
 	font-size: 12px;
 }
 
@@ -225,7 +225,7 @@ li:hover {
 }
 /* Card Pet*/
 .pet-card {
-	background-color: #FCFAFF;
+	background-color: var(--branco);
 	width: 220px;
 	margin: 10px;
 	border-radius: 5px;
@@ -235,7 +235,7 @@ li:hover {
 
 .pet-card:hover {
 	transform: scale(1.1);
-	border: 2px solid #390879;
+	border: 2px solid var(--roxo);
 }
 
 .foto-pet {
@@ -257,11 +257,11 @@ li:hover {
 }
 
 #label-ong {
-	color: #626262;
+	color: var(--cinza);
 }
 
 #value-ong {
-	color: #390879;
+	color: var(--roxo);
 }
 
 .info-mid {
@@ -274,7 +274,7 @@ li:hover {
 #nome-pet {
 	font-size: 17px;
 	font-weight: 500;
-	color: #390879;
+	color: var(--roxo);
 	margin-left: 5px;
 	text-transform: lowercase;
 }
@@ -308,12 +308,12 @@ li:hover {
 }
 
 .label {
-	color: #626262;
+	color: var(--cinza);
 	margin-right: 5px;
 }
 
 .value {
-	color: #000000;
+	color: var(--preto);
 	text-transform: lowercase;
 }
 
@@ -331,8 +331,8 @@ li:hover {
 	display: inline-block;
 	width: 210px;
 	height: 30px;
-	background-color: #390879;
-	color: white;
+	background-color: var(--roxo);
+	color: var(--branco);
 	text-align: center;
 	line-height: 30px;
 	text-decoration: none;
@@ -341,7 +341,7 @@ li:hover {
 }
 
 .btn-adotar-card:hover {
-	color: #fcb700;
+	color: var(--amarelo);
 }
 
 /* Login */
@@ -353,7 +353,7 @@ li:hover {
 }
 
 .container-h2 {
-	color: #390879;
+	color: var(--roxo);
 }
 
 .input-login {
@@ -367,7 +367,7 @@ li:hover {
 }
 
 .botao-login:hover {
-	color: #fcb700;
+	color: var(--amarelo);
 	background-color: rgb(44, 6, 94);
 }
 
@@ -382,7 +382,7 @@ li:hover {
 }
 
 .container-link-cadastro a {
-	color: #390879;
+	color: var(--roxo);
 	font-weight: bold;
 }
 
@@ -395,7 +395,7 @@ Editar Tutor, ONG * /
 
 .container-editarh1 {
 	text-align: center;
-	color: #390879;
+	color: var(--roxo);
 }
 
 .input-editar label {
@@ -419,7 +419,7 @@ input[type='file'] {
 .label-inserir-foto {
 	font-size: 30px;
 	cursor: pointer;
-	color: #390879;
+	color: var(--roxo);
 }
 
 .link-cadastro {
@@ -432,8 +432,8 @@ input[type='file'] {
 	display: inline-block;
 	width: 210px;
 	height: 30px;
-	background-color: #fcb700;
-	color: white;
+	background-color: var(--amarelo);
+	color: var(--branco);
 	text-align: center;
 	line-height: 30px;
 	text-decoration: none;
@@ -444,7 +444,7 @@ input[type='file'] {
 #ong-nome-card {
 	font-size: 17px;
 	font-weight: 500;
-	color: #390879;
+	color: var(--roxo);
 	margin-left: 5px;
 }
 
