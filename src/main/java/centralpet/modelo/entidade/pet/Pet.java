@@ -2,6 +2,7 @@ package centralpet.modelo.entidade.pet;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -91,13 +92,12 @@ public class Pet implements Serializable {
 	public Pet() {
 	}
 
-	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade, Double peso,
+	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, Double peso,
 			Ong ong, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setNome(nome);
 		setVacinas(vacinas);
 		setDescricao(descricao);
-		setIdade(idade);
 		setPeso(peso);
 		setOng(ong);
 		setPortePet(portePet);
@@ -106,17 +106,17 @@ public class Pet implements Serializable {
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
 		setDataNascimento(dataNascimento);
+		setIdade(dataNascimento);
 //		setAcompanhamento(acompanhamento);
 	}
 
-	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento, byte idade,
+	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento,
 			Double peso, Ong ong, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
 			EstadoPet estadoPet, PelagemPet pelagemPet) {
 		setId(id);
 		setNome(nome);
 		setVacinas(vacinas);
 		setDescricao(descricao);
-		setIdade(idade);
 		setPeso(peso);
 		setOng(ong);
 		setPortePet(portePet);
@@ -125,6 +125,7 @@ public class Pet implements Serializable {
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
 		setDataNascimento(dataNascimento);
+		setIdade(dataNascimento);
 		setFotos(fotos);
 //		setAcompanhamento(acompanhamento);
 	}
@@ -165,8 +166,8 @@ public class Pet implements Serializable {
 		return idade;
 	}
 
-	public void setIdade(byte idade) {
-		this.idade = idade;
+	public void setIdade(LocalDate dataNascimento) {
+		this.idade = calcularIdadePet(dataNascimento);
 	}
 
 	public Double getPeso() {
@@ -252,6 +253,14 @@ public class Pet implements Serializable {
 	public String fotoPrincipalPet() {
 		String urlFotoPrincipal =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotos.get(0).getDadosImagem())) ;
 		return urlFotoPrincipal;
+	}
+	
+	private byte calcularIdadePet(LocalDate dataNascimento) {
+
+		LocalDate dataAtual = LocalDate.now();
+		Period periodo = Period.between(dataNascimento, dataAtual);
+
+		return (byte) periodo.getYears();
 	}
 
 //	public Acompanhamento getAcompanhamento() {

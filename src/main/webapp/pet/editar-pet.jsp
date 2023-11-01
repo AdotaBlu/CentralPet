@@ -39,9 +39,6 @@
         		<label for="dataNascimento">Data de Nascimento do Pet</label>
         		<input type="date" id="dataNascimentoPet" name="data-nascimento-pet" value="<c:out value='${pet.dataNascimento}' />">
         		
-        		<label for="idade">Idade do Pet</label>
-        		<input type="number" id="idade" name="idade" value="<c:out value='${pet.idade}'/>">
-        		
         		<label for="peso">Peso do Pet</label>
         		<input type="text" id="peso" name="peso" value="<c:out value='${pet.peso}' />">
         		
