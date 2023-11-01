@@ -71,7 +71,7 @@
         <input type="password" id="senha" name="senha" value="<c:out value='${ong.senha}' />">
         
         
-        <label for="imagem">Escolha uma foto de perfil</label>
+        <label for="foto-perfil">Escolha uma foto de perfil</label>
     	<input type="file" name="foto-perfil" id="fotoPerfil" accept="image/*">
         	
         <div class="container-botao">

@@ -6,31 +6,6 @@
 	
 	<display-name>Central Pet</display-name>
 	
-	 <servlet>
-        <servlet-name>Cadastro</servlet-name>
-        <servlet-class>centralpet.controle.cadastroServlet.Cadastro</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Cadastro</servlet-name>
-        <url-pattern>/novo-tutor</url-pattern>
-    </servlet-mapping>
-     <servlet-mapping>
-        <servlet-name>Cadastro</servlet-name>
-        <url-pattern>/nova-ong</url-pattern>
-    </servlet-mapping>
-     <servlet-mapping>
-        <servlet-name>Cadastro</servlet-name>
-        <url-pattern>/novo-pet</url-pattern>
-    </servlet-mapping>
-     <servlet-mapping>
-        <servlet-name>Cadastro</servlet-name>
-        <url-pattern>/novo-termo</url-pattern>
-    </servlet-mapping>
-     <servlet-mapping>
-        <servlet-name>Cadastro</servlet-name>
-        <url-pattern>/nova-adocao</url-pattern>
-    </servlet-mapping>
-        
 	<welcome-file-list>
 		<welcome-file>/home.jsp</welcome-file>
 	</welcome-file-list>

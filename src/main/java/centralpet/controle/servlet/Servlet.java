@@ -274,18 +274,11 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		FotoDTO fotoDTO = new FotoDTO();
-		String urlFoto;
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 		}
 
@@ -293,11 +286,6 @@ public class Servlet extends HttpServlet {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Ong ong = daoOng.recuperarOngUsuario(usuario);
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 		}
 
@@ -309,18 +297,11 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		FotoDTO fotoDTO = new FotoDTO();
-		String urlFoto;
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -330,11 +311,6 @@ public class Servlet extends HttpServlet {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Ong ong = daoOng.recuperarOngUsuario(usuario);
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -351,7 +327,7 @@ public class Servlet extends HttpServlet {
 
 		request.setAttribute("pets", petsDisponiveis);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pet/mostrar-cards-pets.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -376,7 +352,7 @@ public class Servlet extends HttpServlet {
 
 		request.setAttribute("pets", petsFiltrados);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-pets.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pet/mostrar-cards-pets.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -387,40 +363,29 @@ public class Servlet extends HttpServlet {
 
 		request.setAttribute("ongs", todasOngs);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-cards-ongs.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-cards-ongs.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void mostrarFormularioNovoTutor(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
+
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-tutor.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/tutor/novo-tutor.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -429,8 +394,7 @@ public class Servlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
+
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
@@ -438,11 +402,6 @@ public class Servlet extends HttpServlet {
 			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 			Contato contato = daoContato.recuperarContatoUsuario(tutor);
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("tutor", tutor);
 			request.setAttribute("contato", contato);
@@ -452,11 +411,6 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -473,8 +427,6 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
@@ -490,11 +442,6 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -511,35 +458,23 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
-
+		
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		}
 
 		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-ong.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/nova-ong.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -548,17 +483,10 @@ public class Servlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -567,15 +495,11 @@ public class Servlet extends HttpServlet {
 
 			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 			Contato contato = daoContato.recuperarContatoUsuario(ong);
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
+			
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
 			request.setAttribute("ong", ong);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("editar-ong.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/editar-ong.jsp");
 			dispatcher.forward(request, response);
 		}
 
@@ -590,8 +514,6 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
@@ -606,11 +528,6 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -626,30 +543,19 @@ public class Servlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-pet.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/pet/novo-pet.jsp");
 			dispatcher.forward(request, response);
 		} else {
 
@@ -662,28 +568,15 @@ public class Servlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
-
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 
 			Long idPet = Long.parseLong(request.getParameter("id-pet"));
@@ -703,7 +596,7 @@ public class Servlet extends HttpServlet {
 
 			request.setAttribute("pet", pet);
 			request.setAttribute("fotos", fotoDTOs);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("editar-pet.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/editar-pet.jsp");
 			dispatcher.forward(request, response);
 		}
 
@@ -717,15 +610,10 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
@@ -733,12 +621,8 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
 			request.setAttribute("ong", ong);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-termo.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/novo-termo.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
@@ -751,9 +635,6 @@ public class Servlet extends HttpServlet {
 
 		HttpSession sessao = request.getSession();
 
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
-
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
@@ -764,10 +645,6 @@ public class Servlet extends HttpServlet {
 			Ong ongPet = daoOng.recuperarOng(idOng);
 			
 			Termo termo = daoTermo.recuperarTermo(idOng);
-
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 			
 			request.setAttribute("termo", termo);
 			request.setAttribute("ong", ongPet);
@@ -778,10 +655,6 @@ public class Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
-
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
@@ -853,7 +726,7 @@ public class Servlet extends HttpServlet {
 		}
 		
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-pet.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pet/mostrar-perfil-pet.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -861,9 +734,6 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
-		
 		Long idOng = Long.parseLong(request.getParameter("id-ong"));
 		Ong ong = daoOng.recuperarOng(idOng);
 		
@@ -881,35 +751,23 @@ public class Servlet extends HttpServlet {
 			if (ongSessao.equals(ong))
 				request.setAttribute("ongSessao", ongSessao);
 			
-			
-
-
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
 			request.setAttribute("pets", petsOng);
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 
 		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
 
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("pets",petsOng);
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			request.setAttribute("tutor", tutor);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			
@@ -917,7 +775,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("ong", ong);
 			request.setAttribute("pets", petsOng);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -952,7 +810,7 @@ public class Servlet extends HttpServlet {
 		request.setAttribute("foto", fotoDTO);
 		request.setAttribute("ong", ongSessao);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-perfil-ong.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -960,8 +818,6 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
 
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
@@ -975,23 +831,12 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
 			request.setAttribute("petsFavoritos", petsFavoritos);
-
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-tutor.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/tutor/mostrar-perfil-tutor.jsp");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -1005,28 +850,16 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		String urlFoto;
-		FotoDTO fotoDTO = new FotoDTO();
-
+		
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(tutor.getfotoPerfil());
-			fotoDTO.setId(tutor.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			urlFoto = Base64.getEncoder().encodeToString(ong.getfotoPerfil());
-			fotoDTO.setId(ong.getId());
-			fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-
-			request.setAttribute("foto", fotoDTO);
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -1243,7 +1076,7 @@ public class Servlet extends HttpServlet {
 		Usuario usuario = daoUsuario.recuperarUsuario(ongPet);
 		sessao.setAttribute("usuario", usuario);
 
-		response.sendRedirect("mostrar-cards-pets.jsp");
+		response.sendRedirect("/pet/mostrar-cards-pets.jsp");
 	}
 
 	private void excluirPet(HttpServletRequest request, HttpServletResponse response)
@@ -1261,7 +1094,7 @@ public class Servlet extends HttpServlet {
 			sessao.setAttribute("usuario", usuario);
 		}
 
-		response.sendRedirect("mostrar-cards-pets");
+		response.sendRedirect("/pet/mostrar-cards-pets");
 	}
 
 	private void inserirPetsFavoritados(HttpServletRequest request, HttpServletResponse response)
@@ -1276,7 +1109,7 @@ public class Servlet extends HttpServlet {
 			daoPetFav.inserirPetsFavoritados(petFavTutor);
 			
 			
-			response.sendRedirect("mostrar-cards-pets");
+			response.sendRedirect("/pet/mostrar-cards-pets");
 		}
 	}
 
@@ -1293,7 +1126,7 @@ public class Servlet extends HttpServlet {
 			daoPetFav.deletarPetsFavoritados(petFavTutor);
 			
 			
-			response.sendRedirect("mostrar-cards-pets");
+			response.sendRedirect("/pet/mostrar-cards-pets");
 
 		}
 	}
@@ -1354,7 +1187,7 @@ public class Servlet extends HttpServlet {
 		daoAvaliacao.inserirAvaliacao(avaliacao);
 		
 		request.setAttribute("ong", ong);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-perfil-ong.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-perfil-ong.jsp");
 		dispatcher.forward(request, response);
 	}
 
