@@ -39,9 +39,6 @@
         		<label for="dataNascimento">Data de Nascimento do Pet</label>
         		<input type="date" id="dataNascimentoPet" name="data-nascimento-pet">
         		
-        		<label for="idade">Idade do Pet</label>
-        		<input type="number" id="idade" name="idade">
-        		
         		<label for="peso">Peso do Pet</label>
         		<input type="text" id="peso" name="peso">
         		

@@ -1031,7 +1031,6 @@ public class Servlet extends HttpServlet {
 		String vacinas = request.getParameter("vacinas");
 		String descricao = request.getParameter("descricao");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
-		Byte idade = Byte.parseByte(request.getParameter("idade"));
 		Double peso = Double.parseDouble(request.getParameter("peso"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
 		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
@@ -1039,7 +1038,7 @@ public class Servlet extends HttpServlet {
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
 
-		pet = new Pet(nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, portePet, especiePet,
+		pet = new Pet(nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet, especiePet,
 				sexoPet, estadoPet, pelagemPet);
 		
 		daoPet.inserirPet(pet);
@@ -1062,14 +1061,13 @@ public class Servlet extends HttpServlet {
 		String vacinas = request.getParameter("vacinas");
 		String descricao = request.getParameter("descricao");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento-pet"));
-		Byte idade = Byte.parseByte(request.getParameter("idade"));
 		Double peso = Double.parseDouble(request.getParameter("peso"));
 		PortePet portePet = PortePet.valueOf(request.getParameter("porte-pet"));
 		EspeciePet especiePet = EspeciePet.valueOf(request.getParameter("especie-pet"));
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
-		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, idade, peso, ongPet, portePet,
+		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet,
 				especiePet, sexoPet, estadoPet, pelagemPet);
 		daoPet.atualizarPet(pet);
 
