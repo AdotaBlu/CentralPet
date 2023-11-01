@@ -59,8 +59,8 @@ import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
-import centralpet.util.conversorImagem.ConversorImagemImpl;
 import centralpet.util.conversorImagem.ConverterImagem;
+
 
 
 @WebServlet("/")
@@ -89,8 +89,6 @@ public class Servlet extends HttpServlet {
 
 	private Collection<Part> parteImagem = null;
 
-	private ConverterImagem converterImagem;
-
 	private PetsFavoritosTutorDAO daoPetFav;
 	
 	private AvaliacaoDAO daoAvaliacao;
@@ -106,7 +104,6 @@ public class Servlet extends HttpServlet {
 		daoAdocao = new AdocaoDAOImpl();
 		daoTermo = new TermoDAOImpl();
 		daoFotosPet = new FotosPetDAOImpl();
-		converterImagem = new ConversorImagemImpl();
 		daoUsuario = new UsuarioDAOImpl();
 		HttpSession sessao = null;
 		daoPetFav = new PetsFavoritosTutorDAOImpl();
@@ -1056,7 +1053,8 @@ public class Servlet extends HttpServlet {
 
 		Tutor tutor = null;
 		Part fotoPerfil = null;
-
+		ConverterImagem converterImagem = new ConverterImagem();
+		
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
@@ -1092,6 +1090,7 @@ public class Servlet extends HttpServlet {
 		Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
 
 		Part fotoPerfil = null;
+		ConverterImagem converterImagem = new ConverterImagem();
 		Long idTutor = Long.parseLong(request.getParameter("id-tutor"));
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
@@ -1130,7 +1129,8 @@ public class Servlet extends HttpServlet {
 
 		Ong ong = null;
 		Part fotoPerfil = null;
-
+		ConverterImagem converterImagem = new ConverterImagem();
+		
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
@@ -1165,6 +1165,7 @@ public class Servlet extends HttpServlet {
 		daoEndereco.atualizarEndereco(endereco);
 
 		Part fotoPerfil = null;
+		ConverterImagem converterImagem = new ConverterImagem();
 
 		Long idOng = Long.parseLong(request.getParameter("id-ong"));
 		String nome = request.getParameter("nome");
@@ -1192,6 +1193,7 @@ public class Servlet extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		Ong ongPet = (Ong) sessao.getAttribute("usuario");
 		Pet pet = null;
+		ConverterImagem converterImagem = new ConverterImagem();
 		String nome = request.getParameter("nome");
 		String vacinas = request.getParameter("vacinas");
 		String descricao = request.getParameter("descricao");
