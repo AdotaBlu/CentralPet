@@ -259,10 +259,15 @@ public class Servlet extends HttpServlet {
 			case "/mostrar-cards-ongs":
 				mostrarTodasOngs(request, response);
 				break;
+				
+			case "/mostrar-tela-aviso":
+				mostrarTelaAviso(request, response);
+				break;
 
 			case "/filtrar-pets":
 				filtrarPets(request, response);
 				break;
+			
 			}
 
 		} catch (SQLException ex) {
@@ -1221,5 +1226,31 @@ public class Servlet extends HttpServlet {
 		
 	}
 
+	private void mostrarTelaAviso(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		HttpSession sessao = request.getSession();
+		
+		if(sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-aviso.jsp");
+			dispatcher.forward(request, response);
+		
+		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor =  (Tutor) sessao.getAttribute("usuario");
+			request.setAttribute("tutor", tutor);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-aviso.jsp");
+			dispatcher.forward(request, response);
+		
+		} else {
+			Ong ong =  (Ong) sessao.getAttribute("usuario");
+			request.setAttribute("ong", ong);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-aviso.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+	}
 	
 }

@@ -40,6 +40,7 @@
 		<a href="<%=request.getContextPath()%>/novo-login">Login</a>
 		<a href="<%=request.getContextPath()%>/novo-termo">Cadastrar Termo</a>
 		<a href="<%=request.getContextPath()%>/nova-adocao">Realizar Adoção</a>
+		<a href="<%=request.getContextPath()%>/mostrar-tela-aviso">teste tela aviso</a>
 		
 	</main>
 </body>
