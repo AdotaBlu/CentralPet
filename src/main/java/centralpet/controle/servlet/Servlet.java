@@ -1,4 +1,4 @@
-package centralpet.controle.cadastroServlet;
+package centralpet.controle.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-import org.hibernate.Hibernate;
 
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
@@ -67,7 +65,7 @@ import centralpet.util.conversorImagem.ConverterImagem;
 
 @WebServlet("/")
 @MultipartConfig
-public class Cadastro extends HttpServlet {
+public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -137,7 +135,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovoTutor(request, response);
 				break;
 
-			case "/cadastro-tutor":
+			case "/cadastrar-tutor":
 				inserirTutor(request, response);
 				break;
 
@@ -157,7 +155,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovaOng(request, response);
 				break;
 
-			case "/cadastro-ong":
+			case "/cadastrar-ong":
 				inserirOng(request, response);
 				break;
 
@@ -177,7 +175,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovoPet(request, response);
 				break;
 
-			case "/cadastro-pet":
+			case "/cadastrar-pet":
 				inserirPet(request, response);
 				break;
 
@@ -205,7 +203,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovoTermo(request, response);
 				break;
 
-			case "/cadastro-termo":
+			case "/cadastrar-termo":
 				inserirTermo(request, response);
 				break;
 
@@ -213,7 +211,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovaAdocao(request, response);
 				break;
 
-			case "/cadastro-adocao":
+			case "/cadastrar-adocao":
 				inserirAdocao(request, response);
 				break;
 				

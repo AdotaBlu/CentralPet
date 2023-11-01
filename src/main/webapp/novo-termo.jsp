@@ -19,7 +19,7 @@
 			<h1>ong = null</h1>
 		</c:if>
 
-		<form method="post" action="cadastro-termo">
+		<form method="post" action="cadastrar-termo">
 			<label for="termo">Termo da ONG</label> <input type="text" id="termo"
 				name="termo">
 

@@ -23,7 +23,7 @@
 				<h1> ong = null </h1>
 			</c:if>
 			
-   			<form method="post"  action="cadastro-pet" enctype="multipart/form-data">
+   			<form method="post"  action="cadastrar-pet" enctype="multipart/form-data">
   
 				<h1>Informações do Pet</h1> 
 		   

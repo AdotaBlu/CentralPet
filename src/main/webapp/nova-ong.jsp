@@ -20,7 +20,7 @@
 <body>
 	<main>
 		<c:if test="${endereco == null && ong == null && contato == null}">
-   			<form method="post"  action="cadastro-ong" enctype="multipart/form-data">
+   			<form method="post"  action="cadastrar-ong" enctype="multipart/form-data">
    		</c:if>
    		
    		<c:if test="${endereco != null && ong != null && contato != null}">
