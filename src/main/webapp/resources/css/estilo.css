@@ -428,17 +428,36 @@ input[type='file'] {
 }
 
 /* Cards Ongs */
+
+.ong-card {
+	background-color: var(--branco);
+	width: 220px;
+	margin: 10px;
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+	transition: transform 0.2s;;
+}
+
+.ong-card:hover {
+	transform: scale(1.1);
+	border: 2px solid var(--roxo);
+}
 .btn-ong-card {
 	display: inline-block;
 	width: 210px;
 	height: 30px;
-	background-color: var(--amarelo);
+	background-color: var(--roxo);
 	color: var(--branco);
 	text-align: center;
 	line-height: 30px;
 	text-decoration: none;
 	border: none;
 	border-radius: 5px;
+}
+.btn-ong-card:hover{
+	transition: 0.2s;
+	color: var(--roxo);
+	background-color: var(--amarelo);
 }
 
 #ong-nome-card {
@@ -449,6 +468,12 @@ input[type='file'] {
 }
 
 /* Perfil Ong */
+
+.container-perfil{
+	width: 70%;
+	height: 200px;
+	
+}
 #ong-pets-cadastrados {
 	display: block;
 }

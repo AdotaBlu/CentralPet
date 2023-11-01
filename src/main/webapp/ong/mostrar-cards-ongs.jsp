@@ -28,7 +28,7 @@
 	<main>
 		<div class="container-cards">
 			<c:forEach var="ong" items="${ongs}">
-				<div class="pet-card">
+				<div class="ong-card">
 					<div class="foto-pet">
 						<img class ="foto-pet" src="<c:out value='${ong.urlFoto()}'></c:out>" alt="foto-pet" width="220" height="170">
 					</div>
