@@ -13,7 +13,7 @@
 <style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 <body>
-	<%@ include file="nav-usuario-deslogado.jsp" %>
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	<main>
 		<div class="container-login">
 			<div class="container-logo">

@@ -23,7 +23,7 @@
 		
 		<c:if test="${pet != null}"> 
 				<h1>Pet: <c:out value='${pet.nome}' /></h1>
-				<form method="post" action="cadastro-adocao" >
+				<form method="post" action="cadastrar-adocao" >
 					<h1> Adocao requerida</h1>
 					<input type="hidden" id="id-pet" name="id-pet"  value="<c:out value='${pet.id}' />">
 					<input type="hidden" id="id-ong" name="id-ong"  value="<c:out value='${ong.id}' />">

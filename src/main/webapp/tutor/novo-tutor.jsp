@@ -19,7 +19,7 @@
 	<main>
 		<div class="container-endereco">
 			<c:if test="${contato == null && endereco == null && tutor == null}">
-				<form method="post" action="cadastro-tutor"
+				<form method="post" action="cadastrar-tutor"
 					enctype="multipart/form-data">
 			</c:if>
 			<c:if test="${contato != null && endereco != null && tutor != null}">

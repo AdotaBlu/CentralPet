@@ -1,4 +1,4 @@
-package centralpet.controle.cadastroServlet;
+package centralpet.controle.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-import org.hibernate.Hibernate;
 
 import centralpet.modelo.dao.adocao.AdocaoDAO;
 import centralpet.modelo.dao.adocao.AdocaoDAOImpl;
@@ -61,13 +59,13 @@ import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
-import centralpet.util.conversorImagem.ConversorImagemImpl;
 import centralpet.util.conversorImagem.ConverterImagem;
+
 
 
 @WebServlet("/")
 @MultipartConfig
-public class Cadastro extends HttpServlet {
+public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -91,8 +89,6 @@ public class Cadastro extends HttpServlet {
 
 	private Collection<Part> parteImagem = null;
 
-	private ConverterImagem converterImagem;
-
 	private PetsFavoritosTutorDAO daoPetFav;
 	
 	private AvaliacaoDAO daoAvaliacao;
@@ -108,7 +104,6 @@ public class Cadastro extends HttpServlet {
 		daoAdocao = new AdocaoDAOImpl();
 		daoTermo = new TermoDAOImpl();
 		daoFotosPet = new FotosPetDAOImpl();
-		converterImagem = new ConversorImagemImpl();
 		daoUsuario = new UsuarioDAOImpl();
 		HttpSession sessao = null;
 		daoPetFav = new PetsFavoritosTutorDAOImpl();
@@ -137,7 +132,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovoTutor(request, response);
 				break;
 
-			case "/cadastro-tutor":
+			case "/cadastrar-tutor":
 				inserirTutor(request, response);
 				break;
 
@@ -157,7 +152,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovaOng(request, response);
 				break;
 
-			case "/cadastro-ong":
+			case "/cadastrar-ong":
 				inserirOng(request, response);
 				break;
 
@@ -177,7 +172,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovoPet(request, response);
 				break;
 
-			case "/cadastro-pet":
+			case "/cadastrar-pet":
 				inserirPet(request, response);
 				break;
 
@@ -205,7 +200,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovoTermo(request, response);
 				break;
 
-			case "/cadastro-termo":
+			case "/cadastrar-termo":
 				inserirTermo(request, response);
 				break;
 
@@ -213,7 +208,7 @@ public class Cadastro extends HttpServlet {
 				mostrarFormularioNovaAdocao(request, response);
 				break;
 
-			case "/cadastro-adocao":
+			case "/cadastrar-adocao":
 				inserirAdocao(request, response);
 				break;
 				
@@ -1058,7 +1053,8 @@ public class Cadastro extends HttpServlet {
 
 		Tutor tutor = null;
 		Part fotoPerfil = null;
-
+		ConverterImagem converterImagem = new ConverterImagem();
+		
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
@@ -1094,6 +1090,7 @@ public class Cadastro extends HttpServlet {
 		Endereco endereco = daoEndereco.recuperarEndereco(idEndereco);
 
 		Part fotoPerfil = null;
+		ConverterImagem converterImagem = new ConverterImagem();
 		Long idTutor = Long.parseLong(request.getParameter("id-tutor"));
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
@@ -1132,7 +1129,8 @@ public class Cadastro extends HttpServlet {
 
 		Ong ong = null;
 		Part fotoPerfil = null;
-
+		ConverterImagem converterImagem = new ConverterImagem();
+		
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String cnpj = request.getParameter("cnpj");
@@ -1167,6 +1165,7 @@ public class Cadastro extends HttpServlet {
 		daoEndereco.atualizarEndereco(endereco);
 
 		Part fotoPerfil = null;
+		ConverterImagem converterImagem = new ConverterImagem();
 
 		Long idOng = Long.parseLong(request.getParameter("id-ong"));
 		String nome = request.getParameter("nome");
@@ -1194,6 +1193,7 @@ public class Cadastro extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		Ong ongPet = (Ong) sessao.getAttribute("usuario");
 		Pet pet = null;
+		ConverterImagem converterImagem = new ConverterImagem();
 		String nome = request.getParameter("nome");
 		String vacinas = request.getParameter("vacinas");
 		String descricao = request.getParameter("descricao");
