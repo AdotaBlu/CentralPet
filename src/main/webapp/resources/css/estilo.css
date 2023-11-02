@@ -477,3 +477,28 @@ input[type='file'] {
 #ong-pets-cadastrados {
 	display: block;
 }
+
+/* Tela aviso */
+
+.tela-aviso {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	
+	transform: translate(-50%, -50%);
+}
+
+.texto-tela-aviso {
+	
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+}
+
+#h1-tela-aviso {
+	padding: 30px;
+	margin: 5px;
+	border: 2px solid var(--roxo);
+}
