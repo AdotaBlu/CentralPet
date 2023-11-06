@@ -19,7 +19,7 @@
 		</c:if>
 		
 		<c:if test="${tutor == null}">
-			<h1>nenhum tutor encontrado</h1>
+			<h1>Nenhum tutor encontrado</h1>
 		</c:if>
 		
 		<div>
@@ -27,7 +27,7 @@
 				<thead>
 					<tr>
 						<th>Nome</th>
-						<th>Email</th>
+						<th>E-mail</th>
 						<th>Telefone</th>
 						<th>CPF</th>
 						<th>Gênero</th>

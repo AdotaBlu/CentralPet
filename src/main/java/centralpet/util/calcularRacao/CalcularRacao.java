@@ -5,34 +5,34 @@ import centralpet.modelo.enumeracao.pet.porte.PortePet;
 
 public class CalcularRacao {
 
-	public int calcularRacaoCachorroPorteGramasPorMes(Pet pet) {
+	public int calcularRacaoCachorroPorteKilosPorMes(Pet pet) {
 		
 		PortePet portePet = pet.getPortePet();
-		int gramasPorMes = 0;
+		int kilosPorMes = 0;
 		switch(portePet) {
 		
 		case MINI:
-			gramasPorMes = 75 * 30;
+			kilosPorMes = (75 * 30) / 1000;
 			break;
 			
 		case PEQUENO:
-			gramasPorMes = 125 * 30;
+			kilosPorMes = (125 * 30) / 1000;
 			break;
 			
 		case MEDIO:
-			gramasPorMes = 240 * 30;
+			kilosPorMes = (240 * 30) / 1000;
 			break;
 			
 		case GRANDE:
-			gramasPorMes = 425 * 30;
+			kilosPorMes = (425 * 30) / 1000;
 			break;
 			
 		case GIGANTE:
-			gramasPorMes = 670 * 30;
+			kilosPorMes = (670 * 30) / 1000;
 			break;
 		}
 		
-		return gramasPorMes;
+		return kilosPorMes;
 	}
 	
 }

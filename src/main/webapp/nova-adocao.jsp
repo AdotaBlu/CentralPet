@@ -10,7 +10,7 @@
 
 	<main>
 		<c:if test="${ong != null}"> 
-				<h1>Nome da ong: <c:out value='${ong.nome}' /></h1>
+				<h1>Nome da ONG: <c:out value='${ong.nome}' /></h1>
 		</c:if>
 		
 		<c:if test="${tutor != null}"> 
@@ -24,7 +24,7 @@
 		<c:if test="${pet != null}"> 
 				<h1>Pet: <c:out value='${pet.nome}' /></h1>
 				<form method="post" action="cadastrar-adocao" >
-					<h1> Adocao requerida</h1>
+					<h1> Adoção requerida</h1>
 					<input type="hidden" id="id-pet" name="id-pet"  value="<c:out value='${pet.id}' />">
 					<input type="hidden" id="id-ong" name="id-ong"  value="<c:out value='${ong.id}' />">
 					 <div class="container-botao">
@@ -35,19 +35,19 @@
 		
 		
 		<c:if test="${ong == null}"> 
-			<h1>ong nula</h1>
+			<h1>ONG nula</h1>
 		</c:if>
 		
 		<c:if test="${tutor == null}"> 
-			<h1>tutor nulo</h1>
+			<h1>Tutor nulo</h1>
 		</c:if>
 		
 		<c:if test="${termo == null}"> 
-			<h1>termo nulo</h1>
+			<h1>Termo nulo</h1>
 		</c:if>
 		
 		<c:if test="${pet == null}"> 
-			<h1>pet nulo</h1>
+			<h1>Pet nulo</h1>
 		</c:if>
 	</main>
 

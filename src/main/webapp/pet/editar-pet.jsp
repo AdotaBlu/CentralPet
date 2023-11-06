@@ -44,7 +44,7 @@
         		
         		<input type="hidden" id="estadoPet" name="estado-pet" value="ATIVO">
         		
-       			 <label for="drop_down_especie">Especie do Pet</label>
+       			 <label for="drop_down_especie">Espécie do Pet</label>
       			  <select name="especie-pet" id="drop_down_especie">
             		<option value="GATO">Gato</option>
          			<option value="CACHORRO">Cachorro</option>
@@ -54,7 +54,7 @@
       			  <select name="porte-pet" id="drop_down_porte">
             		<option value="MINI">Mini</option>
          			<option value="PEQUENO">Pequeno</option>
-         			<option value="MEDIO">Medio</option>
+         			<option value="MEDIO">Médio</option>
          			<option value="GRANDE">Grande</option>
          			<option value="GIGANTE">Gigante</option>
        			 </select>
@@ -62,14 +62,14 @@
        			 <label for="drop_down_sexo">Sexo do Pet</label>
       			  <select name="sexo-pet" id="drop_down_sexo">
             		<option value="MACHO">Macho</option>
-         			<option value="FEMEA">Femea</option>
+         			<option value="FEMEA">Fêmea</option>
        			 </select>
        			 
        			 
        			 <label for="drop_down_pelagem">Pelagem</label>
       			  <select name="pelagem-pet" id="drop_down_pelagem">
             		<option value="CURTO">Curto</option>
-         			<option value="MEDIO">Medio</option>
+         			<option value="MEDIO">Médio</option>
          			<option value="LONGO">Longo</option>
        			 </select>
        			 

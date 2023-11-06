@@ -7,7 +7,7 @@
 		</div>
 	</a>
 	<ul class="mid">
-	<a href="<%=request.getContextPath()%>/mostrar-cards-ongs"><li>Ongs</li></a>
+	<a href="<%=request.getContextPath()%>/mostrar-cards-ongs"><li>ONGs</li></a>
 		<a href=""><li>Acompanhamento</li></a>
 	</ul>
 	<ul class="end">

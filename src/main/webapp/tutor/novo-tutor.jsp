@@ -74,7 +74,7 @@
 				<input type="tel"id="telefone" name="telefone"value="<c:out value='${contato.telefone}' />">
 			</div>
 			<div class="input-cadastro">
-				<label for="email">Email</label> 
+				<label for="email">E-mail</label> 
 				<input type="email" id="email"name="email" value="<c:out value='${contato.email}' />">
 			</div>
 			<div class="input-cadastro">

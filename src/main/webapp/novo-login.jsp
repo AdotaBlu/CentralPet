@@ -22,7 +22,7 @@
 			<form method="post" action="confirmar-login">
 				<div class="container-input">
 					<div class="input-login">
-						<label for="email-usuario">Email</label> 
+						<label for="email-usuario">E-mail</label> 
 						<input type="text" id="email-usuario" name="email-usuario">
 					</div>
 					<div class="input-login">

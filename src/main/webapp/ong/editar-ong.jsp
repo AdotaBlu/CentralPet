@@ -33,7 +33,7 @@
 							<input type="text" id="cnpj" name="cnpj" value="<c:out value='${ong.cnpj}' />">
 						</div>
 						<div class="input-editar">
-							<label for="email">Email</label> 
+							<label for="email">E-mail</label> 
 							<input type="text" id="email" name="email" value="<c:out value='${contato.email}' />">
 						</div>
 						<div class="input-editar">
