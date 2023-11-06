@@ -427,7 +427,7 @@ input[type='file'] {
 	align-items: center;
 }
 
-/* Cards Ongs */
+/* Cards ONGs */
 
 .ong-card {
 	background-color: var(--branco);
@@ -467,7 +467,7 @@ input[type='file'] {
 	margin-left: 5px;
 }
 
-/* Perfil Ong */
+/* Perfil ONG */
 
 .container-perfil{
 	width: 70%;
