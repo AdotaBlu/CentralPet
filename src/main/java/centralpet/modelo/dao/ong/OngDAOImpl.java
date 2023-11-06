@@ -1,12 +1,15 @@
-package centralpet.modelo.dao.ong;
+ package centralpet.modelo.dao.ong;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Predicate;
 
 import org.hibernate.Session;
 
@@ -16,6 +19,7 @@ import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.usuario.Usuario;
+import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
 public class OngDAOImpl implements OngDAO {
@@ -152,7 +156,7 @@ public class OngDAOImpl implements OngDAO {
 
 	}
 
-	public List<Ong> recuperarOngBairro(String localidade) {
+	public List<Ong> recuperarOngBairro(Bairros bairro) {
 
 		Session sessao = null;
 
@@ -174,7 +178,7 @@ public class OngDAOImpl implements OngDAO {
 
 			criteria.select(raizOng);
 
-			criteria.where(construtor.like(juncaoEndereco.get(Endereco_.bairro), "%" + localidade + "%"));
+			criteria.where(construtor.equal(juncaoEndereco.get(Endereco_.bairro), bairro));
 
 			ongs = sessao.createQuery(criteria).getResultList();
 
@@ -381,6 +385,52 @@ public class OngDAOImpl implements OngDAO {
 		}
 
 		return essaOng;
+	}
+	
+	public List<Ong> recuperarOngsOpcionalBairroNome(Optional<Bairros> bairroOp, Optional<String> nomeOp) {
+		
+		Session sessao = null;
+		List<Ong> ongsFiltradas = null;
+		
+		try {
+			
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
+			Root<Ong> raizOng = criteria.from(Ong.class);
+			
+			Join<Ong, Endereco> juncaoEndereco = raizOng.join(Ong_.endereco);
+			criteria.select(raizOng);
+			
+			List<Predicate> predicados = new ArrayList<>();
+			
+			bairroOp.ifPresent(bairro -> predicados.add(construtor.equal(juncaoEndereco.get(Endereco_.bairro), bairroOp.get())));
+			nomeOp.ifPresent(ong -> predicados.add(construtor.like(raizOng.get(Ong_.nome), "%" + nomeOp.get() + "%" )));
+			
+			if (!predicados.isEmpty()) {
+				criteria.where(construtor.and(predicados.toArray(new Predicate[0])));
+			}
+			
+			ongsFiltradas = sessao.createQuery(criteria).getResultList();
+			
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return ongsFiltradas;
 	}
 
 }

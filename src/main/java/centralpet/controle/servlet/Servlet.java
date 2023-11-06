@@ -53,6 +53,7 @@ import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.termo.Termo;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.usuario.Usuario;
+import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
@@ -260,6 +261,10 @@ public class Servlet extends HttpServlet {
 				mostrarTodasOngs(request, response);
 				break;
 				
+			case "/filtrar-ongs":
+				filtrarOngs(request, response);
+				break;
+				
 			case "/mostrar-tela-aviso":
 				mostrarTelaAviso(request, response);
 				break;
@@ -382,6 +387,23 @@ public class Servlet extends HttpServlet {
 
 		request.setAttribute("ongs", todasOngs);
 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-cards-ongs.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void filtrarOngs(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		String bairro = request.getParameter("bairro");
+		Optional<Bairros> bairroOp = (bairro == "") ? Optional.empty() : Optional.of(Bairros.valueOf(bairro));
+		
+		String nomeOng = request.getParameter("nome-ong");
+		Optional<String> nomeOngOp = (nomeOng == "") ? Optional.empty() : Optional.of(nomeOng);
+		
+		List<Ong> ongsFiltradas = daoOng.recuperarOngsOpcionalBairroNome(bairroOp, nomeOngOp);
+		
+		request.setAttribute("ongs", ongsFiltradas);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-cards-ongs.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -935,7 +957,7 @@ public class Servlet extends HttpServlet {
 
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 
@@ -973,7 +995,7 @@ public class Servlet extends HttpServlet {
 		Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 
@@ -1011,7 +1033,7 @@ public class Servlet extends HttpServlet {
 
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 
@@ -1049,7 +1071,7 @@ public class Servlet extends HttpServlet {
 		Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 		Endereco endereco = new Endereco(idEndereco, logradouro, numero, bairro, cep, pontoReferencia);

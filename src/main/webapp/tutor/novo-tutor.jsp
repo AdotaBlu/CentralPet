@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"rel="stylesheet">
+
 <style><%@include file="/resources/css/estilo.css"%></style>
 <c:choose>
 	<c:when test="${tutor == null}">
@@ -33,7 +37,7 @@
 			<input type="text"id="logradouro" name="logradouro" value="<c:out value='${endereco.logradouro}' />"> 
 			<label for="numero">Número</label> 
 			<input type="number" id="numero"name="numero" value="<c:out value='${endereco.numero}' />">
-			<label for="bairro">Bairro</label> <input type="text" id="bairro"name="bairro" value="<c:out value='${endereco.bairro}' />">
+			<%@include file="../opcao-bairro.jsp"%>
 			<label for="cep">CEP</label> 
 			<input type="text" id="cep" name="cep"value="<c:out value='${endereco.cep}' />"> 
 			<label for="pontoReferencia">Ponto de Referência</label> 

@@ -25,6 +25,8 @@
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 	
+	<%@ include file="../filtro-ong.jsp" %>
+	
 	<main>
 		<div class="container-cards">
 			<c:forEach var="ong" items="${ongs}">
