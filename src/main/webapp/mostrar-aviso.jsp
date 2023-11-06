@@ -26,7 +26,7 @@
 		<div class ="tela-aviso">
 			<div class ="texto-tela-aviso">
 				<h1 id="h1-tela-aviso">PARE</h1>
-				<h3>Voce nao pode netrar aqui</h3>
+				<h3>Você não pode entrar aqui</h3>
 			</div>
 		</div>
 	</body>

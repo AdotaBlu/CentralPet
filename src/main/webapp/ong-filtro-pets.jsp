@@ -1,7 +1,7 @@
 <div class="container-filtro">
 	<form action="ong-filtrar-pets" method="post">
 	<div class="filtro">
-	<h2>Filtro de pets para ong</h2>
+	<h2>Filtro de pets para ONG</h2>
 	
 	<select name="estado" id="especie">
 		<option value="" selected>Selecione um filtro</option>

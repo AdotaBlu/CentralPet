@@ -33,7 +33,7 @@
 							<input type="text" id="cpf" name="cpf" value="<c:out value='${tutor.cpf}' />">
 						</div>
 						<div class="input-editar">
-							<label for="email">Email</label> 
+							<label for="email">E-mail</label> 
 							<input type="text" id="email" name="email" value="<c:out value='${contato.email}' />">
 						</div>
 						<div class="input-editar">

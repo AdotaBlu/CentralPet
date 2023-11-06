@@ -3,7 +3,7 @@
 	<div class="filtro">
 
 	<select name="especie" id="especie">
-		<option value="" selected>Especie</option>
+		<option value="" selected>Espécie</option>
 		<option value="CACHORRO">Cachorro</option>
 		<option value="GATO">Gato</option>
 	</select>

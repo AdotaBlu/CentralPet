@@ -64,7 +64,7 @@
         <label for="telefone">Telefone</label>
         <input type="tel" id="telefone" name="telefone" value="<c:out value='${contato.telefone}' />">
         
-        <label for="email">Email</label>
+        <label for="email">E-mail</label>
         <input type="email" id="email" name="email" value="<c:out value='${contato.email}' />">
         
         <label for="senha">Senha</label>

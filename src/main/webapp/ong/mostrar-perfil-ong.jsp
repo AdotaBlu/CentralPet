@@ -132,7 +132,7 @@
 		</c:if>
 		
 		<c:if test="${ong == null}">
-			<h1>Nenhuma ong encontrada</h1>
+			<h1>Nenhuma ONG encontrada</h1>
 		</c:if>
 	
 	</main>

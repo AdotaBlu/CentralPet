@@ -32,7 +32,7 @@
 						<th>Data de nascimento</th>
 						<th>Idade</th>
 						<th>Peso</th>
-						<th>ONG responsavel</th>
+						<th>ONG responsável</th>
 						<th>Porte</th>
 						<th>Especie</th>
 						<th>Sexo</th>

@@ -17,7 +17,7 @@
 					<tr>
 						<th>Pet</th>
 						<th>Tutor</th>
-						<th>Ong</th>
+						<th>ONG</th>
 						<th>Data</th>
 					</tr>
 				</thead>
