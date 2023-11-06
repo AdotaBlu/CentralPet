@@ -53,6 +53,7 @@ import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.termo.Termo;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.usuario.Usuario;
+import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
@@ -935,7 +936,7 @@ public class Servlet extends HttpServlet {
 
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 
@@ -973,7 +974,7 @@ public class Servlet extends HttpServlet {
 		Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 
@@ -1011,7 +1012,7 @@ public class Servlet extends HttpServlet {
 
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 
@@ -1049,7 +1050,7 @@ public class Servlet extends HttpServlet {
 		Long idEndereco = Long.parseLong(request.getParameter("id-endereco"));
 		String logradouro = request.getParameter("logradouro");
 		int numero = Integer.parseInt(request.getParameter("numero"));
-		String bairro = request.getParameter("bairro");
+		Bairros bairro = Bairros.valueOf(request.getParameter("bairro"));
 		String cep = request.getParameter("cep");
 		String pontoReferencia = request.getParameter("ponto-referencia");
 		Endereco endereco = new Endereco(idEndereco, logradouro, numero, bairro, cep, pontoReferencia);
