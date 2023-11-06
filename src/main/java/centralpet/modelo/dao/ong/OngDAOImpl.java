@@ -1,4 +1,4 @@
-package centralpet.modelo.dao.ong;
+ package centralpet.modelo.dao.ong;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.usuario.Usuario;
+import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
 
 public class OngDAOImpl implements OngDAO {
@@ -152,7 +153,7 @@ public class OngDAOImpl implements OngDAO {
 
 	}
 
-	public List<Ong> recuperarOngBairro(String localidade) {
+	public List<Ong> recuperarOngBairro(Bairros bairro) {
 
 		Session sessao = null;
 
@@ -174,7 +175,7 @@ public class OngDAOImpl implements OngDAO {
 
 			criteria.select(raizOng);
 
-			criteria.where(construtor.like(juncaoEndereco.get(Endereco_.bairro), "%" + localidade + "%"));
+			criteria.where(construtor.equal(juncaoEndereco.get(Endereco_.bairro), bairro));
 
 			ongs = sessao.createQuery(criteria).getResultList();
 
