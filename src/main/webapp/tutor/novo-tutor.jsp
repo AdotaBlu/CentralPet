@@ -37,7 +37,7 @@
 			<input type="text"id="logradouro" name="logradouro" value="<c:out value='${endereco.logradouro}' />"> 
 			<label for="numero">Número</label> 
 			<input type="number" id="numero"name="numero" value="<c:out value='${endereco.numero}' />">
-			<label for="bairro">Bairro</label> <input type="text" id="bairro"name="bairro" value="<c:out value='${endereco.bairro}' />">
+			<%@include file="../opcao-bairro.jsp"%>
 			<label for="cep">CEP</label> 
 			<input type="text" id="cep" name="cep"value="<c:out value='${endereco.cep}' />"> 
 			<label for="pontoReferencia">Ponto de Referência</label> 
