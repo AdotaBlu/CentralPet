@@ -261,6 +261,10 @@ public class Servlet extends HttpServlet {
 				mostrarTodasOngs(request, response);
 				break;
 				
+			case "/filtrar-ongs":
+				filtrarOngs(request, response);
+				break;
+				
 			case "/mostrar-tela-aviso":
 				mostrarTelaAviso(request, response);
 				break;
@@ -383,6 +387,23 @@ public class Servlet extends HttpServlet {
 
 		request.setAttribute("ongs", todasOngs);
 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-cards-ongs.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void filtrarOngs(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		String bairro = request.getParameter("bairro");
+		Optional<Bairros> bairroOp = (bairro == "") ? Optional.empty() : Optional.of(Bairros.valueOf(bairro));
+		
+		String nomeOng = request.getParameter("nome-ong");
+		Optional<String> nomeOngOp = (nomeOng == "") ? Optional.empty() : Optional.of(nomeOng);
+		
+		List<Ong> ongsFiltradas = daoOng.recuperarOngsOpcionalBairroNome(bairroOp, nomeOngOp);
+		
+		request.setAttribute("ongs", ongsFiltradas);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-cards-ongs.jsp");
 		dispatcher.forward(request, response);
 	}

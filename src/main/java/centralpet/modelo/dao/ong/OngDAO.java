@@ -1,6 +1,7 @@
 package centralpet.modelo.dao.ong;
 
 import java.util.List;
+import java.util.Optional;
 
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
@@ -20,6 +21,8 @@ public interface OngDAO {
 	List<Ong> recuperarOngNome(String nomeOng);
 
 	List<Ong> recuperarOngBairro(Bairros bairro);
+	
+	List<Ong> recuperarOngsOpcionalBairroNome(Optional<Bairros> bairro, Optional<String> nome);
 
 	List<Pet> recuperarOngPet(Ong pets);
 	

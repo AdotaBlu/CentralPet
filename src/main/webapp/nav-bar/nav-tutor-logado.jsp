@@ -13,7 +13,7 @@
 	<ul class="end">
 		<a id="botao-adotar" href="<%=request.getContextPath()%>/mostrar-cards-pets"><button = class ="botao-adotar-miniatura">Adotar</button></a>
 		<div class="li">
-			<img class ="foto-miniatura"src='<c:out value="${tutor.urlFoto}"></c:out>' alt="miniatura-tutor"  width="30px" height="30px"> 
+			<img class ="foto-miniatura"src='<c:out value="${tutor.urlFoto()}"></c:out>' alt="miniatura-tutor"  width="30px" height="30px"> 
 			<a href=""><li>Minha Conta</li></a>
 		</div>
 		<a href="<%=request.getContextPath()%>/sair"><button>Sair</button></a>
