@@ -20,6 +20,11 @@
 </c:choose>
 </head>
 <body>
+
+	<c:if test="${tutor == null && ong == null}">
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
+	</c:if>
+
 	<main>
 		<div class="container-endereco">
 			<c:if test="${contato == null && endereco == null && tutor == null}">

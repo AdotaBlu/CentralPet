@@ -8,6 +8,19 @@
 <title>Termo</title>
 </head>
 <body>
+
+	<c:if test="${tutor == null && ong == null}">
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
+	</c:if>
+	
+	<c:if test="${tutor != null}">
+	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
+	</c:if>
+	
+	<c:if test="${ong != null}">
+	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
+	</c:if>
+
 	<main>
 		<c:if test="${ong != null}">
 			<h1>

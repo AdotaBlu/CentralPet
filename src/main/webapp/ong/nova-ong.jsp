@@ -18,6 +18,12 @@
 </head>
 
 <body>
+
+	<c:if test="${tutor == null && ong == null}">
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
+	</c:if>
+	
+
 	<main>
 		<c:if test="${endereco == null && ong == null && contato == null}">
    			<form method="post"  action="cadastrar-ong" enctype="multipart/form-data">
