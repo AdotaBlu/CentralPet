@@ -8,7 +8,6 @@
 	<style><%@include file="/resources/css/estilo.css"%></style>
 	<title>Perfil da ONG</title>
 </head>
-<body>
 		<c:if test="${tutor == null && ongSessao == null}">
 		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 		</c:if>
@@ -20,25 +19,38 @@
 		<c:if test="${ongSessao != null}">
 		<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 		</c:if>
+<body>
+		
 	<main>
 		<c:if test="${ong != null}">
 			<div class="container-perfil">
 				<div class="foto-perfil-ong">
-					<img alt="foto-de-perfil" src='<c:out value="${ong.urlFoto()}"></c:out>' width="100">
+					<img id="foto-perfil-ong" alt="foto-de-perfil" src='<c:out value="${ong.urlFoto()}"></c:out>'>
 				</div>
-				<div class="info-perfil-ong">
+				<div class="container-info-perfil-ong">
+					<div class="info-perfil-ong">
 					<div class="nome-ong">
 						<h2><c:out value='${ong.nome}'></c:out></h2>
 					</div>
-					<div class="endereco-ong"></div>
-					<div class="contato-ong"></div>
+					<div class="endereco-ong">
+						<p><c:out value='${ong.endereco.logradouro}'></c:out> <p>
+						<p>, <c:out value='${ong.endereco.numero}'></c:out><p>
+					</div>
+					<div class="contato-ong">
+						<p><c:out value='${contato.telefone}'></c:out> <p>
+					</div>
+					</div>
+					<div class="container-btn-ong">
+						<c:if test="${ongSessao != null}">
+							<form method="post" action="excluir-ong">
+								<button type="submit" class="btn-perfil-ong">Deletar Conta</button>
+							</form>
+						</c:if>
+						<a href="<%=request.getContextPath()%>/editar-ong"><button type="button" class="btn-perfil-ong">Editar</button></a>
+					</div>
 				</div>
 			</div>
-		<c:if test="${ongSessao != null}">
-			<form method="post" action="excluir-ong">
-				<button type="submit" class="btn-adotar-card">Deletar Conta</button>
-			</form>
-		</c:if>
+
 		<c:if test="${avaliacoesOng != null}">
 		<div class="container-avaliacoes">
 			<h2>Avaliações de Tutores</h2>

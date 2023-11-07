@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
@@ -325,6 +326,8 @@ public class OngDAOImpl implements OngDAO {
 			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
 			Root<Ong> raizOng = criteria.from(Ong.class);
 			
+	        raizOng.fetch("endereco", JoinType.LEFT);  
+
 			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
 			
 			essaOng = sessao.createQuery(criteria).getSingleResult();

@@ -470,10 +470,55 @@ input[type='file'] {
 /* Perfil ONG */
 
 .container-perfil{
+	margin:20px;
+	padding: 10px;
 	width: 70%;
 	height: 200px;
+	display: flex;
+	align-items: center;
+}
+
+#foto-perfil-ong{
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	border: 2px solid var(--roxo);
+	margin: 10px;
 	
 }
+
+.btn-perfil-ong{
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	background-color: var(--roxo);
+	color: var(--branco);
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+	margin: 0 0 0 10;
+}
+.container-info-perfil-ong{
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.container-btn-ong{
+	width: 100%;
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.endereco-ong{
+	display: flex;
+}
+
 #ong-pets-cadastrados {
 	display: block;
 }
