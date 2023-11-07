@@ -11,6 +11,11 @@
 <style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 <body>
+
+	<c:if test="${tutor == null && ong == null}">
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
+	</c:if>
+
 	<main>
 		<div class="container-login">
 			<div class="container-logo">
