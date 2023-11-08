@@ -456,7 +456,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("tutor", tutor);
 			request.setAttribute("contato", contato);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("editar-tutor.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/tutor/editar-tutor.jsp");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
@@ -817,7 +817,6 @@ public class Servlet extends HttpServlet {
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 
 			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
-			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 			Contato contato = daoContato.recuperarContatoUsuario(ong);
 			
 			
@@ -826,7 +825,6 @@ public class Servlet extends HttpServlet {
 			
 
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
-			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
 			request.setAttribute("pets", petsOng);
 			request.setAttribute("ong", ong);
@@ -842,6 +840,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("tutor", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
+			
 		} else {
 			
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
@@ -901,13 +900,11 @@ public class Servlet extends HttpServlet {
 		else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 			Contato contato = daoContato.recuperarContatoUsuario(tutor);
 			List<Pet> petsFavoritos = daoPetFav.petsFavoritadosTutor(tutor);
 
 
 			request.setAttribute("tutor", tutor);
-			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
 			request.setAttribute("petsFavoritos", petsFavoritos);
 			request.setAttribute("tutor", tutor);
@@ -1021,7 +1018,8 @@ public class Servlet extends HttpServlet {
 		daoContato.atualizarContato(new Contato(idContato, email, telefone, tutor));
 
 		HttpSession sessao = request.getSession();
-		Usuario usuario = daoUsuario.recuperarUsuarioEmail(email);
+		Long id = daoUsuario.recuperarUsuarioEmail(email);
+		Usuario usuario = daoUsuario.recuperarUsuarioId(id);
 		sessao.setAttribute("usuario", usuario);
 		response.sendRedirect("home");
 	}
@@ -1095,7 +1093,8 @@ public class Servlet extends HttpServlet {
 		daoContato.atualizarContato(new Contato(idContato, email, telefone, ong));
 
 		HttpSession sessao = request.getSession();
-		Usuario usuario = daoUsuario.recuperarUsuarioEmail(email);
+		Long id = daoUsuario.recuperarUsuarioEmail(email);
+		Usuario usuario = daoUsuario.recuperarUsuarioId(id);
 		sessao.setAttribute("usuario", usuario);
 		response.sendRedirect("home");
 	}
@@ -1278,9 +1277,12 @@ public class Servlet extends HttpServlet {
 
 		if (existe) {
 			HttpSession sessao = request.getSession();
-			Usuario usuario = daoUsuario.recuperarUsuarioEmail(emailUsuario);
+			Long id = daoUsuario.recuperarUsuarioEmail(emailUsuario);
+			Usuario usuario = daoUsuario.recuperarUsuarioId(id);
+			
 			sessao.setAttribute("usuario", usuario);
 			response.sendRedirect("home");
+			
 		} else {
 			usuarioInvalido = "invalido";
 			

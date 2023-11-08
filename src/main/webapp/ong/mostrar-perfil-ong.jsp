@@ -50,6 +50,7 @@
 					</div>
 				</div>
 			</div>
+				<div class="line"></div>
 
 		<c:if test="${avaliacoesOng != null}">
 		<div class="container-avaliacoes">
@@ -90,7 +91,7 @@
 								<div class="pet-nome">
 									<p id="nome-pet">
 										<c:out value='${pet.nome}'></c:out>
-									</p>
+									</p> 
 								</div>
 								<div class="pet-icone">
 									<div class="pet-icone-sexo">
