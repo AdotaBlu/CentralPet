@@ -60,6 +60,7 @@ import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
+import centralpet.util.calcularRacao.CalcularRacao;
 import centralpet.util.conversorImagem.ConverterImagem;
 
 
@@ -93,6 +94,8 @@ public class Servlet extends HttpServlet {
 	private PetsFavoritosTutorDAO daoPetFav;
 	
 	private AvaliacaoDAO daoAvaliacao;
+	
+	private CalcularRacao calcularRacao;
 
 	private byte[] fotos = null;
 
@@ -109,6 +112,7 @@ public class Servlet extends HttpServlet {
 		HttpSession sessao = null;
 		daoPetFav = new PetsFavoritosTutorDAOImpl();
 		daoAvaliacao = new AvaliacaoDAOImpl();
+		calcularRacao = new CalcularRacao();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -348,6 +352,19 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
+		HttpSession sessao = request.getSession();
+			
+		if(sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+
+			request.setAttribute("tutor", tutor);
+			
+			
+		} else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+
+			request.setAttribute("ong", ong);
+		}
 
 		request.setAttribute("pets", petsDisponiveis);
 
@@ -395,7 +412,7 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String bairro = request.getParameter("bairro");
-		Optional<Bairros> bairroOp = (bairro == "") ? Optional.empty() : Optional.of(Bairros.valueOf(bairro));
+		Optional<Bairros> bairroOp = (bairro == "5 ") ? Optional.empty() : Optional.of(Bairros.valueOf(bairro));
 		
 		String nomeOng = request.getParameter("nome-ong");
 		Optional<String> nomeOngOp = (nomeOng == "") ? Optional.empty() : Optional.of(nomeOng);
@@ -782,6 +799,7 @@ public class Servlet extends HttpServlet {
 		}
 
 		if (pet != null && ong != null) {
+			request.setAttribute("racao", calcularRacao);
 			request.setAttribute("pet", pet);
 			request.setAttribute("ong", ong);
 
