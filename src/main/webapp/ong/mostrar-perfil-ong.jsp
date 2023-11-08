@@ -45,8 +45,9 @@
 							<form method="post" action="excluir-ong">
 								<button type="submit" class="btn-perfil-ong">Deletar Conta</button>
 							</form>
-						</c:if>
+						
 						<a href="<%=request.getContextPath()%>/editar-ong"><button type="button" class="btn-perfil-ong">Editar</button></a>
+						</c:if>
 					</div>
 				</div>
 			</div>
