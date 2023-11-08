@@ -326,7 +326,7 @@ public class OngDAOImpl implements OngDAO {
 			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
 			Root<Ong> raizOng = criteria.from(Ong.class);
 			
-	        raizOng.fetch("endereco", JoinType.LEFT);  
+	        raizOng.fetch(Ong_.endereco, JoinType.LEFT);  
 
 			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
 			

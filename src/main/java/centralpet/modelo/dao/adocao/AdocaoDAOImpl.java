@@ -249,9 +249,9 @@ private ConexaoFactory fabrica;
 	        CriteriaQuery<Adocao> criteria = construtor.createQuery(Adocao.class);
 	        Root<Adocao> raizAdocao = criteria.from(Adocao.class);
 
-	        raizAdocao.fetch("pet", JoinType.LEFT);  
-	        raizAdocao.fetch("ong", JoinType.LEFT);
-	        raizAdocao.fetch("termo", JoinType.LEFT);
+	        raizAdocao.fetch(Adocao_.pet, JoinType.LEFT);  
+	        raizAdocao.fetch(Adocao_.ong, JoinType.LEFT);
+	        raizAdocao.fetch(Adocao_.termo, JoinType.LEFT);
 
 	        criteria.where(construtor.equal(raizAdocao.get(Adocao_.tutor), tutor.getId()));
 	        
