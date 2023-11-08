@@ -33,7 +33,7 @@
 				<div class="editar-info-tutor">
 					<div class="editar-foto-tutor">
 						<label class="label-inserir-foto" for="foto-perfil">+</label> 
-						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${foto.urlImagem}"></c:out>">
+						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${ong.urlFoto()}"></c:out>">
 						<input type="file" name="foto-perfil" id="foto-perfil" accept="image/*">
 					</div>
 					<div class="editar-dados">

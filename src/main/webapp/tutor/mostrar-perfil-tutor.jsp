@@ -33,62 +33,34 @@
 			<h1>Nenhum tutor encontrado</h1>
 		</c:if>
 		
-		<div>
-			<table class = "infomacoes">
-				<thead>
-					<tr>
-						<th>Nome</th>
-						<th>E-mail</th>
-						<th>Telefone</th>
-						<th>CPF</th>
-						<th>Gênero</th>
-						<th>Data de Nascimento</th>
-					</tr>
-				</thead>
-				
-				<c:if test="${tutor != null && contato != null}">
-					<tbody>
-						<tr>							
-							<td><c:out value='${tutor.nome}'></c:out></td>
-							<td><c:out value='${contato.email}'></c:out></td>
-							<td><c:out value='${contato.telefone}'></c:out></td>
-							<td><c:out value='${tutor.cpf}'></c:out></td>
-							<td><c:out value='${tutor.generoTutor}'></c:out></td>
-							<td><c:out value='${tutor.dataNascimento}'></c:out></td>
-						</tr>
-					</tbody>
-				</c:if>
-			</table>
-			<table class = "infomacoes">
-				<thead>
-					<tr>
-						<th>Logradouro</th>
-						<th>Número</th>
-						<th>Bairro</th>
-						<th>CEP</th>
-						<th>Ponto de Referência</th>
-					</tr>
-				</thead>
-				
-				<c:if test="${endereco != null}">
-					<tbody>
-						<tr>							
-							<td><c:out value='${endereco.logradouro}'></c:out></td>
-							<td><c:out value='${endereco.numero}'></c:out></td>
-							<td><c:out value='${endereco.bairro}'></c:out></td>
-							<td><c:out value='${endereco.cep}'></c:out></td>
-							<td><c:out value='${endereco.pontoReferencia}'></c:out></td>
-						</tr>
-					</tbody>
-				</c:if>
-			</table>
-			
-			<c:if test="${tutor != null}">
-				<form method="post" action="excluir-tutor">
-					<button type="submit" class="btn-adotar-card">Deletar Conta</button>
-				</form>
-			</c:if>
-		</div>
+			<div class="container-perfil">
+				<div class="foto-perfil-tutor">
+					<img id="foto-perfil-tutor" alt="foto-de-perfil" src='<c:out value="${tutor.urlFoto()}"></c:out>'>
+				</div>
+				<div class="container-info-perfil-tutor">
+					<div class="info-perfil-tutor">
+					<div class="nome-tutor">
+						<h2><c:out value='${tutor.nome}'></c:out></h2>
+					</div>
+					<div class="endereco-tutor">
+						<p><c:out value='${tutor.endereco.logradouro}'></c:out> <p>
+						<p>, <c:out value='${tutor.endereco.numero}'></c:out><p>
+					</div>
+					<div class="contato-tutor">
+						<p><c:out value='${contato.telefone}'></c:out> <p>
+					</div>
+					</div>
+					<div class="container-btn-tutor">
+						<c:if test="${ongSessao != null}">
+							<form method="post" action="excluir-tutor">
+								<button type="submit" class="btn-perfil-tutor">Deletar Conta</button>
+							</form>
+						</c:if>
+						<a href="<%=request.getContextPath()%>/editar-tutor"><button type="button" class="btn-perfil-tutor">Editar</button></a>
+					</div>
+				</div>
+			</div>
+				<div class="line"></div>
 		<h1>Pets Favoritados</h1>
 			<div class="container-cards">
 			<c:forEach var="pet" items="${petsFavoritos}">

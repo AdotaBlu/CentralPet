@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
@@ -246,7 +247,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 	
-	public Usuario recuperarUsuarioEmail(String emailUsuario) {
+	public Long recuperarUsuarioEmail(String emailUsuario) {
 		Session sessao = null;
 		Usuario usuario = null;
 
@@ -281,8 +282,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				sessao.close();
 			}
 		}
-
-		return usuario;
+					
+		return usuario.getId();
 		
 	}
 	
@@ -326,5 +327,49 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuarioRecuperado;
 		
 	}
+	
+	public Usuario recuperarUsuarioId(Long id) {
+		Session sessao = null;
+		Usuario usuario = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+
+			Root<Usuario> raizUsuario= criteria.from(Usuario.class);
+			
+			raizUsuario.fetch(Usuario_.endereco, JoinType.LEFT);
+
+		    criteria.select(raizUsuario); 
+		    
+	        criteria.where(construtor.equal(raizUsuario.get(Usuario_.id), id));
+	        
+	        usuario = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return usuario;
+		
+	}
+
 
 }
