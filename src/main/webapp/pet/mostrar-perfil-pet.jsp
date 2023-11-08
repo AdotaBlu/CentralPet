@@ -75,7 +75,19 @@
 				</c:if>
 			</table>
 		</div>
+		
+		<div class="info-racao">
+					<div class="info-racao-kg">
+				<h3>Consumo em media de kg de ração por mes deste porte de pet: <c:out value="${racao.racaoCachorroPorteKilosPorMes(pet)}"></c:out></h3> 
+					</div>
+					<div class="info-racao-preco">
+					<h3>Em media pode gerar R$<c:out value="${racao.valorRacaoCachorroPorteKilosPorMes(pet)}"></c:out> de gastos mensais com ração.</h3>
+					</div>
+			</div>
+		
 		<div>
+		
+			
 			<c:if test="${ongSessao != null}">
 				<form method="post" action="editar-pet">
 					<input type="hidden" id="id-pet" name="id-pet" value="<c:out value='${pet.id}' />">
