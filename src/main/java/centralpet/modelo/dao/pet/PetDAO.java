@@ -27,16 +27,6 @@ public interface PetDAO {
 	
 	List<Pet> recuperarPetsAtivosOng(Ong ong);
 	
-	List<Pet> recuperarPetsPorte(Pet pet);
-	
-	List<Pet> recuperarPetsSexo(Pet pet);
-	
-	List<Pet> recuperarPetsEspecie(Pet pet);
-	
-	List<Pet> recuperarPetsPelagem(Pet pet);
-	
-	List<Pet> recuperarPetsEstado(Pet pet);
-	
 	List<Pet> filtrarBuscaPet(Optional<EspeciePet> especiePet, Optional<PortePet> portePet,
 			Optional<SexoPet> sexoPet, Optional<PelagemPet> pelagemPet, Optional<EstadoPet> estadoPet);
 	

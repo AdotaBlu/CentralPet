@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
@@ -133,7 +134,7 @@ public class PetDAOImpl implements PetDAO {
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
 
-			criteria.select(raizPet);
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 
 			pets = sessao.createQuery(criteria).getResultList();
 
@@ -172,11 +173,13 @@ public class PetDAOImpl implements PetDAO {
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
 			
-			criteria.select(raizPet);
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 			
 			criteria.where(construtor.equal(raizPet.get(Pet_.estadoPet), EstadoPet.ATIVO));
 
 			petsAtivos = sessao.createQuery(criteria).getResultList();
+			
+			
 
 			sessao.getTransaction().commit();
 
@@ -216,6 +219,8 @@ public class PetDAOImpl implements PetDAO {
 			Join<Pet, Ong> juncaoOng = raizPet.join(Pet_.ONG);
 
 			ParameterExpression<Long> idOng = construtor.parameter(Long.class);
+			
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 
 			criteria.where(construtor.equal(juncaoOng.get(Ong_.ID), idOng));
 
@@ -260,6 +265,8 @@ public class PetDAOImpl implements PetDAO {
 
 			//criteria.where(construtor.equal(juncaoOng.get(Ong_.ID), idOng));
 			
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			
 			criteria.where(construtor.and(
 					construtor.equal(juncaoOng.get(Ong_.id), idOng),
 					construtor.equal(raizPet.get(Pet_.estadoPet), EstadoPet.ATIVO)));
@@ -285,193 +292,6 @@ public class PetDAOImpl implements PetDAO {
 		return petsOng;
 	}
 
-	public List<Pet> recuperarPetsPorte(Pet pet) {
-
-		Session sessao = null;
-		List<Pet> petsDessePorte = null;
-
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
-
-			ParameterExpression<PortePet> portePet = construtor.parameter(PortePet.class);
-
-			criteria.where(construtor.equal(portePet, pet.getPortePet()));
-
-			petsDessePorte = sessao.createQuery(criteria).setParameter(portePet, pet.getPortePet()).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return petsDessePorte;
-	}
-
-	public List<Pet> recuperarPetsSexo(Pet pet) {
-		Session sessao = null;
-		List<Pet> petsDesseSexo = null;
-
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
-
-			ParameterExpression<SexoPet> sexoPet = construtor.parameter(SexoPet.class);
-
-			criteria.where(construtor.equal(sexoPet, pet.getSexoPet()));
-
-			petsDesseSexo = sessao.createQuery(criteria).setParameter(sexoPet, pet.getSexoPet()).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return petsDesseSexo;
-	}
-
-	public List<Pet> recuperarPetsEspecie(Pet pet) {
-
-		Session sessao = null;
-		List<Pet> petsDessaEspecie = null;
-
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
-
-			ParameterExpression<EspeciePet> especiePet = construtor.parameter(EspeciePet.class);
-
-			criteria.where(construtor.equal(especiePet, pet.getEspeciePet()));
-
-			petsDessaEspecie = sessao.createQuery(criteria).setParameter(especiePet, pet.getEspeciePet())
-					.getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return petsDessaEspecie;
-	}
-
-
-	public List<Pet> recuperarPetsEstado(Pet pet) {
-
-		Session sessao = null;
-		List<Pet> petsDesseEstado = null;
-
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
-
-			ParameterExpression<EstadoPet> estadoPet = construtor.parameter(EstadoPet.class);
-
-			criteria.where(construtor.equal(estadoPet, pet.getEstadoPet()));
-
-			petsDesseEstado = sessao.createQuery(criteria).setParameter(estadoPet, pet.getEstadoPet()).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return petsDesseEstado;
-	}
-
-	public List<Pet> recuperarPetsPelagem(Pet pet) {
-
-		Session sessao = null;
-		List<Pet> petsDessaPelagem = null;
-
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
-
-			ParameterExpression<PelagemPet> pelagemPet = construtor.parameter(PelagemPet.class);
-
-			criteria.where(construtor.equal(pelagemPet, pet.getPelagemPet()));
-
-			petsDessaPelagem = sessao.createQuery(criteria).setParameter(pelagemPet, pet.getPelagemPet())
-					.getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return petsDessaPelagem;
-	}
-
 	public Pet recuperarPet(Long id) {
 
 		Session sessao = null;
@@ -485,6 +305,8 @@ public class PetDAOImpl implements PetDAO {
 
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
+			
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 
 			criteria.where(construtor.equal(raizPet.get(Pet_.id), id));
 
@@ -524,7 +346,7 @@ public class PetDAOImpl implements PetDAO {
 			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
 			Root<Pet> raizPet = criteria.from(Pet.class);
 
-			criteria.select(raizPet);
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 
 			List<Predicate> predicatos = new ArrayList<>();
 			
@@ -570,7 +392,8 @@ public class PetDAOImpl implements PetDAO {
 			Root<Pet> raizPet = criteria.from(Pet.class);
 			
 			Join<Pet, Ong> juncaoOng = raizPet.join(Pet_.ONG);
-			criteria.select(raizPet);
+			
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 
 			List<Predicate> predicados = new ArrayList<>();
 			
@@ -598,5 +421,7 @@ public class PetDAOImpl implements PetDAO {
 		}
 		return petsFiltrados;
 	}
+	
+	
 }
 	

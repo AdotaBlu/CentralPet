@@ -781,10 +781,8 @@ public class Servlet extends HttpServlet {
 		Long idPet = Long.parseLong(request.getParameter("id-pet"));
 		Long idOng = Long.parseLong(request.getParameter("id-ong"));
 		Pet pet = daoPet.recuperarPet(idPet);
-		List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(idPet);
+		List<FotosPet> fotosPet = pet.getFotos();
 		Ong ong = daoOng.recuperarOng(idOng);
-		List<FotoDTO> fotoDTOs = new ArrayList<>();
-		String urlFoto;
 
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
@@ -803,16 +801,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("pet", pet);
 			request.setAttribute("ong", ong);
 
-			for (FotosPet foto : fotosPet) {
-
-				FotoDTO fotoDTO = new FotoDTO();
-				urlFoto = Base64.getEncoder().encodeToString(foto.getDadosImagem());
-				fotoDTO.setId(foto.getId());
-				fotoDTO.setUrlImagem("data:image/jpeg;base64," + urlFoto);
-				fotoDTOs.add(fotoDTO);
-			}
-
-			request.setAttribute("fotos", fotoDTOs);
+			request.setAttribute("fotos", fotosPet);
 
 		}
 		

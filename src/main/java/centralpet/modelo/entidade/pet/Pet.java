@@ -82,7 +82,7 @@ public class Pet implements Serializable {
 	@Column(name = "pelagem_pet", nullable = false, unique = false)
 	private PelagemPet pelagemPet;
 
-	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<FotosPet> fotos = new ArrayList<>();
 
 //	@OneToOne(fetch = FetchType.LAZY)
