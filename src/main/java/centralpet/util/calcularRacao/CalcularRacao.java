@@ -35,7 +35,7 @@ public class CalcularRacao {
 		return kilosPorMes;
 	}
 	
-	public double valorRacaoCachorroPorteKilosPorMes (Pet pet) {
+	public double valorRacaoCachorroPorteKilosPorMes(Pet pet) {
 		
 		PortePet portePet = pet.getPortePet();
 		double valorRacao = 0;
