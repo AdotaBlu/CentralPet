@@ -8,11 +8,11 @@
 	<style><%@include file="/resources/css/estilo.css"%></style>
 	<title>Perfil da ONG</title>
 </head>
-		<c:if test="${tutor == null && ongSessao == null}">
+		<c:if test="${tutorSessao == null && ongSessao == null}">
 		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 		</c:if>
 	
-		<c:if test="${tutor != null}">
+		<c:if test="${tutorSessao != null}">
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 		</c:if>
 	
