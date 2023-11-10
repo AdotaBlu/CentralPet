@@ -12,6 +12,7 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
 import centralpet.modelo.entidade.ong.Ong;
@@ -36,13 +37,18 @@ public class PetDAOImpl implements PetDAO {
 	public void inserirPet(Pet pet) {
 
 		Session sessao = null;
-
+		
+		
 		try {
 
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
-
+			
 			sessao.save(pet);
+			
+			Ong ong = sessao.get(Ong.class, pet.getOng().getId());
+			Hibernate.initialize(ong.getPets());
+			ong.adicionarPet(pet);
 
 			sessao.getTransaction().commit();
 
@@ -135,6 +141,7 @@ public class PetDAOImpl implements PetDAO {
 			Root<Pet> raizPet = criteria.from(Pet.class);
 
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.ong, JoinType.LEFT);
 
 			pets = sessao.createQuery(criteria).getResultList();
 
@@ -174,6 +181,7 @@ public class PetDAOImpl implements PetDAO {
 			Root<Pet> raizPet = criteria.from(Pet.class);
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.ong, JoinType.LEFT);
 			
 			criteria.where(construtor.equal(raizPet.get(Pet_.estadoPet), EstadoPet.ATIVO));
 
@@ -221,6 +229,7 @@ public class PetDAOImpl implements PetDAO {
 			ParameterExpression<Long> idOng = construtor.parameter(Long.class);
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.ong, JoinType.LEFT);
 
 			criteria.where(construtor.equal(juncaoOng.get(Ong_.ID), idOng));
 
@@ -266,6 +275,7 @@ public class PetDAOImpl implements PetDAO {
 			//criteria.where(construtor.equal(juncaoOng.get(Ong_.ID), idOng));
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.ong, JoinType.LEFT);
 			
 			criteria.where(construtor.and(
 					construtor.equal(juncaoOng.get(Ong_.id), idOng),
@@ -307,6 +317,7 @@ public class PetDAOImpl implements PetDAO {
 			Root<Pet> raizPet = criteria.from(Pet.class);
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.ong, JoinType.LEFT);
 
 			criteria.where(construtor.equal(raizPet.get(Pet_.id), id));
 
@@ -347,6 +358,7 @@ public class PetDAOImpl implements PetDAO {
 			Root<Pet> raizPet = criteria.from(Pet.class);
 
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.ong, JoinType.LEFT);
 
 			List<Predicate> predicatos = new ArrayList<>();
 			
@@ -394,6 +406,7 @@ public class PetDAOImpl implements PetDAO {
 			Join<Pet, Ong> juncaoOng = raizPet.join(Pet_.ONG);
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.ong, JoinType.LEFT);
 
 			List<Predicate> predicados = new ArrayList<>();
 			

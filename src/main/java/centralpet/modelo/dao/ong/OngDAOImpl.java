@@ -106,109 +106,6 @@ public class OngDAOImpl implements OngDAO {
 		}
 	}
 
-	// Checar os parâmetros de comparação (equals)
-	public List<Ong> recuperarOngNome(String nomeOng) {
-
-		Session sessao = null;
-
-		List<Ong> ongs= null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
-
-			Root<Ong> raizOng = criteria.from(Ong.class);
-			
-			criteria.select(raizOng);
-
-			criteria.where(construtor.like(raizOng.get(Ong_.nome), "%" + nomeOng + "%"));
-
-			ongs = sessao.createQuery(criteria).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-
-				sessao.getTransaction().rollback();
-
-			}
-
-		} finally {
-
-			if (sessao != null) {
-
-				sessao.close();
-
-			}
-
-		}
-
-		return ongs;
-
-	}
-
-	public List<Ong> recuperarOngBairro(Bairros bairro) {
-
-		Session sessao = null;
-
-		List<Ong> ongs = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
-
-			Root<Ong> raizOng = criteria.from(Ong.class);
-
-			Join<Ong, Endereco> juncaoEndereco = raizOng.join(Ong_.endereco);
-
-			criteria.select(raizOng);
-
-			criteria.where(construtor.equal(juncaoEndereco.get(Endereco_.bairro), bairro));
-
-			ongs = sessao.createQuery(criteria).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-
-				sessao.getTransaction().rollback();
-
-			}
-
-		} finally {
-
-			if (sessao != null) {
-
-				sessao.close();
-
-			}
-
-		}
-
-		return ongs;
-
-	}
-
 
 	public List<Pet> recuperarOngPet(Ong pet) {
 
@@ -231,6 +128,8 @@ public class OngDAOImpl implements OngDAO {
 			Join<Ong, Pet> juncaoBairros = raizOng.join(Ong_.PETS);
 
 			ParameterExpression<Long> idOng = construtor.parameter(Long.class);
+			
+			raizOng.fetch(Ong_.pets, JoinType.LEFT);
 
 			criteria.where(construtor.equal(juncaoBairros.get(Ong_.ID), idOng));
 
@@ -282,7 +181,7 @@ public class OngDAOImpl implements OngDAO {
 
 			Root<Ong> raizOng = criteria.from(Ong.class);
 
-			criteria.select(raizOng);
+			raizOng.fetch(Ong_.pets, JoinType.LEFT);
 
 			ongs = sessao.createQuery(criteria).getResultList();
 
@@ -326,6 +225,8 @@ public class OngDAOImpl implements OngDAO {
 			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
 			Root<Ong> raizOng = criteria.from(Ong.class);
 			
+			raizOng.fetch(Ong_.pets, JoinType.LEFT);
+			
 	        raizOng.fetch(Ong_.endereco, JoinType.LEFT);  
 
 			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
@@ -365,6 +266,8 @@ public class OngDAOImpl implements OngDAO {
 			
 			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
 			Root<Ong> raizOng = criteria.from(Ong.class);
+			
+			raizOng.fetch(Ong_.pets, JoinType.LEFT);
 			
 			criteria.where(construtor.equal(raizOng.get(Ong_.id), usuario.getId()));
 			
@@ -406,7 +309,7 @@ public class OngDAOImpl implements OngDAO {
 			
 			Join<Ong, Endereco> juncaoEndereco = raizOng.join(Ong_.endereco);
 			criteria.select(raizOng);
-			
+			raizOng.fetch(Ong_.pets, JoinType.LEFT);
 			List<Predicate> predicados = new ArrayList<>();
 			
 			bairroOp.ifPresent(bairro -> predicados.add(construtor.equal(juncaoEndereco.get(Endereco_.bairro), bairroOp.get())));
