@@ -46,6 +46,7 @@ public class PetDAOImpl implements PetDAO {
 			
 			sessao.save(pet);
 			
+			//pegar a sessao da ong pra persistir a lista para conseguir adicionar depois
 			Ong ong = sessao.get(Ong.class, pet.getOng().getId());
 			Hibernate.initialize(ong.getPets());
 			ong.adicionarPet(pet);
