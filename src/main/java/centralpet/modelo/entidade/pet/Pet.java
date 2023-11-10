@@ -21,6 +21,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
@@ -58,7 +61,7 @@ public class Pet implements Serializable {
 	@Column(name = "peso_pet", nullable = false, unique = false)
 	private Double peso;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_ong", nullable = false)
 	private Ong ong;
 
