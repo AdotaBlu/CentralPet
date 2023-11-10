@@ -378,6 +378,19 @@ public class Servlet extends HttpServlet {
 	private void filtrarPets(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession sessao = request.getSession();
+		
+		if(sessao.getAttribute("usuario") instanceof Tutor) {
+			
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			request.setAttribute("tutor", tutor);
+		
+		} else if(sessao.getAttribute("usuario") instanceof Ong) {
+			
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			request.setAttribute("ongSessao", ong);
+		}
+		
 		String especie = request.getParameter("especie");
 		Optional<EspeciePet> especieOp = (especie == "") ? Optional.empty() : Optional.of(EspeciePet.valueOf(especie));
 
@@ -402,6 +415,19 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTodasOngs(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		
+		if(sessao.getAttribute("usuario") instanceof Tutor) {
+			
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			request.setAttribute("tutorSessao", tutor);
+		
+		} else if(sessao.getAttribute("usuario") instanceof Ong) {
+			
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			request.setAttribute("ongSessao", ong);
+		}
 
 		List<Ong> todasOngs = daoOng.recuperarTodasOngs();
 
@@ -414,8 +440,21 @@ public class Servlet extends HttpServlet {
 	private void filtrarOngs(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
+		HttpSession sessao = request.getSession();
+		
+		if(sessao.getAttribute("usuario") instanceof Tutor) {
+			
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			request.setAttribute("tutorSessao", tutor);
+		
+		} else if(sessao.getAttribute("usuario") instanceof Ong) {
+			
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			request.setAttribute("ongSessao", ong);
+		}
+		
 		String bairro = request.getParameter("bairro");
-		Optional<Bairros> bairroOp = (bairro == "5 ") ? Optional.empty() : Optional.of(Bairros.valueOf(bairro));
+		Optional<Bairros> bairroOp = (bairro == "") ? Optional.empty() : Optional.of(Bairros.valueOf(bairro));
 		
 		String nomeOng = request.getParameter("nome-ong");
 		Optional<String> nomeOngOp = (nomeOng == "") ? Optional.empty() : Optional.of(nomeOng);
@@ -847,7 +886,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("pets",petsOng);
 			request.setAttribute("ong", ong);
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/mostrar-perfil-ong.jsp");
 			dispatcher.forward(request, response);
 			
