@@ -308,8 +308,10 @@ public class OngDAOImpl implements OngDAO {
 			Root<Ong> raizOng = criteria.from(Ong.class);
 			
 			Join<Ong, Endereco> juncaoEndereco = raizOng.join(Ong_.endereco);
+			
 			criteria.select(raizOng);
 			raizOng.fetch(Ong_.pets, JoinType.LEFT);
+			
 			List<Predicate> predicados = new ArrayList<>();
 			
 			bairroOp.ifPresent(bairro -> predicados.add(construtor.equal(juncaoEndereco.get(Endereco_.bairro), bairroOp.get())));
