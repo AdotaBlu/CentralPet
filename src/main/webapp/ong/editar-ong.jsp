@@ -11,6 +11,19 @@
 <style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 <body>
+
+	<c:if test="${tutor == null && ong == null}">
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
+	</c:if>
+	
+	<c:if test="${tutor != null}">
+	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
+	</c:if>
+	
+	<c:if test="${ong != null}">
+	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
+	</c:if>
+
 	<main>
 		
 		<form method="post" action="atualizar-ong" enctype="multipart/form-data">
@@ -20,7 +33,7 @@
 				<div class="editar-info-tutor">
 					<div class="editar-foto-tutor">
 						<label class="label-inserir-foto" for="foto-perfil">+</label> 
-						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${foto.urlImagem}"></c:out>">
+						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${ong.urlFoto()}"></c:out>">
 						<input type="file" name="foto-perfil" id="foto-perfil" accept="image/*">
 					</div>
 					<div class="editar-dados">

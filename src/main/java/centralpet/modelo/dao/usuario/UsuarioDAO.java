@@ -17,8 +17,11 @@ public interface UsuarioDAO {
 	
 	Boolean verificarUsuario(String emailUsuario, String senhaUsuario);
 	
-	Usuario recuperarUsuarioEmail(String nomeUsuario);
+	Long recuperarUsuarioEmail(String nomeUsuario);
 	
 	Usuario recuperarUsuario(Usuario usuario);
+	
+	Usuario recuperarUsuarioId(Long id);
+
 	
 }

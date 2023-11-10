@@ -17,10 +17,6 @@ public interface OngDAO {
 	void atualizarOng(Ong ong);
 
 	List<Ong> recuperarTodasOngs();
-
-	List<Ong> recuperarOngNome(String nomeOng);
-
-	List<Ong> recuperarOngBairro(Bairros bairro);
 	
 	List<Ong> recuperarOngsOpcionalBairroNome(Optional<Bairros> bairro, Optional<String> nome);
 

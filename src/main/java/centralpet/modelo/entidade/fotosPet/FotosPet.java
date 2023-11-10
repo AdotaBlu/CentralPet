@@ -1,6 +1,7 @@
 package centralpet.modelo.entidade.fotosPet;
 
 import java.io.Serializable;
+import java.util.Base64;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -70,6 +71,9 @@ public class FotosPet implements Serializable {
 		this.pet = pet;
 	}
     
-    
+	public String urlFoto() {
+		String urlFoto =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.dadosImagem));
+		return urlFoto;
+	}
 	
 }

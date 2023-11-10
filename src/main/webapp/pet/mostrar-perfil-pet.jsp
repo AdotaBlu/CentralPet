@@ -14,6 +14,19 @@
 </head>
 
 <body>
+
+	<c:if test="${tutor == null && ong == null}">
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
+	</c:if>
+	
+	<c:if test="${tutor != null}">
+	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
+	</c:if>
+	
+	<c:if test="${ongSessao != null}">
+	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
+	</c:if>
+
 	<main>
 		<c:if test="${pet != null}">
 			<h1><c:out value='${pet.nome}'/></h1>
@@ -23,7 +36,7 @@
 				<c:if test="${not empty fotos}">
 					<h2>Fotos do pet</h2>
 					<c:forEach var="foto" items="${fotos}">
-						<img class="imagem-perfil-pet" src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
+						<img class="imagem-perfil-pet" src='<c:out value="${foto.urlFoto()}"></c:out>' alt="Foto do Pet">
 					</c:forEach>
 				</c:if>
 			</div>
@@ -62,7 +75,19 @@
 				</c:if>
 			</table>
 		</div>
+		
+		<div class="info-racao">
+					<div class="info-racao-kg">
+				<h3>Consumo em media de kg de ração por mes deste porte de pet: <c:out value="${racao.racaoCachorroPorteKilosPorMes(pet)}"></c:out></h3> 
+					</div>
+					<div class="info-racao-preco">
+					<h3>Em media pode gerar R$<c:out value="${racao.valorRacaoCachorroPorteKilosPorMes(pet)}"></c:out> de gastos mensais com ração.</h3>
+					</div>
+			</div>
+		
 		<div>
+		
+			
 			<c:if test="${ongSessao != null}">
 				<form method="post" action="editar-pet">
 					<input type="hidden" id="id-pet" name="id-pet" value="<c:out value='${pet.id}' />">

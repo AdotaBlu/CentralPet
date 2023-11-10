@@ -24,6 +24,8 @@ public class ConverterImagem {
 	public void adicionarImagensArrayFotosPet(Pet pet, Collection<Part> parteImagem) throws IOException {
 
 		FotosPetDAO daoFotosPet;
+		
+		
 
 		for (Part partes : parteImagem) {
 			
@@ -42,6 +44,7 @@ public class ConverterImagem {
 				foto = new FotosPet(fotos, pet);
 
 				pet.adicionarFoto(foto);
+				 
 				daoFotosPet.inserirFotosPet(foto);
 			}
 
