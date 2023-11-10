@@ -27,6 +27,15 @@ main {
 	background-color: var(--gelo);
 }
 
+.container_secaoHome{
+	flex: 2;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 form {
 	display: grid;
 	gap: 10px;

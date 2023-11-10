@@ -28,6 +28,26 @@
 	</c:if>
 	
 	<main>
+		<div class="container_secaoHome">
+		<img src="" alt="Logo do CentralPet">
+		<span>Adote e ajude um animalzinho a encontrar novo lar a ele.</span>
+		</div>
+		
+		<div class="container_secaoHome">
+		</div>
+		
+		<div class="container_secaoHome">
+		</div>
+		
+		<div class="container_secaoHome">
+		</div>
+		
+		<div class="container_secaoHome">
+		</div>
+		
+		<div class="container_secaoHome">
+		</div>
+	
 		<a href="<%=request.getContextPath()%>/novo-tutor">Cadastrar Tutor</a>
 		<a href="<%=request.getContextPath()%>/editar-tutor">Editar Tutor</a>
 		<a href="<%=request.getContextPath()%>/mostrar-perfil-tutor">Perfil Tutor</a>
