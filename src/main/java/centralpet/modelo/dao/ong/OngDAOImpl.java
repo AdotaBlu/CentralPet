@@ -182,6 +182,8 @@ public class OngDAOImpl implements OngDAO {
 			Root<Ong> raizOng = criteria.from(Ong.class);
 
 			raizOng.fetch(Ong_.pets, JoinType.LEFT);
+			
+			criteria.distinct(true);
 
 			ongs = sessao.createQuery(criteria).getResultList();
 
@@ -227,7 +229,9 @@ public class OngDAOImpl implements OngDAO {
 			
 			raizOng.fetch(Ong_.pets, JoinType.LEFT);
 			
-	        raizOng.fetch(Ong_.endereco, JoinType.LEFT);  
+	        raizOng.fetch(Ong_.endereco, JoinType.LEFT); 
+	        
+	        criteria.distinct(true);
 
 			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
 			
@@ -268,6 +272,8 @@ public class OngDAOImpl implements OngDAO {
 			Root<Ong> raizOng = criteria.from(Ong.class);
 			
 			raizOng.fetch(Ong_.pets, JoinType.LEFT);
+			
+			criteria.distinct(true);
 			
 			criteria.where(construtor.equal(raizOng.get(Ong_.id), usuario.getId()));
 			
@@ -311,6 +317,8 @@ public class OngDAOImpl implements OngDAO {
 			
 			criteria.select(raizOng);
 			raizOng.fetch(Ong_.pets, JoinType.LEFT);
+			
+			criteria.distinct(true);
 			
 			List<Predicate> predicados = new ArrayList<>();
 			

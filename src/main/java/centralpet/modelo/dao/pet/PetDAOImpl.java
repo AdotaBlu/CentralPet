@@ -143,6 +143,8 @@ public class PetDAOImpl implements PetDAO {
 
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 			raizPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
 
 			pets = sessao.createQuery(criteria).getResultList();
 
@@ -183,6 +185,8 @@ public class PetDAOImpl implements PetDAO {
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 			raizPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
 			
 			criteria.where(construtor.equal(raizPet.get(Pet_.estadoPet), EstadoPet.ATIVO));
 
@@ -231,6 +235,8 @@ public class PetDAOImpl implements PetDAO {
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 			raizPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
 
 			criteria.where(construtor.equal(juncaoOng.get(Ong_.ID), idOng));
 
@@ -275,8 +281,10 @@ public class PetDAOImpl implements PetDAO {
 
 			//criteria.where(construtor.equal(juncaoOng.get(Ong_.ID), idOng));
 			
-			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
+			raizPet.fetch(Pet_.fotos, JoinType.LEFT );
 			raizPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
 			
 			criteria.where(construtor.and(
 					construtor.equal(juncaoOng.get(Ong_.id), idOng),
@@ -319,6 +327,8 @@ public class PetDAOImpl implements PetDAO {
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 			raizPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
 
 			criteria.where(construtor.equal(raizPet.get(Pet_.id), id));
 
@@ -360,6 +370,8 @@ public class PetDAOImpl implements PetDAO {
 
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 			raizPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
 
 			List<Predicate> predicatos = new ArrayList<>();
 			
@@ -408,6 +420,8 @@ public class PetDAOImpl implements PetDAO {
 			
 			raizPet.fetch(Pet_.fotos, JoinType.LEFT);
 			raizPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
 
 			List<Predicate> predicados = new ArrayList<>();
 			
