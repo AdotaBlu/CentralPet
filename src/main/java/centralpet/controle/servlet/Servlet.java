@@ -352,9 +352,7 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
-		for (Pet pet : petsDisponiveis) {
-			System.out.println(pet.getNome());
-		}
+		
 		HttpSession sessao = request.getSession();
 			
 		if(sessao.getAttribute("usuario") instanceof Tutor) {
