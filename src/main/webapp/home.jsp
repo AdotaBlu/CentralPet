@@ -27,27 +27,52 @@
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 	
-	<main>
-		<div class="container_secaoHome">
-		<img src="" alt="Logo do CentralPet">
-		<span>Adote e ajude um animalzinho a encontrar novo lar a ele.</span>
-		</div>
+	<div class="conteinerHome">
+		<div class="container-secaoHome">
+				<img src="/CentralPet/src/main/webapp/resources/img/logo-redonda.png" alt="Logo do CentralPet">
 		
-		<div class="container_secaoHome">
+				<div>
+					<p><b>Adote</b> e ajude um <br>animalzinho a encontrar <br>um lar.</p>
+				</div>
+				
+			</div>
+			
+			<div class="container-secaoHome">
+				<p><b>Fique de olho e escolha um amigo.</b></p>
+				<div>
+					<span>Cards de pets</span>
+				</div>
+			</div>
+			
+			<div class="container_secaoHome">
+				<p>Dê o primeiro passo para encontrar seu novo amigo peludo! Nesta etapa, explore os pets disponíveis
+				 para adoção. Veja suas fotos, leia suas histórias e descubra qual deles toca seu coração.</p>
+				 
+				<p>Já foram adotados pela central pet até agora.</p>
+
+			</div>
+			
+			<div class="container-secaoHome">
+					<p><b>Ongs em destaque.</b></p>
+				<div>
+					<span>CARD DAS ONGS EM DESTAQUE</span>
+				</div>
+				
+				<p>Essa são as ONGs que estão em destaque, deêm uma olhada no 
+				perfil delas para poder achar o seu novo amiguinho, e dar um 
+				novo lar e uma nova família para eles.</p>
+					
+			</div>
+			
+			<div class="container-secaoHome">
+			</div>
+			
+			<div class="container-secaoHome">
 		</div>
-		
-		<div class="container_secaoHome">
-		</div>
-		
-		<div class="container_secaoHome">
-		</div>
-		
-		<div class="container_secaoHome">
-		</div>
-		
-		<div class="container_secaoHome">
-		</div>
+	</div>
 	
+	
+	<main>
 		<a href="<%=request.getContextPath()%>/novo-tutor">Cadastrar Tutor</a>
 		<a href="<%=request.getContextPath()%>/editar-tutor">Editar Tutor</a>
 		<a href="<%=request.getContextPath()%>/mostrar-perfil-tutor">Perfil Tutor</a>
