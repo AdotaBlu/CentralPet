@@ -27,6 +27,32 @@ main {
 	background-color: var(--gelo);
 }
 
+/* Estilos HOME */
+
+.conteinerHome{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--gelo);
+	height: 100vh;
+}
+
+.container-secaoHome{
+	flex: 2;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.img_logo_home{
+	
+}
+
 form {
 	display: grid;
 	gap: 10px;
@@ -176,8 +202,9 @@ li:hover {
 	margin-left: 5px;
 	display: flex;
 	font-size: 12px;
-	color: var(--roxo);
+	color: #515151;
 	list-style: none;
+	
 }
 
 .end {
@@ -605,17 +632,14 @@ input[type='file'] {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	
 	transform: translate(-50%, -50%);
 }
 
 .texto-tela-aviso {
-	
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	
 }
 
 #h1-tela-aviso {
