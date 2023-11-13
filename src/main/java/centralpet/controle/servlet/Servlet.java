@@ -948,7 +948,7 @@ public class Servlet extends HttpServlet {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
 			Contato contato = daoContato.recuperarContatoUsuario(tutor);
-			List<Pet> petsFavoritos = daoPetFav.petsFavoritadosTutor(tutor);
+			List<Pet> petsFavoritos = daoPet.recuperarPetsFavoritosTutor(tutor.getId());
 
 
 			request.setAttribute("tutor", tutor);
@@ -1233,7 +1233,7 @@ public class Servlet extends HttpServlet {
 			daoPetFav.inserirPetsFavoritados(petFavTutor);
 			
 			
-			response.sendRedirect("/pet/mostrar-cards-pets");
+			response.sendRedirect("mostrar-cards-pets");
 		}
 	}
 
@@ -1250,7 +1250,7 @@ public class Servlet extends HttpServlet {
 			daoPetFav.deletarPetsFavoritados(petFavTutor);
 			
 			
-			response.sendRedirect("/pet/mostrar-cards-pets");
+			response.sendRedirect("mostrar-cards-pets");
 
 		}
 	}

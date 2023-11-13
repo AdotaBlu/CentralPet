@@ -15,6 +15,8 @@ import javax.persistence.criteria.Predicate;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import centralpet.modelo.entidade.favorito.PetsFavoritosTutor;
+import centralpet.modelo.entidade.favorito.PetsFavoritosTutor_;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.pet.Pet;
@@ -448,6 +450,50 @@ public class PetDAOImpl implements PetDAO {
 			}
 		}
 		return petsFiltrados;
+	}
+	
+	public List<Pet> recuperarPetsFavoritosTutor(Long idTutor) {
+		
+		Session sessao = null; 
+		List<Pet> petsFavortitadosTutor = null;
+		
+		try {
+			
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+			Root<PetsFavoritosTutor> raizPetsFav = criteria.from(PetsFavoritosTutor.class);
+			
+			Join<PetsFavoritosTutor, Pet> juncaoPet = raizPetsFav.join(PetsFavoritosTutor_.pet);
+			
+			criteria.select(raizPetsFav.get(PetsFavoritosTutor_.pet));
+			
+			juncaoPet.fetch(Pet_.fotos, JoinType.LEFT);
+			juncaoPet.fetch(Pet_.ong, JoinType.LEFT);
+			
+			criteria.distinct(true);
+			
+			criteria.where(construtor.equal(raizPetsFav.get(PetsFavoritosTutor_.usuario), idTutor));
+			
+			petsFavortitadosTutor = sessao.createQuery(criteria).getResultList();
+			
+		} catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
+			if(sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+			
+		} finally {
+			if(sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return petsFavortitadosTutor;
 	}
 	
 	
