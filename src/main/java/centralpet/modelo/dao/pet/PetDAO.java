@@ -33,4 +33,6 @@ public interface PetDAO {
 	List<Pet> filtrarPetsEstado(Optional<EstadoPet> estadoPet, Ong ong);
 	
 	Pet recuperarPet(Long id);
+	
+	List<Pet> recuperarPetsFavoritosTutor(Long idTutor);
 }
