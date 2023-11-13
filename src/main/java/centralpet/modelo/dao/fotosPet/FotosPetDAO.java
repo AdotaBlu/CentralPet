@@ -12,7 +12,4 @@ public interface FotosPetDAO {
 	 
 	 List<FotosPet> recuperarFotosPet(Long id);
 	 
-	 FotosPet recuperarFotoId(Long id);
-	 
-	 List<FotosPet> recuperarTodasFotos();
 }

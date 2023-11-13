@@ -3,7 +3,7 @@ package centralpet.controle.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
@@ -27,8 +27,6 @@ import centralpet.modelo.dao.contato.ContatoDAO;
 import centralpet.modelo.dao.contato.ContatoDAOImpl;
 import centralpet.modelo.dao.endereco.EnderecoDAO;
 import centralpet.modelo.dao.endereco.EnderecoDAOImpl;
-import centralpet.modelo.dao.fotosPet.FotosPetDAO;
-import centralpet.modelo.dao.fotosPet.FotosPetDAOImpl;
 import centralpet.modelo.dao.ong.OngDAO;
 import centralpet.modelo.dao.ong.OngDAOImpl;
 import centralpet.modelo.dao.pet.PetDAO;
@@ -85,7 +83,6 @@ public class Servlet extends HttpServlet {
 
 	private TermoDAO daoTermo;
 
-	private FotosPetDAO daoFotosPet;
 
 	private UsuarioDAO daoUsuario;
 
@@ -107,7 +104,6 @@ public class Servlet extends HttpServlet {
 		daoPet = new PetDAOImpl();
 		daoAdocao = new AdocaoDAOImpl();
 		daoTermo = new TermoDAOImpl();
-		daoFotosPet = new FotosPetDAOImpl();
 		daoUsuario = new UsuarioDAOImpl();
 		HttpSession sessao = null;
 		daoPetFav = new PetsFavoritosTutorDAOImpl();
@@ -702,22 +698,11 @@ public class Servlet extends HttpServlet {
 
 			Long idPet = Long.parseLong(request.getParameter("id-pet"));
 			Pet pet = daoPet.recuperarPet(idPet);
-			List<FotosPet> fotosPet = daoFotosPet.recuperarFotosPet(idPet);
-			List<FotoDTO> fotoDTOs = new ArrayList<>();
-			String urlFotoPet;
-
-			for (FotosPet fotoPet : fotosPet) {
-
-				FotoDTO fotoDTOPet = new FotoDTO();
-				urlFotoPet = Base64.getEncoder().encodeToString(fotoPet.getDadosImagem());
-				fotoDTOPet.setId(fotoPet.getId());
-				fotoDTOPet.setUrlImagem("data:image/jpeg;base64," + urlFotoPet);
-				fotoDTOs.add(fotoDTOPet);
-			}
-
+			List<FotosPet> fotosPet = pet.getFotos();
+			
 			request.setAttribute("pet", pet);
-			request.setAttribute("fotos", fotoDTOs);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/editar-pet.jsp");
+			request.setAttribute("fotos", fotosPet);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/pet/editar-pet.jsp");
 			dispatcher.forward(request, response);
 		}
 
@@ -1200,7 +1185,7 @@ public class Servlet extends HttpServlet {
 		Usuario usuario = daoUsuario.recuperarUsuario(ongPet);
 		sessao.setAttribute("usuario", usuario);
 
-		response.sendRedirect("/pet/mostrar-cards-pets.jsp");
+		response.sendRedirect("mostrar-cards-pets");
 	}
 
 	private void excluirPet(HttpServletRequest request, HttpServletResponse response)
