@@ -645,3 +645,52 @@ input[type='file'] {
 	border: 2px solid var(--roxo);
 }
 
+/* Perfil do pet */
+
+.container-principal-pet{
+	margin: 50px 0 50px 0;
+	display: flex;
+	width: 60%;
+	height: 300px;
+}
+#foto-principal-pet{
+	width:250px; 
+	height:250px;
+	border-radius: 5px;
+}
+
+.container-info{
+	width: 100%;
+	margin-left: 20px;
+}
+
+.container-dados-pet{
+	height: 30%;
+	width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.container-nome-fav{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ong-pet{
+	display: flex;
+	align-items: center;
+}
+
+#nome-ong-pet{
+	color: var(--roxo);
+	margin: 0 5px 0 5px;
+}
+
+.nome-pet{
+	display: flex;
+	align-items: center;
+}
