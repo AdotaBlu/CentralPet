@@ -251,7 +251,7 @@ public class Pet implements Serializable {
 	}
 
 	public String fotoPrincipalPet() {
-		String urlFotoPrincipal =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotos.get(0).getDadosImagem())) ;
+		String urlFotoPrincipal = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotos.get(0).getDadosImagem());
 		return urlFotoPrincipal;
 	}
 	
