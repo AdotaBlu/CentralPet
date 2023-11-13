@@ -31,15 +31,20 @@
 
 	<main>
 				
-			<c:if test="${ong != null}"> 
-				<h1><c:out value='${ong.nome}' /></h1>
-				<img alt="foto-de-perfil" src='<c:out value="${foto.urlImagem}"></c:out>' width="100">
-			</c:if>
+
 			
 			<c:if test="${ong == null}"> 
 				<h1> ong = null </h1>
 			</c:if>
-			
+			<c:if test="${fotos != null}">
+			<div class="container-fotos-pet">
+				<c:forEach var="foto" items="${fotos}">
+					<div class="foto-pet-editar">
+						<img  width=200px height=200px src=<c:out value='${foto.urlFoto()}' />>
+					</div>
+				</c:forEach>
+			</div>
+			</c:if>
    			<form method="post"  action="atualizar-pet" enctype="multipart/form-data">
   
 				<h1>Informações do Pet</h1> 
@@ -88,14 +93,7 @@
             		<option value="CURTO">Curto</option>
          			<option value="MEDIO">Médio</option>
          			<option value="LONGO">Longo</option>
-       			 </select>
-       			 
-       			 <c:forEach var="foto" items="${fotosDTOs}">
-					<img class="imagem-perfil-pet" width="150px" height="150px" src='<c:out value="${foto.urlImagem}"></c:out>' alt="Foto do Pet">
-				 </c:forEach>
-				<label class="label-inserir-foto" for="foto-perfil">+</label> 
-				<input type="file" name="foto-perfil" id="foto-perfil" accept="image/*">
-						
+       			 </select>			
     			 
     			 <input type="hidden" id="id-pet" name="id-pet" value="<c:out value='${pet.id}' />">
        			
