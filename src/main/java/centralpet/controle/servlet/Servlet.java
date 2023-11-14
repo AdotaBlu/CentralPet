@@ -3,7 +3,6 @@ package centralpet.controle.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
@@ -53,6 +52,7 @@ import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
+import centralpet.modelo.enumeracao.pet.castrado.Castrado;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
@@ -1148,9 +1148,10 @@ public class Servlet extends HttpServlet {
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
+		Castrado castrado = Castrado.valueOf(request.getParameter("castrado"));
 
 		pet = new Pet(nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet, especiePet,
-				sexoPet, estadoPet, pelagemPet);
+				sexoPet, estadoPet, pelagemPet, castrado);
 		
 		daoPet.inserirPet(pet);
 
@@ -1178,8 +1179,10 @@ public class Servlet extends HttpServlet {
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
+		Castrado castrado = Castrado.valueOf(request.getParameter("castrado"));
+		
 		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet,
-				especiePet, sexoPet, estadoPet, pelagemPet);
+				especiePet, sexoPet, estadoPet, pelagemPet, castrado);
 		daoPet.atualizarPet(pet);
 
 		Usuario usuario = daoUsuario.recuperarUsuario(ongPet);
@@ -1361,5 +1364,6 @@ public class Servlet extends HttpServlet {
 		}
 		
 	}
+	
 	
 }
