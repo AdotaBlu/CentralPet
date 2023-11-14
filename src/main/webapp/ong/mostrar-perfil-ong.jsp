@@ -148,6 +148,10 @@
 		<c:if test="${ong == null}">
 			<h1>Nenhuma ONG encontrada</h1>
 		</c:if>
+		
+		Teste contar pets da ong:
+		<c:out value="${somaPet}"></c:out>
+		
 	
 	</main>
 
