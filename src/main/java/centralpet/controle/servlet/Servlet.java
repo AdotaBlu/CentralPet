@@ -284,8 +284,11 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
+		int somaTodosPets = daoPet.recuperarSomaPetsTodos();
 		
 		if(sessao.getAttribute("usuario") == null) {
+			
+			request.setAttribute("soma", somaTodosPets);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -296,6 +299,7 @@ public class Servlet extends HttpServlet {
 			Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
 
 			request.setAttribute("tutor", tutor);
+			request.setAttribute("soma", somaTodosPets);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -306,6 +310,7 @@ public class Servlet extends HttpServlet {
 			Ong ong = daoOng.recuperarOngUsuario(usuario);
 
 			request.setAttribute("ong", ong);
+			request.setAttribute("soma", somaTodosPets);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
@@ -846,6 +851,9 @@ public class Servlet extends HttpServlet {
 		List<Pet> petsOng = daoPet.recuperarPetsAtivosOng(ong);
 		List<Avaliacao> avaliacoesOng =	daoAvaliacao.recuperarAvaliacoesOng(ong);
 		
+		int somaPetsOng = daoPet.recuperarSomaPetsDaOng(ong.getId());
+		System.out.println(somaPetsOng);
+		
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 
 			Ong ongSessao = (Ong) sessao.getAttribute("usuario");
@@ -855,7 +863,7 @@ public class Servlet extends HttpServlet {
 			if (ongSessao.equals(ong))
 				request.setAttribute("ongSessao", ongSessao);
 			
-
+			request.setAttribute("soma", somaPetsOng);
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("contato", contato);
 			request.setAttribute("pets", petsOng);
@@ -865,7 +873,8 @@ public class Servlet extends HttpServlet {
 
 		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-
+			
+			request.setAttribute("soma", somaPetsOng);
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("pets",petsOng);
 			request.setAttribute("ong", ong);
@@ -875,6 +884,7 @@ public class Servlet extends HttpServlet {
 			
 		} else {
 			
+			request.setAttribute("soma", somaPetsOng);
 			request.setAttribute("avaliacoesOng", avaliacoesOng);
 			request.setAttribute("ong", ong);
 			request.setAttribute("pets", petsOng);

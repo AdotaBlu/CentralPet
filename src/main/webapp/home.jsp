@@ -90,6 +90,9 @@
 		<a href="<%=request.getContextPath()%>/nova-adocao">Realizar Adoção</a>
 		<a href="<%=request.getContextPath()%>/mostrar-tela-aviso">Teste tela aviso</a>
 		
+		Teste somar pets inseridos
+		<c:out value="${soma}"></c:out>
+		
 	</main>
 </body>
 
