@@ -13,8 +13,8 @@
 	<ul class="end">
 		<a style= "margin-left: 60px"; id="botao-adotar" href="<%=request.getContextPath()%>/mostrar-cards-pets"><button = class ="botao-adotar-miniatura">Adotar</button></a>
 		<div style= "margin-left: 60px"; class="li">
-			<img class ="foto-miniatura"src='<c:out value="${tutor.urlFoto()}"></c:out>' alt="miniatura-tutor"  width="30px" height="30px"> 
-			<a href=""><li>Minha Conta</li></a>
+			<img style= "margin-left: 60px"; class ="foto-miniatura"src='<c:out value="${tutor.urlFoto()}"></c:out>' alt="miniatura-tutor"  width="30px" height="30px"> 
+			<a style= "margin-left: 60px"; href=""><li>Minha Conta</li></a>
 		</div>
 		<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/sair"><button>Sair</button></a>
 	</ul>

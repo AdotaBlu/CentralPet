@@ -49,8 +49,20 @@ main {
 	height: 100%;
 }
 
-.img_logo_home{
-	
+.conteiner-secao{
+	display: flex;
+	background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    white-space: pre-line;
+    color: var(--roxo);
+    text-align: justify;
+}
+
+conteiner-secao p{
+	white-space: pre-line;
 }
 
 form {
@@ -68,6 +80,10 @@ input, option {
 	border: 1px solid var(--roxo);
 	border-radius: 5px;
 	background-color: var(--branco);
+}
+
+li{
+	color: var(--cinza)
 }
 
 #termo {

@@ -285,6 +285,10 @@ public class Servlet extends HttpServlet {
 
 		HttpSession sessao = request.getSession();
 		
+		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
+		
+		request.setAttribute("pets", petsDisponiveis);
+		
 		if(sessao.getAttribute("usuario") == null) {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
