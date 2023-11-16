@@ -200,9 +200,17 @@ public class Servlet extends HttpServlet {
 			case "/novo-termo":
 				mostrarFormularioNovoTermo(request, response);
 				break;
+				
+			case "/editar-termo":
+				mostrarFormularioEditarTermo(request, response);
+				break;
 
 			case "/cadastrar-termo":
 				inserirTermo(request, response);
+				break;
+				
+			case "/atualizar-termo":
+				atualizarTermo(request, response);
 				break;
 
 			case "/nova-adocao":
@@ -733,11 +741,44 @@ public class Servlet extends HttpServlet {
 			
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
-
+	
 			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/novo-termo.jsp");
+			dispatcher.forward(request, response);	
+			
+		}
+	}
+	
+	private void mostrarFormularioEditarTermo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
-		} 
+		}
+		
+		else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+
+
+			request.setAttribute("tutor", tutor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			ong = daoOng.recuperarOngComTermo(ong.getId());
+			
+			List<Termo> termos = ong.getTermos();
+			
+			request.setAttribute("termos", termos);
+			request.setAttribute("ong", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/editar-termo.jsp");
+			dispatcher.forward(request, response);	
+			
+		}	
 	}
 
 	private void mostrarFormularioNovaAdocao(HttpServletRequest request, HttpServletResponse response)
@@ -1101,7 +1142,7 @@ public class Servlet extends HttpServlet {
 		contato = new Contato(email, telefone, ong);
 		daoContato.inserirContato(contato);
 
-		response.sendRedirect("home");
+		response.sendRedirect("novo-termo");
 
 	}
 
@@ -1256,13 +1297,31 @@ public class Servlet extends HttpServlet {
 		
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
+			ong = daoOng.recuperarOngComTermo(ong.getId());
 			String Otermo = request.getParameter("termo");
 
 			Termo termo = new Termo(ong, Otermo);
+			ong.adicionarTermo(termo);
 			daoTermo.inserirTermo(termo);
 			response.sendRedirect("home");
 		}
 	}
+	
+	private void atualizarTermo(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			String Otermo = request.getParameter("termo");
+			Long idTermo = Long.parseLong(request.getParameter("id-termo"));
+			
+			Termo termo = new Termo(idTermo, ong, Otermo);
+			daoTermo.atualizarTermo(termo);
+			response.sendRedirect("home");
+		}
+	}
+	
 
 	private void inserirAdocao(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {

@@ -348,5 +348,47 @@ public class OngDAOImpl implements OngDAO {
 		
 		return ongsFiltradas;
 	}
+	
+	public Ong recuperarOngComTermo(Long id) {
+		
+		Session sessao = null;
+		Ong essaOng = null;
+
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
+			Root<Ong> raizOng = criteria.from(Ong.class);
+			
+			raizOng.fetch(Ong_.termos, JoinType.LEFT);
+	        
+	        criteria.distinct(true);
+
+			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
+			
+			essaOng = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+
+			}
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return essaOng;
+	}
 
 }
