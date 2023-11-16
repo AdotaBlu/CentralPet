@@ -144,6 +144,8 @@ a {
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
+	margin: -690px 0 0 0;
+	position: relative;
 }
 
 .filtro select {
@@ -226,6 +228,7 @@ li:hover {
 	border: none;
 	background-color: var(--roxo);
 	font-size: 12px;
+	margin-right: 10px;
 }
 
 .li {
@@ -529,7 +532,7 @@ input[type='file'] {
 	text-decoration: none;
 	border: none;
 	border-radius: 5px;
-	margin: 0 0 0 10;
+	margin: 0 360 0 -350;
 }
 .container-info-perfil-ong{
 	padding: 10px;
@@ -538,6 +541,7 @@ input[type='file'] {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	line-height: 30px;
 }
 
 .container-btn-ong{
@@ -548,10 +552,12 @@ input[type='file'] {
 
 .endereco-ong{
 	display: flex;
+	height: 25px;
 }
 
 #ong-pets-cadastrados {
 	display: block;
+	margin-top: 50px;
 }
 
 .line{

@@ -51,35 +51,7 @@
 					</div>
 				</div>
 			</div>
-				<div class="line"></div>
-
-		<c:if test="${avaliacoesOng != null}">
-		<div class="container-avaliacoes">
-			<h2>Avaliações de Tutores</h2>
-			<c:forEach var="avaliacao" items="${avaliacoesOng}">
-				<div class="container-avaliacao">
-					<div class="info-avalicao">
-						<div class="miniatura-avaliacao">
-							<img class="foto-miniatura" width="40px" height="40px" src="<c:out value='${avaliacao.tutor.urlFoto()}'></c:out>">
-							<div class="nome-tutor">
-								<h4><c:out value='${avaliacao.tutor.nome}'></c:out></h4>
-							</div>
-						</div> 
-						<div class="nota-avalicao">
-							<span class="label">Nota: </span>
-							<span class="value"><c:out value='${avaliacao.nota}'></c:out></span>
-						</div>
-					</div>
-					<div class="container-depoimento">
-						<p id="depoimento">
-							<c:out value='${avaliacao.depoimento}'></c:out>
-						</p>
-					</div>							
-				</div>
-			</c:forEach>
-		</div>
-		</c:if>
-		<c:if test="${pets != null}">
+				<c:if test="${pets != null}">
 			<h2 id="ong-pets-cadastrados">Pets Cadastrados</h2>
 			<div class="container-cards">
 				<c:forEach var="pet" items="${pets}">
@@ -149,10 +121,6 @@
 			<h1>Nenhuma ONG encontrada</h1>
 		</c:if>
 		
-		Teste contar pets da ong:
-		<c:out value="${somaPet}"></c:out>
-		
-	
 	</main>
 
 </body>
