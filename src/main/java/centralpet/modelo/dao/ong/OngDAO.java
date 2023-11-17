@@ -27,4 +27,6 @@ public interface OngDAO {
 	Ong recuperarOngUsuario(Usuario usuario);
 	
 	Ong recuperarOngComTermo(Long id);
+	
+	Ong recuperarOngComRespostasTermo(Long id);
 }

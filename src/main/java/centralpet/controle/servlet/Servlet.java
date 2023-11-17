@@ -1405,12 +1405,12 @@ public class Servlet extends HttpServlet {
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-				request.setAttribute("ongSessao", ong);
+				request.setAttribute("ong", ong);
 		
 		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
-			request.setAttribute("tutorSessao", tutor);
+			request.setAttribute("tutor", tutor);
 		}
 	}
 
