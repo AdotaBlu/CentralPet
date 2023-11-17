@@ -145,7 +145,6 @@ a {
 	align-items: center;
 	flex-direction: row;
 	margin: -690px 0 0 0;
-	position: relative;
 }
 
 .filtro select {
@@ -532,7 +531,8 @@ input[type='file'] {
 	text-decoration: none;
 	border: none;
 	border-radius: 5px;
-	margin: 0 360 0 -350;
+	margin: 0 360px 0 -350px;
+
 }
 .container-info-perfil-ong{
 	padding: 10px;
@@ -599,7 +599,7 @@ input[type='file'] {
 	text-decoration: none;
 	border: none;
 	border-radius: 5px;
-	margin: 0 0 0 10;
+	margin: 0 360px 0 -350px;
 }
 .container-info-perfil-tutor{
 	padding: 10px;
@@ -608,6 +608,7 @@ input[type='file'] {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	line-height: 30px;
 }
 
 .container-btn-tutor{
