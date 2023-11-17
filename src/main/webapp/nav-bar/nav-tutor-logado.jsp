@@ -16,6 +16,6 @@
 			<img class ="foto-miniatura"src='<c:out value="${tutor.urlFoto()}"></c:out>' alt="miniatura-tutor"  width="30px" height="30px"> 
 			<a href=""><li>Minha Conta</li></a>
 		</div>
-		<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/sair"><button>Sair</button></a>
+		<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/mostrar-tela-logoff"><button>Sair</button></a>
 	</ul>
 </header>
