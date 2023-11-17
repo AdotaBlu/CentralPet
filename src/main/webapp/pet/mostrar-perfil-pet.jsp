@@ -53,8 +53,21 @@
 							<span class="value"><c:out value='${pet.sexoPet}'></c:out></span>
 						</div>
 						<div class="pet-info">
-							<span class="label">Idade: </span>
-							<span class="value"><c:out value='${pet.idade}'></c:out></span>
+							<span class="label-pet">Idade: </span>
+							<c:choose>
+								<c:when test="${pet.idadeFormatada() > 1.0}">
+									<span class="value-pet"><fmt:formatNumber value="${pet.idadeFormatada()}"/> anos</span>
+								</c:when>
+								<c:when test="${pet.idadeFormatada() == 1.0}">
+									<span class="value-pet"><fmt:formatNumber value="${pet.idadeFormatada()}"/> ano</span>
+								</c:when>
+								<c:when test="${pet.idadeFormatada() < 1.0 and fn:substringAfter(pet.idadeFormatada(), '.') >= '2'}">
+									<span class="value-pet"><fmt:formatNumber value="${pet.idadeFormatada() * 10}"/> meses</span>
+								</c:when>
+								<c:when test="${fn:substringAfter(pet.idadeFormatada(), '.') == '1'}">
+									<span class="value-pet"><fmt:formatNumber value="${pet.idadeFormatada() * 10}"/> mês</span>
+								</c:when>
+							</c:choose>
 						</div>
 						<div class="pet-info">
 							<span class="label">Peso: </span>
