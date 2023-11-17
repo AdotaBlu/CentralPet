@@ -39,6 +39,9 @@
 					<div class="contato-ong">
 						<p><c:out value='${contato.telefone}'></c:out> <p>
 					</div>
+					<div class="contato-tutor">
+						<p><c:out value='${contato.email}'></c:out> <p>
+					</div>
 					</div>
 					<div class="container-btn-ong">
 						<c:if test="${ongSessao != null}">
