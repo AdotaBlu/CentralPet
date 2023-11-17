@@ -61,6 +61,14 @@
         		
         		<input type="hidden" id="estadoPet" name="estado-pet" value="ATIVO">
         		
+        		<label for="castrado">Castrado</label>
+				<div class="value-radio">
+					<input type="radio" id="input-radio" name="castrado" value="SIM">
+  					<label for="sim">Sim</label>
+ 					<input type="radio" id="input-radio" name="castrado" value="NAO">
+  					<label for="nao">Não</label>
+				</div>
+        		
        			 <label for="drop_down_especie">Espécie do Pet</label>
       			  <select name="especie-pet" id="drop_down_especie">
             		<option value="GATO">Gato</option>
