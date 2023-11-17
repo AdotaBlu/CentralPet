@@ -10,10 +10,10 @@
 		<a href=""><li>Acompanhamento</li></a>
 	</ul>
 	<ul class="end">
-		<a href="<%=request.getContextPath()%>/novo-pet"><button>Cadastrar Pet</button></a>
+		<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/novo-pet"><button>Cadastrar Pet</button></a>
 		<div class="li">
-			<img class = "foto-miniatura" src='<c:out value="${ong.urlFoto()}"></c:out>' alt="miniatura-perfil"> <a href=""><li>Minha Conta</li></a>
+			<img style= "margin-left: 60px"; class = "foto-miniatura" src='<c:out value="${ong.urlFoto()}"></c:out>' alt="miniatura-perfil"> <a href=""><li>Minha Conta</li></a>
 		</div>
-		<a href="<%=request.getContextPath()%>/sair"><button>Sair</button></a>
+		<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/sair"><button>Sair</button></a>
 	</ul>
 </header>

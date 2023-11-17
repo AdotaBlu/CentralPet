@@ -9,16 +9,15 @@
 	</a>
 
 	<ul class="mid">
-		<a href="<%=request.getContextPath()%>/mostrar-cards-ongs"><li>ONGs</li></a>
+		<b><a href="<%=request.getContextPath()%>/mostrar-cards-ongs"><li>ONGs</li></a></b>
 	</ul>
 
 	<ul class="end">
 		<a href="<%=request.getContextPath()%>/mostrar-cards-pets"><button>Adotar</button></a>
 		
-		
-		
 		<div class="li">
-			<a href="<%=request.getContextPath()%>/novo-login"><li>Entrar</li></a>
+			<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/novo-login"><li>Entrar</li></a>
+			<a>|</a>
 			<a href="<%=request.getContextPath()%>/mostrar-selecao-cadastro"><li>Cadastrar</li></a>
 		</div>
 	</ul>
