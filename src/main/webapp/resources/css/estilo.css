@@ -799,4 +799,15 @@ input[type='file'] {
 	margin: 0 5px 0 5px;
 }
 
+/*  */
+.container-logoff{
+display: flex;
+    flex: row;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+	
+}
+
 
