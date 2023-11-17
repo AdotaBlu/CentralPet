@@ -144,7 +144,7 @@ a {
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
-	margin: -690px 0 0 0;
+	margin: 0 0 0 0;
 }
 
 .filtro select {
@@ -702,4 +702,15 @@ input[type='file'] {
 .nome-pet{
 	display: flex;
 	align-items: center;
+}
+
+/*  */
+.container-logoff{
+display: flex;
+    flex: row;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+	
 }

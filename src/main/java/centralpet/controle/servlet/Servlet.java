@@ -1399,19 +1399,22 @@ public class Servlet extends HttpServlet {
 	}
 	
 	private void mostrarTelaFinalizarLogin(HttpServletRequest request, HttpServletResponse response) 
-					throws SQLException, IOException{
+					throws SQLException, IOException, ServletException{
 		HttpSession sessao = request.getSession();
 		
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-				request.setAttribute("ongSessao", ong);
+				request.setAttribute("ong", ong);
 		
 		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
-			request.setAttribute("tutorSessao", tutor);
+			request.setAttribute("tutor", tutor);
+			
 		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-logoff.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void finalizarLogin(HttpServletRequest request, HttpServletResponse response)
