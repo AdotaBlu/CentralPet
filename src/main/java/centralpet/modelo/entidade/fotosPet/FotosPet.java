@@ -72,7 +72,7 @@ public class FotosPet implements Serializable {
 	}
     
 	public String urlFoto() {
-		String urlFoto =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.dadosImagem));
+		String urlFoto = ("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.dadosImagem));
 		return urlFoto;
 	}
 	
