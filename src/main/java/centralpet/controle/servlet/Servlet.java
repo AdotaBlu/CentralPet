@@ -1399,7 +1399,7 @@ public class Servlet extends HttpServlet {
 	}
 	
 	private void mostrarTelaFinalizarLogin(HttpServletRequest request, HttpServletResponse response) 
-					throws SQLException, IOException{
+					throws SQLException, IOException, ServletException{
 		HttpSession sessao = request.getSession();
 		
 		if (sessao.getAttribute("usuario") instanceof Ong) {
@@ -1411,7 +1411,10 @@ public class Servlet extends HttpServlet {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
 			request.setAttribute("tutor", tutor);
+
 		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-logoff.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void finalizarLogin(HttpServletRequest request, HttpServletResponse response)

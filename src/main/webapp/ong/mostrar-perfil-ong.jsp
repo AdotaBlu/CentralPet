@@ -54,6 +54,9 @@
 					</div>
 				</div>
 			</div>
+				<c:if test="${ongSessao != null}">
+				<%@ include file="../ong-filtro-pets.jsp" %>
+			</c:if>
 				<c:if test="${pets != null}">
 			<h2 id="ong-pets-cadastrados">Pets Cadastrados</h2>
 			<div class="container-cards">
@@ -114,9 +117,6 @@
 						</div>
 					</c:forEach>
 				</div>
-			</c:if>
-			<c:if test="${ongSessao != null}">
-				<%@ include file="../ong-filtro-pets.jsp" %>
 			</c:if>
 		</c:if>
 		
