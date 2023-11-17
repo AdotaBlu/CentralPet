@@ -1411,7 +1411,7 @@ public class Servlet extends HttpServlet {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
 			request.setAttribute("tutor", tutor);
-			
+
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-logoff.jsp");
 		dispatcher.forward(request, response);

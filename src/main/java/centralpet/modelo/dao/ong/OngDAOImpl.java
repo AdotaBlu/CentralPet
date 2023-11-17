@@ -1,5 +1,6 @@
  package centralpet.modelo.dao.ong;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -389,6 +390,44 @@ public class OngDAOImpl implements OngDAO {
 		}
 
 		return essaOng;
+	}
+
+	public Ong recuperarOngComRespostasTermo(Long id) {
+		
+		Session sessao = null;
+		Ong ong = null;
+			
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
+			Root<Ong> raizOng = criteria.from(Ong.class);
+			
+			raizOng.fetch(Ong_.respostasTermo, JoinType.LEFT);
+			
+			criteria.distinct(true);
+			
+			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
+			
+			ong = sessao.createQuery(criteria).getSingleResult();
+			
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			
+			if(sessao.getTransaction()!= null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return ong;
 	}
 
 }
