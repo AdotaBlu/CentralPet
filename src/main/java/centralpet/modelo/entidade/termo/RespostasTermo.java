@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import centralpet.modelo.entidade.ong.Ong;
@@ -18,7 +19,7 @@ import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.enumeracao.respostasTermo.respostaQuatro.RespostaQuatro;
 
 @Entity
-@Table(name="Respostas_termo")
+@Table(name="respostas_termo")
 public class RespostasTermo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -34,35 +35,44 @@ public class RespostasTermo implements Serializable{
 	private Termo termo;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_termo")
+	@JoinColumn(name = "id_ong",  insertable = false, updatable = false)
 	private Ong ong;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_tutor",  insertable = false, updatable = false)
 	private Tutor tutor;
 	
 	//Você já teve experiência prévia com pets? Se sim, por favor, descreva brevemente. *
+	@Column(name ="resposta_um", columnDefinition = "text", nullable = false, unique = false)
 	private String respostaUm;
 	
 	//Como é a sua rotina diária? Horários de trabalho, atividades, etc. *
+	@Column(name ="resposta_dois", columnDefinition = "text", nullable = false, unique = false)
 	private String respostaDois;
 	
 	//Você possui crianças em casa? Se sim, qual a idade delas?
+	@Column(name ="resposta_tres", columnDefinition = "text", nullable = false, unique = false)
 	private String respostaTres;
 	
 	//Você mora em casa ou apartamento? *
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "resposta_quatro", nullable = false, unique = false)
 	private RespostaQuatro respostaQuatro;
 	
 	//Existe um espaço ao ar livre onde o pet poderá brincar? *
+	@Column(name ="resposta_cinco", columnDefinition = "text", nullable = false, unique = false)
 	private String respostaCinco;
 	
 	//Como você planeja cuidar do pet enquanto estiver ausente (trabalho, viagens, etc.)? *
+	@Column(name ="resposta_seis", columnDefinition = "text", nullable = false, unique = false)
 	private String respostaSeis;
 	
 	//Você compreende que a adoção de um pet é um compromisso de longo prazo, que pode durar muitos anos? *
+	@Column(name ="resposta_sete", nullable = false, unique = false)
 	private boolean respostaSete;
 	
 	//Por que você decidiu adotar um pet e o que você espera da relação com ele? *
+	@Column(name ="resposta_oito", columnDefinition = "text", nullable = false, unique = false)
 	private String respostaOito;
 	
 	public RespostasTermo() {}

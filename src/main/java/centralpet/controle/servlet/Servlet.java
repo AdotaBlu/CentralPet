@@ -256,6 +256,10 @@ public class Servlet extends HttpServlet {
 			case "/confirmar-login":
 				confirmarLogin(request, response);
 				break;
+				
+			case "/mostrar-tela-logoff":
+				mostrarTelaFinalizarLogin(request, response);
+				break;
 
 			case "/sair":
 				finalizarLogin(request, response);
@@ -1392,6 +1396,22 @@ public class Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 
+	}
+	
+	private void mostrarTelaFinalizarLogin(HttpServletRequest request, HttpServletResponse response) 
+					throws SQLException, IOException{
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+
+				request.setAttribute("ongSessao", ong);
+		
+		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			
+			request.setAttribute("tutorSessao", tutor);
+		}
 	}
 
 	private void finalizarLogin(HttpServletRequest request, HttpServletResponse response)
