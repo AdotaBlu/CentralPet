@@ -244,6 +244,10 @@ public class Servlet extends HttpServlet {
 			case "/mostrar-perfil-tutor":
 				mostrarPerfilTutor(request, response);
 				break;
+				
+			case "/mostrar-tela-reponder-termo":
+				mostrartelaResponderTermoTutor(request, response);
+				break;
 
 			case "/mostrar-selecao-cadastro":
 				mostrarSelecaoCadastro(request, response);
@@ -284,6 +288,7 @@ public class Servlet extends HttpServlet {
 			case "/filtrar-pets":
 				filtrarPets(request, response);
 				break;
+				
 			
 			}
 
@@ -1071,6 +1076,33 @@ public class Servlet extends HttpServlet {
 		contato = new Contato(email, telefone, tutor);
 		daoContato.inserirContato(contato);
 		response.sendRedirect("home");
+	}
+	
+	private void mostrartelaResponderTermoTutor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException { 
+		
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		}
+		
+		else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+
+			request.setAttribute("tutor", tutor);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-resposta-termo.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+
+			request.setAttribute("ong", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		} 
 	}
 
 	private void atualizarTutor(HttpServletRequest request, HttpServletResponse response)
