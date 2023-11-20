@@ -1,10 +1,11 @@
 package centralpet.modelo.entidade.pet;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Base64;													
+import java.util.Base64;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -255,12 +256,17 @@ public class Pet implements Serializable {
 		return urlFotoPrincipal;
 	}
 	
-	private byte calcularIdadePet(LocalDate dataNascimento) {
-
+	public float idadeFormatada() {
+		
 		LocalDate dataAtual = LocalDate.now();
-		Period periodo = Period.between(dataNascimento, dataAtual);
-
-		return (byte) periodo.getYears();
+	    long meses = ChronoUnit.MONTHS.between(dataNascimento, dataAtual);
+	    double anos = meses / 12.0;
+	    DecimalFormat df = new DecimalFormat("#0.0");
+	    String resultadoString = df.format(anos);
+	    resultadoString = resultadoString.replace(',', '.');
+	    float idadeFormatada = Float.parseFloat(resultadoString);
+	    System.out.println(idadeFormatada); 
+		return idadeFormatada;
 	}
 
 //	public Acompanhamento getAcompanhamento() {

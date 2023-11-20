@@ -700,9 +700,69 @@ input[type='file'] {
 	margin: 0 5px 0 5px;
 }
 
-.nome-pet{
+.nome-pet h1{
+	color: var(--roxo);
+}
+
+.label-pet {
+	font-size: 18px;
+	color: var(--roxo);
+	margin-right: 3px;
+	font-weight: bold;
+}
+
+.value-pet{
+	font-size: 18px;
+	color: var(--roxo);
+	margin-right: 50px;
+	text-transform: lowercase;
+	font-weight: 500;
+}
+
+.value-pet::first-letter {
+	text-transform: uppercase;
+}
+
+.container-btn-perfil-pet{
+	width: 100%;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+}
+
+.btn-perfil-pet{
+	display: inline-block;
+	width: 90px;
+	height: 30px;
+	background-color: var(--roxo);
+	color: var(--branco);
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+	margin: 0 0 0 10;
+}
+
+.barra-nav-perfil-pet{
+	display: flex;
+	text-align: center;	
+	justify-content: space-between;
+}
+
+.nav-bar-pet-link{
+	color: var(--roxo);
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.nav-bar-pet-items{
 	display: flex;
 	align-items: center;
+	margin-left: 20px;
+}
+.nav-bar-pet-link:hover{
+	color:var(--amarelo)
 }
 
 /* Tela Logoff */
