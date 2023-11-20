@@ -14,15 +14,15 @@
 </head>
 <body>
 
-	<c:if test="${tutor == null && ong == null}">
+	<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutor != null}">
+	<c:if test="${tutorSessao != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ongSessao != null}">
+	<c:if test="${ongSessaoSessao != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 
@@ -32,7 +32,7 @@
 		</c:if>
 		
 		<c:if test="${tutor != null}"> 
-				<h1>Nome do tutor: <c:out value='${tutor.nome}' /></h1>
+				<h1>Nome do tutor: <c:out value='${tutorSessao.nome}' /></h1>
 		</c:if>
 		
 		<c:if test="${termo != null}"> 

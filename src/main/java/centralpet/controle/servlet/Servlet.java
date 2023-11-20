@@ -421,7 +421,7 @@ public class Servlet extends HttpServlet {
 		if(sessao.getAttribute("usuario") instanceof Tutor) {
 			
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 		
 		} else if(sessao.getAttribute("usuario") instanceof Ong) {
 			
@@ -683,7 +683,7 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -732,13 +732,13 @@ public class Servlet extends HttpServlet {
 		else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 
 			Long idPet = Long.parseLong(request.getParameter("id-pet"));
 			Pet pet = daoPet.recuperarPet(idPet);
@@ -794,7 +794,7 @@ public class Servlet extends HttpServlet {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 			
@@ -805,7 +805,7 @@ public class Servlet extends HttpServlet {
 			List<Termo> termos = ong.getTermos();
 			
 			request.setAttribute("termos", termos);
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/editar-termo.jsp");
 			dispatcher.forward(request, response);	
 			
@@ -837,7 +837,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("termos", termos);
 			request.setAttribute("ong", ongPet);
 			request.setAttribute("pet", pet);
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("nova-adocao.jsp");
 			dispatcher.forward(request, response);
@@ -845,7 +845,7 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -868,7 +868,7 @@ public class Servlet extends HttpServlet {
 			Adocao adocao = daoAdocao.recuperarAdocaoPendenteTutor(tutor);
 			
 			request.setAttribute("adocao", adocao);
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-formulario-avaliacao.jsp");
 			dispatcher.forward(request, response);
@@ -1018,7 +1018,7 @@ public class Servlet extends HttpServlet {
 			List<Pet> petsFavoritos = daoPet.recuperarPetsFavoritosTutor(tutor.getId());
 
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			request.setAttribute("contato", contato);
 			request.setAttribute("petsFavoritos", petsFavoritos);
 			request.setAttribute("tutor", tutor);
@@ -1028,7 +1028,7 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		} 
@@ -1048,13 +1048,13 @@ public class Servlet extends HttpServlet {
 		else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		} 
@@ -1579,12 +1579,12 @@ public class Servlet extends HttpServlet {
 		if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-				request.setAttribute("ong", ong);
+				request.setAttribute("ongSessao", ong);
 		
 		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-logoff.jsp");
@@ -1613,14 +1613,14 @@ public class Servlet extends HttpServlet {
 		
 		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor =  (Tutor) sessao.getAttribute("usuario");
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-aviso.jsp");
 			dispatcher.forward(request, response);
 		
 		} else {
 			Ong ong =  (Ong) sessao.getAttribute("usuario");
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-aviso.jsp");
 			dispatcher.forward(request, response);

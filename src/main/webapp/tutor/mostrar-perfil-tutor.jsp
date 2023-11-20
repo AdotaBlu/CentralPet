@@ -12,39 +12,39 @@
 	<title>Perfil do Tutor</title>
 </head>
 <body>
-		<c:if test="${tutor == null && ong == null}">
+		<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutor != null}">
+	<c:if test="${tutorSessao != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ong != null}">
+	<c:if test="${ongSessao != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 	
 	<main>
-		<c:if test="${tutor != null}">
-			<h1><c:out value='${tutor.nome}' /></h1>
+		<c:if test="${tutorSessao != null}">
+			<h1><c:out value='${tutorSessao.nome}' /></h1>
 		</c:if>
 		
-		<c:if test="${tutor == null}">
+		<c:if test="${tutorSessao == null}">
 			<h1>Nenhum tutor encontrado</h1>
 		</c:if>
 		
 			<div class="container-perfil">
 				<div class="foto-perfil-tutor">
-					<img id="foto-perfil-tutor" alt="foto-de-perfil" src='<c:out value="${tutor.urlFoto()}"></c:out>'>
+					<img id="foto-perfil-tutor" alt="foto-de-perfil" src='<c:out value="${tutorSessao.urlFoto()}"></c:out>'>
 				</div>
 				<div class="container-info-perfil-tutor">
 					<div class="info-perfil-tutor">
 					<div class="nome-tutor">
-						<h2><c:out value='${tutor.nome}'></c:out></h2>
+						<h2><c:out value='${tutorSessao.nome}'></c:out></h2>
 					</div>
 					<div class="endereco-tutor">
-						<p><c:out value='${tutor.endereco.logradouro}'></c:out> <p>
-						<p>, <c:out value='${tutor.endereco.numero}'></c:out><p>
+						<p><c:out value='${tutorSessao.endereco.logradouro}'></c:out> <p>
+						<p>, <c:out value='${tutorSessao.endereco.numero}'></c:out><p>
 					</div>
 					<div class="contato-tutor">
 						<p><c:out value='${contato.telefone}'></c:out> <p>
@@ -54,7 +54,7 @@
 					</div>
 					</div>
 					<div class="container-btn-tutor">
-						<c:if test="${ongSessao != null}">
+						<c:if test="${tutorSessao != null}">
 							<form method="post" action="excluir-tutor">
 								<button type="submit" class="btn-perfil-tutor">Deletar Conta</button>
 							</form>
