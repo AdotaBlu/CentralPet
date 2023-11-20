@@ -373,7 +373,7 @@ public class Servlet extends HttpServlet {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -382,7 +382,7 @@ public class Servlet extends HttpServlet {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Ong ong = daoOng.recuperarOngUsuario(usuario);
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -398,13 +398,13 @@ public class Servlet extends HttpServlet {
 		if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			
 			
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 		}
 
 		request.setAttribute("pets", petsDisponiveis);
@@ -550,7 +550,7 @@ public class Servlet extends HttpServlet {
 			Contato contato = daoContato.recuperarContatoUsuario(tutor);
 
 			request.setAttribute("endereco", endereco);
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			request.setAttribute("contato", contato);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/tutor/editar-tutor.jsp");
@@ -558,7 +558,7 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -611,14 +611,14 @@ public class Servlet extends HttpServlet {
 		else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 			
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -639,7 +639,7 @@ public class Servlet extends HttpServlet {
 		else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 			
@@ -651,7 +651,7 @@ public class Servlet extends HttpServlet {
 			
 			request.setAttribute("endereco", endereco);
 			request.setAttribute("contato", contato);
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/editar-ong.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -705,14 +705,14 @@ public class Servlet extends HttpServlet {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 			
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/pet/novo-pet.jsp");
 			dispatcher.forward(request, response);
 		} 
@@ -766,14 +766,14 @@ public class Servlet extends HttpServlet {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 			
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 	
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/novo-termo.jsp");
 			dispatcher.forward(request, response);	
 			
@@ -1122,7 +1122,7 @@ public class Servlet extends HttpServlet {
 			List<Termo> termos = ong.getTermos();
 			request.setAttribute("ong", ong);
 			request.setAttribute("termos", termos);
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			request.setAttribute("pet", pet);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/nova-resposta-termo.jsp");
 			dispatcher.forward(request, response);
@@ -1159,7 +1159,7 @@ public class Servlet extends HttpServlet {
 			
 			request.setAttribute("ong", ong);
 			request.setAttribute("termos", termos);
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			request.setAttribute("pet", pet);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/tela-dois-resposta-termo.jsp");
 			dispatcher.forward(request, response);

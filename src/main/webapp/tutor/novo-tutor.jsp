@@ -27,11 +27,11 @@
 
 	<main>
 		<div class="container-endereco">
-			<c:if test="${contato == null && endereco == null && tutor == null}">
+			<c:if test="${contato == null && endereco == null && tutorSessao == null}">
 				<form method="post" action="cadastrar-tutor"
 					enctype="multipart/form-data">
 			</c:if>
-			<c:if test="${contato != null && endereco != null && tutor != null}">
+			<c:if test="${contato != null && endereco != null && tutoSessao != null}">
 				<form method="post" action="atualizar-tutor"
 					enctype="multipart/form-data">
 			</c:if>
