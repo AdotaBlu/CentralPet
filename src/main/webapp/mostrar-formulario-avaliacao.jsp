@@ -15,15 +15,15 @@
 	
 	<body>
 	
-	<c:if test="${tutor == null && ong == null}">
+	<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutor != null}">
+	<c:if test="${tutorSessao != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ong != null}">
+	<c:if test="${ongSessao != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 	
@@ -38,11 +38,11 @@
 						<th>Data</th>
 					</tr>
 				</thead>
-				<c:if test="${adocao != null && tutor != null}">
+				<c:if test="${adocao != null && tutorSessao != null}">
 				<tbody>
 						<tr>
 							<td><c:out value='${adocao.pet.nome}'></c:out></td>
-							<td><c:out value='${tutor.nome}'></c:out></td>
+							<td><c:out value='${tutorSessao.nome}'></c:out></td>
 							<td><c:out value='${adocao.ong.nome}'></c:out></td>
 							<td><c:out value='${adocao.dataAdocao}'></c:out></td>
 						</tr>
@@ -52,8 +52,8 @@
 		</div>
 		<div>
 			<form action="registrar-avaliacao" method="post">
-				<c:if test="${adocao != null && tutor != null}">
-					<input type="hidden" id="id-tutor" name="id-tutor"  value="<c:out value='${tutor.id}' />">
+				<c:if test="${adocao != null && tutorSessao != null}">
+					<input type="hidden" id="id-tutor" name="id-tutor"  value="<c:out value='${tutorSessao.id}' />">
 					<input type="hidden" id="id-ong" name="id-ong"  value="<c:out value='${adocao.ong.id}' />">
 				</c:if>
 				

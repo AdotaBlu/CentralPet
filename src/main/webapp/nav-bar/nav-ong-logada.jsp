@@ -12,7 +12,7 @@
 	<ul class="end">
 		<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/novo-pet"><button>Cadastrar Pet</button></a>
 		<div class="li">
-			<img class = "foto-miniatura" src='<c:out value="${ong.urlFoto()}"></c:out>' alt="miniatura-perfil"> <a href=""><li>Minha Conta</li></a>
+			<img class = "foto-miniatura" src='<c:out value="${ongSessao.urlFoto()}"></c:out>' alt="miniatura-perfil"> <a href=""><li>Minha Conta</li></a>
 		</div>
 		<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/mostrar-tela-logoff"><button>Sair</button></a>
 	</ul>

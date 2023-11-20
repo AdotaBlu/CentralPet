@@ -13,11 +13,11 @@
 <style><%@include file="/resources/css/estilo.css"%></style>
 </head>
 <body>
-		<c:if test="${tutor != null}">
+		<c:if test="${tutorSessao != null}">
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 		</c:if>
 	
-		<c:if test="${ong != null}">
+		<c:if test="${ongSessao != null}">
 		<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 		</c:if>
 	<main>

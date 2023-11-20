@@ -17,15 +17,15 @@
 
 <body>
 
-	<c:if test="${tutor == null && ong == null}">
+	<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutor != null}">
+	<c:if test="${tutorSessao != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ong != null}">
+	<c:if test="${ongSessao != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 
@@ -33,7 +33,7 @@
 				
 
 			
-			<c:if test="${ong == null}"> 
+			<c:if test="${ongSessao == null}"> 
 				<h1> ong = null </h1>
 			</c:if>
 			<c:if test="${fotos != null}">
@@ -63,6 +63,14 @@
         		
         		<label for="peso">Peso do Pet</label>
         		<input type="text" id="peso" name="peso" value="<c:out value='${pet.peso}' />">
+  				
+        		<label for="castrado">Castrado</label>
+				<div class="value-radio">
+					<input type="radio" id="input-radio" name="castrado" value="SIM">
+  					<label for="sim">Sim</label>
+ 					<input type="radio" id="input-radio" name="castrado" value="NAO">
+  					<label for="nao">Não</label>
+				</div>
         		
         		<input type="hidden" id="estadoPet" name="estado-pet" value="ATIVO">
         		

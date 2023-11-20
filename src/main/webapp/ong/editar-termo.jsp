@@ -16,27 +16,27 @@
 	
 	<body>
 
-		<c:if test="${tutor == null && ong == null}">
+		<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutor != null}">
+	<c:if test="${tutorSessao != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ong != null}">
+	<c:if test="${ongSessao != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 
 	<main>
-		<c:if test="${ong != null}">
+		<c:if test="${ongSessao != null}">
 			<h1>
-				<c:out value='${ong.nome}' />
+				<c:out value='${ongSessao.nome}' />
 			</h1>
 		</c:if>
 
-		<c:if test="${ong == null}">
-			<h1>ong = null</h1>
+		<c:if test="${ongSessao == null}">
+			<h1>ongSessao = null</h1>
 		</c:if>
 
 		<form method="post" action="atualizar-termo">
