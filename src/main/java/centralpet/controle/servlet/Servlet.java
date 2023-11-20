@@ -33,6 +33,8 @@ import centralpet.modelo.dao.pet.PetDAO;
 import centralpet.modelo.dao.pet.PetDAOImpl;
 import centralpet.modelo.dao.petsFavoritosTutor.PetsFavoritosTutorDAO;
 import centralpet.modelo.dao.petsFavoritosTutor.PetsFavoritosTutorDAOImpl;
+import centralpet.modelo.dao.respostasTermoDAO.RespostasTermoDAO;
+import centralpet.modelo.dao.respostasTermoDAO.RespostasTermoDAOImpl;
 import centralpet.modelo.dao.termo.TermoDAO;
 import centralpet.modelo.dao.termo.TermoDAOImpl;
 import centralpet.modelo.dao.tutor.TutorDAO;
@@ -48,6 +50,7 @@ import centralpet.modelo.entidade.fotosPet.FotoDTO;
 import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.pet.Pet;
+import centralpet.modelo.entidade.termo.RespostasTermo;
 import centralpet.modelo.entidade.termo.Termo;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.usuario.Usuario;
@@ -58,6 +61,7 @@ import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
 import centralpet.modelo.enumeracao.pet.porte.PortePet;
 import centralpet.modelo.enumeracao.pet.sexo.SexoPet;
+import centralpet.modelo.enumeracao.respostasTermo.respostaQuatro.RespostaQuatro;
 import centralpet.util.calcularRacao.CalcularRacao;
 import centralpet.util.conversorImagem.ConverterImagem;
 
@@ -83,6 +87,7 @@ public class Servlet extends HttpServlet {
 
 	private TermoDAO daoTermo;
 
+	private RespostasTermoDAO daoRespostasTermo;
 
 	private UsuarioDAO daoUsuario;
 
@@ -109,6 +114,7 @@ public class Servlet extends HttpServlet {
 		daoPetFav = new PetsFavoritosTutorDAOImpl();
 		daoAvaliacao = new AvaliacaoDAOImpl();
 		calcularRacao = new CalcularRacao();
+		daoRespostasTermo = new RespostasTermoDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -244,6 +250,22 @@ public class Servlet extends HttpServlet {
 			case "/mostrar-perfil-tutor":
 				mostrarPerfilTutor(request, response);
 				break;
+				
+			case "/mostrar-tela-responder-termo":
+				mostrartelaResponderTermoTutor(request, response);
+				break;
+				
+			case "/mostrar-tela-dois-resposta-termo":
+				mostrartelaResponderTermoTutorDois(request, response);
+				break;
+				
+			case "/mostrar-tela-Tres-resposta-termo":
+				mostrartelaResponderTermoTutorTres(request, response);
+				break;
+				
+			case "/cadastrar-reposta-termo":
+				inserirRespostaTermo(request, response);
+				break;
 
 			case "/mostrar-selecao-cadastro":
 				mostrarSelecaoCadastro(request, response);
@@ -284,6 +306,7 @@ public class Servlet extends HttpServlet {
 			case "/filtrar-pets":
 				filtrarPets(request, response);
 				break;
+				
 			
 			}
 
@@ -803,9 +826,9 @@ public class Servlet extends HttpServlet {
 			Pet pet = daoPet.recuperarPet(idPet);
 			
 			Long idOng = pet.getOng().getId();
-			Ong ongPet = daoOng.recuperarOng(idOng);
+			Ong ongPet = daoOng.recuperarOngComTermo(idOng);
 			
-			Termo termo = daoTermo.recuperarTermo(idOng);
+			Termo termo = ongPet.getTermos().get(0);
 			
 			request.setAttribute("termo", termo);
 			request.setAttribute("ong", ongPet);
@@ -818,7 +841,7 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -1071,6 +1094,151 @@ public class Servlet extends HttpServlet {
 		contato = new Contato(email, telefone, tutor);
 		daoContato.inserirContato(contato);
 		response.sendRedirect("home");
+	}
+	
+	private void mostrartelaResponderTermoTutor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException { 
+		
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		}
+		
+		else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+
+			Long idPet = Long.parseLong(request.getParameter("id-pet"));
+			Pet pet = daoPet.recuperarPet(idPet);
+			
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOngComTermo(idOng);
+			List<Termo> termos = ong.getTermos();
+			request.setAttribute("ong", ong);
+			request.setAttribute("termos", termos);
+			request.setAttribute("tutor", tutor);
+			request.setAttribute("pet", pet);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/nova-resposta-termo.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+
+			request.setAttribute("ongSessao", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		} 
+	}
+	
+	private void mostrartelaResponderTermoTutorDois(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException { 
+		
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		}
+		
+		else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+
+			Pet pet = (Pet) request.getAttribute("pet");
+			pet = daoPet.recuperarPet(pet.getId());
+			
+			Ong ong = (Ong) request.getAttribute("ong");
+			ong = daoOng.recuperarOngComTermo(ong.getId());
+			List<Termo> termos = ong.getTermos();
+			
+			request.setAttribute("ong", ong);
+			request.setAttribute("termos", termos);
+			request.setAttribute("tutor", tutor);
+			request.setAttribute("pet", pet);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/tela-dois-resposta-termo.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+
+			request.setAttribute("ongSessao", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		} 
+	}
+	
+	private void mostrartelaResponderTermoTutorTres(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException { 
+		
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		}
+		
+		else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+
+			Long idPet = Long.parseLong(request.getParameter("id-pet"));
+			Pet pet = daoPet.recuperarPet(idPet);
+			
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOngComTermo(idOng);
+			
+			request.setAttribute("ong", ong);
+			request.setAttribute("tutor", tutor);
+			request.setAttribute("pet", pet);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/tela-tres-resposta-termo.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+
+			request.setAttribute("ongSessao", ong);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		} 
+	}
+	
+	private void inserirRespostaTermo(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException { 
+		
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			Long id = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOngComTermo(id);
+			Termo termo = ong.getTermos().get(0);
+			
+			String respostaUm = request.getParameter("pergunta-um");
+			String respostaDois = request.getParameter("pergunta-dois");
+			String respostaTres = request.getParameter("pergunta-tres");
+			RespostaQuatro respostaQuatro = RespostaQuatro.valueOf(request.getParameter("pergunta-quatro"));
+			String respostaCinco = request.getParameter("pergunta-cinco");
+			String respostaSeis = request.getParameter("pergunta-seis");
+			boolean respostaSete = Boolean.getBoolean("0");
+			String respostaOito = request.getParameter("pergunta-oito");
+			
+			RespostasTermo respostaTermo = new RespostasTermo(termo, ong, tutor, respostaUm, respostaDois, respostaTres, respostaQuatro,
+													respostaCinco, respostaSeis, respostaSete, respostaOito);
+			ong = daoOng.recuperarOngComRespostasTermo(id);
+			ong.adicionarRespostasTermo(respostaTermo);
+			daoRespostasTermo.inserirRespostaTermo(respostaTermo);
+			
+			Long idPet = Long.parseLong(request.getParameter("id-pet"));
+			Pet pet = daoPet.recuperarPet(idPet);
+			
+			request.setAttribute("pet", pet);
+			request.setAttribute("ong", ong);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-dois-resposta-termo");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void atualizarTutor(HttpServletRequest request, HttpServletResponse response)
