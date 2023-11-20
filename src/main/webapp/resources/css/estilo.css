@@ -13,6 +13,7 @@
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 	text-decoration: none;
+	
 }
 
 body {
@@ -27,7 +28,7 @@ main {
 	background-color: var(--gelo);
 }
 
-/* Estilos HOME */
+/* HOME */
 
 .conteinerHome{
 	display: flex;
@@ -37,33 +38,41 @@ main {
 	height: 100vh;
 }
 
-.container-secaoHome{
-	flex: 2;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+.container-secao{
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-}
-
-.conteiner-secao{
-	display: flex;
-	background-color: #fff;
-    border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
+    padding: 50px;
+    margin: 50px;
     white-space: pre-line;
     color: var(--roxo);
     text-align: justify;
+    gap: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cards-home{
+	display: flex;
+	gap: 40px;
 }
 
 conteiner-secao p{
 	white-space: pre-line;
+	
 }
+
+.img-logo-home{
+	height: 350px;
+	width: 450px;
+}
+
+
+
+.container-secao p{
+	font-size: 25px;
+}
+
+/* HOME */
 
 form {
 	display: grid;
@@ -189,6 +198,11 @@ header {
 	align-items: center;
 }
 
+.img-logo-navbar{
+	max-width: 35px;
+	max-height: 35px;
+}
+
 li:hover {
 	color: var(--amarelo);
 }
@@ -274,7 +288,7 @@ li:hover {
 	margin: 10px;
 	border-radius: 5px;
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
-	transition: transform 0.2s;;
+	transition: transform 0.5s;
 }
 
 .pet-card:hover {

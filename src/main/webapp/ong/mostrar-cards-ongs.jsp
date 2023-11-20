@@ -45,7 +45,7 @@
 								<button type="submit" class="btn-ong-card">Perfil ONG</button>
 							</div>
 						</form>
-				</div>
+					</div>
 			</c:forEach>
 		</div>
 		
