@@ -95,6 +95,11 @@ li{
 	color: var(--cinza)
 }
 
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
 #termo {
 	padding: 5px;
 	border: 1px solid var(--roxo);
@@ -159,6 +164,7 @@ a {
 }
 
 /*Barra de filtros*/
+
 .filtro {
 	margin-top: auto;
 	margin-bottom: auto;
@@ -282,6 +288,7 @@ li:hover {
 }
 
 /* Card Pet*/
+
 .pet-card {
 	background-color: var(--branco);
 	width: 220px;
@@ -403,6 +410,7 @@ li:hover {
 }
 
 /* Login */
+
 .container-login {
 	margin-top: 10%;
 	display: flex;
@@ -678,6 +686,7 @@ input[type='file'] {
 /* Perfil do pet */
 
 .container-principal-pet{
+	height: 40%;
 	margin: 50px 0 50px 0;
 	display: flex;
 	width: 60%;
@@ -692,10 +701,10 @@ input[type='file'] {
 .container-info{
 	width: 100%;
 	margin-left: 20px;
-}
+
 
 .container-dados-pet{
-	height: 30%;
+	height: 40%;
 	width: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -718,9 +727,90 @@ input[type='file'] {
 #nome-ong-pet{
 	color: var(--roxo);
 	margin: 0 5px 0 5px;
+	font-weight: bold;
 }
 
 .nome-pet{
 	display: flex;
 	align-items: center;
 }
+
+.nome-pet h1{
+	color: var(--roxo);
+}
+
+.label-pet {
+	font-size: 18px;
+	color: var(--roxo);
+	margin-right: 3px;
+	font-weight: bold;
+}
+
+.value-pet{
+	font-size: 18px;
+	color: var(--roxo);
+	margin-right: 50px;
+	text-transform: lowercase;
+	font-weight: 500;
+}
+
+.value-pet::first-letter {
+	text-transform: uppercase;
+}
+
+.container-btn-perfil-pet{
+	width: 100%;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+}
+
+.btn-perfil-pet{
+	display: inline-block;
+	width: 90px;
+	height: 30px;
+	background-color: var(--roxo);
+	color: var(--branco);
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+	margin: 0 0 0 10;
+}
+
+.barra-nav-perfil-pet{
+	display: flex;
+	text-align: center;	
+	justify-content: space-between;
+}
+
+.nav-bar-pet-link{
+	color: var(--roxo);
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.nav-bar-pet-items{
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+}
+.nav-bar-pet-link:hover{
+	color:var(--amarelo)
+}
+
+
+
+/* Novo Pet */
+
+.value-radio{
+	display: flex;
+	align-items: center;
+}
+
+#input-radio{
+	margin: 0 5px 0 5px;
+}
+
+

@@ -1,10 +1,12 @@
 package centralpet.modelo.entidade.pet;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Base64;													
+import java.util.Base64;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,6 +25,7 @@ import javax.persistence.Table;
 
 import centralpet.modelo.entidade.fotosPet.FotosPet;
 import centralpet.modelo.entidade.ong.Ong;
+import centralpet.modelo.enumeracao.pet.castrado.Castrado;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
@@ -53,7 +56,7 @@ public class Pet implements Serializable {
 	private LocalDate dataNascimento;
 
 	@Column(name = "idade_pet", nullable = false, unique = false)
-	private byte idade;
+	private float idade;
 
 	@Column(name = "peso_pet", nullable = false, unique = false)
 	private Double peso;
@@ -81,6 +84,11 @@ public class Pet implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "pelagem_pet", nullable = false, unique = false)
 	private PelagemPet pelagemPet;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "castrado", nullable = false, unique = false)
+	private Castrado castrado;
+	
 
 	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<FotosPet> fotos = new ArrayList<>();
@@ -94,7 +102,7 @@ public class Pet implements Serializable {
 
 	public Pet(String nome, String vacinas, String descricao, LocalDate dataNascimento, Double peso,
 			Ong ong, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
-			EstadoPet estadoPet, PelagemPet pelagemPet) {
+			EstadoPet estadoPet, PelagemPet pelagemPet, Castrado castrado) {
 		setNome(nome);
 		setVacinas(vacinas);
 		setDescricao(descricao);
@@ -105,14 +113,16 @@ public class Pet implements Serializable {
 		setSexoPet(sexoPet);
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
+		setCastrado(castrado);
 		setDataNascimento(dataNascimento);
 		setIdade(dataNascimento);
 //		setAcompanhamento(acompanhamento);
 	}
 
+
 	public Pet(Long id, String nome, String vacinas, String descricao, LocalDate dataNascimento,
 			Double peso, Ong ong, PortePet portePet, EspeciePet especiePet, SexoPet sexoPet,
-			EstadoPet estadoPet, PelagemPet pelagemPet) {
+			EstadoPet estadoPet, PelagemPet pelagemPet, Castrado castrado) {
 		setId(id);
 		setNome(nome);
 		setVacinas(vacinas);
@@ -124,6 +134,7 @@ public class Pet implements Serializable {
 		setSexoPet(sexoPet);
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
+		setCastrado(castrado);
 		setDataNascimento(dataNascimento);
 		setIdade(dataNascimento);
 		setFotos(fotos);
@@ -162,12 +173,12 @@ public class Pet implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public byte getIdade() {
+	public float getIdade() {
 		return idade;
 	}
 
 	public void setIdade(LocalDate dataNascimento) {
-		this.idade = calcularIdadePet(dataNascimento);
+		this.idade = idadeFormatada();
 	}
 
 	public Double getPeso() {
@@ -225,6 +236,14 @@ public class Pet implements Serializable {
 	public void setPelagemPet(PelagemPet pelagemPet) {
 		this.pelagemPet = pelagemPet;
 	}
+	
+	public Castrado getCastrado() {
+		return castrado;
+	}
+
+	public void setCastrado(Castrado castrado) {
+		this.castrado = castrado;
+	}
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
@@ -243,7 +262,7 @@ public class Pet implements Serializable {
 	}
 
 	public void adicionarFoto(FotosPet foto) {
-		this.fotos.add(foto);
+		this.fotos.add(foto); 
 	}
 
 	public void removerFoto(FotosPet foto) {
@@ -251,16 +270,21 @@ public class Pet implements Serializable {
 	}
 
 	public String fotoPrincipalPet() {
-		String urlFotoPrincipal =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotos.get(0).getDadosImagem())) ;
+		String urlFotoPrincipal = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotos.get(0).getDadosImagem());
 		return urlFotoPrincipal;
 	}
 	
-	private byte calcularIdadePet(LocalDate dataNascimento) {
-
+	public float idadeFormatada() {
+		
 		LocalDate dataAtual = LocalDate.now();
-		Period periodo = Period.between(dataNascimento, dataAtual);
-
-		return (byte) periodo.getYears();
+	    long meses = ChronoUnit.MONTHS.between(dataNascimento, dataAtual);
+	    double anos = meses / 12.0;
+	    DecimalFormat df = new DecimalFormat("#0.0");
+	    String resultadoString = df.format(anos);
+	    resultadoString = resultadoString.replace(',', '.');
+	    float idadeFormatada = Float.parseFloat(resultadoString);
+	    System.out.println(idadeFormatada); 
+		return idadeFormatada;
 	}
 
 //	public Acompanhamento getAcompanhamento() {
