@@ -421,7 +421,7 @@ public class Servlet extends HttpServlet {
 		if(sessao.getAttribute("usuario") instanceof Tutor) {
 			
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 		
 		} else if(sessao.getAttribute("usuario") instanceof Ong) {
 			
