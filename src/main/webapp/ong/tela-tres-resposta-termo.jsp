@@ -45,12 +45,12 @@
 		</div>
 		
 		<form action="nova-adocao" method="post">
-			<input type="hidden" name="id-termo" value='<c:out value="${pet.id}"></c:out>'>
-			<input type="hidden" name="id-termo" value='<c:out value="${ong.id}"></c:out>'>
-		</form>
+			<input type="hidden" name="id-pet" value='<c:out value="${pet.id}"></c:out>'>
+			<input type="hidden" name="id-ong" value='<c:out value="${ong.id}"></c:out>'>
 		
 		<div class="container-botao">
 			<button type="submit" class="botao-primario">Entendi</button>
 		</div>
+		</form>
 	</body>
 </html>

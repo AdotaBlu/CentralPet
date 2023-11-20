@@ -828,9 +828,9 @@ public class Servlet extends HttpServlet {
 			Long idOng = pet.getOng().getId();
 			Ong ongPet = daoOng.recuperarOngComTermo(idOng);
 			
-			Termo termos = ongPet.getTermos().get(0);
+			Termo termo = ongPet.getTermos().get(0);
 			
-			request.setAttribute("termos", termos);
+			request.setAttribute("termo", termo);
 			request.setAttribute("ong", ongPet);
 			request.setAttribute("pet", pet);
 			request.setAttribute("tutor", tutor);
@@ -841,7 +841,7 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
