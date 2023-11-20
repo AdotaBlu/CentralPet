@@ -113,12 +113,12 @@
 									value="<c:out value='${pet.id}' />"> <input
 									type="hidden" id="id-ong" name="id-ong"
 									value="<c:out value='${ongSessao.id}' />">
-								<button type="submit" class="btn-perfil-pet">Editar Pet</button>
+								<button type="submit" class="btn-perfil-pet">Editar</button>
 							</form>
 							<form method="post" action="excluir-pet">
 								<input type="hidden" id="id-pet" name="id-pet"
 									value="<c:out value='${pet.id}' />">
-								<button type="submit" class="btn-perfil-pet">Deletar Pet</button>
+								<button type="submit" class="btn-perfil-pet">Deletar</button>
 							</form>
 						</c:if>
 					</div>
@@ -127,19 +127,19 @@
 							<form method="post" action="favoritar-pet">
 								<input type="hidden" id="id-pet" name="id-pet"
 									value="<c:out value = '${pet.id}'/>">
-								<button type="submit" class="btn-perfil-pet">Favoritar Pet</button>
+								<button type="submit" class="btn-perfil-pet">Favoritar</button>
 							</form>
 							<form method="post" action="excluir-pet-favoritado">
 								<input type="hidden" id="id-pet" name="id-pet"
 									value="<c:out value = '${pet.id}'/>">
-								<button type="submit" class="btn-perfil-pet">Excluir Pet Favoritado</button>
+								<button type="submit" class="btn-perfil-pet">Desfavoritar</button>
 							</form>
 							<form method="post" action="mostrar-tela-responder-termo">
 								<input type="hidden" id="id-pet" name="id-ong"
 									value="<c:out value = '${ong.id}'/>"> <input
 									type="hidden" id="id-pet" name="id-pet"
 									value="<c:out value = '${pet.id}'/>">
-								<button type="submit" class="btn-perfil-pet">Adotar Pet</button>
+								<button type="submit" class="btn-perfil-pet">Adotar</button>
 							</form>
 						</c:if>
 					</div>

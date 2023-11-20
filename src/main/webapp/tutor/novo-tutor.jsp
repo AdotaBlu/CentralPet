@@ -27,8 +27,18 @@
 
 	<main>
 		<div class="container-endereco">
-				<form method="post" action="cadastrar-tutor"enctype="multipart/form-data">
-			
+
+			<c:if test="${contato == null && endereco == null && tutorSessao == null}">
+				<form method="post" action="cadastrar-tutor"
+					enctype="multipart/form-data">
+			</c:if>
+			<c:if test="${contato != null && endereco != null && tutoSessao != null}">
+				<form method="post" action="atualizar-tutor"
+					enctype="multipart/form-data">
+			</c:if>
+			<c:if test="${endereco != null}">
+				<input type="hidden" id="id-endereco" name="id-endereco"value="<c:out value='${endereco.id}' />">
+			</c:if>
 			<label for="logradouro">Logradouro</label> 
 			<input type="text"id="logradouro" name="logradouro" > 
 			<label for="numero">Número</label> 
