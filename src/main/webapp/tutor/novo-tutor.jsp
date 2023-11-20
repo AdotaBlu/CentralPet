@@ -11,7 +11,7 @@
 
 <style><%@include file="/resources/css/estilo.css"%></style>
 <c:choose>
-	<c:when test="${tutor == null}">
+	<c:when test="${tutorSessao == null}">
 		<title>Cadastro Tutor</title>
 	</c:when>
 	<c:otherwise>
@@ -21,7 +21,7 @@
 </head>
 <body>
 
-	<c:if test="${tutor == null && ong == null}">
+	<c:if test="${tutorSessao == null && ong == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 

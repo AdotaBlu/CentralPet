@@ -3,7 +3,6 @@ package centralpet.controle.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
@@ -56,6 +55,7 @@ import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
+import centralpet.modelo.enumeracao.pet.castrado.Castrado;
 import centralpet.modelo.enumeracao.pet.especie.EspeciePet;
 import centralpet.modelo.enumeracao.pet.estado.EstadoPet;
 import centralpet.modelo.enumeracao.pet.pelagem.PelagemPet;
@@ -321,6 +321,10 @@ public class Servlet extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		int somaTodosPets = daoPet.recuperarSomaPetsTodos();
 		
+		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
+		
+		request.setAttribute("pets", petsDisponiveis);
+		
 		if(sessao.getAttribute("usuario") == null) {
 			
 			request.setAttribute("soma", somaTodosPets);
@@ -333,7 +337,7 @@ public class Servlet extends HttpServlet {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Tutor tutor = daoTutor.recuperarTutorUsuario(usuario);
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			request.setAttribute("soma", somaTodosPets);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
@@ -344,7 +348,7 @@ public class Servlet extends HttpServlet {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			Ong ong = daoOng.recuperarOngUsuario(usuario);
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			request.setAttribute("soma", somaTodosPets);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
@@ -515,14 +519,14 @@ public class Servlet extends HttpServlet {
 		else if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 			
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ong", ong);
+			request.setAttribute("ongSessao", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -828,9 +832,9 @@ public class Servlet extends HttpServlet {
 			Long idOng = pet.getOng().getId();
 			Ong ongPet = daoOng.recuperarOngComTermo(idOng);
 			
-			Termo termo = ongPet.getTermos().get(0);
+			Termo termos = ongPet.getTermos().get(0);
 			
-			request.setAttribute("termo", termo);
+			request.setAttribute("termos", termos);
 			request.setAttribute("ong", ongPet);
 			request.setAttribute("pet", pet);
 			request.setAttribute("tutor", tutor);
@@ -841,7 +845,7 @@ public class Servlet extends HttpServlet {
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
 
-			request.setAttribute("ongSessao", ong);
+			request.setAttribute("ong", ong);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
 			dispatcher.forward(request, response);
 		}
@@ -891,10 +895,11 @@ public class Servlet extends HttpServlet {
 		} else if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
-			request.setAttribute("tutor", tutor);
+			request.setAttribute("tutorSessao", tutor);
 		}
 
 		if (pet != null && ong != null) {
+			request.setAttribute("racao", calcularRacao);
 			request.setAttribute("pet", pet);
 			request.setAttribute("ong", ong);
 
@@ -1370,9 +1375,9 @@ public class Servlet extends HttpServlet {
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
+		Castrado castrado = Castrado.valueOf(request.getParameter("castrado"));
 
-		pet = new Pet(nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet, especiePet,
-				sexoPet, estadoPet, pelagemPet);
+		pet = new Pet(nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet, castrado);
 		
 		daoPet.inserirPet(pet);
 
@@ -1400,8 +1405,10 @@ public class Servlet extends HttpServlet {
 		SexoPet sexoPet = SexoPet.valueOf(request.getParameter("sexo-pet"));
 		EstadoPet estadoPet = EstadoPet.valueOf(request.getParameter("estado-pet"));
 		PelagemPet pelagemPet = PelagemPet.valueOf(request.getParameter("pelagem-pet"));
+		Castrado castrado = Castrado.valueOf(request.getParameter("castrado"));
+		
 		pet = new Pet(id, nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet,
-				especiePet, sexoPet, estadoPet, pelagemPet);
+				especiePet, sexoPet, estadoPet, pelagemPet, castrado);
 		daoPet.atualizarPet(pet);
 
 		Usuario usuario = daoUsuario.recuperarUsuario(ongPet);
@@ -1620,5 +1627,6 @@ public class Servlet extends HttpServlet {
 		}
 		
 	}
+	
 	
 }
