@@ -54,7 +54,7 @@ public class Pet implements Serializable {
 	private LocalDate dataNascimento;
 
 	@Column(name = "idade_pet", nullable = false, unique = false)
-	private byte idade;
+	private float idade;
 
 	@Column(name = "peso_pet", nullable = false, unique = false)
 	private Double peso;
@@ -107,7 +107,7 @@ public class Pet implements Serializable {
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
 		setDataNascimento(dataNascimento);
-		setIdade(dataNascimento);
+		setIdade();
 //		setAcompanhamento(acompanhamento);
 	}
 
@@ -126,7 +126,7 @@ public class Pet implements Serializable {
 		setEstadoPet(estadoPet);
 		setPelagemPet(pelagemPet);
 		setDataNascimento(dataNascimento);
-		setIdade(dataNascimento);
+		setIdade();
 		setFotos(fotos);
 //		setAcompanhamento(acompanhamento);
 	}
@@ -163,12 +163,12 @@ public class Pet implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public byte getIdade() {
+	public float getIdade() {
 		return idade;
 	}
 
-	public void setIdade(LocalDate dataNascimento) {
-		this.idade = calcularIdadePet(dataNascimento);
+	public void setIdade() {
+		this.idade = idadeFormatada();
 	}
 
 	public Double getPeso() {
@@ -265,7 +265,6 @@ public class Pet implements Serializable {
 	    String resultadoString = df.format(anos);
 	    resultadoString = resultadoString.replace(',', '.');
 	    float idadeFormatada = Float.parseFloat(resultadoString);
-	    System.out.println(idadeFormatada); 
 		return idadeFormatada;
 	}
 
