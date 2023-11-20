@@ -21,50 +21,38 @@
 </head>
 <body>
 
-	<c:if test="${tutorSessao == null && ong == null}">
+	<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 
 	<main>
 		<div class="container-endereco">
-			<c:if test="${contato == null && endereco == null && tutor == null}">
-				<form method="post" action="cadastrar-tutor"
-					enctype="multipart/form-data">
-			</c:if>
-			<c:if test="${contato != null && endereco != null && tutor != null}">
-				<form method="post" action="atualizar-tutor"
-					enctype="multipart/form-data">
-			</c:if>
-			<c:if test="${endereco != null}">
-				<input type="hidden" id="id-endereco" name="id-endereco"value="<c:out value='${endereco.id}' />">
-			</c:if>
+				<form method="post" action="cadastrar-tutor"enctype="multipart/form-data">
+			
 			<label for="logradouro">Logradouro</label> 
-			<input type="text"id="logradouro" name="logradouro" value="<c:out value='${endereco.logradouro}' />"> 
+			<input type="text"id="logradouro" name="logradouro" > 
 			<label for="numero">Número</label> 
-			<input type="number" id="numero"name="numero" value="<c:out value='${endereco.numero}' />">
+			<input type="number" id="numero"name="numero" >
 			<%@include file="../opcao-bairro.jsp"%>
 			<label for="cep">CEP</label> 
-			<input type="text" id="cep" name="cep"value="<c:out value='${endereco.cep}' />"> 
+			<input type="text" id="cep" name="cep"> 
 			<label for="pontoReferencia">Ponto de Referência</label> 
-			<input type="text"id="pontoReferencia" name="ponto-referencia"value="<c:out value='${endereco.pontoReferencia}' />">
+			<input type="text"id="pontoReferencia" name="ponto-referencia">
 		</div>
 		<div class="container-cadastro">
 			<h1>Informações tutor</h1>
-			<c:if test="${tutor != null}">
-				<input type="hidden" id="id-tutor" name="id-tutor"
-					value="<c:out value='${tutor.id}' />">
-			</c:if>
+			
 			<div class="input-cadastro">
 				<label for="nome">Nome</label> 
-				<input type="text" id="nome"name="nome" value="<c:out value='${tutor.nome}' />">
+				<input type="text" id="nome"name="nome" >
 			</div>
 			<div class="input-cadastro">
 				<label for="cpf">CPF</label> 
-				<input type="text" id="cpf" name="cpf"value="<c:out value='${tutor.cpf}' />">
+				<input type="text" id="cpf" name="cpf">
 			</div>
 			<div class="input-cadastro">
 				<label for="dataNascimento">Data de Nascimento</label> 
-				<input type="date" id="dataNascimento" name="data-nascimento"value="<c:out value='${tutor.dataNascimento}' />" />
+				<input type="date" id="dataNascimento" name="data-nascimento"/>
 			</div>
 			<div class="select-cadastro">
 				<label for="drop_down_genero">Gênero</label> <select
@@ -74,21 +62,17 @@
 					<option value="OUTROS">Outros</option>
 				</select>
 			</div>
-			<c:if test="${contato != null}">
-				<input type="hidden" id="id-contato" name="id-contato"
-					value="<c:out value='${contato.id}' />">
-			</c:if>
 			<div class="input-cadastro">
 				<label for="telefone">Telefone</label> 
-				<input type="tel"id="telefone" name="telefone"value="<c:out value='${contato.telefone}' />">
+				<input type="tel"id="telefone" name="telefone">
 			</div>
 			<div class="input-cadastro">
 				<label for="email">E-mail</label> 
-				<input type="email" id="email"name="email" value="<c:out value='${contato.email}' />">
+				<input type="email" id="email"name="email" >
 			</div>
 			<div class="input-cadastro">
 				<label for="senha">Senha</label> 
-				<input type="password" id="senha"name="senha" value="<c:out value='${tutor.senha}' />">
+				<input type="password" id="senha"name="senha" >
 			</div>
 			<div class="input-cadastro">
 				<label for="fotoPerfil">Escolha uma foto de perfil</label> 
@@ -98,8 +82,9 @@
 				<button type="reset" class="botao-secundario">Limpar</button>
 				<button type="submit" class="botao-primario">Salvar</button>
 			</div>
+			</form>
 		</div>
-		</form>
+		
 	</main>
 </body>
 </html>
