@@ -895,7 +895,6 @@ public class Servlet extends HttpServlet {
 		}
 
 		if (pet != null && ong != null) {
-			request.setAttribute("racao", calcularRacao);
 			request.setAttribute("pet", pet);
 			request.setAttribute("ong", ong);
 
