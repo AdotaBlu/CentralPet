@@ -33,8 +33,14 @@
 				<h1>Nome do tutor: <c:out value='${tutor.nome}' /></h1>
 		</c:if>
 		
-		<c:if test="${termo != null}"> 
-				<h1>Termo: <c:out value='${termo.termo}' /></h1>
+		<c:if test="${termos != null}"> 
+			<div class="texto-aceitar-termo">
+				<c:forEach var="termo" items="${termos}">
+				<textarea rows="35" cols="140" name="termo">
+				<c:out value='${termo.termo}' />
+				</textarea>
+				</c:forEach>
+			</div>
 		</c:if>
 		
 		<c:if test="${pet != null}"> 

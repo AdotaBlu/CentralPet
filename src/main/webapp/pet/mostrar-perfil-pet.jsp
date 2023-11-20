@@ -15,7 +15,7 @@
 
 <body>
 
-	<c:if test="${tutor == null && ong == null}">
+	<c:if test="${tutor == null && ongSessao == null}">
 		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
@@ -23,7 +23,7 @@
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ong != null}">
+	<c:if test="${ongSessao != null}">
 		<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 
@@ -103,7 +103,8 @@
 		</div>
 		<div>
 			<c:if test="${tutor != null }">
-				<form method = "post" action = "nova-adocao">
+				<form method = "post" action = "mostrar-tela-responder-termo">
+					<input type = "hidden" id = "id-pet" name = "id-ong" value = "<c:out value = '${ong.id}'/>">
 					<input type = "hidden" id = "id-pet" name = "id-pet" value = "<c:out value = '${pet.id}'/>">
 					<button type="submit">Adotar Pet</button>
 				</form>
