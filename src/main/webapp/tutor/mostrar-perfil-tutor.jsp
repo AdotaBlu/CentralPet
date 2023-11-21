@@ -55,11 +55,11 @@
 					</div>
 					<div class="container-btn-tutor">
 						<c:if test="${tutorSessao != null}">
-							<form method="post" action="excluir-tutor">
-								<button type="submit" class="btn-perfil-tutor">Deletar Conta</button>
-							</form>
+							<a href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao"><button type="button" class="btn-perfil-ong">Deletar</button></a>
+							
+							<a href="<%=request.getContextPath()%>/editar-tutor"><button type="button" class="btn-perfil-tutor">Editar</button></a>	
 						</c:if>
-						<a href="<%=request.getContextPath()%>/editar-tutor"><button type="button" class="btn-perfil-tutor">Editar</button></a>
+						
 					</div>
 				</div>
 			</div>

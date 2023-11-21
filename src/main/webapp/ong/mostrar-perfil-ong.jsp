@@ -45,9 +45,7 @@
 					</div>
 					<div class="container-btn-ong">
 						<c:if test="${ongSessao != null}">
-							<form method="post" action="excluir-ong">
-								<button type="submit" class="btn-perfil-ong">Deletar Conta</button>
-							</form>
+						<a href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao"><button type="button" class="btn-perfil-ong">Deletar</button></a>
 						
 						<a href="<%=request.getContextPath()%>/editar-ong"><button type="button" class="btn-perfil-ong">Editar</button></a>
 						</c:if>
