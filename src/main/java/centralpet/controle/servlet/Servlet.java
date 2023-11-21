@@ -170,6 +170,14 @@ public class Servlet extends HttpServlet {
 			case "/excluir-ong":
 				excluirOng(request, response);
 				break;
+				
+			case "/mostrar-tela-confirmar-exclusao":
+				mostrarTelaConfirmacaoExclusao(request, response);
+				break;
+				
+			case "/mostrar-tela-confirmar-exclusao-senha":
+				mostrarTelaConfirmacaoExclusaoSenha(request, response);
+				break;
 
 			case "/atualizar-ong":
 				atualizarOng(request, response);
@@ -578,14 +586,25 @@ public class Servlet extends HttpServlet {
 		
 		else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
-			Contato contato = daoContato.recuperarContatoUsuario(tutor);
-			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
+			String Senha = request.getParameter("senha-usuario-confirmar");
+			
+			boolean confirmarSenha = daoUsuario.verificarUsuarioConfirmarSenha(Senha, tutor.getId());
+			
+			if(confirmarSenha) {
+				
+				Contato contato = daoContato.recuperarContatoUsuario(tutor);
+				Endereco endereco = daoEndereco.recuperarEnderecoUsuario(tutor);
 
-			daoEndereco.deletarEndereco(endereco);
-			daoContato.deletarContato(contato);
-			daoTutor.deletarTutor(tutor);
-			sessao.invalidate();
-			response.sendRedirect("home");
+				daoEndereco.deletarEndereco(endereco);
+				daoContato.deletarContato(contato);
+				daoTutor.deletarTutor(tutor);
+				sessao.invalidate();
+				response.sendRedirect("home");
+				
+			} else {
+				
+				response.sendRedirect("mostrar-tela-confirmar-exclusao-senha");
+			}
 
 		} else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
@@ -671,14 +690,28 @@ public class Servlet extends HttpServlet {
 		
 		else if (sessao.getAttribute("usuario") instanceof Ong) {
 			Ong ong = (Ong) sessao.getAttribute("usuario");
-			Contato contato = daoContato.recuperarContatoUsuario(ong);
-			Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
+			
+			String Senha = request.getParameter("senha-usuario-confirmar");
+			
+			boolean confirmarSenha = daoUsuario.verificarUsuarioConfirmarSenha(Senha, ong.getId());
+			
+			if(confirmarSenha) {
+				
+				Contato contato = daoContato.recuperarContatoUsuario(ong);
+				Endereco endereco = daoEndereco.recuperarEnderecoUsuario(ong);
 
-			daoEndereco.deletarEndereco(endereco);
-			daoContato.deletarContato(contato);
-			daoOng.deletarOng(ong);
-			sessao.invalidate();
-			response.sendRedirect("home");
+				daoEndereco.deletarEndereco(endereco);
+				daoContato.deletarContato(contato);
+				daoOng.deletarOng(ong);
+				sessao.invalidate();
+				response.sendRedirect("home");
+				
+			} else {
+				
+				response.sendRedirect("mostrar-tela-confirmar-exclusao-senha");
+			}
+			
+			
 			
 		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
@@ -688,6 +721,67 @@ public class Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		
+	}
+	
+	private void mostrarTelaConfirmacaoExclusao(HttpServletRequest request, HttpServletResponse response) 
+				 throws SQLException, IOException, ServletException {
+		
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		}
+		
+		else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+		
+			request.setAttribute("ongSessao", ong);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("confirmar-exclusao-conta.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+
+			request.setAttribute("tutorSessao", tutor);
+	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("confirmar-exclusao-conta.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+	
+	private void mostrarTelaConfirmacaoExclusaoSenha(HttpServletRequest request, HttpServletResponse response) 
+			 throws SQLException, IOException, ServletException {
+	
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-aviso");
+			dispatcher.forward(request, response);
+		}
+		
+		else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+		
+			request.setAttribute("ongSessao", ong);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("confirmar-exclusao-conta-senha.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+	
+			request.setAttribute("tutorSessao", tutor);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("confirmar-exclusao-conta-senha.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarFormularioNovoPet(HttpServletRequest request, HttpServletResponse response)
