@@ -1,5 +1,5 @@
 
-function goBack() {
+function voltar() {
 	
 	window.history.back();
 }

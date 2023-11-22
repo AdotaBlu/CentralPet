@@ -134,7 +134,7 @@
 									value="<c:out value = '${pet.id}'/>">
 								<button type="submit" class="btn-perfil-pet">Desfavoritar</button>
 							</form>
-							<form method="post" action="mostrar-tela-responder-termo">
+							<form method="post" action="tela-adocao-pet">
 								<input type="hidden" id="id-pet" name="id-ong"
 									value="<c:out value = '${ong.id}'/>"> <input
 									type="hidden" id="id-pet" name="id-pet"

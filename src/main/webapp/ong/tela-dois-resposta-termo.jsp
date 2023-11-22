@@ -16,11 +16,11 @@
 	
 	<body>
 	
-		<c:if test="${tutor == null && ong == null}">
+		<c:if test="${tutorSessao == null && ongSessao == null}">
 		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 		</c:if>
 		
-		<c:if test="${tutor != null}">
+		<c:if test="${tutorSessao != null}">
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 		</c:if>
 		
@@ -37,12 +37,13 @@
 			<input type="checkbox"> Concordo com o termo de responsabilidade
 		</div>
 		
-		<form action="mostrar-tela-Tres-resposta-termo" method="post">
+		<form action="cadastrar-adocao" method="post">
 			<input type="hidden" name="id-pet" value='<c:out value="${pet.id}"></c:out>'>
 			<input type="hidden" name="id-ong" value='<c:out value="${ong.id}"></c:out>'>
 		
 			<div class="container-botao">
-				<button type="submit" class="botao-primario">Avançar</button>
+			<button type="button" class="btn-perfil-ong" onclick="voltar()">Voltar</button>
+				<button type="submit" class="botao-primario">Adotar</button>
 			</div>
 		</form>
 	</body>

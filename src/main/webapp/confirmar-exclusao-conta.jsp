@@ -14,6 +14,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"rel="stylesheet">
 	</head>
 	<body>
+    
 		<c:if test="${tutorSessao != null}">
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 		</c:if>
@@ -27,10 +28,12 @@
 			<div class="container-h2">
 			<h2>Você tem certeza de que deseja excluir sua conta?</h2>
 		</div>
-		<div>		
-			<a><button type="button" onclick="goBack()">Cancelar</button></a>
-			<a href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao-senha"><button type="button">Confirmar</button></a>
-		</div>
+
+		
+		<div class="container-btn-ong">
+			<button type="button" class="btn-perfil-ong" onclick="voltar()">Voltar</button>
+			<a href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao-senha"><button type="button" class="btn-perfil-ong">Confirmar</button></a>
+      
 		</div>
 	</main>
 </body>
