@@ -1322,15 +1322,7 @@ public class Servlet extends HttpServlet {
 		else if (sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 
-			Long idPet = Long.parseLong(request.getParameter("id-pet"));
-			Pet pet = daoPet.recuperarPet(idPet);
-			
-			Long idOng = Long.parseLong(request.getParameter("id-ong"));
-			Ong ong = daoOng.recuperarOngComTermo(idOng);
-			
-			request.setAttribute("ong", ong);
 			request.setAttribute("tutor", tutor);
-			request.setAttribute("pet", pet);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ong/tela-tres-resposta-termo.jsp");
 			dispatcher.forward(request, response);
 			
@@ -1649,8 +1641,8 @@ public class Servlet extends HttpServlet {
 			Pet pet = daoPet.recuperarPet(idPet);
 			pet.setEstadoPet(EstadoPet.INATIVO);
 			daoPet.atualizarPet(pet);
-			Ong ong = daoOng.recuperarOng(idOng);
-			Termo termo = daoTermo.recuperarTermo(ong.getId());
+			Ong ong = daoOng.recuperarOngComTermo(idOng);
+			Termo termo = ong.getTermos().get(0);
 
 			Adocao adocao = new Adocao(pet, ong, tutor, termo);
 			daoAdocao.inserirAdocao(adocao);

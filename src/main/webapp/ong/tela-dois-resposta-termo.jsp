@@ -16,11 +16,11 @@
 	
 	<body>
 	
-		<c:if test="${tutor == null && ong == null}">
+		<c:if test="${tutorSessao == null && ongSessao == null}">
 		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 		</c:if>
 		
-		<c:if test="${tutor != null}">
+		<c:if test="${tutorSessao != null}">
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 		</c:if>
 		
@@ -43,7 +43,7 @@
 		
 			<div class="container-botao">
 			<button type="button" class="btn-perfil-ong" onclick="voltar()">Voltar</button>
-				<button type="submit" class="botao-primario">Avançar</button>
+				<button type="submit" class="botao-primario">Adotar</button>
 			</div>
 		</form>
 	</body>

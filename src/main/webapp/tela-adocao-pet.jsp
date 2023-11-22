@@ -60,8 +60,8 @@
 				
 					
 				<form action="mostrar-tela-responder-termo" method="post">
-					<input type="hidden" name="id-pet" value='<c:out value="${pet.id}"></c:out>'>
-					<input type="hidden" name="id-ong" value='<c:out value="${ong.id}"></c:out>'>
+					<input type="hidden" name="id-pet" value="<c:out value = '${pet.id}'/>">
+					<input type="hidden" name="id-ong" value="<c:out value = '${ong.id}'/>">
 					
 					<div class="container-botao">
 						<button type="button" class="btn-perfil-ong" onclick="voltar()">Voltar</button>	

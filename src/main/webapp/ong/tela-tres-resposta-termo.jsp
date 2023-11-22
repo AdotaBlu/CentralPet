@@ -27,27 +27,30 @@
 		<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 		</c:if>
 		
-		<div class="titulo-tela-tres-resposta-termo">
-			<h2>Parabéns pela maravilhosa decisão de adotar um pet!</h2>
-		</div>
-		<div class="texto-um-tela-tres-resposta-termo">
-			<h3>Preparando o Lar</h3>
-			Antes da adoção, queremos garantir que sua casa seja um lugar seguro
-			e acolhedor para o novo pet. Nossa equipe fornecerá orientações e dicas 
-			para preparar seu lar para a chegada do seu amigo peludo.
-		</div>
-		<div class="texto-dois-tela-tres-resposta-termo">
-			<h3>Suporte Contínuo</h3>
-			Mesmo após a adoção, estamos aqui por você. Oferecemos suporte contínuo 
-			para garantir que a transição seja suave e para responder a quaisquer 
-			perguntas que você possa ter. Compartilhe suas histórias conosco e juntos 
-			celebraremos essa linda jornada de amor.
-		</div>
+		<div>
 		
+			<div class="titulo-tela-tres-resposta-termo">
+				<h2>Parabéns pela maravilhosa decisão de adotar um pet!</h2>
+			</div>
+			<div class="texto-um-tela-tres-resposta-termo">
+				<h3>Preparando o Lar</h3>
+				Antes da adoção, queremos garantir que sua casa seja um lugar seguro
+				e acolhedor para o novo pet. Nossa equipe fornecerá orientações e dicas 
+				para preparar seu lar para a chegada do seu amigo peludo.
+			</div>
+			
+			<div class="texto-dois-tela-tres-resposta-termo">
+				<h3>Suporte Contínuo</h3>
+				Mesmo após a adoção, estamos aqui por você. Oferecemos suporte contínuo 
+				para garantir que a transição seja suave e para responder a quaisquer 
+				perguntas que você possa ter. Compartilhe suas histórias conosco e juntos 
+				celebraremos essa linda jornada de amor.
+			</div>
+			
+			<div class="container-botao">
+				<a href="<%=request.getContextPath()%>/inserir-avaliacao"><button type="button" >Entendi</button></a>
+			</div>
 		
-		
-		<div class="container-botao">
-			<a href="<%=request.getContextPath()%>/inserir-avaliacao"><button type="button" class="btn-perfil-ong">Entendi</button></a>
 		</div>
 	</body>
 </html>
