@@ -63,12 +63,6 @@
 				novo lar e uma nova família para eles.</p>
 					
 			</div>
-			
-			<div class="container-secaoHome">
-			</div>
-			
-			<div class="container-secaoHome">
-		</div>
 	</div>
 	
 	
