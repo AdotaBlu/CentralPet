@@ -37,11 +37,12 @@
 			<input type="checkbox"> Concordo com o termo de responsabilidade
 		</div>
 		
-		<form action="mostrar-tela-Tres-resposta-termo" method="post">
+		<form action="cadastrar-adocao" method="post">
 			<input type="hidden" name="id-pet" value='<c:out value="${pet.id}"></c:out>'>
 			<input type="hidden" name="id-ong" value='<c:out value="${ong.id}"></c:out>'>
 		
 			<div class="container-botao">
+			<button type="button" class="btn-perfil-ong" onclick="voltar()">Voltar</button>
 				<button type="submit" class="botao-primario">Avançar</button>
 			</div>
 		</form>

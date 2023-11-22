@@ -44,13 +44,10 @@
 			celebraremos essa linda jornada de amor.
 		</div>
 		
-		<form action="nova-adocao" method="post">
-			<input type="hidden" name="id-pet" value='<c:out value="${pet.id}"></c:out>'>
-			<input type="hidden" name="id-ong" value='<c:out value="${ong.id}"></c:out>'>
+		
 		
 		<div class="container-botao">
-			<button type="submit" class="botao-primario">Entendi</button>
+			<a href="<%=request.getContextPath()%>/inserir-avaliacao"><button type="button" class="btn-perfil-ong">Entendi</button></a>
 		</div>
-		</form>
 	</body>
 </html>

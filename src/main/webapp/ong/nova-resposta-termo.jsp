@@ -60,7 +60,7 @@
 		<label for="pergunta-oito">Por que você decidiu adotar um pet e o que você espera da relação com ele? *</label>
 		<input type="text" name="pergunta-oito" id="">
 		
-		<input type = "hidden" id = "id-pet" name = "id-ong" value = "<c:out value = '${ongSessao.id}'/>">
+		<input type = "hidden" id = "id-pet" name = "id-ong" value = "<c:out value = '${ong.id}'/>">
 		<input type = "hidden" id = "id-pet" name = "id-pet" value = "<c:out value = '${pet.id}'/>">
 		
 		<div class="container-botao">

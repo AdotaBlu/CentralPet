@@ -230,6 +230,10 @@ public class Servlet extends HttpServlet {
 			case "/nova-adocao":
 				mostrarFormularioNovaAdocao(request, response);
 				break;
+				
+			case "/tela-adocao-pet":
+				mostrarTelaAdocaoPet(request, response);
+				break;
 
 			case "/cadastrar-adocao":
 				inserirAdocao(request, response);
@@ -945,6 +949,43 @@ public class Servlet extends HttpServlet {
 		}
 	}
 	
+	private void mostrarTelaAdocaoPet(HttpServletRequest request, HttpServletResponse response)
+					throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		
+		if (sessao.getAttribute("usuario") == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("novo-login");
+			dispatcher.forward(request, response);
+		}
+
+		else if (sessao.getAttribute("usuario") instanceof Tutor) {
+			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
+			request.setAttribute("tutorSessao", tutor);
+			
+			Long idOng = Long.parseLong(request.getParameter("id-ong"));
+			Ong ong = daoOng.recuperarOng(idOng);
+			
+			Long idPet = Long.parseLong(request.getParameter("id-pet"));
+			Pet pet = daoPet.recuperarPet(idPet);
+			
+			request.setAttribute("ong", ong);
+			request.setAttribute("pet", pet);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("tela-adocao-pet.jsp");
+			dispatcher.forward(request, response);
+			
+		} else if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong = (Ong) sessao.getAttribute("usuario");
+			request.setAttribute("ongSessao", ong);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("tela-adocao-pet.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+	}
+	
 	private void mostrarFormularioAvaliacao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -1614,7 +1655,7 @@ public class Servlet extends HttpServlet {
 			Adocao adocao = new Adocao(pet, ong, tutor, termo);
 			daoAdocao.inserirAdocao(adocao);
 
-			response.sendRedirect("inserir-avaliacao");
+			response.sendRedirect("mostrar-tela-Tres-resposta-termo");
 
 		}
 

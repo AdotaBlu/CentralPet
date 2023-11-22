@@ -16,10 +16,6 @@
 	
 	<body>
 	
-		<c:if test="${tutorSessao == null && ongSessao == null}">
-		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
-		</c:if>
-	
 		<c:if test="${tutorSessao != null}">
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 		</c:if>
@@ -33,7 +29,7 @@
 		</div>
 		
 		<div class="container-btn-ong">
-			<button type="button" class="btn-perfil-ong" onclick="goBack()">Voltar</button>
+			<button type="button" class="btn-perfil-ong" onclick="voltar()">Voltar</button>
 			<a href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao-senha"><button type="button" class="btn-perfil-ong">Confirmar</button></a>
 		</div>
 		

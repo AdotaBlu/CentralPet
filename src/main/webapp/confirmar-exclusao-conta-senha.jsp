@@ -16,10 +16,6 @@
 	
 	<body>
 	
-		<c:if test="${tutorSessao == null && ongSessao == null}">
-		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
-		</c:if>
-	
 		<c:if test="${tutorSessao != null}">
 		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 		</c:if>
