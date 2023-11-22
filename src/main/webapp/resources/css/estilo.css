@@ -49,6 +49,7 @@ main {
     gap: 200px;
     align-items: center;
     justify-content: center;
+    
 }
 
 .cards-home{
@@ -66,10 +67,29 @@ conteiner-secao p{
 	width: 450px;
 }
 
-
-
 .container-secao p{
 	font-size: 25px;
+}
+
+#primeira-secao{
+	align-items: center;
+	justify-content: center;
+}
+
+#segunda-secao{
+	display: block;
+}
+
+#terceira-secao{
+	display: flex;
+}
+
+#quarta-secao{
+	
+}
+
+#quinta-secao{
+	
 }
 
 /* HOME */
@@ -800,8 +820,6 @@ input[type='file'] {
 	color:var(--amarelo)
 }
 
-
-
 /* Novo Pet */
 
 .value-radio{
@@ -811,6 +829,6 @@ input[type='file'] {
 
 #input-radio{
 	margin: 0 5px 0 5px;
-}
+}}
 
 
