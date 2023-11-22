@@ -25,14 +25,6 @@
 	</c:if>
 	
 	<main>
-		<c:if test="${tutorSessao != null}">
-			<h1><c:out value='${tutorSessao.nome}' /></h1>
-		</c:if>
-		
-		<c:if test="${tutorSessao == null}">
-			<h1>Nenhum tutor encontrado</h1>
-		</c:if>
-		
 			<div class="container-perfil">
 				<div class="foto-perfil-tutor">
 					<img id="foto-perfil-tutor" alt="foto-de-perfil" src='<c:out value="${tutorSessao.urlFoto()}"></c:out>'>
@@ -55,16 +47,15 @@
 					</div>
 					<div class="container-btn-tutor">
 						<c:if test="${tutorSessao != null}">
-							<a href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao"><button type="button" class="btn-perfil-ong">Deletar</button></a>
-							
-							<a href="<%=request.getContextPath()%>/editar-tutor"><button type="button" class="btn-perfil-tutor">Editar</button></a>	
+							<a class="link-perfil-tutor" href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao"><button type="button" class="btn-perfil-tutor">Deletar</button></a>
+							<a class="link-perfil-tutor" href="<%=request.getContextPath()%>/editar-tutor"><button type="button" class="btn-perfil-tutor">Editar</button></a>	
 						</c:if>
 						
 					</div>
 				</div>
 			</div>
 		<h1>Pets Favoritados</h1>
-			<div class="container-cards">
+			<div class="container-cards-favoritos">
 			<c:forEach var="pet" items="${petsFavoritos}">
 				<div class="pet-card">
 					<div class="foto-pet">
@@ -125,7 +116,7 @@
 									<button type="submit" class="btn-adotar-card">Adotar</button>
 								</div>
 							</form>
-						</div>
+					</div>
 				</div>
 			</c:forEach>
 		</div>

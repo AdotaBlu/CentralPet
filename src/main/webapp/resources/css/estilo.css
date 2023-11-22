@@ -53,23 +53,19 @@ main {
 	
 }
 
-form {
-	display: grid;
-	gap: 10px;
-	justify-content: center;
-	align-items: center;
+a {
+	text-align: center;
+	text-decoration: none;
 }
 
 input, option {
 	padding: 15px;
 	width: 470px;
 	height: 40px;
-	margin: 15px;
 	border: 1px solid var(--roxo);
 	border-radius: 5px;
 	background-color: var(--branco);
 }
-
 #termo {
 	padding: 5px;
 	border: 1px solid var(--roxo);
@@ -77,9 +73,38 @@ input, option {
 	background-color: var(--branco);
 }
 
+/* Cadastro Tutor */
+
+.input-endereco{
+	display: flex;
+	flex-direction: column;
+}
+
+.input-endereco label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 15px 0 15px 0;
+}
+
+.select-endereco{
+	display: flex;
+	flex-direction: column;
+}
+
+.select-endereco label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 15px 0 15px 0;
+}
+
 .input-cadastro {
 	display: flex;
 	flex-direction: column;
+}
+.input-cadastro label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 15px 0 15px 0;
 }
 
 .select-cadastro {
@@ -87,10 +112,59 @@ input, option {
 	flex-direction: column;
 }
 
+.select-cadastro label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 15px 0 15px 0;
+}
+
+.container-cep-numero{
+	display: flex;
+	flex-direction: row; 
+	justify-content: space-between;
+}
+
+#cep {
+	width: 355px;
+}
+#numero{
+	width: 100px;
+}
+
+.container-data-genero{
+	display: flex;
+	flex-direction: row; 
+	justify-content: space-between;
+	align-items: center;
+}
+
+#dataNascimento{
+	width: 230px;
+}
+
+#drop_down_genero{
+	width: 230px;
+}
+
+.container-senha-cadastro{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#senha-um{
+	width: 230px;
+}
+
+#senha-dois{
+	width: 230px;
+}
+
+
 select {
 	width: 470px;
 	height: 40px;
-	margin: 15px;
 	border: 1px solid var(--roxo);
 	border-radius: 5px;
 }
@@ -112,21 +186,6 @@ button {
 	color: var(--branco);
 }
 
-.footer-content {
-	display: flex;
-	justify-content: center;
-}
-
-.footer-content ul {
-	align-items: left;
-	margin: 40px;
-	width: 20%;
-}
-
-a {
-	text-align: center;
-	text-decoration: none;
-}
 
 .imagem-perfil-pet {
 	width: 200px;
@@ -439,9 +498,6 @@ Editar Tutor, ONG * /
 	display: block;
 }
 
-input[type='file'] {
-	display: none
-}
 
 .editar-foto {
 	display: flex;
@@ -599,7 +655,6 @@ input[type='file'] {
 	text-decoration: none;
 	border: none;
 	border-radius: 5px;
-	margin: 0 360px 0 -350px;
 }
 .container-info-perfil-tutor{
 	padding: 10px;
@@ -617,12 +672,25 @@ input[type='file'] {
 	flex-direction: row-reverse;
 }
 
+.container-cards-favoritos{
+	display: flex;
+	flex-direction: row;
+	justify-content:start;
+	width: 70%;
+	height: 100%;
+}
+
 .endereco-tutor{
 	display: flex;
 }
 
 #ong-pets-cadastrados {
 	display: block;
+}
+
+.link-perfil-tutor{
+	margin-left: 10px;
+	
 }
 
 .line{

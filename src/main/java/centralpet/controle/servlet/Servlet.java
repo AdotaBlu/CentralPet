@@ -3,6 +3,7 @@ package centralpet.controle.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
@@ -1110,7 +1111,6 @@ public class Servlet extends HttpServlet {
 
 			Contato contato = daoContato.recuperarContatoUsuario(tutor);
 			List<Pet> petsFavoritos = daoPet.recuperarPetsFavoritosTutor(tutor.getId());
-
 
 			request.setAttribute("tutorSessao", tutor);
 			request.setAttribute("contato", contato);
