@@ -23,7 +23,6 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100%;
 	background-color: var(--gelo);
 }
 
@@ -75,6 +74,12 @@ input, option {
 
 /* Cadastro Tutor */
 
+.container-endereco{
+	width: 470px;
+}
+.container-cadastro{
+	width: 470px;
+}
 .input-endereco{
 	display: flex;
 	flex-direction: column;
@@ -83,7 +88,7 @@ input, option {
 .input-endereco label{
 	font-weight: bold;
 	color: var(--roxo);
-	margin: 15px 0 15px 0;
+	margin: 10px 0 10px 0;
 }
 
 .select-endereco{
@@ -94,7 +99,7 @@ input, option {
 .select-endereco label{
 	font-weight: bold;
 	color: var(--roxo);
-	margin: 15px 0 15px 0;
+	margin: 10px 0 10px 0;
 }
 
 .input-cadastro {
@@ -104,7 +109,7 @@ input, option {
 .input-cadastro label{
 	font-weight: bold;
 	color: var(--roxo);
-	margin: 15px 0 15px 0;
+	margin: 10px 0 10px 0;
 }
 
 .select-cadastro {
@@ -115,7 +120,13 @@ input, option {
 .select-cadastro label{
 	font-weight: bold;
 	color: var(--roxo);
-	margin: 15px 0 15px 0;
+	margin: 10px 0 10px 0;
+}
+
+.label-adicionar-foto{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
 }
 
 .container-cep-numero{
@@ -153,13 +164,35 @@ input, option {
 	justify-content: space-between;
 }
 
-#senha-um{
+#senha-um {
 	width: 230px;
 }
 
-#senha-dois{
+#senha-dois {
 	width: 230px;
 }
+
+.input-foto-cadastro {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+ input[type="file"] {
+    display: none;
+}
+
+#icone-adicionar-foto{
+	width: 300px;
+	height: 300px;
+	border-radius: 5px;
+	border: 1px solid var(--roxo);
+}
+
+
 
 
 select {
@@ -191,6 +224,7 @@ button {
 	width: 200px;
 	height: 200px;
 }
+
 
 /*Barra de filtros*/
 
@@ -437,11 +471,20 @@ li:hover {
 
 /* Login */
 
-.container-login {
+.container-principal-login {
 	margin-top: 10%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.container-input-login{
+	display: flex;
+	flex-direction: column;
+}
+
+.input-login{
+	margin: 10px;
 }
 
 .container-h2 {
@@ -453,6 +496,7 @@ li:hover {
 }
 
 .container-botao-login {
+	margin-top: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -468,6 +512,7 @@ li:hover {
 }
 
 .container-link-cadastro {
+	margin-top: 20px;
 	text-align: center;
 	font-size: 12px;
 	font-weight: 500;
