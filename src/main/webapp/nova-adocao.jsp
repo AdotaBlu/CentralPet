@@ -3,24 +3,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Adoção</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>Adoção</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style><%@include file="/resources/css/estilo.css"%></style>
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"rel="stylesheet">
 </head>
 <body>
 
-	<c:if test="${tutor == null && ong == null}">
+	<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutor != null}">
+	<c:if test="${tutorSessao != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ong != null}">
+	<c:if test="${ongSessaoSessao != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 
@@ -30,11 +32,15 @@
 		</c:if>
 		
 		<c:if test="${tutor != null}"> 
-				<h1>Nome do tutor: <c:out value='${tutor.nome}' /></h1>
+				<h1>Nome do tutor: <c:out value='${tutorSessao.nome}' /></h1>
 		</c:if>
 		
 		<c:if test="${termo != null}"> 
-				<h1>Termo: <c:out value='${termo.termo}' /></h1>
+			<div class="texto-aceitar-termo">
+				<textarea rows="35" cols="140" name="termo">
+				<c:out value='${termo.termo}' />
+				</textarea>
+			</div>
 		</c:if>
 		
 		<c:if test="${pet != null}"> 

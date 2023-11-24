@@ -12,15 +12,15 @@
 </head>
 <body>
 
-	<c:if test="${tutor == null && ong == null}">
+	<c:if test="${tutorSessao == null && ongSessao == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutor != null}">
+	<c:if test="${tutorSessao != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ong != null}">
+	<c:if test="${ongSessao != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 
@@ -33,17 +33,17 @@
 				<div class="editar-info">
 					<div class="editar-foto-tutor">
 						<label class="label-inserir-foto" for="foto-perfil">+</label> 
-						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${tutor.urlFoto()}"></c:out>">
+						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${tutorSessao.urlFoto()}"></c:out>">
 						<input type="file" name="foto-perfil" id="foto-perfil" accept="image/*">
 					</div>
 					<div class="editar-dados-tutor">
 						<div class="input-editar">
 							<label for="nome">Nome</label> 
-							<input type="text" id="nome" name="nome" value="<c:out value='${tutor.nome}' />">
+							<input type="text" id="nome" name="nome" value="<c:out value='${tutorSessao.nome}' />">
 						</div>
 						<div class="input-editar">
 							<label for="cpf">CPF</label> 
-							<input type="text" id="cpf" name="cpf" value="<c:out value='${tutor.cpf}' />">
+							<input type="text" id="cpf" name="cpf" value="<c:out value='${tutorSessao.cpf}' />">
 						</div>
 						<div class="input-editar">
 							<label for="email">E-mail</label> 
@@ -96,7 +96,7 @@
 					</div>
 				</div>
 			</div>
-			<input type="hidden" id="id-tutor" name="id-tutor" value="<c:out value='${tutor.id}' />">
+			<input type="hidden" id="id-tutor" name="id-tutor" value="<c:out value='${tutorSessao.id}' />">
 			<input type="hidden" id="id-contato" name="id-contato" value="<c:out value='${contato.id}' />">
 			<input type="hidden" id="id-endereco" name="id-endereco" value="<c:out value='${endereco.id}' />">		
 			<div class="container-botao">

@@ -24,7 +24,6 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100%;
 	background-color: var(--gelo);
 }
 
@@ -88,11 +87,17 @@ conteiner-secao p{
 	
 }
 
+
+
+
 #quinta-secao{
 	
 }
 
 /* HOME */
+a {
+	text-align: center;
+	text-decoration: none;
 
 form {
 	display: grid;
@@ -105,11 +110,11 @@ input, option {
 	padding: 15px;
 	width: 470px;
 	height: 40px;
-	margin: 15px;
 	border: 1px solid var(--roxo);
 	border-radius: 5px;
 	background-color: var(--branco);
 }
+
 
 li{
 	color: var(--cinza)
@@ -120,6 +125,7 @@ input[type="radio"] {
     height: 20px;
     margin: 0;
 }
+
 #termo {
 	padding: 5px;
 	border: 1px solid var(--roxo);
@@ -127,9 +133,44 @@ input[type="radio"] {
 	background-color: var(--branco);
 }
 
+/* Cadastro Tutor */
+
+.container-endereco{
+	width: 470px;
+}
+.container-cadastro{
+	width: 470px;
+}
+.input-endereco{
+	display: flex;
+	flex-direction: column;
+}
+
+.input-endereco label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
+.select-endereco{
+	display: flex;
+	flex-direction: column;
+}
+
+.select-endereco label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
 .input-cadastro {
 	display: flex;
 	flex-direction: column;
+}
+.input-cadastro label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
 }
 
 .select-cadastro {
@@ -137,10 +178,87 @@ input[type="radio"] {
 	flex-direction: column;
 }
 
+.select-cadastro label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
+.label-adicionar-foto{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
+.container-cep-numero{
+	display: flex;
+	flex-direction: row; 
+	justify-content: space-between;
+}
+
+#cep {
+	width: 355px;
+}
+#numero{
+	width: 100px;
+}
+
+.container-data-genero{
+	display: flex;
+	flex-direction: row; 
+	justify-content: space-between;
+	align-items: center;
+}
+
+#dataNascimento{
+	width: 230px;
+}
+
+#drop_down_genero{
+	width: 230px;
+}
+
+.container-senha-cadastro{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#senha-um {
+	width: 230px;
+}
+
+#senha-dois {
+	width: 230px;
+}
+
+.input-foto-cadastro {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+ input[type="file"] {
+    display: none;
+}
+
+#icone-adicionar-foto{
+	width: 300px;
+	height: 300px;
+	border-radius: 5px;
+	border: 1px solid var(--roxo);
+}
+
+
+
+
 select {
 	width: 470px;
 	height: 40px;
-	margin: 15px;
 	border: 1px solid var(--roxo);
 	border-radius: 5px;
 }
@@ -162,26 +280,12 @@ button {
 	color: var(--branco);
 }
 
-.footer-content {
-	display: flex;
-	justify-content: center;
-}
-
-.footer-content ul {
-	align-items: left;
-	margin: 40px;
-	width: 20%;
-}
-
-a {
-	text-align: center;
-	text-decoration: none;
-}
 
 .imagem-perfil-pet {
 	width: 200px;
 	height: 200px;
 }
+
 
 /*Barra de filtros*/
 
@@ -194,6 +298,7 @@ a {
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
+	margin: 0 0 0 0;
 }
 
 .filtro select {
@@ -281,6 +386,7 @@ li:hover {
 	border: none;
 	background-color: var(--roxo);
 	font-size: 12px;
+	margin-right: 10px;
 }
 
 .li {
@@ -431,11 +537,20 @@ li:hover {
 
 /* Login */
 
-.container-login {
+.container-principal-login {
 	margin-top: 10%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.container-input-login{
+	display: flex;
+	flex-direction: column;
+}
+
+.input-login{
+	margin: 10px;
 }
 
 .container-h2 {
@@ -447,6 +562,7 @@ li:hover {
 }
 
 .container-botao-login {
+	margin-top: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -462,6 +578,7 @@ li:hover {
 }
 
 .container-link-cadastro {
+	margin-top: 20px;
 	text-align: center;
 	font-size: 12px;
 	font-weight: 500;
@@ -492,9 +609,6 @@ Editar Tutor, ONG * /
 	display: block;
 }
 
-input[type='file'] {
-	display: none
-}
 
 .editar-foto {
 	display: flex;
@@ -584,7 +698,8 @@ input[type='file'] {
 	text-decoration: none;
 	border: none;
 	border-radius: 5px;
-	margin: 0 0 0 10;
+	margin: 0 360px 0 -350px;
+
 }
 .container-info-perfil-ong{
 	padding: 10px;
@@ -593,6 +708,7 @@ input[type='file'] {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	line-height: 30px;
 }
 
 .container-btn-ong{
@@ -603,10 +719,12 @@ input[type='file'] {
 
 .endereco-ong{
 	display: flex;
+	height: 25px;
 }
 
 #ong-pets-cadastrados {
 	display: block;
+	margin-top: 50px;
 }
 
 .line{
@@ -648,7 +766,6 @@ input[type='file'] {
 	text-decoration: none;
 	border: none;
 	border-radius: 5px;
-	margin: 0 0 0 10;
 }
 .container-info-perfil-tutor{
 	padding: 10px;
@@ -657,6 +774,7 @@ input[type='file'] {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	line-height: 30px;
 }
 
 .container-btn-tutor{
@@ -665,12 +783,25 @@ input[type='file'] {
 	flex-direction: row-reverse;
 }
 
+.container-cards-favoritos{
+	display: flex;
+	flex-direction: row;
+	justify-content:start;
+	width: 70%;
+	height: 100%;
+}
+
 .endereco-tutor{
 	display: flex;
 }
 
 #ong-pets-cadastrados {
 	display: block;
+}
+
+.link-perfil-tutor{
+	margin-left: 10px;
+	
 }
 
 .line{
@@ -750,8 +881,105 @@ input[type='file'] {
 	font-weight: bold;
 }
 
-.nome-pet{
+.nome-pet h1{
+	color: var(--roxo);
+}
+
+.label-pet {
+	font-size: 18px;
+	color: var(--roxo);
+	margin-right: 3px;
+	font-weight: bold;
+}
+
+.value-pet{
+	font-size: 18px;
+	color: var(--roxo);
+	margin-right: 50px;
+	text-transform: lowercase;
+	font-weight: 500;
+}
+
+.value-pet::first-letter {
+	text-transform: uppercase;
+}
+
+.container-btn-perfil-pet{
+	width: 100%;
 	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+}
+
+.btn-perfil-pet{
+	display: inline-block;
+	width: 90px;
+	height: 30px;
+	background-color: var(--roxo);
+	color: var(--branco);
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+	margin: 0 0 0 10;
+}
+
+.barra-nav-perfil-pet{
+	display: flex;
+	text-align: center;	
+	justify-content: space-between;
+}
+
+.nav-bar-pet-link{
+	color: var(--roxo);
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.nav-bar-pet-items{
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+}
+.nav-bar-pet-link:hover{
+	color:var(--amarelo)
+}
+
+/* Tela Logoff */
+.container-logoff{
+display: flex;
+    flex: row;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+	
+}
+
+/* Tela Excluir conta */
+.container-tela-exclusao-conta-texto{
+	display: flex;
+    flex: row;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+	
+}
+
+/* Formulário */
+.container-form{
+	align-items: center;
+}
+
+.container-botao-form {
+	align-items: center;
+	justify-content: center;
+}
+
+.input-form {
+	width: 400px;
 	align-items: center;
 }
 

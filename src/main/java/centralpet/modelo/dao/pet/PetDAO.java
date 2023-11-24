@@ -35,4 +35,8 @@ public interface PetDAO {
 	Pet recuperarPet(Long id);
 	
 	List<Pet> recuperarPetsFavoritosTutor(Long idTutor);
+	
+	int recuperarSomaPetsDaOng(Long idOng);
+	
+	int recuperarSomaPetsTodos();
 }

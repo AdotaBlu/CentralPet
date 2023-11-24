@@ -16,16 +16,18 @@
 
 </head>
 <body>
-	<c:if test="${tutor == null && ong == null}">
-		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp"%>
-	</c:if>
 
-	<c:if test="${tutor != null}">
-		<%@ include file="../nav-bar/nav-tutor-logado.jsp"%>
+	<c:if test="${tutorSessao == null && ongSessao == null}">
+	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
+	
+	<c:if test="${tutorSessao != null}">
+	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
+	</c:if>
+	
+	<c:if test="${ongSessao != null}">
+	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 
-	<c:if test="${ong != null}">
-		<%@ include file="../nav-bar/nav-ong-logada.jsp"%>
 	</c:if>
 
 	<div class="conteinerHome">
@@ -134,7 +136,7 @@
 			<div>
 				<p><b>Ongs em destaque.</b></p>
 			</div>
-			
+
 				<div class="container-cards">
 					<c:forEach var="ong" items="${ongs}" varStatus="loop2">
 						<c:if test="${loop2.index < 3}">
@@ -171,6 +173,7 @@
 		<div class="container-secao"></div>
 
 		<div class="container-secao"></div>
+
 	</div>
 
 
@@ -208,11 +211,13 @@
 			Cadastro</a> 
 			<a href="<%=request.getContextPath()%>/novo-login">Login</a>
 		<a href="<%=request.getContextPath()%>/novo-termo">Cadastrar Termo</a>
-		<a href="<%=request.getContextPath()%>/nova-adocao">Realizar
-			Adoção</a> 
-			<a href="<%=request.getContextPath()%>/mostrar-tela-aviso">Teste
-			tela aviso</a>
 
+		<a href="<%=request.getContextPath()%>/editar-termo">Editar Termo</a>
+		<a href="<%=request.getContextPath()%>/nova-adocao">Realizar Adoção</a>
+		<a href="<%=request.getContextPath()%>/mostrar-tela-aviso">Teste tela aviso</a>
+		
+		Teste somar pets inseridos
+		<c:out value="${soma}"></c:out>
 	</main>
 </body>
 
