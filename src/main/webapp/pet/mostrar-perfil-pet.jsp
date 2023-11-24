@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
@@ -20,6 +21,7 @@
 
 <body>
 
+
 	<c:if test="${tutorSessao == null && ongSessao == null}">
 		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp"%>
 	</c:if>
@@ -30,20 +32,22 @@
 
 	<c:if test="${ongSessao != null}">
 		<%@ include file="../nav-bar/nav-ong-logada.jsp"%>
+
 	</c:if>
 
 	<main>
 		<c:if test="${pet != null}">
 
-
 			<div class="container-principal-pet">
 				<div class="container-foto-pet">
 					<img id="foto-principal-pet" alt="foto-pricipal-pet"
 						src="${pet.fotoPrincipalPet()}">
+
 				</div>
 				<div class="container-info">
 					<div class="container-nome-fav">
 						<div class="nome-pet">
+
 							<h1>
 								<c:out value="${pet.nome}"></c:out>
 							</h1>
@@ -167,7 +171,6 @@
 					<a class="nav-bar-pet-link">Fotos</a>
 				</div>
 			</div>
-
 		</c:if>
 
 		<c:if test="${pet == null}">

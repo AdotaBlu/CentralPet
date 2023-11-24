@@ -15,8 +15,6 @@
 	<ul class="end">
 		<a href="<%=request.getContextPath()%>/mostrar-cards-pets"><button>Adotar</button></a>
 		
-		
-		
 		<div class="li">
 			<a style= "margin-left: 60px"; href="<%=request.getContextPath()%>/novo-login"><li>Entrar</li></a>
 			<a>|</a>

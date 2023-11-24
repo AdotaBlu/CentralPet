@@ -338,6 +338,10 @@ public class Servlet extends HttpServlet {
 		
 		request.setAttribute("pets", petsDisponiveis);
 		
+		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
+		
+		request.setAttribute("pets", petsDisponiveis);
+		
 		if(sessao.getAttribute("usuario") == null) {
 			
 			request.setAttribute("soma", somaTodosPets);
@@ -1505,7 +1509,6 @@ public class Servlet extends HttpServlet {
 		Castrado castrado = Castrado.valueOf(request.getParameter("castrado"));
 
 		pet = new Pet(nome, vacinas, descricao, dataNascimento, peso, ongPet, portePet, especiePet, sexoPet, estadoPet, pelagemPet, castrado);
-		
 		daoPet.inserirPet(pet);
 
 		parteImagem = request.getParts();
