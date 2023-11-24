@@ -342,6 +342,7 @@ public class Servlet extends HttpServlet {
 			
 			request.setAttribute("soma", somaTodosPets);
 			
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 			dispatcher.forward(request, response);
 		}
