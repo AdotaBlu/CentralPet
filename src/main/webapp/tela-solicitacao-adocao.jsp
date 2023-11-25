@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -14,7 +15,34 @@
 	
 	<body>
 	
+		<c:if test="${tutorSessao == null && ongSessao == null}">
+		<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
+		</c:if>
 		
+		<c:if test="${tutorSessao != null}">
+		<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
+		</c:if>
+		
+		<c:if test="${ongSessao != null}">
+		<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
+		</c:if>
+	
+		teste tutor:
+		<c:out value="${adocao.tutor.nome}"></c:out>
+		teste pet:
+		<c:out value="${adocao.pet.nome}"></c:out>
+		
+		<form action="aceitar-adocao" method="post">
+		<input type="hidden" name="id-adocao" value='<c:out value="${adocao.id}"></c:out>'>
+		
+		<button type="submit">Aceitar</button>
+		</form>
+		
+		<form action="recusar-adocao" method="post">
+		<input type="hidden" name="id-adocao" value='<c:out value="${adocao.id}"></c:out>'>
+		
+		<button type="submit">Recusar</button>
+		</form>
 	
 	</body>
 </html>

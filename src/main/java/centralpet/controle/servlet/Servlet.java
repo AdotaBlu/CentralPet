@@ -54,6 +54,7 @@ import centralpet.modelo.entidade.termo.RespostasTermo;
 import centralpet.modelo.entidade.termo.Termo;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.usuario.Usuario;
+import centralpet.modelo.enumeracao.adocao.StatusAdocao;
 import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
 import centralpet.modelo.enumeracao.pet.castrado.Castrado;
@@ -238,6 +239,14 @@ public class Servlet extends HttpServlet {
 
 			case "/cadastrar-adocao":
 				inserirAdocao(request, response);
+				break;
+				
+			case "/aceitar-adocao":
+				aceitarAdocao(request, response);
+				break;
+				
+			case "/recusar-adocao":
+				recusarAdocao(request, response);
 				break;
 				
 			case "/inserir-avaliacao":
@@ -1651,7 +1660,52 @@ public class Servlet extends HttpServlet {
 
 		}
 
+	}
 
+	private void aceitarAdocao(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong =  (Ong) sessao.getAttribute("usuario");
+			ong = daoOng.recuperarOngComTermo(ong.getId());
+			
+			Long idAdocao = Long.parseLong(request.getParameter("id-adocao"));
+			Adocao adocao = null;
+			StatusAdocao statusAdocao = StatusAdocao.APROVADA;
+			
+			Tutor tutor = daoAdocao.recuperarTutorAdocao(idAdocao);
+			Pet pet = daoAdocao.recuperarPetAdocao(idAdocao);
+			Termo termo = ong.getTermos().get(0);
+			adocao = new Adocao(idAdocao, pet, ong, tutor, termo, statusAdocao);
+			daoAdocao.atualizarAdocao(adocao);
+			
+			response.sendRedirect("home");
+			
+		}
+	}
+	
+	private void recusarAdocao(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		if (sessao.getAttribute("usuario") instanceof Ong) {
+			Ong ong =  (Ong) sessao.getAttribute("usuario");
+			ong = daoOng.recuperarOngComTermo(ong.getId());
+			
+			Long idAdocao = Long.parseLong(request.getParameter("id-adocao"));
+			Adocao adocao = null;
+			StatusAdocao statusAdocao = StatusAdocao.REPROVADA;
+			
+			Tutor tutor = daoAdocao.recuperarTutorAdocao(idAdocao);
+			Pet pet = daoAdocao.recuperarPetAdocao(idAdocao);
+			Termo termo = ong.getTermos().get(0);
+			adocao = new Adocao(idAdocao, pet, ong, tutor, termo, statusAdocao);
+			daoAdocao.atualizarAdocao(adocao);
+			
+			response.sendRedirect("home");
+			
+		}
 	}
 	
 	private void registrarAvaliacao(HttpServletRequest request, HttpServletResponse response)

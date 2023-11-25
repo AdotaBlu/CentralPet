@@ -15,6 +15,7 @@ import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.adocao.Adocao_;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
+import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.tutor.Tutor_;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
@@ -309,4 +310,128 @@ private ConexaoFactory fabrica;
 		
 		return adocao;
 	}
-}
+	
+	public Tutor recuperarTutorAdocao(Long idAdocao) {
+		
+		Session sessao = null;
+		Tutor tutor = null;
+		
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Tutor> criteria = construtor.createQuery(Tutor.class);
+			Root<Adocao> raizAdocao = criteria.from(Adocao.class);
+			
+			criteria.select(raizAdocao.get(Adocao_.tutor));
+			
+			criteria.where(construtor.equal(raizAdocao.get(Adocao_.id), idAdocao));
+
+			tutor = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
+			if(sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+				
+			}
+		} finally {
+			
+			if(sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return tutor;
+		
+	}
+	
+	public Ong recuperarOngAdocao(Long idAdocao) {
+			
+			Session sessao = null;
+			Ong ong = null;
+			
+			try {
+				sessao = fabrica.getConexao().openSession();
+				sessao.beginTransaction();
+				
+				CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+				
+				CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
+				Root<Adocao> raizAdocao = criteria.from(Adocao.class);
+				
+				criteria.select(raizAdocao.get(Adocao_.ong));
+				
+				criteria.where(construtor.equal(raizAdocao.get(Adocao_.id), idAdocao));
+	
+				ong = sessao.createQuery(criteria).getSingleResult();
+				
+				sessao.getTransaction().commit();
+	
+			} catch (Exception sqlException) {
+				
+				sqlException.printStackTrace();
+				
+				if(sessao.getTransaction() != null) {
+					sessao.getTransaction().rollback();
+					
+				}
+			} finally {
+				
+				if(sessao != null) {
+					sessao.close();
+				}
+			}
+			
+			return ong;
+			
+		}
+	
+public Pet recuperarPetAdocao(Long idAdocao) {
+		
+		Session sessao = null;
+		Pet pet = null;
+		
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
+			Root<Adocao> raizAdocao = criteria.from(Adocao.class);
+			
+			criteria.select(raizAdocao.get(Adocao_.pet));
+			
+			criteria.where(construtor.equal(raizAdocao.get(Adocao_.id), idAdocao));
+
+			pet = sessao.createQuery(criteria).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
+			if(sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+				
+			}
+		} finally {
+			
+			if(sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return pet;
+		
+	}
+	
+	}
