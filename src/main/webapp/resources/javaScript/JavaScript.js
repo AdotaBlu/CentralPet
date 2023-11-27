@@ -44,16 +44,7 @@ function confirmarSenha() {
             reader.readAsDataURL(file);
         }
     }
-
-    document.getElementById('fotoPerfil').addEventListener('click', function() {
-        document.getElementById('fotoPerfil').click();
-    });
     
     
-    
-    
-    
-            reader.readAsDataURL(file);
-        }
-    }
+  
   

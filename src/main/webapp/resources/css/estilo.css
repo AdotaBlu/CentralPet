@@ -58,7 +58,7 @@ a {
 }
 
 input, option {
-	padding: 15px;
+	padding: 5px;
 	width: 470px;
 	height: 40px;
 	border: 1px solid var(--roxo);
@@ -72,11 +72,8 @@ input, option {
 	background-color: var(--branco);
 }
 
-/* Cadastro Tutor */
+/* Cadastro Tutor/ONG */
 
-.container-endereco{
-	width: 470px;
-}
 .container-cadastro{
 	width: 470px;
 }
@@ -185,6 +182,12 @@ input, option {
     display: none;
 }
 
+ input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--roxo);
+}
+
 #icone-adicionar-foto{
 	width: 300px;
 	height: 300px;
@@ -192,8 +195,40 @@ input, option {
 	border: 1px solid var(--roxo);
 }
 
+/* Cadastro Pet */
 
+.value-radio{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.value-radio label{
+	margin: 0 5px;
+}
 
+.select-cadastro select{
+	width: 230px;
+	padding: 5px;
+}
+
+#dataNascimentoPet, #vacinas{
+	width: 230px;
+}
+
+#descricao{
+	width: 470px;
+	height: 200px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+}
+
+.container-select-pet{
+	width:100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
 
 select {
 	width: 470px;
@@ -523,7 +558,8 @@ li:hover {
 	font-weight: bold;
 }
 
-Editar Tutor, ONG * /
+/* Editar Tutor, ONG */
+
 .container-editar {
 	margin-top: 40px;
 	display: flex;
