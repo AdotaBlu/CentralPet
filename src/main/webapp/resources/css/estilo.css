@@ -57,6 +57,8 @@ a {
 	text-decoration: none;
 }
 
+
+
 input, option {
 	padding: 15px;
 	width: 470px;
@@ -72,7 +74,7 @@ input, option {
 	background-color: var(--branco);
 }
 
-/* Cadastro Tutor */
+/* Cadastro Tutor/ONG */
 
 .container-endereco{
 	width: 470px;
@@ -522,43 +524,51 @@ li:hover {
 	color: var(--roxo);
 	font-weight: bold;
 }
+/*Editar Tutor, ONG*/
 
-Editar Tutor, ONG * /
 .container-editar {
-	margin-top: 40px;
+	grid-column: 3/10F;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+}
+
+.editar-foto-perfil {
+	grid-column: 3/4;
+}
+
+.editar-infos-perfil {
+	grid-column: 5/10;
+	
+}
+
+form {
+	display: grid;
+	width: 100%;
 }
 
 .container-editarh1 {
-	text-align: center;
-	color: var(--roxo);
+	
 }
 
 .input-editar label {
-	display: block;
+	
 }
 
 .select-editar label {
-	display: block;
+	
 }
 
 
 .editar-foto {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	
 }
 
 .label-inserir-foto {
-	font-size: 30px;
-	cursor: pointer;
-	color: var(--roxo);
+	
 }
 
 .link-cadastro {
-	display: block;
-	align-items: center;
+	
 }
 
 /* Cards ONGs */
@@ -656,7 +666,7 @@ Editar Tutor, ONG * /
 	height: 25px;
 }
 
-#ong-pets-cadastrados {
+#F-pets-cadastrados {
 	display: block;
 	margin-top: 50px;
 }
@@ -914,3 +924,12 @@ display: flex;
 	width: 400px;
 	align-items: center;
 }
+
+/*GRID*/
+.container-grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100vw;
+
+}
+
