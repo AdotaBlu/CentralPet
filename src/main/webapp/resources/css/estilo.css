@@ -526,25 +526,95 @@ li:hover {
 }
 /*Editar Tutor, ONG*/
 
-.container-editar {
-	grid-column: 3/10F;
+.container-geral {
+	
+	grid-column: 3/12;
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 10%;
+}
+
+.container-editar {
+	grid-column: 3/12;
+	display: grid;
 	flex-direction: row;
 }
 
 .editar-foto-perfil {
 	grid-column: 3/4;
+	display: flex;
+	flex-direction: column;
 }
 
 .editar-infos-perfil {
-	grid-column: 5/10;
+	grid-column: 5/12;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.grupo-inputs {
+	width: 50%;
+	box-sizing: border-box;
+	flex-direction: column;
+}
+
+.grupo-inputs input {
+	 width: 100%;
+    padding: 10px;
+}
+
+.editar-foto-perfil {
+	
+	width: 150px;
+	height: 150px;
+	border-radius:50%
+	}
+	
+.editar-foto-perfil label {
+	align-self: center;
+}
+	
+.container-editar-endereco {
+	display: none;
+}
+
+.container-botoes-editar {
+	grid-column: 5/8;
+	display: flex;
+	flex-direction: row;
 	
 }
 
-form {
-	display: grid;
-	width: 100%;
+.botao-voltar {
+	width: 230px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+	margin: 5px;
 }
+
+.botao-proximo {
+	width: 230px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+	margin: 5px;
+	
+}	
+
+.form-editar-perfil {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	}
 
 .container-editarh1 {
 	

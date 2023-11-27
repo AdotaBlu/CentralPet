@@ -25,88 +25,100 @@
 	</c:if>
 
 	<main class="container-grid">
-		<div class="container-editar">
 		
-		<form method="post" action="atualizar-tutor" enctype="multipart/form-data" class="form-grid">
+	<div class="container-geral">
 		
-			
-				<h1>Editar Dados Tutor</h1>
+		<form method="post" action="atualizar-tutor" enctype="multipart/form-data" class="form-editar-perfil">
+		
+			<div class="container-editar">
 				
-					<div class="editar-foto-perfil">
-						<label class="label-inserir-foto" for="foto-perfil">+</label> 
-						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${tutorSessao.urlFoto()}"></c:out>">
-						<input type="file" name="foto-perfil" id="foto-perfil" accept="image/*">
-					</div>
-					<div class="editar-infos-perfil">
-						<div class="">
-							<label for="nome">Nome</label> 
-							<input type="text" id="nome" name="nome" value="<c:out value='${tutorSessao.nome}' />">
-						</div>
-						<div class="">
-							<label for="cpf">CPF</label> 
-							<input type="text" id="cpf" name="cpf" value="<c:out value='${tutorSessao.cpf}' />">
-						</div>
-						<div class="">
-							<label for="email">E-mail</label> 
-							<input type="text" id="email" name="email" value="<c:out value='${contato.email}' />">
-						</div>
-						<div class="">
-							<label for="telefone">Telefone</label> 
-							<input type="tel" id="telefone" name="telefone" value="<c:out value='${contato.telefone}' />">
-						</div>
-						<div class="">
-							<label for="data-nascimento">Data de Nascimento</label> 
-							<input type="date" id="data-nascimento" name="data-nascimento" value='${tutor.dataNascimento}'>
-						</div>
-							<input type="hidden" id="senha" name="senha" value="<c:out value='${tutor.senha}' />">
-						<div class="select-editar">
-							<label for="drop_down_genero">Gênero</label> 
-							<select name="genero-tutor" id="drop_down_genero">
-								<option value="MASCULINO">Masculino</option>
-								<option value="FEMININO">Feminino</option>
-								<option value="OUTROS">Outros</option>
-							</select>
-						</div>
-					</div>
+				<div class="editar-foto-perfil">
+					<label class="label-editar-foto" for="foto-perfil">Foto de Perfil</label> 
+					<img alt="foto-perfil-tutor" class="editar-foto-perfil" src="<c:out value="${tutorSessao.urlFoto()}"></c:out>">
+					<input type="file" name="foto-perfil" id="foto-perfil" accept="image/*">
+				</div>
 				
+				<div class="editar-infos-perfil">
 				
-				<div class="">
-					<div class="">
-    				<label for="logradouro">Logradouro</label>
-    				<input type="text" id="logradouro" name="logradouro" value="<c:out value='${endereco.logradouro}' />">
+					<div class="grupo-inputs">
+						<label for="nome">Nome</label> 
+						<input type="text" id="nome" name="nome" value="<c:out value='${tutorSessao.nome}' />">
 					</div>
-
-					<div class="">
-    				<label for="numero">Número</label>
-    				<input type="number" id="numero" name="numero" value="<c:out value='${endereco.numero}' />">
+					
+					<div class="grupo-inputs">
+						<label for="cpf">CPF</label> 
+						<input type="text" id="cpf" name="cpf" value="<c:out value='${tutorSessao.cpf}' />">
 					</div>
-
-					<div class="">
-   					<label for="bairro">Bairro</label>
-    				<input type="text" id="bairro" name="bairro" value="<c:out value='${endereco.bairro}' />">
+					
+					<div class="grupo-inputs">
+						<label for="email">E-mail</label> 
+						<input type="text" id="email" name="email" value="<c:out value='${contato.email}' />">
 					</div>
-
-					<div class="">
-    				<label for="cep">CEP</label>
-   					<input type="text" id="cep" name="cep" value="<c:out value='${endereco.cep}' />">
+					
+					<div class="grupo-inputs">
+						<label for="telefone">Telefone</label> 
+						<input type="tel" id="telefone" name="telefone" value="<c:out value='${contato.telefone}' />">
 					</div>
-
-					<div class="">
-    				<label for="pontoReferencia">Ponto de Referência</label>
-    				<input type="text" id="pontoReferencia" name="ponto-referencia" value="<c:out value='${endereco.pontoReferencia}' />">
+					
+					<div class="grupo-inputs">
+						<label for="data-nascimento">Data de Nascimento</label> 
+						<input type="date" id="data-nascimento" name="data-nascimento" value='${tutor.dataNascimento}'>
+					</div>
+					
+					<input type="hidden" id="senha" name="senha" value="<c:out value='${tutor.senha}' />">
+					
+					<div class="grupo-inputs">
+						<label for="drop_down_genero">Gênero</label> 
+						<select name="genero-tutor" id="drop_down_genero">
+							<option value="MASCULINO">Masculino</option>
+							<option value="FEMININO">Feminino</option>
+							<option value="OUTROS">Outros</option>
+						</select>
 					</div>
 				</div>
-			
-			<input type="hidden" id="id-tutor" name="id-tutor" value="<c:out value='${tutorSessao.id}' />">
-			<input type="hidden" id="id-contato" name="id-contato" value="<c:out value='${contato.id}' />">
-			<input type="hidden" id="id-endereco" name="id-endereco" value="<c:out value='${endereco.id}' />">		
-			<div class="">
-				<button type="reset" class="botao-secundario">Limpar</button>
-				<button type="submit" class="botao-primario">Salvar</button>
 				
+				<div class="container-editar-endereco">
+				
+					<div class="">
+    					<label for="logradouro">Logradouro</label>
+    					<input type="text" id="logradouro" name="logradouro" value="<c:out value='${endereco.logradouro}' />">
+					</div>
+
+					<div class="">
+    					<label for="numero">Número</label>
+    					<input type="number" id="numero" name="numero" value="<c:out value='${endereco.numero}' />">
+					</div>
+
+					<div class="">
+   						<label for="bairro">Bairro</label>
+    					<input type="text" id="bairro" name="bairro" value="<c:out value='${endereco.bairro}' />">
+					</div>
+
+					<div class="">
+    					<label for="cep">CEP</label>
+   						<input type="text" id="cep" name="cep" value="<c:out value='${endereco.cep}' />">
+					</div>
+
+					<div class="">
+    					<label for="pontoReferencia">Ponto de Referência</label>
+    					<input type="text" id="pontoReferencia" name="ponto-referencia" value="<c:out value='${endereco.pontoReferencia}' />">
+					</div>
+					
+				</div>
+			
+				<input type="hidden" id="id-tutor" name="id-tutor" value="<c:out value='${tutorSessao.id}' />">
+				<input type="hidden" id="id-contato" name="id-contato" value="<c:out value='${contato.id}' />">
+				<input type="hidden" id="id-endereco" name="id-endereco" value="<c:out value='${endereco.id}' />">	
+		
 			</div>
-		</form>
-	</div>		
+			
+			<div class="container-botoes-editar">
+				<button type="reset" class="botao-voltar">Voltar</button>
+				<button type="submit" class="botao-proximo">Continuar</button>	
+			</div>
+				
+		</form>	
+		</div>
 	</main>
 
 </body>
