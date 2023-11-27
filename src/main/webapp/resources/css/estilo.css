@@ -28,48 +28,41 @@ main {
 
 /* Estilos HOME */
 
-.conteinerHome{
-	display: flex;
-	flex-direction: column;
+.conteiner-home{
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
 	align-items: center;
 	background-color: var(--gelo);
 	height: 100vh;
 }
 
-.container-secaoHome{
-	flex: 2;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+.container-secao{
+	display: grid;
+	grid-column: 3 / 10;
+    border-radius: 5px;
+    padding: 50px;
+    margin: 50px;
+    white-space: pre-line;
+    color: var(--roxo);
+    text-align: justify;
+    gap: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cards-home{
+	display: grid;
+	grid-column: 3 / 10;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 40px;
+	align-items: center;
 	justify-content: center;
-	width: 100%;
-	height: 100%;
 }
 
-.img_logo_home{
-	
-}
-
-a {
-	text-align: center;
-	text-decoration: none;
-}
-
-input, option {
-	padding: 15px;
-	width: 470px;
-	height: 40px;
-	border: 1px solid var(--roxo);
-	border-radius: 5px;
-	background-color: var(--branco);
-}
-#termo {
-	padding: 5px;
-	border: 1px solid var(--roxo);
-	border-radius: 5px;
-	background-color: var(--branco);
+.img-logo-home{
+	grid-template: 3 / 5;
+	height: 350px;
+	width: 350px;
 }
 
 /* Cadastro Tutor */
@@ -880,7 +873,7 @@ Editar Tutor, ONG * /
 
 /* Tela Logoff */
 .container-logoff{
-display: flex;
+	display: flex;
     flex: row;
     margin-top: 50px;
     flex-direction: column;

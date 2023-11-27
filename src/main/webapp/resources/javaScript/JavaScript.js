@@ -49,10 +49,6 @@ function confirmarSenha() {
         document.getElementById('fotoPerfil').click();
     });
     
-    
-    
-    
-    
             reader.readAsDataURL(file);
         }
     }
