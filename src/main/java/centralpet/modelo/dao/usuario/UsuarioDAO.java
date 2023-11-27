@@ -22,8 +22,6 @@ public interface UsuarioDAO {
 	Usuario recuperarUsuario(Usuario usuario);
 	
 	Usuario recuperarUsuarioId(Long id);
-	
-	Boolean verificarUsuarioConfirmarSenha(String senhaUsuario, Long idUsuario);
 
 	
 }

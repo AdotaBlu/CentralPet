@@ -388,8 +388,6 @@ public class PetDAOImpl implements PetDAO {
 			}
 
 			petsFiltrados = sessao.createQuery(criteria).getResultList();
-			
-			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
 
@@ -437,8 +435,6 @@ public class PetDAOImpl implements PetDAO {
 			}
 
 			petsFiltrados = sessao.createQuery(criteria).getResultList();
-			
-			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
 
@@ -483,8 +479,6 @@ public class PetDAOImpl implements PetDAO {
 			
 			petsFavortitadosTutor = sessao.createQuery(criteria).getResultList();
 			
-			sessao.getTransaction().commit();
-			
 		} catch (Exception sqlException) {
 			
 			sqlException.printStackTrace();
@@ -500,91 +494,6 @@ public class PetDAOImpl implements PetDAO {
 		}
 		
 		return petsFavortitadosTutor;
-	}
-
-	
-	public int recuperarSomaPetsDaOng(Long idOng) {
-		
-		Session sessao = null;
-		int somaPetsOng = 0;
-		
-		try {
-			
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			CriteriaQuery<Long> criteria = construtor.createQuery(Long.class);
-			Root<Pet> raizPet = criteria.from(Pet.class);
-			Join<Pet, Ong> juncaoOng = raizPet.join(Pet_.ong);
-			
-			criteria.where(construtor.equal(juncaoOng.get(Ong_.id), idOng));
-			
-			criteria.select(construtor.count(raizPet));
-			
-			Long resultado = sessao.createQuery(criteria).uniqueResult();
-			
-			somaPetsOng = (resultado != null) ? resultado.intValue() : 0;
-			
-			sessao.getTransaction().commit();
-			
-		} catch (Exception sqlException) {
-			
-			sqlException.printStackTrace();
-			
-			if(sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-			
-		} finally {
-			if(sessao != null) {
-				sessao.close();
-			}
-		}
-		
-		return somaPetsOng;
-		
-		
-	}
-
-	
-	public int recuperarSomaPetsTodos() {
-		
-		Session sessao = null;
-		int somaPets = 0;
-		
-		try {
-			
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			CriteriaQuery<Long> criteria = construtor.createQuery(Long.class);
-			Root<Pet> raizPet = criteria.from(Pet.class);
-			
-			criteria.select(construtor.count(raizPet));
-			
-			Long resultado = sessao.createQuery(criteria).uniqueResult();
-			
-			somaPets = (resultado != null) ? resultado.intValue() : 0;
-			
-			sessao.getTransaction().commit();
-			
-		} catch (Exception sqlException) {
-			
-			sqlException.printStackTrace();
-			
-			if(sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-			
-		} finally {
-			if(sessao != null) {
-				sessao.close();
-			}
-		}
-		
-		return somaPets;
 	}
 	
 	

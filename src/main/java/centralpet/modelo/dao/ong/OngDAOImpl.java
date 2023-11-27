@@ -19,7 +19,6 @@ import centralpet.modelo.entidade.endereco.Endereco_;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
 import centralpet.modelo.entidade.pet.Pet;
-import centralpet.modelo.entidade.pet.Pet_;
 import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
@@ -126,13 +125,13 @@ public class OngDAOImpl implements OngDAO {
 
 			Root<Ong> raizOng = criteria.from(Ong.class);
 
-			Join<Ong, Pet> juncaoPets = raizOng.join(Ong_.PETS);
+			Join<Ong, Pet> juncaoBairros = raizOng.join(Ong_.PETS);
 
 			ParameterExpression<Long> idOng = construtor.parameter(Long.class);
 			
 			raizOng.fetch(Ong_.pets, JoinType.LEFT);
 
-			criteria.where(construtor.equal(juncaoPets.get(Ong_.ID), idOng));
+			criteria.where(construtor.equal(juncaoBairros.get(Ong_.ID), idOng));
 
 			pets = sessao.createQuery(criteria).setParameter(idOng, pet.getId()).getResultList();
 
@@ -349,130 +348,5 @@ public class OngDAOImpl implements OngDAO {
 		
 		return ongsFiltradas;
 	}
-	
-	public Ong recuperarOngComTermo(Long id) {
-		
-		Session sessao = null;
-		Ong essaOng = null;
-
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			
-			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
-			Root<Ong> raizOng = criteria.from(Ong.class);
-			
-			raizOng.fetch(Ong_.termos, JoinType.LEFT);
-	        
-	        criteria.distinct(true);
-
-			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
-			
-			essaOng = sessao.createQuery(criteria).getSingleResult();
-			
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-
-			}
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return essaOng;
-	}
-
-	public Ong recuperarOngComRespostasTermo(Long id) {
-		
-		Session sessao = null;
-		Ong ong = null;
-			
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			
-			CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
-			Root<Ong> raizOng = criteria.from(Ong.class);
-			
-			raizOng.fetch(Ong_.respostasTermo, JoinType.LEFT);
-			
-			criteria.distinct(true);
-			
-			criteria.where(construtor.equal(raizOng.get(Ong_.id), id));
-			
-			ong = sessao.createQuery(criteria).getSingleResult();
-			
-			sessao.getTransaction().commit();
-			
-		} catch (Exception sqlException) {
-			sqlException.printStackTrace();
-			
-			if(sessao.getTransaction()!= null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-			
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		
-		return ong;
-	}
-
-
-
-public List<Pet> recuperarQuatroPetsOng(Long idOng) {
-	
-	Session sessao = null;
-	List<Pet> pets = null;
-		
-	try {
-		sessao = fabrica.getConexao().openSession();
-		sessao.beginTransaction();
-		
-		CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-		
-		CriteriaQuery<Pet> criteria = construtor.createQuery(Pet.class);
-		Root<Ong> raizOng = criteria.from(Ong.class);
-		Join<Ong, Pet> juncaoPets = raizOng.join(Ong_.pets);
-		
-		raizOng.fetch(Ong_.pets, JoinType.LEFT);
-		
-		criteria.distinct(true);
-		
-		criteria.where(construtor.equal(juncaoPets.get(Pet_.ong), idOng));
-		
-		pets = sessao.createQuery(criteria).setMaxResults(4).getResultList();
-		
-		sessao.getTransaction().commit();
-		
-	} catch (Exception sqlException) {
-		sqlException.printStackTrace();
-		
-		if(sessao.getTransaction()!= null) {
-			sessao.getTransaction().rollback();
-		}
-	} finally {
-		
-		if (sessao != null) {
-			sessao.close();
-		}
-	}
-	
-	return pets;
-}
 
 }

@@ -12,19 +12,20 @@
 </head>
 <body>
 
-	<c:if test="${tutorSessao == null && ongSessao == null}">
+	<c:if test="${tutor == null && ong == null}">
 	<%@ include file="../nav-bar/nav-usuario-deslogado.jsp" %>
 	</c:if>
 	
-	<c:if test="${tutorSessao != null}">
+	<c:if test="${tutor != null}">
 	<%@ include file="../nav-bar/nav-tutor-logado.jsp" %>
 	</c:if>
 	
-	<c:if test="${ongSessao != null}">
+	<c:if test="${ong != null}">
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 
 	<main>
+		
 		<form method="post" action="atualizar-ong" enctype="multipart/form-data">
 		
 			<div class="container-editar">
@@ -32,17 +33,17 @@
 				<div class="editar-info-tutor">
 					<div class="editar-foto-tutor">
 						<label class="label-inserir-foto" for="foto-perfil">+</label> 
-						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${ongSessao.urlFoto()}"></c:out>">
+						<img alt="foto-perfil-tutor" width="150px" height="150px" src="<c:out value="${ong.urlFoto()}"></c:out>">
 						<input type="file" name="foto-perfil" id="foto-perfil" accept="image/*">
 					</div>
 					<div class="editar-dados">
 						<div class="input-editar">
 							<label for="nome">Nome</label> 
-							<input type="text" id="nome" name="nome" value="<c:out value='${ongSessao.nome}' />">
+							<input type="text" id="nome" name="nome" value="<c:out value='${ong.nome}' />">
 						</div>
 						<div class="input-editar">
 							<label for="cnpj">CNPJ</label> 
-							<input type="text" id="cnpj" name="cnpj" value="<c:out value='${ongSessao.cnpj}' />">
+							<input type="text" id="cnpj" name="cnpj" value="<c:out value='${ong.cnpj}' />">
 						</div>
 						<div class="input-editar">
 							<label for="email">E-mail</label> 
@@ -52,7 +53,7 @@
 							<label for="telefone">Telefone</label> 
 							<input type="tel" id="telefone" name="telefone" value="<c:out value='${contato.telefone}' />">
 						</div>
-							<input type="hidden" id="senha" name="senha" value="<c:out value='${ongSessao.senha}' />">
+							<input type="hidden" id="senha" name="senha" value="<c:out value='${ong.senha}' />">
 					</div>
 				</div>
 				
@@ -83,7 +84,7 @@
 					</div>
 				</div>
 			</div>
-			<input type="hidden" id="id-ong" name="id-ong" value="<c:out value='${ongSessao.id}' />">
+			<input type="hidden" id="id-ong" name="id-ong" value="<c:out value='${ong.id}' />">
 			<input type="hidden" id="id-contato" name="id-contato" value="<c:out value='${contato.id}' />">
 			<input type="hidden" id="id-endereco" name="id-endereco" value="<c:out value='${endereco.id}' />">		
 			<div class="container-botao">

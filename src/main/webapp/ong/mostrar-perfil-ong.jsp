@@ -39,23 +39,47 @@
 					<div class="contato-ong">
 						<p><c:out value='${contato.telefone}'></c:out> <p>
 					</div>
-					<div class="contato-tutor">
-						<p><c:out value='${contato.email}'></c:out> <p>
-					</div>
 					</div>
 					<div class="container-btn-ong">
 						<c:if test="${ongSessao != null}">
-						<a href="<%=request.getContextPath()%>/mostrar-tela-confirmar-exclusao"><button type="button" class="btn-perfil-ong">Deletar</button></a>
+							<form method="post" action="excluir-ong">
+								<button type="submit" class="btn-perfil-ong">Deletar Conta</button>
+							</form>
 						
 						<a href="<%=request.getContextPath()%>/editar-ong"><button type="button" class="btn-perfil-ong">Editar</button></a>
 						</c:if>
 					</div>
 				</div>
 			</div>
-				<c:if test="${ongSessao != null}">
-				<%@ include file="../ong-filtro-pets.jsp" %>
-			</c:if>
-				<c:if test="${pets != null}">
+				<div class="line"></div>
+
+		<c:if test="${avaliacoesOng != null}">
+		<div class="container-avaliacoes">
+			<h2>Avaliações de Tutores</h2>
+			<c:forEach var="avaliacao" items="${avaliacoesOng}">
+				<div class="container-avaliacao">
+					<div class="info-avalicao">
+						<div class="miniatura-avaliacao">
+							<img class="foto-miniatura" width="40px" height="40px" src="<c:out value='${avaliacao.tutor.urlFoto()}'></c:out>">
+							<div class="nome-tutor">
+								<h4><c:out value='${avaliacao.tutor.nome}'></c:out></h4>
+							</div>
+						</div> 
+						<div class="nota-avalicao">
+							<span class="label">Nota: </span>
+							<span class="value"><c:out value='${avaliacao.nota}'></c:out></span>
+						</div>
+					</div>
+					<div class="container-depoimento">
+						<p id="depoimento">
+							<c:out value='${avaliacao.depoimento}'></c:out>
+						</p>
+					</div>							
+				</div>
+			</c:forEach>
+		</div>
+		</c:if>
+		<c:if test="${pets != null}">
 			<h2 id="ong-pets-cadastrados">Pets Cadastrados</h2>
 			<div class="container-cards">
 				<c:forEach var="pet" items="${pets}">
@@ -116,12 +140,15 @@
 					</c:forEach>
 				</div>
 			</c:if>
+			<c:if test="${ongSessao != null}">
+				<%@ include file="../ong-filtro-pets.jsp" %>
+			</c:if>
 		</c:if>
 		
 		<c:if test="${ong == null}">
 			<h1>Nenhuma ONG encontrada</h1>
 		</c:if>
-		
+	
 	</main>
 
 </body>
