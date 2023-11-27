@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import centralpet.modelo.entidade.usuario.Usuario;
+import centralpet.modelo.enumeracao.endereco.bairro.Bairros;
 
 @Entity
 @Table(name = "endereco")
@@ -30,14 +33,15 @@ public class Endereco implements Serializable {
 	@Column(name = "id_endereco")
 	private Long id;
 	
-	@Column(name = "logradouro_endereco", length = 20, nullable = false, unique = false)
+	@Column(name = "logradouro_endereco", length = 60, nullable = false, unique = false)
 	private String logradouro;
 	
 	@Column(name = "numero_endereco", nullable = false)
-	private short numero;
+	private int numero;
 	
-	@Column(name = "bairro_endereco", length = 30, nullable = false, unique = false)
-	private String bairro;
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "bairro_endereco", nullable = false, unique = false)
+	private Bairros bairro;
 	
 	@Column(name = "cep_endereco", length = 8, nullable = false, unique = false)
 	private String cep;
@@ -50,7 +54,11 @@ public class Endereco implements Serializable {
 	
 	public Endereco () {}
 	
-	public Endereco (String logradouro, short numero, String bairro, String cep, String pontoReferencia) {
+	public Endereco (Long id) {
+		setId(id);
+	}
+	
+	public Endereco (String logradouro, int numero, Bairros bairro, String cep, String pontoReferencia) {
 		setLogradouro(logradouro);
 		setNumero(numero);
 		setBairro(bairro);
@@ -58,7 +66,7 @@ public class Endereco implements Serializable {
 		setPontoReferencia(pontoReferencia);
 	}
 	
-	public Endereco (Long id, String logradouro, short numero, String bairro, String cep, String pontoReferencia) {
+	public Endereco (Long id, String logradouro, int numero, Bairros bairro, String cep, String pontoReferencia) {
 		setId(id);
 		setLogradouro(logradouro);
 		setNumero(numero);
@@ -83,22 +91,22 @@ public class Endereco implements Serializable {
 		this.logradouro = logradouro;
 	}
 	
-	public short getNumero () {
+	public int getNumero () {
 		return numero;
 	}
 	
-	public void setNumero (short numero) {
+	public void setNumero (int numero) {
 		this.numero = numero;
 	} 
 	
-	public String getBairro () {
+	public Bairros getBairro() {
 		return bairro;
 	}
-	
-	public void setBairro (String bairro) {
+
+	public void setBairro(Bairros bairro) {
 		this.bairro = bairro;
 	}
-	
+
 	public String getCep () {
 		return cep;
 	}

@@ -68,3 +68,7 @@ target/
 *.logs
 *.iml
 .idea/
+/.apt_generated_tests/
+/.apt_generated/
+/generated-sources/
+/generated-test-sources/

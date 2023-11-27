@@ -14,9 +14,10 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import centralpet.modelo.entidade.acompanhamento.Acompanhamento;
 import centralpet.modelo.entidade.adocao.Adocao;
+import centralpet.modelo.entidade.avaliacao.Avaliacao;
 import centralpet.modelo.entidade.endereco.Endereco;
+import centralpet.modelo.entidade.termo.RespostasTermo;
 import centralpet.modelo.entidade.usuario.Usuario;
 import centralpet.modelo.enumeracao.genero.GeneroTutor;
 
@@ -28,7 +29,7 @@ public class Tutor extends Usuario implements Serializable {
 
 	@Column(name = "cpf_tutor", length = 11, nullable = false, unique = true)
 	private String cpf;
-
+	
 	@Column(name = "data_nascimento_tutor", nullable = false, unique = false)
 	private LocalDate dataNascimento;
 
@@ -38,6 +39,12 @@ public class Tutor extends Usuario implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Adocao> adocoes = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Avaliacao> avaliacoes = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<RespostasTermo> respostasTermo = new ArrayList<>();
 
 	//@OneToOne(fetch = FetchType.LAZY)
 	//@JoinColumn(name = "id_acompanhamento", nullable = true)
@@ -47,8 +54,8 @@ public class Tutor extends Usuario implements Serializable {
 	}
 
 	public Tutor(String nome, Endereco endereco, String cpf, LocalDate datanascimento, GeneroTutor generoTutor,
-			Acompanhamento acompanhamento) {
-		super(nome, endereco);
+			String senha, byte[] fotoPerfil) {
+		super(nome, endereco, senha, fotoPerfil);
 		setCpf(cpf);
 		setDataNascimento(datanascimento);
 		setGeneroTutor(generoTutor);
@@ -56,9 +63,8 @@ public class Tutor extends Usuario implements Serializable {
 	}
 
 	public Tutor(String nome, Endereco endereco, Long id, String cpf, LocalDate datanascimento, GeneroTutor generoTutor,
-			Acompanhamento acompanhamento) {
-		super(nome, endereco);
-		setId(id);
+			String senha, byte[] fotoPerfil) {
+		super(id, nome, endereco, fotoPerfil, senha);
 		setCpf(cpf);
 		setDataNascimento(datanascimento);
 		setGeneroTutor(generoTutor);
@@ -100,6 +106,8 @@ public class Tutor extends Usuario implements Serializable {
 	public void adocaoDesfeita(Adocao adocao) {
 		this.adocoes.remove(adocao);
 	}
+	
+
 
 //	public Acompanhamento getAcompanhamento() {
 //		return acompanhamento;

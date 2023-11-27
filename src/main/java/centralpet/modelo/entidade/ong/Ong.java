@@ -13,8 +13,10 @@ import javax.persistence.Table;
 
 import centralpet.modelo.entidade.acompanhamento.Acompanhamento;
 import centralpet.modelo.entidade.adocao.Adocao;
+import centralpet.modelo.entidade.avaliacao.Avaliacao;
 import centralpet.modelo.entidade.endereco.Endereco;
 import centralpet.modelo.entidade.pet.Pet;
+import centralpet.modelo.entidade.termo.RespostasTermo;
 import centralpet.modelo.entidade.termo.Termo;
 import centralpet.modelo.entidade.usuario.Usuario;
 
@@ -38,18 +40,23 @@ public class Ong extends Usuario implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ong", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Acompanhamento> acompanhamentos = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ong", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Avaliacao>avalicoes = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ong", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<RespostasTermo> respostasTermo;
 
 	public Ong() {
 	}
 
-	public Ong(String nome, Endereco endereco, String cnpj) {
-		super(nome, endereco);
+	public Ong(String nome, Endereco endereco, String cnpj, String senha, byte[] fotoPerfil) {
+		super(nome, endereco, senha, fotoPerfil);
 		setCnpj(cnpj);
 	}
 
-	public Ong(String nome, Endereco endereco, Long id, String cnpj) {
-		super(nome, endereco);
-		setId(id);
+	public Ong(String nome, Endereco endereco, Long id, String cnpj, String senha, byte[] fotoPerfil) {
+		super(id, nome, endereco, fotoPerfil, senha);
 		setCnpj(cnpj);
 	}
 
@@ -108,5 +115,11 @@ public class Ong extends Usuario implements Serializable {
 	public void removerAcompanhamento(Acompanhamento acompanhamento) {
 		this.acompanhamentos.remove(acompanhamento);
 	}
+	
+	public void adicionarRespostasTermo(RespostasTermo respostasTermo) {
+		this.respostasTermo.add(respostasTermo);
+	}
+	
+	 
 
 }

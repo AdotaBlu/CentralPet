@@ -15,4 +15,5 @@ public interface TermoDAO {
 
 	List<Termo> recuperarTermosOng(Ong id);
 
+	Termo recuperarTermo(Long id);
 }

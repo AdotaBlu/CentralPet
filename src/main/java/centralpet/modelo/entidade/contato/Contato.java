@@ -37,6 +37,10 @@ public class Contato implements Serializable {
 	private Usuario usuario;
 	
 	public Contato () {}
+
+	public Contato (Long id) {
+		setId(id);
+	}
 	
 	public Contato (String email, String telefone, Usuario usuario) {
 		setEmail(email);

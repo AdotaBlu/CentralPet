@@ -2,6 +2,7 @@ package centralpet.modelo.entidade.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Base64;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import centralpet.modelo.entidade.endereco.Endereco;
+import centralpet.modelo.entidade.ong.Ong;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -32,12 +35,19 @@ public abstract class Usuario implements Serializable {
 
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = false)
 	private String nome;
+	
+	@Column(name = "senha_usuario", length = 30, nullable = false, unique = false)
+	private String senha;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
+	
+	@Lob
+	@Column(name="foto_perfil_usuario", nullable = true, unique = false)
+	private byte[] fotoPerfil;
 
-	@Column(name = "data_cadastro_usuario", nullable = false, unique = false)
+	@Column(name = "data_cadastro_usuario", nullable = true, unique = false, updatable = false)
 	private LocalDate dataCadastro;
 
 	@Column(name = "data_alteracao_cadastro_usuario", nullable = true, unique = false)
@@ -45,17 +55,32 @@ public abstract class Usuario implements Serializable {
 
 	public Usuario () {}
 	
-	public Usuario (String nome, Endereco endereco) {
+	public Usuario (Long id) {
+		setId(id);
+	}
+	
+	public Usuario (String nome, Endereco endereco, String senha, byte[] fotoPerfil) {
 		setNome(nome);
 		setEndereco(endereco);
 		setDataCadastro(dataCadastro);
 		setDataAlteracaoCadastro(dataAlteracaoCadastro);
+		setSenha(senha);
+		setFotoPerfil(fotoPerfil);
 	}
 	
-	public Usuario (Long id, String nome, Endereco endereco) {
+	public Usuario (Long id, String nome, Endereco endereco, byte[] fotoPerfil, String senha) {
 		setId(id);
 		setNome(nome);
 		setEndereco(endereco);
+		setDataAlteracaoCadastro(dataAlteracaoCadastro);
+		setFotoPerfil(fotoPerfil);
+		setSenha(senha);
+	}
+	
+	public Usuario (Long id, String senha) {
+		setId(id);
+		setSenha(senha);
+		setDataAlteracaoCadastro(dataAlteracaoCadastro);
 	}
 
 	public Long getId() {
@@ -99,6 +124,41 @@ public abstract class Usuario implements Serializable {
 		dataAlteracaoCadastro = LocalDate.now();
 		this.dataAlteracaoCadastro = dataAlteracaoCadastro;
 	} 
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	public byte[] getfotoPerfil() {
+		return fotoPerfil;
+	}
+	
+	public void setFotoPerfil(byte[] fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
+	}
+	
+	public String urlFoto() {
+		String urlFoto =("data:image/jpeg;base64," + Base64.getEncoder().encodeToString(this.fotoPerfil));
+		return urlFoto;
+	}
+	
+	  @Override
+	    public boolean equals(Object obj) {
+	        if(!(obj instanceof Ong)) 
+	        	return false; 
+
+	        if(obj == this) 
+	        	return true;
+	        
+	        Usuario usuario = (Usuario) obj; 
+
+	        return this.id == usuario.getId() &&
+	                this.nome.equals(usuario.getNome());
+	    }   
 	
 	
 }

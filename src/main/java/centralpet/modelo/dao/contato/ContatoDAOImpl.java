@@ -1,7 +1,5 @@
 package centralpet.modelo.dao.contato;
 
-import java.util.List;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -114,44 +112,7 @@ public class ContatoDAOImpl implements ContatoDAO{
 	}
 
 
-	public List<Contato> recuperarTodosContatos() {
-		
-		Session sessao = null;
-		List<Contato> contatos = null;
-		
-		try {
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			
-			CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
-			Root<Contato> raizContato = criteria.from(Contato.class);
-			
-			criteria.select(raizContato);
-			
-			contatos = sessao.createQuery(criteria).getResultList();
-			
-			sessao.getTransaction().commit();
-		
-		} catch (Exception sqlException) {
-			
-			sqlException.printStackTrace();
-			
-			if(sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-				
-			}
-		} finally {
-			
-			if(sessao != null) {
-				sessao.close();
-			}
-		}
-		
-		return contatos;
-	}
-
+	
 
 	public Contato recuperarContatoUsuario(Usuario usuario) {
 		
@@ -193,5 +154,7 @@ public class ContatoDAOImpl implements ContatoDAO{
 		
 		return contato;
 	}
+	
+	
 	
 }

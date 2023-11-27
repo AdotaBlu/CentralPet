@@ -1,7 +1,9 @@
 package centralpet.modelo.entidade.termo;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import centralpet.modelo.entidade.ong.Ong;
@@ -31,6 +34,9 @@ public class Termo implements Serializable {
 	
 	@Column(name = "termo", length = 5000, nullable = false, unique = false)
 	private String termo;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "termo", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<RespostasTermo> respostasTermo;
 	
 	public Termo () {}
 	
@@ -68,6 +74,13 @@ public class Termo implements Serializable {
 	public void setTermo(String termo) {
 		this.termo = termo;
 	}
+
+	public List<RespostasTermo> getRespostasTermo() {
+		return respostasTermo;
+	}
 	
+	public void adicionarRespostasTermo(RespostasTermo respostasTermo) {
+		this.respostasTermo.add(respostasTermo);
+	}
 	
 }
