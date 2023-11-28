@@ -584,6 +584,41 @@ li:hover {
 	
 .container-editar-endereco {
 	display: none;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.grupo-inputs-endereco {
+	display: flex;
+	width: 35%;
+	box-sizing: border-box;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.grupo-inputs-endereco input {
+	padding: 10px;
+}
+
+#logradouro-editar-endereco {
+	width: 95%;
+}
+
+#numero-editar-endereco {
+	width: 95%;
+}
+
+#bairro-editar-endereco {
+	width: 95%;
+}
+
+#cep-editar-endereco {
+	width: 95%;
+}
+
+#referencia-editar-endereco {
+	width: 95%;
 }
 
 .container-botoes-editar {
@@ -603,7 +638,7 @@ li:hover {
 	background-color: var(--gelo);
 	color: var(--roxo);
 	margin-top: 5px;
-	margin-left: 200px;
+	margin-left: 190px;
 	font-size: large;
 }
 
@@ -616,7 +651,8 @@ li:hover {
 	background-color: var(--gelo);
 	color: var(--roxo);
 	margin-top: 5px;
-	margin-left: 180;
+	margin-left: 140px;
+	margin-right: 62px;
 	font-size: large;
 }
 
@@ -629,7 +665,7 @@ li:hover {
 	background-color: var(--roxo);
 	color: var(--branco);
 	margin-top: 5px;
-	margin-left: 240px;
+	margin-left: 190px;
 	font-size: large;
 }	
 
