@@ -69,7 +69,7 @@
 					
 					<div class="grupo-inputs">
 						<label for="drop_down_genero">Gênero</label> 
-						<select name="genero-tutor" id="drop_down_genero">
+						<select name="genero-tutor">
 							<option value="MASCULINO">Masculino</option>
 							<option value="FEMININO">Feminino</option>
 							<option value="OUTROS">Outros</option>
@@ -113,8 +113,9 @@
 			</div>
 			
 			<div class="container-botoes-editar">
-				<button type="reset" class="botao-voltar">Voltar</button>
-				<button type="submit" class="botao-proximo">Continuar</button>	
+				<button type="button" class="botao-voltar">Voltar</button>
+				<button type="submit" class="botao-salvar">Salvar</button>
+				<button type="button" class="botao-proximo">Continuar</button>	
 			</div>
 				
 		</form>	

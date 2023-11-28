@@ -528,15 +528,15 @@ li:hover {
 
 .container-geral {
 	
-	grid-column: 3/12;
+	grid-column: 3/11;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 10%;
+	margin-top: 20%;
 }
 
 .container-editar {
-	grid-column: 3/12;
+	grid-column: 3/11;
 	display: grid;
 	flex-direction: row;
 }
@@ -545,25 +545,31 @@ li:hover {
 	grid-column: 3/4;
 	display: flex;
 	flex-direction: column;
+	margin-top: 10px;
 }
 
 .editar-infos-perfil {
-	grid-column: 5/12;
+	grid-column: 5/11;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-end;
 }
 
 .grupo-inputs {
-	width: 50%;
+	width: 35%;
 	box-sizing: border-box;
 	flex-direction: column;
+	margin-top: 10px;
 }
 
-.grupo-inputs input {
-	 width: 100%;
+.grupo-inputs input, option, select {
     padding: 10px;
+    width: 100%;
 }
+
+
 
 .editar-foto-perfil {
 	
@@ -581,6 +587,7 @@ li:hover {
 }
 
 .container-botoes-editar {
+	margin-top: 5%;
 	grid-column: 5/8;
 	display: flex;
 	flex-direction: row;
@@ -588,26 +595,42 @@ li:hover {
 }
 
 .botao-voltar {
-	width: 230px;
+	width: 170px;
 	height: 40px;
-	border: 1px solid var(--roxo);
+	border: 1px solid var(--gelo);
 	border-radius: 5px;
 	cursor: pointer;
-	background-color: var(--roxo);
-	color: var(--branco);
-	margin: 5px;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	margin-top: 5px;
+	margin-left: 200px;
+	font-size: large;
 }
 
 .botao-proximo {
-	width: 230px;
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	margin-top: 5px;
+	margin-left: 180;
+	font-size: large;
+}
+
+.botao-salvar {
+	width: 170px;
 	height: 40px;
 	border: 1px solid var(--roxo);
 	border-radius: 5px;
 	cursor: pointer;
 	background-color: var(--roxo);
 	color: var(--branco);
-	margin: 5px;
-	
+	margin-top: 5px;
+	margin-left: 240px;
+	font-size: large;
 }	
 
 .form-editar-perfil {
