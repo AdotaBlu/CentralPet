@@ -57,6 +57,8 @@ a {
 	text-decoration: none;
 }
 
+
+
 input, option {
 	padding: 15px;
 	width: 470px;
@@ -72,7 +74,7 @@ input, option {
 	background-color: var(--branco);
 }
 
-/* Cadastro Tutor */
+/* Cadastro Tutor/ONG */
 
 .container-endereco{
 	width: 470px;
@@ -522,44 +524,156 @@ li:hover {
 	color: var(--roxo);
 	font-weight: bold;
 }
+/*Editar Tutor, ONG*/
 
-Editar Tutor, ONG * /
-.container-editar {
-	margin-top: 40px;
+.container-geral {
+	
+	grid-column: 3/11;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	margin-top: 20%;
 }
 
-.container-editarh1 {
-	text-align: center;
-	color: var(--roxo);
+.container-editar {
+	grid-column: 3/11;
+	display: grid;
+	flex-direction: row;
 }
 
-.input-editar label {
-	display: block;
-}
-
-.select-editar label {
-	display: block;
-}
-
-
-.editar-foto {
+.editar-foto-perfil {
+	grid-column: 3/4;
 	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.editar-infos-perfil {
+	grid-column: 5/11;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-end;
+}
+
+.grupo-inputs {
+	width: 35%;
+	box-sizing: border-box;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.grupo-inputs input, option, select {
+    padding: 10px;
+    width: 100%;
+}
+
+
+
+.editar-foto-perfil {
+	
+	width: 150px;
+	height: 150px;
+	border-radius:50%
+	}
+	
+.editar-foto-perfil label {
+	align-self: center;
+}
+	
+.container-editar-endereco {
+	display: none;
+	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
 }
 
-.label-inserir-foto {
-	font-size: 30px;
+.grupo-inputs-endereco {
+	display: flex;
+	width: 35%;
+	box-sizing: border-box;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.grupo-inputs-endereco input {
+	padding: 10px;
+}
+
+#logradouro-editar-endereco {
+	width: 95%;
+}
+
+#numero-editar-endereco {
+	width: 95%;
+}
+
+#bairro-editar-endereco {
+	width: 95%;
+}
+
+#cep-editar-endereco {
+	width: 95%;
+}
+
+#referencia-editar-endereco {
+	width: 95%;
+}
+
+.container-botoes-editar {
+	margin-top: 5%;
+	grid-column: 5/8;
+	display: flex;
+	flex-direction: row;
+	
+}
+
+.botao-voltar {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--gelo);
+	border-radius: 5px;
 	cursor: pointer;
+	background-color: var(--gelo);
 	color: var(--roxo);
+	margin-top: 5px;
+	margin-left: 190px;
+	font-size: large;
 }
 
-.link-cadastro {
-	display: block;
-	align-items: center;
+.botao-proximo {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	margin-top: 5px;
+	margin-left: 140px;
+	margin-right: 62px;
+	font-size: large;
 }
+
+.botao-salvar {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+	margin-top: 5px;
+	margin-left: 190px;
+	font-size: large;
+}	
+
+.form-editar-perfil {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	}
 
 /* Cards ONGs */
 
@@ -656,7 +770,7 @@ Editar Tutor, ONG * /
 	height: 25px;
 }
 
-#ong-pets-cadastrados {
+#F-pets-cadastrados {
 	display: block;
 	margin-top: 50px;
 }
@@ -922,7 +1036,6 @@ display: flex;
     width: 100vw;
 
 }
-
 
 /* Tela adoção pet */
 

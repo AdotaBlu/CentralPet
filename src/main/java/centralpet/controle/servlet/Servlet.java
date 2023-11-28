@@ -1445,7 +1445,7 @@ public class Servlet extends HttpServlet {
 		contato = new Contato(email, telefone, ong);
 		daoContato.inserirContato(contato);
 
-		response.sendRedirect("novo-termo");
+		response.sendRedirect("novo-login");
 
 	}
 

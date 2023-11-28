@@ -44,9 +44,41 @@ function confirmarSenha() {
             reader.readAsDataURL(file);
         }
     }
+    
+    
+let etapaAtual = 0;    
 
-    document.getElementById('fotoPerfil').addEventListener('click', function() {
-        document.getElementById('fotoPerfil').click();
-    });
- 
-  
+function proximaEtapa(numero) {
+	
+	etapaAtual = numero;
+	
+	if (etapaAtual == 1) {
+		
+		document.getElementById('etapa-um').style.display = 'none';
+		document.getElementById('etapa-um-parte-dois').style.display = 'none';
+		document.getElementById('etapa-dois').style.display = 'flex';
+		
+		document.getElementById('botao-proximo').style.display = 'none';
+		document.getElementById('botao-salvar').style.marginLeft = '432px';
+		document.getElementById('botao-voltar').style.marginLeft = '170px';
+		document.getElementById('botao-voltar').style.border = '1px solid var(--roxo)';
+	}
+}
+
+function voltarEtapa(numero) {
+	
+	etapaAtual = numero;
+	
+	if (etapaAtual == 0) {
+		
+		document.getElementById('etapa-um').style.display = 'flex';
+		document.getElementById('etapa-um-parte-dois').style.display = 'flex';
+		document.getElementById('etapa-dois').style.display = 'none';
+		
+		document.getElementById('botao-proximo').style.display = '';
+		document.getElementById('botao-salvar').style.marginLeft = '';
+		document.getElementById('botao-voltar').style.marginLeft = '';
+		document.getElementById('botao-voltar').style.border = '';
+	}
+}
+
