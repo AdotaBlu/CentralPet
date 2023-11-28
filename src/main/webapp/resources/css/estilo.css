@@ -565,11 +565,8 @@ li:hover {
 }
 
 .grupo-inputs input, option, select {
-    padding: 10px;
     width: 100%;
 }
-
-
 
 .editar-foto-perfil {
 	
@@ -1042,6 +1039,7 @@ display: flex;
 .container-main{
 	grid-column: 3 / 11;
 	display: flex;
+	margin-top: 2.5%;
 }
 
 .info-pet {
@@ -1050,6 +1048,7 @@ display: flex;
 	flex-direction: column;
 	padding: 3px;
 	font-size: 11px;
+	margin-right: 20px;
 }
 
 .container-tela-adocao-pet-texto{
@@ -1057,8 +1056,8 @@ display: flex;
     flex: row;
     margin-top: 50px;
     flex-direction: column;
-    align-items: center;
-    margin-top: 200px;
+    align-items: flex-start;
+    margin-top: 0px;
 	
 }
 
@@ -1071,10 +1070,62 @@ display: flex;
 /* Tela adoção pet subtitulo */
 .container-tela-adocao-pet-sub{
 	display: flex;
-    flex: row;
     margin-top: 50px;
     flex-direction: column;
     align-items: center;
     margin-top: 200px;
 	
+}
+
+
+
+.container-titulo {
+	grid-column: 5/11;
+	display: flex;
+	justify-content: center;
+	margin-top: 5%;
+	margin-right: 10px;
+}
+
+.bloco-direita-texto {
+	margin-bottom: 2.5%;
+}
+
+.container-tela-adocao-pet-texto p {
+	margin-bottom: 1.25%;
+	margin-top: 1.25%;
+}
+
+.botoes-adocao-pet {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5%;
+}
+
+.botao-tela-adocao-pet {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	background-color: var(--roxo);
+	color: var(--branco);
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+}
+
+.separacao-nome-icone {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.nome-pet {
+	display: flex;
+}
+
+.icone-pet {
+	display: flex;
+	margin-left: 20px;
 }
