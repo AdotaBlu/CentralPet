@@ -31,7 +31,7 @@
 		
 		<form method="post" action="atualizar-tutor" enctype="multipart/form-data" class="form-editar-perfil">
 		
-			<div class="container-editar">
+			<div class="container-editar" id="div-container-editar">
 				
 				<div class="editar-foto-perfil" id="etapa-um">
 					<label class="label-editar-foto" for="foto-perfil">Foto de Perfil</label> 
@@ -147,13 +147,15 @@
 				<input type="hidden" id="id-contato" name="id-contato" value="<c:out value='${contato.id}' />">
 				<input type="hidden" id="id-endereco" name="id-endereco" value="<c:out value='${endereco.id}' />">	
 		
-			</div>
-			
-			<div class="container-botoes-editar">
+				<div class="container-botoes-editar" id="div-botoes-editar">
 				<button type="button" class="botao-voltar" onclick="voltarEtapa(0)" id="botao-voltar">Voltar</button>
 				<button type="submit" class="botao-salvar" id="botao-salvar">Salvar</button>
 				<button type="button" class="botao-proximo" id="botao-proximo" onclick="proximaEtapa(1)">Continuar</button>	
+				</div>
+		
 			</div>
+			
+			
 				
 		</form>	
 		</div>

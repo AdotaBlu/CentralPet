@@ -59,9 +59,10 @@ function proximaEtapa(numero) {
 		document.getElementById('etapa-dois').style.display = 'flex';
 		
 		document.getElementById('botao-proximo').style.display = 'none';
-		document.getElementById('botao-salvar').style.marginLeft = '432px';
-		document.getElementById('botao-voltar').style.marginLeft = '170px';
 		document.getElementById('botao-voltar').style.border = '1px solid var(--roxo)';
+		document.getElementById('div-container-editar').style.flexDirection = 'column';
+		document.getElementById('div-container-editar').style.display = 'flex';
+		document.getElementById('botao-salvar').style.display = 'block';
 	}
 }
 
@@ -76,9 +77,10 @@ function voltarEtapa(numero) {
 		document.getElementById('etapa-dois').style.display = 'none';
 		
 		document.getElementById('botao-proximo').style.display = '';
-		document.getElementById('botao-salvar').style.marginLeft = '';
-		document.getElementById('botao-voltar').style.marginLeft = '';
 		document.getElementById('botao-voltar').style.border = '';
+		document.getElementById('div-container-editar').style.display = '';
+		document.getElementById('div-container-editar').style.flexDirection = '';
+		document.getElementById('botao-salvar').style.display = '';
 	}
 }
 
