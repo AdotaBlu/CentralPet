@@ -82,4 +82,3 @@ function voltarEtapa(numero) {
 	}
 }
 
-  
