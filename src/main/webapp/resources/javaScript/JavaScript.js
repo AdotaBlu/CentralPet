@@ -84,3 +84,19 @@ function voltarEtapa(numero) {
 	}
 }
 
+function continuarCadastro() {
+	
+	document.getElementById('container-cadastro-usuario').style.display = 'none';
+	document.getElementById('container-cadastro-endereco').style.display = 'flex';
+	document.getElementById('container-cadastro-tudo').style.gridColumn = '2/12';
+	document.getElementById('container-cadastro-tudo').style.marginTop = '15%';
+}
+
+function voltarCadastro() {
+	
+	document.getElementById('container-cadastro-usuario').style.display = 'flex';
+	document.getElementById('container-cadastro-endereco').style.display = 'none';
+	document.getElementById('container-cadastro-tudo').style.gridColumn = '';
+	document.getElementById('container-cadastro-tudo').style.marginTop = '';
+}
+

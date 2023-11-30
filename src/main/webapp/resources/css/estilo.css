@@ -76,10 +76,95 @@ input, option {
 
 /* Cadastro Tutor/ONG */
 
-.container-cadastro{
-	width: 470px;
+.container-cadastro-tudo {
+	display: flex;
+	grid-column: 5/9;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 30%;
 }
+
+.container-cadastro-tudo-tutor {
+	display: flex;
+	grid-column: 5/9;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 24%;
+}
+
+.container-botao-cadastro {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.container-botao-cadastro-endereco {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 5%;
+}
+
+.container-botao-voltar-cadastro {
+	margin-right: 17%;	
+	margin-left: 1%;
+}
+
+.botao-cadastro {
+	width: 200px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+	font-size: large;
+}
+
+.botao-cadastro-voltar {
+	width: 200px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	font-size: large;
+}
+
+#botao-continuar-cadastro {
+	margin-left: 15%;
+}
+
+.container-cadastro-endereco{
+	display: none;
+	flex-direction: column;
+	width: 100%;
+}
+
+.container-cadastro-foto {
+	display: flex;
+	flex-direction: column;
+	margin-right: -10%;
+}
+
 .input-endereco{
+	display: flex;
+	flex-direction: column;
+}
+
+.container-cadastro-usuario {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-infos-endereco-e-foto {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.container-infos-endereco {
 	display: flex;
 	flex-direction: column;
 }
@@ -106,6 +191,18 @@ input, option {
 	flex-direction: column;
 }
 .input-cadastro label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
+.input-cadastro-confirmar {
+	display: flex;
+	flex-direction: column;
+	margin-left: 2.10%;
+}
+
+.input-cadastro-confirmar label {
 	font-weight: bold;
 	color: var(--roxo);
 	margin: 10px 0 10px 0;
@@ -160,7 +257,7 @@ input, option {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	margin-bottom: 8%;
 }
 
 #senha-um {
