@@ -1,4 +1,4 @@
-<div class="container-filtro">
+<div class="container-filtro-pet">
 	<form action="filtrar-pets" method="post">
 	<div class="filtro">
 

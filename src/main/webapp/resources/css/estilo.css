@@ -57,6 +57,8 @@ a {
 	text-decoration: none;
 }
 
+
+
 input, option {
 	padding: 5px;
 	width: 470px;
@@ -295,6 +297,76 @@ button {
 	border-radius: 5px;
 }
 
+/* Barra de filtro ONG */
+
+.container-filtro-ong {
+	grid-column: 3/10;
+	display: flex;
+	margin-left: 11.50%;
+	margin-right: 1.60%;
+}
+
+.filtro-ong {
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 100%;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0 0 0 0;
+}
+
+.container-filtro-ong form {
+	display: flex;
+	width: 100%;
+}
+
+.div-input-filtro-ong{
+	display: flex;
+}
+
+.filtro-ong input {
+	padding: 15px;
+    width: 590px;
+    height: 30px;
+    border: 1px solid var(--roxo);
+    border-radius: 5px;
+    background-color: var(--branco);
+    margin: 0 0 0 0;
+}
+
+.div-select-filtro-ong {
+	display: flex;
+}
+
+.filtro-ong select {
+	width: 160px;
+	height: 30px;
+	margin-left: 5%;
+	margin-right: 10px;
+	border: 0, 5px;
+	border-radius: 5px;
+	color: var(--roxo);
+	margin: 0 0 0 0;
+}
+
+.div-button-filtro-ong {
+	display: flex;
+
+}
+
+.filtro-ong button {
+	height: 30px;
+    width: 130px;
+    background-color: var(--roxo);
+    color: var(--branco);
+    border: none;
+    border-radius: 5px;
+    margin: 0 0 0 0;
+}
+
 /* Barra de navegação tutor logado */
 header {
 	display: flex;
@@ -381,6 +453,45 @@ li:hover {
 	justify-content: center;
 	width: 100%;
 	height: 100%;
+}
+
+.container-cards-e-filtro {
+	grid-column: 3/10;
+	display: grid;
+	flex-direction: column;
+}
+
+.container-cards-grid {
+	grid-column: 3/10;
+	margin-left: 10%;
+}
+
+/* Nenhuma ONG cadastrada*/
+
+.imagem-nenhuma-ong {
+	width: 340px;
+	height: 340px;
+	margin-right: 12%;
+}
+
+/* Nenhum pet cadastrado*/
+
+.nenhum-pet-cadastrado {
+	grid-column: 1/13;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5%;
+}
+
+.descricao-nenhum-pet h2{
+	color: var(--cinza);
+}
+
+.imagem-nenhum-pet {
+	width: 340px;
+	height: 340px;
+	margin-right: 5%;
 }
 
 /* Card Pet*/
@@ -558,45 +669,151 @@ li:hover {
 	color: var(--roxo);
 	font-weight: bold;
 }
+/*Editar Tutor, ONG*/
 
-/* Editar Tutor, ONG */
 
-.container-editar {
-	margin-top: 40px;
+.container-geral {
+	grid-column: 3/11;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	margin-top: 20%;
 }
 
-.container-editarh1 {
-	text-align: center;
-	color: var(--roxo);
+.container-editar {
+	grid-column: 3/11;
+	display: grid;
+	flex-direction: row;
 }
 
-.input-editar label {
-	display: block;
-}
-
-.select-editar label {
-	display: block;
-}
-
-
-.editar-foto {
+.editar-foto-perfil {
+	grid-column: 3/4;
 	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.editar-infos-perfil {
+	grid-column: 5/11;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-end;
+}
+
+.grupo-inputs {
+	width: 35%;
+	box-sizing: border-box;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.grupo-inputs input, option, select {
+    width: 100%;
+}
+
+.editar-foto-perfil {
+	
+	width: 150px;
+	height: 150px;
+	border-radius:50%
+	}
+	
+.editar-foto-perfil label {
+	align-self: center;
+}
+	
+.container-editar-endereco {
+	display: none;
+	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
 }
 
-.label-inserir-foto {
-	font-size: 30px;
+.grupo-inputs-endereco {
+	display: flex;
+	width: 35%;
+	box-sizing: border-box;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.grupo-inputs-endereco input {
+	padding: 10px;
+}
+
+#logradouro-editar-endereco {
+	width: 95%;
+}
+
+#numero-editar-endereco {
+	width: 95%;
+}
+
+#bairro-editar-endereco {
+	width: 95%;
+}
+
+#cep-editar-endereco {
+	width: 95%;
+}
+
+#referencia-editar-endereco {
+	width: 95%;
+}
+
+.container-botoes-editar {
+	margin-top: 5%;
+	grid-column: 5/11;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	
+}
+
+.botao-voltar {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--gelo);
+	border-radius: 5px;
 	cursor: pointer;
+	background-color: var(--gelo);
 	color: var(--roxo);
+	margin-top: 5px;
+	font-size: large;
 }
 
-.link-cadastro {
-	display: block;
-	align-items: center;
+.botao-proximo {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	margin-top: 5px;
+	font-size: large;
 }
+
+.botao-salvar {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+	margin-top: 5px;
+	font-size: large;
+	display: none;
+}	
+
+.form-editar-perfil {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	}
 
 /* Cards ONGs */
 
@@ -693,7 +910,7 @@ li:hover {
 	height: 25px;
 }
 
-#ong-pets-cadastrados {
+#F-pets-cadastrados {
 	display: block;
 	margin-top: 50px;
 }
@@ -950,4 +1167,108 @@ display: flex;
 .input-form {
 	width: 400px;
 	align-items: center;
+}
+
+/*GRID*/
+.container-grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100vw;
+
+}
+
+/* Tela adoção pet */
+
+.container-main{
+	grid-column: 3 / 11;
+	display: flex;
+	margin-top: 2.5%;
+}
+
+.info-pet {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	padding: 3px;
+	font-size: 11px;
+	margin-right: 20px;
+}
+
+.container-tela-adocao-pet-texto{
+	display: flex;
+    flex: row;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0px;
+	
+}
+
+.container-ong-pet{
+	display: flex;
+	margin: 0 0 0 0;
+	
+}
+
+/* Tela adoção pet subtitulo */
+.container-tela-adocao-pet-sub{
+	display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+	
+}
+
+
+
+.container-titulo {
+	grid-column: 5/11;
+	display: flex;
+	justify-content: center;
+	margin-top: 5%;
+	margin-right: 10px;
+}
+
+.bloco-direita-texto {
+	margin-bottom: 2.5%;
+}
+
+.container-tela-adocao-pet-texto p {
+	margin-bottom: 1.25%;
+	margin-top: 1.25%;
+}
+
+.botoes-adocao-pet {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5%;
+}
+
+.botao-tela-adocao-pet {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	background-color: var(--roxo);
+	color: var(--branco);
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+}
+
+.separacao-nome-icone {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.nome-pet {
+	display: flex;
+}
+
+.icone-pet {
+	display: flex;
+	margin-left: 20px;
 }
