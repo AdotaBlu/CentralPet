@@ -296,6 +296,27 @@ input, option {
 
 /* Cadastro Pet */
 
+.container-grid-pet{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100vw;
+    align-items: start;
+    margin-top: 5%;
+}
+
+.container-cadastro-pet-foto {
+	display: flex;
+	grid-column: 4/7;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.container-cadastro-infos {
+	display: flex;
+	grid-column: 7/11;
+	flex-direction: column;
+}
+
 .value-radio{
 	display: flex;
 	flex-direction: row;
@@ -327,7 +348,69 @@ input, option {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+}
+
+.cadastro-direita-pet {
+	display: flex;
+	flex-direction: column;
+}
+
+.cadastro-direita-pet label {
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
+.cadastro-direita-pet {
+	margin-left: 2%;
+}
+
+.cadastro-direita-pet select {
+	width: 230px;
+	height: 40px;
+}
+
+.input-castrado-pet {
+	display: flex;
+	flex-direction: row;
+	margin-top: 2%;
+}
+
+.input-castrado-pet label {
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 10px 10px 0;
+	
+}
+
+.container-botao-pet {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	justify-content: space-between;
+	margin-top: 7%;
+}
+
+.botao-cadastro-pet-voltar {
+	width: 181px;
+    height: 40px;
+    border: 1px solid var(--roxo);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--gelo);
+    color: var(--roxo);
+    font-size: large;
+}
+
+.botao-cadastro-pet {
+	width: 181px;
+    height: 40px;
+    border: 1px solid var(--roxo);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--roxo);
+    color: var(--branco);
+    font-size: large;
 }
 
 select {
@@ -739,7 +822,7 @@ li:hover {
 	height: 70px;
 	border-radius: 10px;
 }
-
+	
 #botao-criar-conta {
 	margin-top: 7%;
 }
@@ -1392,8 +1475,8 @@ display: flex;
 
 .botao-tela-adocao-pet {
 	display: inline-block;
-	width: 100px;
-	height: 30px;
+	width: 120px;
+	height: 40px;
 	background-color: var(--roxo);
 	color: var(--branco);
 	text-align: center;
