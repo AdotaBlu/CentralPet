@@ -713,6 +713,54 @@ li:hover {
 	color: var(--amarelo);
 }
 
+/* Seleção de cadastro */
+
+.container-imagem-cadastro {
+	display: flex;
+	grid-column: 2/8;
+	margin-top: 5%;
+}
+
+.container-selecao-cadastro {
+	display: flex;
+	grid-column: 8/12;
+	flex-direction: column;
+	margin-top: 20%;
+}
+
+.container-botoes-selecao-cadastro {
+	display: flex;
+	flex-direction: column;
+	margin-top: 7%;
+}
+
+.container-botoes-selecao-cadastro button {
+	width: 300px;
+	height: 70px;
+	border-radius: 10px;
+}
+
+#botao-criar-conta {
+	margin-top: 7%;
+}
+
+.container-logo-selecao-cadastro {
+	display: flex;
+	justify-content:center;
+	margin-left: 7%;
+}
+
+.container-h2-selecao-cadastro {
+	display: flex;
+	justify-content:center;
+	margin-top: 7%;
+}
+
+.container-h2-selecao-cadastro  h2{
+	color: var(--roxo);
+	font-size: 200%;
+}
+
 /* Login */
 
 .container-principal-login {
