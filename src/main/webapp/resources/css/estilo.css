@@ -1649,3 +1649,78 @@ display: flex;
 	background-color: var(--roxo);
 	color: var(--branco);
 }
+
+/* Tela avaliação */
+
+.container-depoimento-avaliacao {
+	grid-column: 4/10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5%;
+}
+
+.titulo-depoimento-avaliacao h2{
+	color: var(--roxo);
+}
+
+.depoimento-avaliacao {
+	display: flex;
+	flex-direction: column;
+	margin-top: 8%;
+}
+
+.depoimento-avaliacao label {
+	color: var(--roxo);
+	margin-top: 2%;
+}
+
+.depoimento-avaliacao textarea {
+	width: 726.5px;
+	height: 270px;
+}
+
+.nota-avaliacao {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: flex-start;
+	margin-left: 21.80%;
+}
+
+.nota-avaliacao label {
+	color: var(--roxo);
+	margin-top: 2%;
+}
+
+.nota-avaliacao input {
+	width: 20%;
+}
+
+.container-botao-avaliacao {
+	display: flex;
+	flex-direction: row;
+	margin-top: 15%;
+	width: 100%;
+	justify-content: space-evenly;
+}
+
+.botao-avaliacao {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+}
+
+.botao-avaliacao-limpar {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+}
