@@ -1546,3 +1546,106 @@ display: flex;
 .container-perguntas input[type="checkbox"] {
 	width: 8%;
 }
+
+/* Tela resposta termo dois */
+
+.container-geral-dois-resposta-termo {
+	grid-column: 3/11;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 5%;
+}
+
+.container-form-dois-resposta-termo {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-botao-dois-resposta-termo {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 3%;
+}
+
+.container-botao-dois-resposta-termo button {
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+.texto-aceitar-termo {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-termo {
+	display: flex;
+	justify-content: center;
+}
+
+.container-checkbox-termo {
+	display: flex;
+	flex-direction: row;
+	margin-top: 2%;
+}
+
+.container-checkbox-termo input[type="checkbox"] {
+	width: 5%;
+	margin-left: 12.20%;
+}
+
+.container-checkbox-termo label {
+	color: var(--roxo);
+	display: flex;
+	align-items: center;
+}
+
+/* Tela resposta termo tres */
+
+.container-geral-tela-tres-resposta-termo {
+	display: flex;
+	flex-direction: column;
+	grid-column: 5/11;
+	margin-top: 18%;
+}
+
+.titulo-tela-tres-resposta-termo {
+	display: flex;
+}
+
+.titulo-tela-tres-resposta-termo h2 {
+	color: var(--roxo);
+}
+
+.texto-tela-tres-resposta-termo {
+	display: flex;
+	width: 70%;
+	flex-direction: column;
+	margin-top: 10%;
+}
+
+.texto-tela-tres-resposta-termo h3 {
+	color: var(--roxo);
+}
+
+.texto-tela-tres-resposta-termo p {
+	color: var(--roxo);
+}
+
+.container-botao-tela-tres-resposta-termo {
+	display: flex;
+	width: 68%;
+	margin-top: 10%;
+	justify-content: flex-end;
+}
+
+.botao-entendi {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+}

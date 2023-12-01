@@ -27,30 +27,33 @@
 		<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 		</c:if>
 		
-		<div>
+		<main class="container-grid">
 		
-			<div class="titulo-tela-tres-resposta-termo">
-				<h2>Parabéns pela maravilhosa decisão de adotar um pet!</h2>
-			</div>
-			<div class="texto-um-tela-tres-resposta-termo">
-				<h3>Preparando o Lar</h3>
-				Antes da adoção, queremos garantir que sua casa seja um lugar seguro
-				e acolhedor para o novo pet. Nossa equipe fornecerá orientações e dicas 
-				para preparar seu lar para a chegada do seu amigo peludo.
-			</div>
+			<div class="container-geral-tela-tres-resposta-termo">
 			
-			<div class="texto-dois-tela-tres-resposta-termo">
-				<h3>Suporte Contínuo</h3>
-				Mesmo após a adoção, estamos aqui por você. Oferecemos suporte contínuo 
-				para garantir que a transição seja suave e para responder a quaisquer 
-				perguntas que você possa ter. Compartilhe suas histórias conosco e juntos 
-				celebraremos essa linda jornada de amor.
-			</div>
+				<div class="titulo-tela-tres-resposta-termo">
+					<h2>Parabéns pela maravilhosa decisão de adotar um pet!</h2>
+				</div>
+				<div class="texto-tela-tres-resposta-termo">
+					<h3>Preparando o Lar</h3>
+					<p>Antes da adoção, queremos garantir que sua casa seja um lugar seguro
+					e acolhedor para o novo pet. Nossa equipe fornecerá orientações e dicas 
+					para preparar seu lar para a chegada do seu amigo peludo.</p>
+				</div>
+				
+				<div class="texto-tela-tres-resposta-termo">
+					<h3>Suporte Contínuo</h3>
+					<p>Mesmo após a adoção, estamos aqui por você. Oferecemos suporte contínuo 
+					para garantir que a transição seja suave e para responder a quaisquer 
+					perguntas que você possa ter. Compartilhe suas histórias conosco e juntos 
+					celebraremos essa linda jornada de amor.</p>
+				</div>
+				
+				<div class="container-botao-tela-tres-resposta-termo">
+					<a href="<%=request.getContextPath()%>/inserir-avaliacao"><button type="button"  class="botao-entendi">Entendi</button></a>
+				</div>
 			
-			<div class="container-botao">
-				<a href="<%=request.getContextPath()%>/inserir-avaliacao"><button type="button" >Entendi</button></a>
 			</div>
-		
-		</div>
+		</main>
 	</body>
 </html>
