@@ -53,7 +53,8 @@ main {
 }
  
 .container-cards {
-	display: flex;
+	display: grid;
+	grid-template-areas: ;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -828,7 +829,6 @@ li:hover {
 
 .value {
 	color: var(--preto);
-	text-transform: lowercase;
 }
 
 .value::first-letter {
