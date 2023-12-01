@@ -1554,7 +1554,7 @@ display: flex;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-top: 5%;
+	margin-top: 3%;
 }
 
 .container-form-dois-resposta-termo {
@@ -1566,7 +1566,7 @@ display: flex;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin-top: 3%;
+	margin-top: 2%;
 }
 
 .container-botao-dois-resposta-termo button {
@@ -1593,6 +1593,7 @@ display: flex;
 .container-checkbox-termo input[type="checkbox"] {
 	width: 5%;
 	margin-left: 12.20%;
+	height: 30px;
 }
 
 .container-checkbox-termo label {
