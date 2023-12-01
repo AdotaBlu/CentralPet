@@ -72,9 +72,23 @@ main {
 }
 
 .grid-secao p{
-	font-size: 25px;
-	margin: 20px
+	font-size: 20px;
+	margin: 20px;
 }
+
+.container-secao p {
+	font-size: 25px;
+	
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; 
+  margin: 0 auto;
+}
+
+/*  HOME  /*
 
 /* Cadastro Tutor */
 
@@ -474,6 +488,12 @@ li:hover {
 
 .btn-adotar-card:hover {
 	color: var(--amarelo);
+}
+
+.foto-pet img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adiciona esta linha para cobrir o contêiner sem distorção */
 }
 
 /* Login */
