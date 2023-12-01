@@ -27,6 +27,68 @@ main {
 }
 
 /* Estilos HOME */
+ 
+.conteiner-home{
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	align-items: center;
+	background-color: var(--gelo);
+	height: 100vh;
+}
+ 
+.container-secao{
+	grid-column: 3 / 11;
+    margin: 50px;
+    white-space: pre-line;
+    color: var(--roxo);
+    text-align: justify;
+    background-color: #ddd;
+}
+ 
+.cards-home{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+	justify-content: center;
+}
+ 
+.container-cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+ 
+.img-logo-home{
+	height: 350px;
+	width: 350px;
+}
+ 
+.grid-secao{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+ 
+.grid-secao p{
+	font-size: 20px;
+	margin: 20px;
+}
+ 
+.container-secao p {
+	font-size: 25px;
+	
+}
+ 
+.conteiner-home img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Estilos HOME */
 
 .conteinerHome{
 	display: flex;

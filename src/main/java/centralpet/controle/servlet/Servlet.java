@@ -336,7 +336,10 @@ public class Servlet extends HttpServlet {
 		
 		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
 		
+		List<Ong> ongsDisponiveis = daoOng.recuperarTodasOngs();
+		
 		request.setAttribute("pets", petsDisponiveis);
+		request.setAttribute("ongs", ongsDisponiveis);
 		
 		if(sessao.getAttribute("usuario") == null) {
 			
