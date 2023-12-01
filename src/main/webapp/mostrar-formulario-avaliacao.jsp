@@ -27,45 +27,35 @@
 	<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 	</c:if>
 	
-		<h1>Detalhes da Adoção</h1>
-		<div>
-			<table>
-				<thead>
-					<tr>
-						<th>Pet</th>
-						<th>Tutor</th>
-						<th>ONG</th>
-						<th>Data</th>
-					</tr>
-				</thead>
-				<c:if test="${adocao != null && tutorSessao != null}">
-				<tbody>
-						<tr>
-							<td><c:out value='${adocao.pet.nome}'></c:out></td>
-							<td><c:out value='${tutorSessao.nome}'></c:out></td>
-							<td><c:out value='${adocao.ong.nome}'></c:out></td>
-							<td><c:out value='${adocao.dataAdocao}'></c:out></td>
-						</tr>
-				</tbody>
-				</c:if>
-			</table>
-		</div>
-		<div>
-			<form action="registrar-avaliacao" method="post">
+			<form action="registrar-avaliacao" method="post" class="container-grid">
 				<c:if test="${adocao != null && tutorSessao != null}">
 					<input type="hidden" id="id-tutor" name="id-tutor"  value="<c:out value='${tutorSessao.id}' />">
 					<input type="hidden" id="id-ong" name="id-ong"  value="<c:out value='${adocao.ong.id}' />">
 				</c:if>
 				
-				<label for="nota">Nota:</label>
-	        	<input type="number" id="nota" name="nota" placeholder="De uma nota de 1 a 5">
-	        	
-	        	<label for="nota">Nota:</label>
-	        	<input type="text" id="depoimento" name="depoimento" placeholder="Descreva ligeiramente como foi o seu processo de adoção com esta ong">
-	        	
-	        	<button type="reset" class= "botao-secundario">Limpar</button>
-        		<button type="submit" class="botao-primario">Salvar</button>	
+				<div class="container-depoimento-avaliacao">
+		        	
+		        	<div class="titulo-depoimento-avaliacao">
+		        		<h2>Adicionar Depoimento</h2>
+		        	</div>
+		        	
+		        	<div class="depoimento-avaliacao">
+		        		<label for="depoimento">Depoimento*</label>
+		        		<textarea rows="" cols="" name="depoimento" placeholder="Digite um depoimento sobre a adoção"></textarea>
+		        	</div>
+		        	
+		        	<div class="nota-avaliacao">
+		        		<label for="nota">Nota:</label>
+		        		<input type="number" id="nota" name="nota" placeholder="De uma nota de 1 a 5">
+		        	</div>	
+		        	
+		        	<div class="container-botao-avaliacao">
+		        		<button type="reset" class= "botao-avaliacao-limpar">Limpar</button>
+	        			<button type="submit" class="botao-avaliacao">Salvar</button>
+        			</div>
+     
+        		</div>	
 			</form>
-		</div>
+		
 	</body>
 </html>

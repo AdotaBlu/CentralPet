@@ -1500,3 +1500,227 @@ display: flex;
 	display: flex;
 	margin-left: 20px;
 }
+
+/* Tela responder termo */
+
+.container-geral-resposta-termo {
+	grid-column: 5/9;
+	display: flex;
+	flex-direction: column;
+	margin-top: 2%;
+}
+
+.container-geral-resposta-termo h2{
+	color: var(--roxo);
+}
+
+.container-botao-nova-resposta-termo {
+	display: flex;
+	margin-top: 2%;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.container-perguntas {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-perguntas label{
+	margin-top: 1%;
+	color: var(--roxo);
+}
+
+.container-perguntas input {
+	width: 100%;
+}
+
+.container-perguntas select {
+	width: 25%;
+}
+
+.check-box-resposta {
+	display: flex;
+}
+
+.container-perguntas input[type="checkbox"] {
+	width: 8%;
+}
+
+/* Tela resposta termo dois */
+
+.container-geral-dois-resposta-termo {
+	grid-column: 3/11;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 5%;
+}
+
+.container-form-dois-resposta-termo {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-botao-dois-resposta-termo {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 3%;
+}
+
+.container-botao-dois-resposta-termo button {
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+.texto-aceitar-termo {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-termo {
+	display: flex;
+	justify-content: center;
+}
+
+.container-checkbox-termo {
+	display: flex;
+	flex-direction: row;
+	margin-top: 2%;
+}
+
+.container-checkbox-termo input[type="checkbox"] {
+	width: 5%;
+	margin-left: 12.20%;
+}
+
+.container-checkbox-termo label {
+	color: var(--roxo);
+	display: flex;
+	align-items: center;
+}
+
+/* Tela resposta termo tres */
+
+.container-geral-tela-tres-resposta-termo {
+	display: flex;
+	flex-direction: column;
+	grid-column: 5/11;
+	margin-top: 18%;
+}
+
+.titulo-tela-tres-resposta-termo {
+	display: flex;
+}
+
+.titulo-tela-tres-resposta-termo h2 {
+	color: var(--roxo);
+}
+
+.texto-tela-tres-resposta-termo {
+	display: flex;
+	width: 70%;
+	flex-direction: column;
+	margin-top: 10%;
+}
+
+.texto-tela-tres-resposta-termo h3 {
+	color: var(--roxo);
+}
+
+.texto-tela-tres-resposta-termo p {
+	color: var(--roxo);
+}
+
+.container-botao-tela-tres-resposta-termo {
+	display: flex;
+	width: 68%;
+	margin-top: 10%;
+	justify-content: flex-end;
+}
+
+.botao-entendi {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+}
+
+/* Tela avaliação */
+
+.container-depoimento-avaliacao {
+	grid-column: 4/10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5%;
+}
+
+.titulo-depoimento-avaliacao h2{
+	color: var(--roxo);
+}
+
+.depoimento-avaliacao {
+	display: flex;
+	flex-direction: column;
+	margin-top: 8%;
+}
+
+.depoimento-avaliacao label {
+	color: var(--roxo);
+	margin-top: 2%;
+}
+
+.depoimento-avaliacao textarea {
+	width: 726.5px;
+	height: 270px;
+}
+
+.nota-avaliacao {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: flex-start;
+	margin-left: 21.80%;
+}
+
+.nota-avaliacao label {
+	color: var(--roxo);
+	margin-top: 2%;
+}
+
+.nota-avaliacao input {
+	width: 20%;
+}
+
+.container-botao-avaliacao {
+	display: flex;
+	flex-direction: row;
+	margin-top: 15%;
+	width: 100%;
+	justify-content: space-evenly;
+}
+
+.botao-avaliacao {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+}
+
+.botao-avaliacao-limpar {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+}
