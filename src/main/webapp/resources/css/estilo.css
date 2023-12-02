@@ -976,6 +976,10 @@ li:hover {
 	flex-direction: row;
 }
 
+.container-editar label {
+	color: var(--roxo);
+}
+
 .editar-foto-perfil {
 	grid-column: 3/4;
 	display: flex;
@@ -1003,10 +1007,16 @@ li:hover {
     width: 100%;
 }
 
+.icone-lapis-foto {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
 .editar-foto-perfil {
 	
-	width: 150px;
-	height: 150px;
+	width: 288px;
+	height: 283px;
 	border-radius:50%
 	}
 	
@@ -1062,6 +1072,16 @@ li:hover {
 	
 }
 
+.container-botoes-editar-ong {
+	margin-top: 5%;
+	margin-left: 20%;
+	grid-column: 5/11;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	
+}
+
 .botao-voltar {
 	width: 170px;
 	height: 40px;
@@ -1071,6 +1091,19 @@ li:hover {
 	background-color: var(--gelo);
 	color: var(--roxo);
 	margin-top: 5px;
+	font-size: large;
+}
+
+.botao-proximo-ong {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	margin-top: 5px;
+	margin-left: 6%;
 	font-size: large;
 }
 
