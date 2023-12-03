@@ -1004,9 +1004,14 @@ public class Servlet extends HttpServlet {
 		else if(sessao.getAttribute("usuario") instanceof Tutor) {
 			Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 			
-			Adocao adocao = daoAdocao.recuperarAdocaoPendenteTutor(tutor);
+			Long idAdocao = Long.parseLong(request.getParameter("id-adocao"));
 			
-			request.setAttribute("adocao", adocao);
+			Ong ong = daoOng.recuperarOngPorAdocao(idAdocao);
+			
+			System.out.println(ong.getId());
+			System.out.println("teste id ong");
+			
+			request.setAttribute("ong", ong);
 			request.setAttribute("tutorSessao", tutor);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-formulario-avaliacao.jsp");
@@ -1632,7 +1637,7 @@ public class Servlet extends HttpServlet {
 	
 
 	private void inserirAdocao(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		
 		HttpSession sessao = request.getSession();
 		if (sessao.getAttribute("usuario") instanceof Tutor) {
@@ -1649,9 +1654,15 @@ public class Servlet extends HttpServlet {
 
 			Adocao adocao = new Adocao(pet, ong, tutor, termo);
 			daoAdocao.inserirAdocao(adocao);
-
-			response.sendRedirect("mostrar-tela-Tres-resposta-termo");
-
+			
+			adocao = daoAdocao.recuperarAdocaoPendenteTutor(tutor);
+			
+			request.setAttribute("adocao", adocao);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("mostrar-tela-Tres-resposta-termo");
+			dispatcher.forward(request, response);
+			
+			
 		}
 
 
@@ -1661,7 +1672,9 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		HttpSession sessao = request.getSession();
 		
-		Long idOng = Long.parseLong(request.getParameter("id-ong"));
+		
+		
+		Long idOng = Long.parseLong(request.getParameter("idong"));
 		
 		Tutor tutor = (Tutor) sessao.getAttribute("usuario");
 		Ong ong = daoOng.recuperarOng(idOng);

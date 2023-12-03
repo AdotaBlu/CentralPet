@@ -250,8 +250,7 @@ private ConexaoFactory fabrica;
 	        Root<Adocao> raizAdocao = criteria.from(Adocao.class);
 
 	        raizAdocao.fetch(Adocao_.pet, JoinType.LEFT);  
-	        raizAdocao.fetch(Adocao_.ong, JoinType.LEFT);
-	        raizAdocao.fetch(Adocao_.termo, JoinType.LEFT);
+	       
 
 	        criteria.where(construtor.equal(raizAdocao.get(Adocao_.tutor), tutor.getId()));
 	        

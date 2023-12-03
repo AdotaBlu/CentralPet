@@ -31,4 +31,6 @@ public interface OngDAO {
 	Ong recuperarOngComRespostasTermo(Long id);
 	
 	List<Pet> recuperarQuatroPetsOng(Long idOng);
+	
+	Ong recuperarOngPorAdocao(Long idAdocao);
 }
