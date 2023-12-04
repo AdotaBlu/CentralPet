@@ -42,7 +42,6 @@ main {
     white-space: pre-line;
     color: var(--roxo);
     text-align: justify;
-    background-color: #ddd;
 }
  
 .cards-home{
@@ -54,7 +53,6 @@ main {
  
 .container-cards {
 	display: grid;
-	grid-template-areas: ;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -89,18 +87,34 @@ main {
   margin: 0 auto;
 }
 
-footer {
-	background-color: var(--roxo);
-	color: var(--branco);
-	padding: 20px;
+.footer-grid {
 	text-align: center;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 20px;
+	grid-gap: 100px;
 }
 
 .coluna {
 	text-align: left;
+	margin-right: 135px;
+}
+
+.footer-grid p{
+	font-size: 14px;
+}
+
+.footer p{
+	font-size: 19px;
+}
+
+.footer{
+	color: var(--branco);
+	background-color: var(--roxo);
+	padding: 20px;
+}
+
+h3{
+	color: var(--amarelo);
 }
 
 /* Estilos HOME */
@@ -713,7 +727,7 @@ li:hover {
 }
 
 .container-cards-e-filtro {
-	grid-column: 3/10;
+	grid-column: 2/11;
 	display: grid;
 	flex-direction: column;
 }
