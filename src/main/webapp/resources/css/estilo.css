@@ -89,6 +89,20 @@ main {
   margin: 0 auto;
 }
 
+footer {
+	background-color: var(--roxo);
+	color: var(--branco);
+	padding: 20px;
+	text-align: center;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
+}
+
+.coluna {
+	text-align: left;
+}
+
 /* Estilos HOME */
 
 .conteinerHome{
