@@ -336,7 +336,10 @@ public class Servlet extends HttpServlet {
 		
 		List<Pet> petsDisponiveis = daoPet.recuperarTodosPetsAtivos();
 		
+		List<Ong> ongsDisponiveis = daoOng.recuperarTodasOngs();
+		
 		request.setAttribute("pets", petsDisponiveis);
+		request.setAttribute("ongs", ongsDisponiveis);
 		
 		if(sessao.getAttribute("usuario") == null) {
 			
@@ -1445,7 +1448,7 @@ public class Servlet extends HttpServlet {
 		contato = new Contato(email, telefone, ong);
 		daoContato.inserirContato(contato);
 
-		response.sendRedirect("novo-termo");
+		response.sendRedirect("novo-login");
 
 	}
 

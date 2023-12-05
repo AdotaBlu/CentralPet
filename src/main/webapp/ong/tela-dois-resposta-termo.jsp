@@ -28,23 +28,47 @@
 		<%@ include file="../nav-bar/nav-ong-logada.jsp" %>
 		</c:if>
 		
-		<div class="texto-aceitar-termo">
-			<c:forEach var="termo" items="${termos}">
-			<textarea rows="35" cols="140" name="termo">
-			<c:out value='${termo.termo}' />
-			</textarea>
-			</c:forEach>
-			<input type="checkbox"> Concordo com o termo de responsabilidade
-		</div>
+		<main class="container-grid">
 		
-		<form action="cadastrar-adocao" method="post">
-			<input type="hidden" name="id-pet" value='<c:out value="${pet.id}"></c:out>'>
-			<input type="hidden" name="id-ong" value='<c:out value="${ong.id}"></c:out>'>
-		
-			<div class="container-botao">
-			<button type="button" class="btn-perfil-ong" onclick="voltar()">Voltar</button>
-				<button type="submit" class="botao-primario">Adotar</button>
+			<div class="container-geral-dois-resposta-termo">
+			
+				<div class="texto-aceitar-termo">
+				
+					<div class="container-termo">
+						<c:forEach var="termo" items="${termos}">
+						<textarea rows="35" cols="140" name="termo">
+						<c:out value='${termo.termo}' />
+						</textarea>
+						</c:forEach>
+					</div>
+					
+					<div class="container-checkbox-termo">
+						<input type="checkbox"> 
+						<label for="checkbox-termo">Concordo com o termo de responsabilidade</label>
+					</div>
+				</div>
+				
+				
+				
+				<form action="cadastrar-adocao" method="post">
+				
+					<div class="container-form-dois-resposta-termo">
+				
+						<input type="hidden" name="id-pet" value='<c:out value="${pet.id}"></c:out>'>
+						<input type="hidden" name="id-ong" value='<c:out value="${ong.id}"></c:out>'>
+					
+						<div class="container-botao-dois-resposta-termo">
+							<button type="button" class="botao-cadastro-voltar" onclick="voltar()">Voltar</button>
+							<button type="submit" class="botao-cadastro">Adotar</button>
+						</div>
+				
+					</div>
+						
+				</form>
+					
+				
+				
 			</div>
-		</form>
+		</main>
 	</body>
 </html>

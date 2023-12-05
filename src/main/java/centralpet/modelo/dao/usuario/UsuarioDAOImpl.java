@@ -209,7 +209,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			Root<Contato> raizContato = criteria.from(Contato.class);
 
-		    criteria.select(raizContato.get(Contato_.USUARIO)); 
+		    criteria.select(raizContato.get(Contato_.USUARIO));
 		    
 	        criteria.where(construtor.and(
 	            construtor.equal(raizContato.get(Contato_.EMAIL), emailUsuario),

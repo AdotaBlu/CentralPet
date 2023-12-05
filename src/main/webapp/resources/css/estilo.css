@@ -27,6 +27,68 @@ main {
 }
 
 /* Estilos HOME */
+ 
+.conteiner-home{
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	align-items: center;
+	background-color: var(--gelo);
+	height: 100vh;
+}
+ 
+.container-secao{
+	grid-column: 3 / 11;
+    margin: 50px;
+    white-space: pre-line;
+    color: var(--roxo);
+    text-align: justify;
+    background-color: #ddd;
+}
+ 
+.cards-home{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+	justify-content: center;
+}
+ 
+.container-cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+ 
+.img-logo-home{
+	height: 350px;
+	width: 350px;
+}
+ 
+.grid-secao{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+ 
+.grid-secao p{
+	font-size: 20px;
+	margin: 20px;
+}
+ 
+.container-secao p {
+	font-size: 25px;
+	
+}
+ 
+.conteiner-home img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Estilos HOME */
 
 .conteinerHome{
 	display: flex;
@@ -57,8 +119,10 @@ a {
 	text-decoration: none;
 }
 
+
+
 input, option {
-	padding: 15px;
+	padding: 5px;
 	width: 470px;
 	height: 40px;
 	border: 1px solid var(--roxo);
@@ -72,15 +136,97 @@ input, option {
 	background-color: var(--branco);
 }
 
-/* Cadastro Tutor */
+/* Cadastro Tutor/ONG */
 
-.container-endereco{
-	width: 470px;
+.container-cadastro-tudo {
+	display: flex;
+	grid-column: 5/9;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 30%;
 }
-.container-cadastro{
-	width: 470px;
+
+.container-cadastro-tudo-tutor {
+	display: flex;
+	grid-column: 5/9;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 24%;
 }
+
+.container-botao-cadastro {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.container-botao-cadastro-endereco {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 5%;
+}
+
+.container-botao-voltar-cadastro {
+	margin-right: 17%;	
+	margin-left: 1%;
+}
+
+.botao-cadastro {
+	width: 200px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+	font-size: large;
+}
+
+.botao-cadastro-voltar {
+	width: 200px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	font-size: large;
+}
+
+#botao-continuar-cadastro {
+	margin-left: 15%;
+}
+
+.container-cadastro-endereco{
+	display: none;
+	flex-direction: column;
+	width: 100%;
+}
+
+.container-cadastro-foto {
+	display: flex;
+	flex-direction: column;
+	margin-right: -10%;
+}
+
 .input-endereco{
+	display: flex;
+	flex-direction: column;
+}
+
+.container-cadastro-usuario {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-infos-endereco-e-foto {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.container-infos-endereco {
 	display: flex;
 	flex-direction: column;
 }
@@ -107,6 +253,18 @@ input, option {
 	flex-direction: column;
 }
 .input-cadastro label{
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
+.input-cadastro-confirmar {
+	display: flex;
+	flex-direction: column;
+	margin-left: 2.10%;
+}
+
+.input-cadastro-confirmar label {
 	font-weight: bold;
 	color: var(--roxo);
 	margin: 10px 0 10px 0;
@@ -161,7 +319,7 @@ input, option {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	margin-bottom: 8%;
 }
 
 #senha-um {
@@ -185,6 +343,12 @@ input, option {
     display: none;
 }
 
+ input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--roxo);
+}
+
 #icone-adicionar-foto{
 	width: 300px;
 	height: 300px;
@@ -192,8 +356,124 @@ input, option {
 	border: 1px solid var(--roxo);
 }
 
+/* Cadastro Pet */
 
+.container-grid-pet{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100vw;
+    align-items: start;
+    margin-top: 5%;
+}
 
+.container-cadastro-pet-foto {
+	display: flex;
+	grid-column: 4/7;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.container-cadastro-infos {
+	display: flex;
+	grid-column: 7/11;
+	flex-direction: column;
+}
+
+.value-radio{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.value-radio label{
+	margin: 0 5px;
+}
+
+.select-cadastro select{
+	width: 230px;
+	padding: 5px;
+}
+
+#dataNascimentoPet, #vacinas{
+	width: 230px;
+}
+
+#descricao{
+	width: 470px;
+	height: 100px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.container-select-pet{
+	width:100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.cadastro-direita-pet {
+	display: flex;
+	flex-direction: column;
+}
+
+.cadastro-direita-pet label {
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 0 10px 0;
+}
+
+.cadastro-direita-pet {
+	margin-left: 2%;
+}
+
+.cadastro-direita-pet select {
+	width: 230px;
+	height: 40px;
+}
+
+.input-castrado-pet {
+	display: flex;
+	flex-direction: row;
+	margin-top: 2%;
+}
+
+.input-castrado-pet label {
+	font-weight: bold;
+	color: var(--roxo);
+	margin: 10px 10px 10px 0;
+	
+}
+
+.container-botao-pet {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 7%;
+}
+
+.botao-cadastro-pet-voltar {
+	width: 181px;
+    height: 40px;
+    border: 1px solid var(--roxo);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--gelo);
+    color: var(--roxo);
+    font-size: large;
+}
+
+.botao-cadastro-pet {
+	width: 181px;
+    height: 40px;
+    border: 1px solid var(--roxo);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--roxo);
+    color: var(--branco);
+    font-size: large;
+}
 
 select {
 	width: 470px;
@@ -257,6 +537,76 @@ button {
 	color: var(--branco);
 	border: none;
 	border-radius: 5px;
+}
+
+/* Barra de filtro ONG */
+
+.container-filtro-ong {
+	grid-column: 3/10;
+	display: flex;
+	margin-left: 11.50%;
+	margin-right: 1.60%;
+}
+
+.filtro-ong {
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 100%;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0 0 0 0;
+}
+
+.container-filtro-ong form {
+	display: flex;
+	width: 100%;
+}
+
+.div-input-filtro-ong{
+	display: flex;
+}
+
+.filtro-ong input {
+	padding: 15px;
+    width: 590px;
+    height: 30px;
+    border: 1px solid var(--roxo);
+    border-radius: 5px;
+    background-color: var(--branco);
+    margin: 0 0 0 0;
+}
+
+.div-select-filtro-ong {
+	display: flex;
+}
+
+.filtro-ong select {
+	width: 160px;
+	height: 30px;
+	margin-left: 5%;
+	margin-right: 10px;
+	border: 0, 5px;
+	border-radius: 5px;
+	color: var(--roxo);
+	margin: 0 0 0 0;
+}
+
+.div-button-filtro-ong {
+	display: flex;
+
+}
+
+.filtro-ong button {
+	height: 30px;
+    width: 130px;
+    background-color: var(--roxo);
+    color: var(--branco);
+    border: none;
+    border-radius: 5px;
+    margin: 0 0 0 0;
 }
 
 /* Barra de navegação tutor logado */
@@ -345,6 +695,45 @@ li:hover {
 	justify-content: center;
 	width: 100%;
 	height: 100%;
+}
+
+.container-cards-e-filtro {
+	grid-column: 3/10;
+	display: grid;
+	flex-direction: column;
+}
+
+.container-cards-grid {
+	grid-column: 3/10;
+	margin-left: 10%;
+}
+
+/* Nenhuma ONG cadastrada*/
+
+.imagem-nenhuma-ong {
+	width: 340px;
+	height: 340px;
+	margin-right: 12%;
+}
+
+/* Nenhum pet cadastrado*/
+
+.nenhum-pet-cadastrado {
+	grid-column: 1/13;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5%;
+}
+
+.descricao-nenhum-pet h2{
+	color: var(--cinza);
+}
+
+.imagem-nenhum-pet {
+	width: 340px;
+	height: 340px;
+	margin-right: 5%;
 }
 
 /* Card Pet*/
@@ -469,6 +858,54 @@ li:hover {
 	color: var(--amarelo);
 }
 
+/* Seleção de cadastro */
+
+.container-imagem-cadastro {
+	display: flex;
+	grid-column: 2/8;
+	margin-top: 5%;
+}
+
+.container-selecao-cadastro {
+	display: flex;
+	grid-column: 8/12;
+	flex-direction: column;
+	margin-top: 20%;
+}
+
+.container-botoes-selecao-cadastro {
+	display: flex;
+	flex-direction: column;
+	margin-top: 7%;
+}
+
+.container-botoes-selecao-cadastro button {
+	width: 300px;
+	height: 70px;
+	border-radius: 10px;
+}
+	
+#botao-criar-conta {
+	margin-top: 7%;
+}
+
+.container-logo-selecao-cadastro {
+	display: flex;
+	justify-content:center;
+	margin-left: 7%;
+}
+
+.container-h2-selecao-cadastro {
+	display: flex;
+	justify-content:center;
+	margin-top: 7%;
+}
+
+.container-h2-selecao-cadastro  h2{
+	color: var(--roxo);
+	font-size: 200%;
+}
+
 /* Login */
 
 .container-principal-login {
@@ -522,44 +959,184 @@ li:hover {
 	color: var(--roxo);
 	font-weight: bold;
 }
+/*Editar Tutor, ONG*/
 
-Editar Tutor, ONG * /
-.container-editar {
-	margin-top: 40px;
+
+.container-geral {
+	grid-column: 3/11;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	margin-top: 20%;
 }
 
-.container-editarh1 {
-	text-align: center;
+.container-editar {
+	grid-column: 3/11;
+	display: grid;
+	flex-direction: row;
+}
+
+.container-editar label {
 	color: var(--roxo);
 }
 
-.input-editar label {
-	display: block;
-}
-
-.select-editar label {
-	display: block;
-}
-
-
-.editar-foto {
+.editar-foto-perfil {
+	grid-column: 3/4;
 	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.editar-infos-perfil {
+	grid-column: 5/11;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-end;
+}
+
+.grupo-inputs {
+	width: 35%;
+	box-sizing: border-box;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.grupo-inputs input, option, select {
+    width: 100%;
+}
+
+.icone-lapis-foto {
+	display: flex;
+	width: 100%;
 	justify-content: center;
-	align-items: center;
 }
 
-.label-inserir-foto {
-	font-size: 30px;
+.editar-foto-perfil {
+	
+	width: 288px;
+	height: 283px;
+	border-radius:50%
+	}
+	
+.editar-foto-perfil label {
+	align-self: center;
+}
+	
+.container-editar-endereco {
+	display: none;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.grupo-inputs-endereco {
+	display: flex;
+	width: 35%;
+	box-sizing: border-box;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.grupo-inputs-endereco input {
+	padding: 10px;
+}
+
+#logradouro-editar-endereco {
+	width: 95%;
+}
+
+#numero-editar-endereco {
+	width: 95%;
+}
+
+#bairro-editar-endereco {
+	width: 95%;
+}
+
+#cep-editar-endereco {
+	width: 95%;
+}
+
+#referencia-editar-endereco {
+	width: 95%;
+}
+
+.container-botoes-editar {
+	margin-top: 5%;
+	grid-column: 5/11;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	
+}
+
+.container-botoes-editar-ong {
+	margin-top: 5%;
+	margin-left: 20%;
+	grid-column: 5/11;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	
+}
+
+.botao-voltar {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--gelo);
+	border-radius: 5px;
 	cursor: pointer;
+	background-color: var(--gelo);
 	color: var(--roxo);
+	margin-top: 5px;
+	font-size: large;
 }
 
-.link-cadastro {
-	display: block;
-	align-items: center;
+.botao-proximo-ong {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	margin-top: 5px;
+	margin-left: 6%;
+	font-size: large;
 }
+
+.botao-proximo {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
+	margin-top: 5px;
+	font-size: large;
+}
+
+.botao-salvar {
+	width: 170px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+	margin-top: 5px;
+	font-size: large;
+	display: none;
+}	
+
+.form-editar-perfil {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	}
 
 /* Cards ONGs */
 
@@ -656,7 +1233,7 @@ Editar Tutor, ONG * /
 	height: 25px;
 }
 
-#ong-pets-cadastrados {
+#F-pets-cadastrados {
 	display: block;
 	margin-top: 50px;
 }
@@ -913,4 +1490,335 @@ display: flex;
 .input-form {
 	width: 400px;
 	align-items: center;
+}
+
+/*GRID*/
+.container-grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100vw;
+
+}
+
+/* Tela adoção pet */
+
+.container-main{
+	grid-column: 3 / 11;
+	display: flex;
+	margin-top: 2.5%;
+}
+
+.info-pet {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	padding: 3px;
+	font-size: 11px;
+	margin-right: 20px;
+}
+
+.container-tela-adocao-pet-texto{
+	display: flex;
+    flex: row;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0px;
+	
+}
+
+.container-ong-pet{
+	display: flex;
+	margin: 0 0 0 0;
+	
+}
+
+/* Tela adoção pet subtitulo */
+.container-tela-adocao-pet-sub{
+	display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+	
+}
+
+
+
+.container-titulo {
+	grid-column: 5/11;
+	display: flex;
+	justify-content: center;
+	margin-top: 5%;
+	margin-right: 10px;
+}
+
+.bloco-direita-texto {
+	margin-bottom: 2.5%;
+}
+
+.container-tela-adocao-pet-texto p {
+	margin-bottom: 1.25%;
+	margin-top: 1.25%;
+}
+
+.botoes-adocao-pet {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5%;
+}
+
+.botao-tela-adocao-pet {
+	display: inline-block;
+	width: 120px;
+	height: 40px;
+	background-color: var(--roxo);
+	color: var(--branco);
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+}
+
+.separacao-nome-icone {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.nome-pet {
+	display: flex;
+}
+
+.icone-pet {
+	display: flex;
+	margin-left: 20px;
+}
+
+/* Tela responder termo */
+
+.container-geral-resposta-termo {
+	grid-column: 5/9;
+	display: flex;
+	flex-direction: column;
+	margin-top: 2%;
+}
+
+.container-geral-resposta-termo h2{
+	color: var(--roxo);
+}
+
+.container-botao-nova-resposta-termo {
+	display: flex;
+	margin-top: 2%;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.container-perguntas {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-perguntas label{
+	margin-top: 1%;
+	color: var(--roxo);
+}
+
+.container-perguntas input {
+	width: 100%;
+	height: 35px;
+}
+
+.container-perguntas select {
+	width: 25%;
+}
+
+.check-box-resposta {
+	display: flex;
+}
+
+.container-perguntas input[type="checkbox"] {
+	width: 3%;
+	height: 25px;
+}
+
+/* Tela resposta termo dois */
+
+.container-geral-dois-resposta-termo {
+	grid-column: 3/11;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 3%;
+}
+
+.container-form-dois-resposta-termo {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-botao-dois-resposta-termo {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 2%;
+}
+
+.container-botao-dois-resposta-termo button {
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+.texto-aceitar-termo {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-termo {
+	display: flex;
+	justify-content: center;
+}
+
+.container-checkbox-termo {
+	display: flex;
+	flex-direction: row;
+	margin-top: 2%;
+}
+
+.container-checkbox-termo input[type="checkbox"] {
+	width: 5%;
+	margin-left: 12.20%;
+	height: 30px;
+}
+
+.container-checkbox-termo label {
+	color: var(--roxo);
+	display: flex;
+	align-items: center;
+}
+
+/* Tela resposta termo tres */
+
+.container-geral-tela-tres-resposta-termo {
+	display: flex;
+	flex-direction: column;
+	grid-column: 5/11;
+	margin-top: 18%;
+}
+
+.titulo-tela-tres-resposta-termo {
+	display: flex;
+}
+
+.titulo-tela-tres-resposta-termo h2 {
+	color: var(--roxo);
+}
+
+.texto-tela-tres-resposta-termo {
+	display: flex;
+	width: 70%;
+	flex-direction: column;
+	margin-top: 10%;
+}
+
+.texto-tela-tres-resposta-termo h3 {
+	color: var(--roxo);
+}
+
+.texto-tela-tres-resposta-termo p {
+	color: var(--roxo);
+}
+
+.container-botao-tela-tres-resposta-termo {
+	display: flex;
+	width: 68%;
+	margin-top: 10%;
+	justify-content: flex-end;
+}
+
+.botao-entendi {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+}
+
+/* Tela avaliação */
+
+.container-depoimento-avaliacao {
+	grid-column: 4/10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5%;
+}
+
+.titulo-depoimento-avaliacao h2{
+	color: var(--roxo);
+}
+
+.depoimento-avaliacao {
+	display: flex;
+	flex-direction: column;
+	margin-top: 8%;
+}
+
+.depoimento-avaliacao label {
+	color: var(--roxo);
+	margin-top: 2%;
+}
+
+.depoimento-avaliacao textarea {
+	width: 726.5px;
+	height: 270px;
+}
+
+.nota-avaliacao {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: flex-start;
+	margin-left: 21.80%;
+}
+
+.nota-avaliacao label {
+	color: var(--roxo);
+	margin-top: 2%;
+}
+
+.nota-avaliacao input {
+	width: 20%;
+}
+
+.container-botao-avaliacao {
+	display: flex;
+	flex-direction: row;
+	margin-top: 15%;
+	width: 100%;
+	justify-content: space-evenly;
+}
+
+.botao-avaliacao {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--roxo);
+	color: var(--branco);
+}
+
+.botao-avaliacao-limpar {
+	width: 130px;
+	height: 40px;
+	border: 1px solid var(--roxo);
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--gelo);
+	color: var(--roxo);
 }

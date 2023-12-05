@@ -44,16 +44,103 @@ function confirmarSenha() {
             reader.readAsDataURL(file);
         }
     }
+    
 
-    document.getElementById('fotoPerfil').addEventListener('click', function() {
-        document.getElementById('fotoPerfil').click();
-    });
-    
-    
-    
-    
-    
-            reader.readAsDataURL(file);
-        }
-    }
-  
+let etapaAtual = 0;    
+
+function proximaEtapa(numero) {
+	
+	etapaAtual = numero;
+	
+	if (etapaAtual == 1) {
+		
+		document.getElementById('etapa-um').style.display = 'none';
+		document.getElementById('etapa-um-parte-dois').style.display = 'none';
+		document.getElementById('etapa-dois').style.display = 'flex';
+		
+		
+		document.getElementById('container-botoes-editar-ong').style.marginLeft = '0%';
+		document.getElementById('botao-proximo').style.display = 'none';
+		document.getElementById('botao-voltar').style.border = '1px solid var(--roxo)';
+		document.getElementById('div-container-editar').style.flexDirection = 'column';
+		document.getElementById('div-container-editar').style.display = 'flex';
+		document.getElementById('botao-salvar').style.display = 'block';
+		
+	}
+}
+
+let etapaAtualTutor = 0;
+
+function proximaEtapaTutor(numero) {
+	
+	etapaAtualTutor = numero;
+	
+	if (etapaAtualTutor == 1) {
+		
+		document.getElementById('etapa-um').style.display = 'none';
+		document.getElementById('etapa-um-parte-dois').style.display = 'none';
+		document.getElementById('etapa-dois').style.display = 'flex';
+		
+		
+		document.getElementById('botao-proximo').style.display = 'none';
+		document.getElementById('botao-voltar').style.border = '1px solid var(--roxo)';
+		document.getElementById('div-container-editar').style.flexDirection = 'column';
+		document.getElementById('div-container-editar').style.display = 'flex';
+		document.getElementById('botao-salvar').style.display = 'block';
+		
+	}
+}
+
+function voltarEtapa(numero) {
+	
+	etapaAtual = numero;
+	
+	if (etapaAtual == 0) {
+		
+		document.getElementById('etapa-um').style.display = 'flex';
+		document.getElementById('etapa-um-parte-dois').style.display = 'flex';
+		document.getElementById('etapa-dois').style.display = 'none';
+		
+		document.getElementById('botao-proximo').style.display = '';
+		document.getElementById('botao-voltar').style.border = '';
+		document.getElementById('div-container-editar').style.display = '';
+		document.getElementById('div-container-editar').style.flexDirection = '';
+		document.getElementById('botao-salvar').style.display = '';
+		document.getElementById('container-botoes-editar-ong').style.marginLeft = '';
+	}
+}
+
+function voltarEtapaTutor(numero) {
+	
+	etapaAtualTutor = numero;
+	
+	if (etapaAtualTutor == 0) {
+		
+		document.getElementById('etapa-um').style.display = 'flex';
+		document.getElementById('etapa-um-parte-dois').style.display = 'flex';
+		document.getElementById('etapa-dois').style.display = 'none';
+		
+		document.getElementById('botao-proximo').style.display = '';
+		document.getElementById('botao-voltar').style.border = '';
+		document.getElementById('div-container-editar').style.display = '';
+		document.getElementById('div-container-editar').style.flexDirection = '';
+		document.getElementById('botao-salvar').style.display = '';
+	}
+}
+
+function continuarCadastro() {
+	
+	document.getElementById('container-cadastro-usuario').style.display = 'none';
+	document.getElementById('container-cadastro-endereco').style.display = 'flex';
+	document.getElementById('container-cadastro-tudo').style.gridColumn = '2/12';
+	document.getElementById('container-cadastro-tudo').style.marginTop = '15%';
+}
+
+function voltarCadastro() {
+	
+	document.getElementById('container-cadastro-usuario').style.display = 'flex';
+	document.getElementById('container-cadastro-endereco').style.display = 'none';
+	document.getElementById('container-cadastro-tudo').style.gridColumn = '';
+	document.getElementById('container-cadastro-tudo').style.marginTop = '';
+}
+
