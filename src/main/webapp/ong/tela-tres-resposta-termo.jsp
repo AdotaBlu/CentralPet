@@ -50,7 +50,15 @@
 				</div>
 				
 				<div class="container-botao-tela-tres-resposta-termo">
-					<a href="<%=request.getContextPath()%>/inserir-avaliacao"><button type="button"  class="botao-entendi">Entendi</button></a>
+					
+					
+					<form action="inserir-avaliacao" method="post">
+					
+						<input type="hidden" name="id-adocao" value='<c:out value="${adocao.id}"></c:out>'>
+					
+						<button type="submit" class="botao-entendi">Entendi</button>
+					</form>
+			
 				</div>
 			
 			</div>
