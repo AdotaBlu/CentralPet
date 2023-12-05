@@ -15,6 +15,7 @@ import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.adocao.Adocao_;
 import centralpet.modelo.entidade.ong.Ong;
 import centralpet.modelo.entidade.ong.Ong_;
+import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.tutor.Tutor;
 import centralpet.modelo.entidade.tutor.Tutor_;
 import centralpet.modelo.factory.conexao.ConexaoFactory;
@@ -237,7 +238,7 @@ private ConexaoFactory fabrica;
 		return doacoes;
 	}
 	
-	public Adocao recuperarAdocaoPendenteTutor(Tutor tutor) {
+	public Adocao recuperarAdocaoPorPet(Pet pet) {
 	    Session sessao = null;
 	    Adocao adocao = null;
 
@@ -252,7 +253,7 @@ private ConexaoFactory fabrica;
 	        raizAdocao.fetch(Adocao_.pet, JoinType.LEFT);  
 	       
 
-	        criteria.where(construtor.equal(raizAdocao.get(Adocao_.tutor), tutor.getId()));
+	        criteria.where(construtor.equal(raizAdocao.get(Adocao_.pet), pet.getId()));
 	        
 	        adocao = sessao.createQuery(criteria).getSingleResult();
 

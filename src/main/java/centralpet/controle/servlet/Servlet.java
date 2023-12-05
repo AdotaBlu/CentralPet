@@ -1655,7 +1655,7 @@ public class Servlet extends HttpServlet {
 			Adocao adocao = new Adocao(pet, ong, tutor, termo);
 			daoAdocao.inserirAdocao(adocao);
 			
-			adocao = daoAdocao.recuperarAdocaoPendenteTutor(tutor);
+			adocao = daoAdocao.recuperarAdocaoPorPet(pet);
 			
 			request.setAttribute("adocao", adocao);
 			
