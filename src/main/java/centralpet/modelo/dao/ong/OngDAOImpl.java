@@ -14,6 +14,8 @@ import javax.persistence.criteria.Predicate;
 
 import org.hibernate.Session;
 
+import centralpet.modelo.entidade.adocao.Adocao;
+import centralpet.modelo.entidade.adocao.Adocao_;
 import centralpet.modelo.entidade.endereco.Endereco;
 import centralpet.modelo.entidade.endereco.Endereco_;
 import centralpet.modelo.entidade.ong.Ong;
@@ -474,5 +476,46 @@ public List<Pet> recuperarQuatroPetsOng(Long idOng) {
 	
 	return pets;
 }
+
+public Ong recuperarOngPorAdocao (Long idAdocao) {
+	
+	Session sessao = null;
+	Ong ong = null;
+		
+	try {
+		sessao = fabrica.getConexao().openSession();
+		sessao.beginTransaction();
+		
+		CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+		
+		CriteriaQuery<Ong> criteria = construtor.createQuery(Ong.class);
+		Root<Adocao> raizAdocao = criteria.from(Adocao.class);
+		
+		criteria.select(raizAdocao.get(Adocao_.ong));
+		
+		criteria.where(construtor.equal(raizAdocao.get(Adocao_.id), idAdocao));
+		
+		ong = sessao.createQuery(criteria).getSingleResult();
+		
+		sessao.getTransaction().commit();
+		
+	} catch (Exception sqlException) {
+		sqlException.printStackTrace();
+		
+		if(sessao.getTransaction()!= null) {
+			sessao.getTransaction().rollback();
+		}
+	} finally {
+		
+		if (sessao != null) {
+			sessao.close();
+		}
+	}
+	
+	return ong;
+	
+	
+}
+
 
 }

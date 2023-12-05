@@ -28,10 +28,8 @@
 	</c:if>
 	
 			<form action="registrar-avaliacao" method="post" class="container-grid">
-				<c:if test="${adocao != null && tutorSessao != null}">
-					<input type="hidden" id="id-tutor" name="id-tutor"  value="<c:out value='${tutorSessao.id}' />">
-					<input type="hidden" id="id-ong" name="id-ong"  value="<c:out value='${adocao.ong.id}' />">
-				</c:if>
+				
+					
 				
 				<div class="container-depoimento-avaliacao">
 		        	
@@ -48,6 +46,11 @@
 		        		<label for="nota">Nota:</label>
 		        		<input type="number" id="nota" name="nota" placeholder="De uma nota de 1 a 5">
 		        	</div>	
+		        	
+		        	<input type="hidden" id="id-tutor" name="id-tutor"  value="<c:out value='${tutorSessao.id}' />">
+					<input type="hidden" id="id-ong" name="idong"  value="<c:out value='${ong.id}' />">
+		        	
+		        	
 		        	
 		        	<div class="container-botao-avaliacao">
 		        		<button type="reset" class= "botao-avaliacao-limpar">Limpar</button>

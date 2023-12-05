@@ -4,6 +4,7 @@ import java.util.List;
 
 import centralpet.modelo.entidade.adocao.Adocao;
 import centralpet.modelo.entidade.ong.Ong;
+import centralpet.modelo.entidade.pet.Pet;
 import centralpet.modelo.entidade.tutor.Tutor;
 
 public interface AdocaoDAO {
@@ -20,7 +21,7 @@ public interface AdocaoDAO {
 	
 	List<Adocao> recuperarAdocoesOng(Ong ong);
 	
-	Adocao recuperarAdocaoPendenteTutor(Tutor tutor);
+	Adocao recuperarAdocaoPorPet(Pet pet);
 	
 	Adocao recuperarAdocao(Long id);
 }

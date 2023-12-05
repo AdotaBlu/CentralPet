@@ -35,12 +35,23 @@
 
 	<main>
 
-		<form method="post" action="cadastrar-pet"
-			enctype="multipart/form-data">
-			<div class="container-cadastro">
+		<form method="post" action="atualizar-pet"enctype="multipart/form-data" class="container-grid-pet">
+			
+			<div class="container-cadastro-pet-foto">
+				<p class="label-adicionar-foto">Adicionar fotos</p>
+				<label for="fotoPerfil" class="input-adicionar-foto">
+					<img alt="icone-adicionar-foto" id="icone-adicionar-foto" src="<c:out value='${pet.fotoPrincipalPet()}'/>">
+				</label> 
+				
+				<input type="file" name="foto-perfil" id="fotoPerfil" accept="image/*" onchange="adicionarFoto(this)" multiple="multiple">
+			
+			</div>
+		
+			<div class="container-cadastro-infos">
 				<div class="input-cadastro">
 					<label for="nome">Nome</label> 
 					<input type="text" id="nome" name="nome" value="<c:out value='${pet.nome}' />">
+					<input type="hidden" id="id" name="id-pet" value="<c:out value='${pet.id}' />">
 				</div>
 
 				<div class="input-cadastro">
@@ -51,13 +62,15 @@
 				<div class="input-cadastro">
 					<input type="hidden" id="estadoPet" name="estado-pet" value="ATIVO">
 				</div>
+				
 				<div class="container-select-pet">
+				
 					<div class="input-cadastro">
 						<label for="vacinas">Vacinas</label>
 						<input type="text" id="vacinas" name="vacinas" value="<c:out value='${pet.vacinas}' />">
 					</div>
 					
-					<div class="input-cadastro">
+					<div class="cadastro-direita-pet">
 						<label for="dataNascimento">Data de Nascimento</label> 
 						<input type="date" id="dataNascimentoPet" name="data-nascimento-pet" value="<c:out value='${pet.dataNascimento}' />">
 					</div>
@@ -71,7 +84,7 @@
 						</select>
 					</div>
 					
-					<div class="select-cadastro">
+					<div class="cadastro-direita-pet">
 						<label for="drop_down_porte">Porte</label>
 							 <select name="porte-pet" id="drop_down_porte">
 							<option value="MINI">Mini</option>
@@ -90,16 +103,17 @@
 						</select>
 					</div>
 					
-					<div class="select-cadastro">
+					<div class="cadastro-direita-pet">
 						<label for="drop_down_especie">Espécie</label> 
 					<select name="especie-pet" id="drop_down_especie">
 							<option value="GATO">Gato</option>
 							<option value="CACHORRO">Cachorro</option>
 						</select>
 					</div>
+					
 				</div>
 					
-				<div class="input-cadastro">
+				<div class="input-castrado-pet">
 					<label for="castrado">Castrado</label>
 					<div class="value-radio">
 						<input type="radio" id="input-radio" name="castrado" value="SIM">
@@ -107,23 +121,23 @@
 						<input type="radio" id="input-radio" name="castrado" value="NAO"> 
 						<label for="nao">Não</label>
 					</div>
+					
 				</div>
 				
 				<div class="input-cadastro">
 					<label for="descricao">Descrição</label>
-					<textarea name="descricao" id="descricao" value="<c:out value='${pet.descricao}'/>"></textarea>
+					<textarea name="descricao" id="descricao"><c:out value='${pet.descricao}'/></textarea>
 				</div>
+				
+				<div class="container-botao-pet">
+					<button type="button" class="botao-cadastro-pet-voltar" onclick="voltar()">Voltar</button>	
+        			<button type="submit" class="botao-cadastro-pet">Atualizar</button>		
+           		</div>
+				
 			</div>
-			<div class="container-cadastro">
-				<p class="label-adicionar-foto">Adicionar fotos</p>
-				<label for="fotoPerfil" class="input-adicionar-foto">
-				<img alt="icone-adicionar-foto" id="icone-adicionar-foto" src="<c:out value='${pet.fotoPrincipalPet()}'/>">
-				</label> 
-				<input type="file" name="foto-perfil" id="fotoPerfil" accept="image/*" onchange="adicionarFoto(this)">
-			</div>
-			<div class="container-botao">
-        		<button type="submit" class="botao-primario">Salvar</button>		
-            </div>
+			
+
+            
 		</form>
 
 	</main>
